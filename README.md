@@ -14,8 +14,8 @@
 [![Flake8](https://img.shields.io/badge/flake8-checked-blueviolet)](https://flake8.pycqa.org/en/latest/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-![Repo Size](https://img.shields.io/github/repo-size/geo1310/PROJET_12_EPIC_EVENTS)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/geo1310/PROJET_12_EPIC_EVENTS)
+![Repo Size](https://img.shields.io/github/repo-size/geo1310/Projet_12_Epic_Events)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/geo1310/Projet_12_Epic_Events)
 
 Création d'une solution de CRM (Customer Relationship Management).
 
@@ -29,6 +29,7 @@ Objectif principal est de mettre en place une base de données qui permette de s
     * Exigences du projet.
 
 1. __[Diagramme d'association ERD ( Entity Relationship Diagram) ](docs/Epic_Events_ERD.pdf)__
+    * Structure de la base de données.
 
 ## Installation et activation de l'environnement Virtuel et des dépendances
 Création de l'environnement virtuel : 
