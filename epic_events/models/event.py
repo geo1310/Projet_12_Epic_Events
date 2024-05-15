@@ -1,6 +1,6 @@
 from sqlalchemy import (TIMESTAMP, Column, Date, ForeignKey, Integer, String,
                         Text, func)
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, validates
 
 from .database import Base
 
@@ -39,3 +39,10 @@ class Event(Base):
 
     Contract = relationship("Contract", backref="Events")
     EmployeeSupport = relationship("Employee", backref="Events")
+
+    # Valider la date de fin après la date de début
+    @validates("DateStart", "DateEnd")
+    def check_dates(self, key, value):
+        if key == "DateEnd" and self.DateStart and value and value <= self.DateStart:
+            raise ValueError("La date de fin doit être après la date de début")
+        return value

@@ -1,6 +1,6 @@
 from sqlalchemy import (TIMESTAMP, Boolean, Column, Float, ForeignKey, Integer,
                         String, func)
-from sqlalchemy.orm import declarative_base, relationship, validates
+from sqlalchemy.orm import relationship
 
 from .database import Base
 

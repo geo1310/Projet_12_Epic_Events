@@ -9,7 +9,7 @@ from epic_events.models.event import Event
 # Configuration du logger
 logging.basicConfig(level=logging.INFO)
 
-# initilaisation des tables 
+# initialisation des tables
 try:
     # Création des tables dans la base
     Base.metadata.drop_all(bind=engine)
@@ -44,7 +44,7 @@ try:
     )
     session.add(commercial)
 
-    #rôle Support
+    # rôle Support
     support = Role(
         RoleName="Support",
         Can_r_Employee=True,
@@ -65,7 +65,7 @@ try:
     )
     session.add(support)
 
-    # Créer le rôle Management
+    # rôle Management
     management = Role(
         RoleName="Management",
         Can_r_Employee=True,
@@ -95,7 +95,6 @@ except Exception as e:
 
 finally:
     session.close()
-
 
 
 # création d'un employé et d'un client
@@ -137,12 +136,7 @@ finally:
 try:
     session = Session()
     # Création d'un contrat
-    new_contract = Contract(
-        Title="Contrat de test",
-        Amount=1000.0,
-        AmountOutstanding=1000.0,
-        ContractSigned=True
-    )
+    new_contract = Contract(Title="Contrat de test", Amount=1000.0, AmountOutstanding=1000.0, ContractSigned=True)
     session.add(new_contract)
     session.commit()
 
@@ -151,9 +145,9 @@ try:
         Title="Événement de test",
         Contract=new_contract,
         Location="Lieu de l'événement",
-        Attendees = 20,
+        Attendees=20,
         DateStart="2024-05-14",
-        DateEnd="2024-05-15"
+        DateEnd="2024-05-15",
     )
     session.add(new_event)
     session.commit()
