@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-# Charge les variables d'environnement depuis le fichier .env
+# Charge les variables d'environnement depuis le fichier .envrc
 load_dotenv(".envrc")
 
 # Informations de connexion à la base de données depuis les variables d'environnement

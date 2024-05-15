@@ -101,29 +101,81 @@ finally:
 try:
     session = Session()
 
-    # Création d'un employé
-    new_employee = Employee(
-        FirstName="John",
-        LastName="Doe",
-        Email="john.doe@example.com",
+    # Création d'un commercial
+    commercial_1 = Employee(
+        FirstName="commercial_1",
+        LastName="",
+        Email="commercial_1@email.com",
         PasswordHash="password123",
         RoleId=1,
     )
-    session.add(new_employee)
-    session.commit()
+    session.add(commercial_1)
+
+    # Création d'un commercial
+    commercial_2 = Employee(
+        FirstName="commercial_2",
+        LastName="",
+        Email="commercial_2@email.com",
+        PasswordHash="password123",
+        RoleId=1,
+    )
+    session.add(commercial_2)
+
+    # Création d'un support
+    support_1 = Employee(
+        FirstName="support_1",
+        LastName="",
+        Email="support_1@email.com",
+        PasswordHash="password123",
+        RoleId=2,
+    )
+    session.add(support_1)
+
+    # Création d'un support
+    support_2 = Employee(
+        FirstName="support_2",
+        LastName="",
+        Email="support_2@email.com",
+        PasswordHash="password123",
+        RoleId=2,
+    )
+    session.add(support_2)
+
+    # Création d'un manager
+    manager_1 = Employee(
+        FirstName="manager_1",
+        LastName="",
+        Email="manager_1@email.com",
+        PasswordHash="password123",
+        RoleId=3,
+    )
+    session.add(manager_1)
 
     # Création d'un client
-    new_customer = Customer(
-        FirstName="Alice",
-        LastName="Smith",
-        Email="alice.smith@example.com",
+    customer_1 = Customer(
+        FirstName="customer_1",
+        LastName="",
+        Email="customer_1@email.com",
         PhoneNumber="123456789",
-        Society="ABC Inc.",
+        Society="society_1",
+        CommercialId=1,
     )
-    session.add(new_customer)
+    session.add(customer_1)
+
+    # Création d'un client
+    customer_2 = Customer(
+        FirstName="customer_2",
+        LastName="",
+        Email="customer_2@email.com",
+        PhoneNumber="123456789",
+        Society="society_2",
+        CommercialId=2,
+    )
+    session.add(customer_2)
+
     session.commit()
 
-    logging.info("L'employé et le client ont été créés avec succès !")
+    logging.info("Employés et clients créés avec succès !")
 
 except Exception as e:
     session.rollback()
@@ -136,20 +188,37 @@ finally:
 try:
     session = Session()
     # Création d'un contrat
-    new_contract = Contract(Title="Contrat de test", Amount=1000.0, AmountOutstanding=1000.0, ContractSigned=True)
-    session.add(new_contract)
+    contract_1 = Contract(
+        Title="Contract_1", 
+        Amount=1000.0, 
+        AmountOutstanding=500.0,
+        CustomerId=1,
+        ContractSigned=True
+    )
+    session.add(contract_1)
+    
+    # Création d'un contrat
+    contract_2 = Contract(
+        Title="Contract_2", 
+        Amount=5000.0, 
+        AmountOutstanding=5000.0,
+        CustomerId=2,
+        ContractSigned=False
+    )
+    session.add(contract_2)
+
     session.commit()
 
     # Création d'un événement associé au contrat
     new_event = Event(
-        Title="Événement de test",
-        Contract=new_contract,
+        Title="Event_1",
+        Contract=contract_1,
         Location="Lieu de l'événement",
         Attendees=20,
         DateStart="2024-05-14",
-        DateEnd="2024-05-15",
     )
     session.add(new_event)
+
     session.commit()
 
     logging.info("Contrat et événement créés avec succès !")
