@@ -12,7 +12,7 @@ class Role(Base):
         RoleName (str): Nom du rôle.
         Can_r_Employee (bool): Indique si le rôle peut lire les informations sur les employés.
         Can_ru_Employee (bool): Indique si le rôle peut lire et mettre à jour les informations sur les employés.
-        Can_crud_Employee (bool): Indique si le rôle peut créer, lire, mettre à jour et supprimer les informations sur les employés.
+        Can_crud_Employee (bool): Indique si le rôle peut créer, lire, mettre à jour et supprimer les informations sur le employés.
         Can_r_role (bool): Indique si le rôle peut lire les informations sur les autres rôles.
         Can_ru_role (bool): Indique si le rôle peut lire et mettre à jour les informations sur les autres rôles.
         Can_crud_role (bool): Indique si le rôle peut créer, lire, mettre à jour et supprimer les informations sur les autres rôles.
@@ -35,11 +35,11 @@ class Role(Base):
     Can_r_Employee = Column(Boolean, nullable=False, default=False)
     Can_ru_Employee = Column(Boolean, nullable=False, default=False)
     Can_crud_Employee = Column(Boolean, nullable=False, default=False)
-    Can_r_role = Column(Boolean, nullable=False, default=False)
-    Can_ru_role = Column(Boolean, nullable=False, default=False)
-    Can_crud_role = Column(Boolean, nullable=False, default=False)
+    Can_r_Role = Column(Boolean, nullable=False, default=False)
+    Can_ru_Role = Column(Boolean, nullable=False, default=False)
+    Can_crud_Role = Column(Boolean, nullable=False, default=False)
     Can_r_Customer = Column(Boolean, nullable=False, default=False)
-    Can_ru_customer = Column(Boolean, nullable=False, default=False)
+    Can_ru_Customer = Column(Boolean, nullable=False, default=False)
     Can_crud_Customer = Column(Boolean, nullable=False, default=False)
     Can_r_Contract = Column(Boolean, nullable=False, default=False)
     Can_ru_Contract = Column(Boolean, nullable=False, default=False)
