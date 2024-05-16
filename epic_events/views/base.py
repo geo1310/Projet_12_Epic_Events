@@ -19,6 +19,10 @@ class View:
         choice = self.console.input("[bold]\nchoix :[/bold]")
         return choice
 
+    def display_table(self, table, title):
+        self.console.print(f"[underline green]{title}[/underline green]")
+        self.console.print(table)
+
     def display_green_message(self, message):
         self.console.print("")
         self.console.print(f"[green]{message}[/green]")
@@ -40,7 +44,7 @@ class View:
     def prompt_wait_enter(self):
         """Pause de l'affichage, Attente de la touche Entrée"""
         self.console.print()
-        self.console.input("Appuyer sur Entrée")
+        self.console.input("[bold]Appuyer sur Entrée[/bold]")
         return True
 
     def clear_screen(self):

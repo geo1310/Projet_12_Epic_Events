@@ -54,14 +54,14 @@ class MenuManage:
             self.role = self.session.query(Role).filter_by(Id=self.employee.RoleId).one()
 
             # affiche le menu principal
-            self.main_menu()
+            self.main_menu(arg=None)
         else:
             self.view.display_red_message("Authentification invalide pour cet utilisateur.")
-            self.quit_app()
+            self.quit_app(arg=None)
 
-    def main_menu(self):
+    def main_menu(self, arg):
         """
-        Composition du menu principal.
+        Composition du menu principal selon les permissions de l'utilisateur.
         """
 
         menu_items = [
@@ -83,7 +83,7 @@ class MenuManage:
 
         self.run_menu(menu_items)
 
-    def menu_customer(self):
+    def menu_customer(self, arg):
         """
         Composition du menu client selon les permissions de l'utilisateur.
         """
@@ -103,7 +103,7 @@ class MenuManage:
 
         self.run_menu(menu_items)
 
-    def menu_contract(self):
+    def menu_contract(self, arg):
         """
         Composition du menu contrat selon les permissions de l'utilisateur..
         """
@@ -124,7 +124,7 @@ class MenuManage:
 
         self.run_menu(menu_items)
 
-    def menu_event(self):
+    def menu_event(self, arg):
         """
         Composition du menu évènement selon les permissions de l'utilisateur.
         """
@@ -145,7 +145,7 @@ class MenuManage:
 
         self.run_menu(menu_items)
 
-    def menu_employee(self):
+    def menu_employee(self, arg):
         """
         Composition du menu employé selon les permissions de l'utilisateur.
         """
@@ -166,7 +166,7 @@ class MenuManage:
 
         self.run_menu(menu_items)
 
-    def menu_role(self):
+    def menu_role(self, arg):
         """
         Composition du menu role selon les permissions de l'utilisateur.
         """
@@ -221,7 +221,7 @@ class MenuManage:
                 for menu in menu_list:
                     if menu[0] == choice:
                         # Envoie vers la méthode choisie
-                        menu_items[1][menu[1]]()
+                        menu_items[1][menu[1]](arg=None)
                     self.view.clear_screen()
 
             else:
@@ -229,12 +229,14 @@ class MenuManage:
                 self.view.prompt_wait_enter()
                 self.view.clear_screen()
 
-        self.view.display_red_message("Votre session a expirée, veuillez vous re-connecter.")
-        self.quit_app()
+        self.view.display_red_message("Votre session a expirée, veuillez vous re-connecter.\n")
+        self.quit_app(arg=None)
 
-    def quit_app(self):
+    def quit_app(self, arg):
         """
         Quitte l'application en supprimant le jeton JWT et en arrêtant le script.
         """
+        if self.session:
+            self.session.close()
         self.delete_token()
         sys.exit()
