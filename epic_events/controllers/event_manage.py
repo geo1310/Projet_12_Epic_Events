@@ -3,10 +3,13 @@ from rich.table import Table
 
 from ..models.database import Session
 from ..models.event import Event
-from ..views.base import View
+from ..views.views import View
 
 
 class EventManage:
+    """
+    Gère les opérations liées aux évènements, telles que l'affichage, la création, la mise à jour et la suppression.
+    """
 
     def __init__(self):
         self.session = Session()
@@ -17,7 +20,7 @@ class EventManage:
         events = self.session.query(Event).all()
 
         # création du tableau
-        table = Table(show_header=True, header_style="bold")
+        table = Table(show_header=True, header_style="bold green")
         # Ajouter des colonnes
         table.add_column("ID", style="dim", width=5)
         table.add_column("Titre")
@@ -44,9 +47,9 @@ class EventManage:
                 str(event.Attendees),
                 event.Contract.Title,
                 employee_support,
-                str(event.DateStart),
-                str(event.DateEnd),
-                str(event.DateCreated),
+                self.format_date(event.DateStart),
+                self.format_date(event.DateEnd),
+                self.format_date(event.DateCreated),
             )
 
         # Affiche le tableau
@@ -64,3 +67,8 @@ class EventManage:
     def delete(self, arg):
         # TODO
         pass
+
+    def format_date(self, date):
+        if date:
+            return date.strftime("%d/%m/%Y")
+        return None

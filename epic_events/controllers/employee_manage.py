@@ -3,10 +3,13 @@ from rich.table import Table
 
 from ..models.database import Session
 from ..models.employee import Employee
-from ..views.base import View
+from ..views.views import View
 
 
 class EmployeeManage:
+    """
+    Gère les opérations liées aux employés, telles que l'affichage, la création, la mise à jour et la suppression.
+    """
 
     def __init__(self):
         self.session = Session()
@@ -18,7 +21,7 @@ class EmployeeManage:
         employees = self.session.query(Employee).all()
 
         # création du tableau
-        table = Table(show_header=True, header_style="bold")
+        table = Table(show_header=True, header_style="bold green")
         # Ajouter des colonnes
         table.add_column("ID", style="dim", width=5)
         table.add_column("Prénom")
@@ -41,7 +44,7 @@ class EmployeeManage:
                 employee.Email,
                 employee.Role.RoleName,
                 str(customer_list),
-                str(employee.DateCreated),
+                self.format_date(employee.DateCreated),
             )
 
         # Affiche le tableau
@@ -59,3 +62,8 @@ class EmployeeManage:
     def delete(self, arg):
         # TODO
         pass
+
+    def format_date(self, date):
+        if date:
+            return date.strftime("%d/%m/%Y")
+        return None

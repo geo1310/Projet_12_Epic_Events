@@ -20,7 +20,7 @@ class Customer(Base):
         LastName (str): Nom de famille du client.
         Email (str): Adresse e-mail du client.
         PhoneNumber (str): Numéro de téléphone du client.
-        Society (str): Nom de la société du client.
+        Company (str): Nom de la société du client.
         DateCreated (datetime): Date de création du client dans la base de données.
         DateLastUpdate (datetime): Date de la dernière mise à jour du client dans la base de données.
         Commercial (Employee): Relation avec l'employé commercial associé.
@@ -34,7 +34,7 @@ class Customer(Base):
     LastName = Column(String(100))
     Email = Column(String(100), unique=True, nullable=False)
     PhoneNumber = Column(String(100))
-    Society = Column(String(100))
+    Company = Column(String(100))
     DateCreated = Column(TIMESTAMP, server_default=func.current_timestamp())
     DateLastUpdate = Column(
         TIMESTAMP,

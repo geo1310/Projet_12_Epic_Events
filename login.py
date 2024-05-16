@@ -2,7 +2,7 @@ import argparse
 
 from epic_events.controllers.authentication import AuthenticationManager
 from epic_events.controllers.menu_manage import MenuManage
-from epic_events.views.base import View
+from epic_events.views.views import View
 from epic_events.utils.token_manage_json import delete_token
 
 view = View()

@@ -3,10 +3,13 @@ from rich.table import Table
 
 from ..models.contract import Contract
 from ..models.database import Session
-from ..views.base import View
+from ..views.views import View
 
 
 class ContractManage:
+    """
+    Gère les opérations liées aux contrats, telles que l'affichage, la création, la mise à jour et la suppression.
+    """
 
     def __init__(self):
         self.session = Session()
@@ -18,7 +21,7 @@ class ContractManage:
         contracts = self.session.query(Contract).all()
 
         # création du tableau
-        table = Table(show_header=True, header_style="bold")
+        table = Table(show_header=True, header_style="bold green")
         # Ajouter des colonnes
         table.add_column("ID", style="dim", width=5)
         table.add_column("Titre")
@@ -30,6 +33,7 @@ class ContractManage:
         table.add_column("Date de création")
 
         for contract in contracts:
+
             table.add_row(
                 str(contract.Id),
                 contract.Title,
@@ -38,7 +42,7 @@ class ContractManage:
                 str(contract.Amount),
                 str(contract.AmountOutstanding),
                 str(contract.ContractSigned),
-                str(contract.DateCreated),
+                self.format_date(contract.DateCreated),
             )
 
         # Affiche le tableau
@@ -56,3 +60,8 @@ class ContractManage:
     def delete(self, arg):
         # TODO
         pass
+
+    def format_date(self, date):
+        if date:
+            return date.strftime("%d/%m/%Y")
+        return None

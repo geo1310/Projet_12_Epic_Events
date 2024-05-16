@@ -158,7 +158,7 @@ try:
         LastName="",
         Email="customer_1@email.com",
         PhoneNumber="123456789",
-        Society="society_1",
+        Company="Company_1",
         CommercialId=1,
     )
     session.add(customer_1)
@@ -169,7 +169,7 @@ try:
         LastName="",
         Email="customer_2@email.com",
         PhoneNumber="123456789",
-        Society="society_2",
+        Company="Company_2",
         CommercialId=2,
     )
     session.add(customer_2)

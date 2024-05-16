@@ -1,12 +1,17 @@
+from datetime import datetime
+
 from rich.console import Console
 from rich.table import Table
 
 from ..models.database import Session
 from ..models.role import Role
-from ..views.base import View
+from ..views.views import View
 
 
 class RoleManage:
+    """
+    Gère les opérations liées aux permissions, telles que l'affichage, la création, la mise à jour et la suppression.
+    """
 
     def __init__(self):
         self.session = Session()
@@ -18,27 +23,29 @@ class RoleManage:
         roles = self.session.query(Role).all()
 
         # création du tableau
-        table = Table(show_header=True, header_style="bold")
+        table = Table(show_header=True, header_style="bold green")
         # Ajouter des colonnes
-        table.add_column("ID", style="dim", width=5)
+        table.add_column("ID", style="dim", width=3)
         table.add_column("Nom")
-        table.add_column("r_employee")
-        table.add_column("ru_employee")
-        table.add_column("crud_employee")
-        table.add_column("r_role")
-        table.add_column("ru_role")
-        table.add_column("crud_role")
-        table.add_column("r_customer")
-        table.add_column("ru_customer")
-        table.add_column("crud_customer")
-        table.add_column("r_contract")
-        table.add_column("ru_contract")
-        table.add_column("crud_contract")
-        table.add_column("r_event")
-        table.add_column("ru_event")
-        table.add_column("crud_event")
+        table.add_column("r_ employee")
+        table.add_column("ru_ employee")
+        table.add_column("crud employee")
+        table.add_column("r_ role")
+        table.add_column("ru_ role")
+        table.add_column("crud role")
+        table.add_column("r_ customer")
+        table.add_column("ru_ customer")
+        table.add_column("crud customer")
+        table.add_column("r_ contract")
+        table.add_column("ru_ contract")
+        table.add_column("crud contract")
+        table.add_column("r_ event")
+        table.add_column("ru_ event")
+        table.add_column("crud event")
+        table.add_column("Date de création")
 
         for role in roles:
+
             table.add_row(
                 str(role.Id),
                 role.RoleName,
@@ -57,7 +64,7 @@ class RoleManage:
                 str(role.Can_r_Event),
                 str(role.Can_ru_Event),
                 str(role.Can_crud_Event),
-                str(role.DateCreated),
+                self.format_date(role.DateCreated),
             )
 
         # Affiche le tableau
@@ -75,3 +82,8 @@ class RoleManage:
     def delete(self, arg):
         # TODO
         pass
+
+    def format_date(self, date):
+        if date:
+            return date.strftime("%d/%m/%Y")
+        return None
