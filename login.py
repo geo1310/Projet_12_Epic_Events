@@ -1,27 +1,39 @@
 import argparse
-import getpass
 
-from epic_events.controllers.authentication import authenticate, generate_jwt_token
-from epic_events.controllers.token_manage import delete_token
+from epic_events.controllers.authentication import AuthenticationManager
+from epic_events.controllers.menu_manage import MenuManage
+from epic_events.views.base import View
+from epic_events.utils.token_manage_json import delete_token
 
-    
+view = View()
+auth_manager = AuthenticationManager(view)
+
+
 def main():
     """
     Point d'entrée principal pour l'authentification en ligne de commande.
     """
-    parser = argparse.ArgumentParser(description='Authentification en ligne de commande')
-    parser.add_argument('username', type=str, help='Nom d\'utilisateur')
-    args = parser.parse_args()
-    password = getpass.getpass(prompt='Mot de passe: ')
 
-    auth_success, user_id = authenticate(args.username, password)
+    # crée l'argument user_email
+    parser = argparse.ArgumentParser(description="Authentification en ligne de commande")
+    parser.add_argument("user_email", type=str, help="Email d'utilisateur")
+    args = parser.parse_args()
+    view.clear_screen()
+    password = view.return_choice(f"{args.user_email} entrez votre mot de passe : ", True)
+
+    # authentifie l'utilisateur dans la base de données
+    auth_success, employee = auth_manager.authenticate(args.user_email, password)
 
     if auth_success:
-        generate_jwt_token(user_id)
-        print("Authentification réussie")
-           
+        auth_manager.generate_jwt_token(employee.Id)
+
+        # lance l'application
+        app = MenuManage(view, auth_manager.verify_and_decode_jwt_token, delete_token, employee.Id)
+        app.run()
+
     else:
-        print("\033[91mNom d'utilisateur ou mot de passe incorrect\033[0m")
+
+        view.display_red_message("Nom d'utilisateur ou mot de passe incorrect\n")
 
 
 if __name__ == "__main__":

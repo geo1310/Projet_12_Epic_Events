@@ -5,8 +5,6 @@ from epic_events.models.customer import Customer
 from epic_events.models.employee import Employee
 from epic_events.models.event import Event
 
-from . import create_test_data, session
-
 
 def test_employee(session, create_test_data):
     """

@@ -48,11 +48,20 @@ poetry install
 ```
 ## Usage
 
-Exécuter la commande suivante dans le dossier racine pour lancer l'application :
+Exécuter la commande suivante dans le dossier racine pour se connecter et lancer l'application :
+
+Liste des utilisateurs par défaut :
+
+1. __email:__ commercial_1@email.com  __password:__ password123
+2. __email:__ commercial_2@email.com  __password:__ password123
+3. __email:__ support_1@email.com  __password:__ password123
+4. __email:__ support_2@email.com  __password:__ password123
+5. __email:__ manager_1@email.com  __password:__ password123
 
 ```bash
-python main.py
+python login.py [email]
 ```
+Entrez votre mot de passe.
 
 ## Contribuer
 

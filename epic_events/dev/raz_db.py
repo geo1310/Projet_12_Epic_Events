@@ -26,14 +26,14 @@ try:
     # rôle Commercial
     commercial = Role(
         RoleName="Commercial",
-        Can_r_Employee=True,
+        Can_r_Employee=False,
         Can_ru_Employee=False,
         Can_crud_Employee=False,
-        Can_r_role=False,
-        Can_ru_role=False,
-        Can_crud_role=False,
+        Can_r_Role=False,
+        Can_ru_Role=False,
+        Can_crud_Role=False,
         Can_r_Customer=True,
-        Can_ru_customer=True,
+        Can_ru_Customer=True,
         Can_crud_Customer=True,
         Can_r_Contract=True,
         Can_ru_Contract=True,
@@ -47,14 +47,14 @@ try:
     # rôle Support
     support = Role(
         RoleName="Support",
-        Can_r_Employee=True,
+        Can_r_Employee=False,
         Can_ru_Employee=False,
         Can_crud_Employee=False,
-        Can_r_role=False,
-        Can_ru_role=False,
-        Can_crud_role=False,
+        Can_r_Role=False,
+        Can_ru_Role=False,
+        Can_crud_Role=False,
         Can_r_Customer=True,
-        Can_ru_customer=False,
+        Can_ru_Customer=False,
         Can_crud_Customer=False,
         Can_r_Contract=True,
         Can_ru_Contract=False,
@@ -71,11 +71,11 @@ try:
         Can_r_Employee=True,
         Can_ru_Employee=True,
         Can_crud_Employee=True,
-        Can_r_role=True,
-        Can_ru_role=True,
-        Can_crud_role=True,
+        Can_r_Role=True,
+        Can_ru_Role=True,
+        Can_crud_Role=True,
         Can_r_Customer=True,
-        Can_ru_customer=True,
+        Can_ru_Customer=True,
         Can_crud_Customer=True,
         Can_r_Contract=True,
         Can_ru_Contract=True,
@@ -189,21 +189,13 @@ try:
     session = Session()
     # Création d'un contrat
     contract_1 = Contract(
-        Title="Contract_1", 
-        Amount=1000.0, 
-        AmountOutstanding=500.0,
-        CustomerId=1,
-        ContractSigned=True
+        Title="Contract_1", Amount=1000.0, AmountOutstanding=500.0, CustomerId=1, ContractSigned=True
     )
     session.add(contract_1)
-    
+
     # Création d'un contrat
     contract_2 = Contract(
-        Title="Contract_2", 
-        Amount=5000.0, 
-        AmountOutstanding=5000.0,
-        CustomerId=2,
-        ContractSigned=False
+        Title="Contract_2", Amount=5000.0, AmountOutstanding=5000.0, CustomerId=2, ContractSigned=False
     )
     session.add(contract_2)
 
