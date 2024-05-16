@@ -1,19 +1,20 @@
 from rich.console import Console
 from rich.table import Table
+
+from ..models.customer import Customer
 from ..models.database import Session
 from ..views.base import View
-from ..models.customer import Customer
 
 
 class CustomerManage:
-    
+
     def __init__(self):
         self.session = Session()
         self.view = View()
         self.console = Console()
 
     def list(self, arg):
-        
+
         customers = self.session.query(Customer).all()
 
         # création du tableau
@@ -31,9 +32,9 @@ class CustomerManage:
 
         for customer in customers:
             table.add_row(
-                str(customer.Id), 
-                customer.FirstName, 
-                customer.LastName, 
+                str(customer.Id),
+                customer.FirstName,
+                customer.LastName,
                 customer.Email,
                 customer.PhoneNumber,
                 customer.Society,
@@ -45,7 +46,6 @@ class CustomerManage:
         # Affiche le tableau
         self.view.display_table(table, "\nListe des Clients")
         self.view.prompt_wait_enter()
-        
 
     def create(self, arg):
         # TODO

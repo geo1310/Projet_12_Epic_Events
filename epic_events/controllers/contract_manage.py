@@ -1,18 +1,20 @@
 from rich.console import Console
 from rich.table import Table
+
+from ..models.contract import Contract
 from ..models.database import Session
 from ..views.base import View
-from ..models.contract import Contract
+
 
 class ContractManage:
-    
+
     def __init__(self):
         self.session = Session()
         self.view = View()
         self.console = Console()
 
     def list(self, arg):
-        
+
         contracts = self.session.query(Contract).all()
 
         # création du tableau
@@ -29,9 +31,9 @@ class ContractManage:
 
         for contract in contracts:
             table.add_row(
-                str(contract.Id), 
-                contract.Title, 
-                contract.Customer.FirstName, 
+                str(contract.Id),
+                contract.Title,
+                contract.Customer.FirstName,
                 contract.Customer.Email,
                 str(contract.Amount),
                 str(contract.AmountOutstanding),

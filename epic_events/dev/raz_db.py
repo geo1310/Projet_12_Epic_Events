@@ -1,10 +1,11 @@
 import logging
-from epic_events.models.database import Base, engine, Session
-from epic_events.models.employee import Employee
-from epic_events.models.role import Role
-from epic_events.models.customer import Customer
+
 from epic_events.models.contract import Contract
+from epic_events.models.customer import Customer
+from epic_events.models.database import Base, Session, engine
+from epic_events.models.employee import Employee
 from epic_events.models.event import Event
+from epic_events.models.role import Role
 
 # Configuration du logger
 logging.basicConfig(level=logging.INFO)

@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 
 from ..models.database import Session
 from ..models.employee import Employee
-from ..utils.token_manage_json import delete_token, load_token_from_json, save_token_to_json
+from ..utils.token_manage_json import (delete_token, load_token_from_json,
+                                       save_token_to_json)
 
 
 class AuthenticationManager:

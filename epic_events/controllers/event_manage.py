@@ -1,12 +1,13 @@
 from rich.console import Console
 from rich.table import Table
+
 from ..models.database import Session
-from ..views.base import View
 from ..models.event import Event
+from ..views.base import View
 
 
 class EventManage:
-    
+
     def __init__(self):
         self.session = Session()
         self.view = View()
@@ -30,15 +31,15 @@ class EventManage:
         table.add_column("Date de création")
 
         for event in events:
-            
-            employee_support=""
+
+            employee_support = ""
             if event.EmployeeSupport:
                 employee_support = event.EmployeeSupport.FirstName
 
             table.add_row(
-                str(event.Id), 
-                event.Title, 
-                event.Notes, 
+                str(event.Id),
+                event.Title,
+                event.Notes,
                 event.Location,
                 str(event.Attendees),
                 event.Contract.Title,

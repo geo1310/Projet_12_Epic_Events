@@ -1,18 +1,20 @@
 from rich.console import Console
 from rich.table import Table
+
 from ..models.database import Session
-from ..views.base import View
 from ..models.role import Role
+from ..views.base import View
+
 
 class RoleManage:
-    
+
     def __init__(self):
         self.session = Session()
         self.view = View()
         self.console = Console()
 
     def list(self, arg):
-        
+
         roles = self.session.query(Role).all()
 
         # création du tableau
@@ -35,12 +37,11 @@ class RoleManage:
         table.add_column("r_event")
         table.add_column("ru_event")
         table.add_column("crud_event")
-        
 
         for role in roles:
             table.add_row(
-                str(role.Id), 
-                role.RoleName, 
+                str(role.Id),
+                role.RoleName,
                 str(role.Can_r_Employee),
                 str(role.Can_ru_Employee),
                 str(role.Can_crud_Employee),
