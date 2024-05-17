@@ -79,9 +79,7 @@ class MenuManage:
         if self.permissions.can_read_role(self.role):
             menu_items[1]["Gestion des permissions"] = self.menu_role
 
-        menu_items[1]["Quitter"] = self.quit_app
-
-        self.run_menu(menu_items)
+        self.run_menu(menu_items, main=True)
 
     def menu_customer(self, arg):
         """
@@ -99,9 +97,7 @@ class MenuManage:
             menu_items[1]["Créer un client"] = self.customer_manage.create
             menu_items[1]["Supprimer un client"] = self.customer_manage.delete
 
-        menu_items[1]["Retour au menu principal"] = self.main_menu
-
-        self.run_menu(menu_items)
+        self.run_menu(menu_items, main=False)
 
     def menu_contract(self, arg):
         """
@@ -120,9 +116,7 @@ class MenuManage:
             menu_items[1]["Créer un contrat"] = self.contract_manage.create
             menu_items[1]["Supprimer un contrat"] = self.contract_manage.delete
 
-        menu_items[1]["Retour au menu principal"] = self.main_menu
-
-        self.run_menu(menu_items)
+        self.run_menu(menu_items, main=False)
 
     def menu_event(self, arg):
         """
@@ -141,9 +135,7 @@ class MenuManage:
             menu_items[1]["Créer un évènement"] = self.event_manage.create
             menu_items[1]["Supprimer un évènement"] = self.event_manage.delete
 
-        menu_items[1]["Retour au menu principal"] = self.main_menu
-
-        self.run_menu(menu_items)
+        self.run_menu(menu_items, main=False)
 
     def menu_employee(self, arg):
         """
@@ -162,9 +154,7 @@ class MenuManage:
             menu_items[1]["Créer un employé"] = self.employee_manage.create
             menu_items[1]["Supprimer un employé"] = self.employee_manage.delete
 
-        menu_items[1]["Retour au menu principal"] = self.main_menu
-
-        self.run_menu(menu_items)
+        self.run_menu(menu_items, main=False)
 
     def menu_role(self, arg):
         """
@@ -183,11 +173,9 @@ class MenuManage:
             menu_items[1]["Créer une permission"] = self.role_manage.create
             menu_items[1]["Supprimer une permission"] = self.role_manage.delete
 
-        menu_items[1]["Retour au menu principal"] = self.main_menu
+        self.run_menu(menu_items, main=False)
 
-        self.run_menu(menu_items)
-
-    def run_menu(self, menu_items):
+    def run_menu(self, menu_items, main):
         """
         Gère l'affichage du menu et le choix de l'utilisateur.
         Lance la méthode associé à chaque menu.
@@ -200,6 +188,12 @@ class MenuManage:
         """
         self.view.clear_screen()
         title = menu_items[0]
+
+        # ajoute la ligne de retour du menu
+        if main:
+            menu_items[1]["Quitter"] = self.quit_app
+        else:
+            menu_items[1]["Retour au menu principal"] = self.main_menu
 
         # Crée la liste du menu indexée
         menu_list = []

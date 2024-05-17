@@ -2,9 +2,9 @@
 # Epic Events
 
 ![Python](https://img.shields.io/badge/python-3.11.x-green.svg)
+![Python](https://img.shields.io/badge/rich-13.7.1-green.svg)
 ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0.30-green.svg)
 ![PostgreSQL 16](https://img.shields.io/badge/PostgreSQL-16-blue)
-
 
 [![pytest](https://img.shields.io/badge/pytest-passing-success)](https://pytest.org)
 [![Coverage](https://img.shields.io/badge/coverage-%25-green)](https://coverage.readthedocs.io/en/latest/)
@@ -17,7 +17,7 @@
 ![Repo Size](https://img.shields.io/github/repo-size/geo1310/Projet_12_Epic_Events)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/geo1310/Projet_12_Epic_Events)
 
-Création d'une solution de CRM (Customer Relationship Management).
+Création d'une solution de CRM (Customer Relationship Management) en CLI.
 
 Objectif principal est de mettre en place une base de données qui permette de stocker et de manipuler de manière sécurisée les informations de nos clients, ainsi que les contrats et les événements que nous organisons.
 
@@ -34,9 +34,9 @@ Objectif principal est de mettre en place une base de données qui permette de s
 ## Installation et activation de l'environnement Virtuel et des dépendances
 Création de l'environnement virtuel : 
 ```bash
-python -m venv env
+python -m venv .venv
 ```
-Activation de l'environnement virtuel se placer dans le dossier **env/scripts** et taper : 
+Activation de l'environnement virtuel se placer dans le dossier **.venv/scripts** et taper : 
 ```bash
 ./activate
 ```
@@ -48,8 +48,6 @@ poetry install
 ```
 ## Usage
 
-Exécuter la commande suivante dans le dossier racine pour se connecter et lancer l'application :
-
 Liste des utilisateurs par défaut :
 
 1. __email:__ commercial_1@email.com  __password:__ password123
@@ -58,10 +56,16 @@ Liste des utilisateurs par défaut :
 4. __email:__ support_2@email.com  __password:__ password123
 5. __email:__ manager_1@email.com  __password:__ password123
 
+Exécuter la commande suivante dans le dossier racine pour se connecter et lancer l'application :
+
 ```bash
 python login.py [email]
 ```
-Entrez votre mot de passe.
+Renseigner votre mot de passe :
+
+```bash
+[email] entrez votre mot de passe :
+```
 
 ## Contribuer
 
