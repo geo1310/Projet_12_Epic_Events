@@ -1,4 +1,5 @@
 import argparse
+from dotenv import load_dotenv
 
 from epic_events.controllers.authentication import AuthenticationManager
 from epic_events.controllers.menu_manage import MenuManage
@@ -25,6 +26,7 @@ def main():
     auth_success, employee = auth_manager.authenticate(args.user_email, password)
 
     if auth_success:
+        
         auth_manager.generate_jwt_token(employee.Id)
 
         # lance l'application
