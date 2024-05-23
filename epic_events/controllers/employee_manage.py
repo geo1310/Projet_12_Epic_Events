@@ -65,14 +65,13 @@ class EmployeeManage:
         self.view.prompt_wait_enter()
 
     def create(self, arg):
-        self.console.clear()
+
         self.console.print(Panel("[bold underline]Création d'un nouvel employé[/bold underline]", style="green"))
 
         # Collecte les informations de l'utilisateur
 
         first_name = self.view.return_choice("Entrez le prénom de l'employé ( facultatif ): ", False)
         last_name = self.view.return_choice("Entrez le nom de famille de l'employé ( facultatif ): ", False)
-        
         email = self.validation_email()
         if not email:
             return
@@ -80,7 +79,6 @@ class EmployeeManage:
         password_hash = self.validation_password()
         if not password_hash:
             return
-        
         # validation du role
         # Tableau de choix pour les roles
         roles_list = Role.get_roles_list(self.session)
@@ -98,12 +96,25 @@ class EmployeeManage:
 
         # Instance du nouvel objet Employee
         new_employee = Employee(
-            FirstName=first_name,
-            LastName=last_name,
-            Email=email,
-            PasswordHash=password_hash,
-            RoleId=int(role_id)
+            FirstName=first_name, LastName=last_name, Email=email, PasswordHash=password_hash, RoleId=int(role_id)
         )
+
+        # Afficher un tableau récapitulatif
+        summary_table = Table(title="\nRésumé de la création de l'employé")
+        summary_table.add_column("Champ", style="cyan")
+        summary_table.add_column("Valeur", style="magenta")
+        summary_table.add_row("Prénom", first_name if first_name else "N/A")
+        summary_table.add_row("Nom de famille", last_name if last_name else "N/A")
+        summary_table.add_row("Email", email)
+        summary_table.add_row("Rôle", next((role.RoleName for role in roles_list if role.Id == int(role_id)), "Inconnu"))
+
+        self.console.print(summary_table)
+
+        # Demander une confirmation avant validation
+        confirm = self.view.return_choice("Confirmez-vous la création de cet employé ? (oui/non): ", False)
+        if confirm.lower() != 'oui':
+            self.console.print("[bold red]Création annulée.[/bold red]")
+            return
 
         # Ajouter à la session et commit
         try:
@@ -120,7 +131,7 @@ class EmployeeManage:
         except Exception as e:
             self.session.rollback()
             self.console.print(f"[bold red]Erreur lors de la création de l'employé : {e}[/bold red]")
-        
+
         self.view.prompt_wait_enter()
 
     def update(self, arg):
@@ -135,13 +146,13 @@ class EmployeeManage:
         if date:
             return date.strftime("%d/%m/%Y")
         return None
-    
+
     def validation_email(self):
         """
         Valide l'adresse e-mail saisie par l'utilisateur.
 
         Demande à l'utilisateur de saisir une adresse e-mail et valide son format.
-        Si l'adresse e-mail n'est pas valide, affiche un message d'erreur et demande 
+        Si l'adresse e-mail n'est pas valide, affiche un message d'erreur et demande
         de saisir à nouveau l'adresse e-mail. Si l'adresse e-mail est valide, la retourne.
 
         Returns:
@@ -159,14 +170,14 @@ class EmployeeManage:
                 self.view.display_red_message(f"Erreur de validation : {e}")
             else:
                 return email
-            
+
     def validation_password(self):
         """
         Valide le mot de passe saisi par l'utilisateur.
 
         Demande à l'utilisateur de saisir un mot de passe et de le confirmer.
-        Si les mots de passe ne correspondent pas ou ne respectent pas les règles de 
-        validation, affiche un message d'erreur et demande de saisir à nouveau les mots de passe. 
+        Si les mots de passe ne correspondent pas ou ne respectent pas les règles de
+        validation, affiche un message d'erreur et demande de saisir à nouveau les mots de passe.
         Si le mot de passe est valide, le hash et le retourne.
 
         Returns:
@@ -178,10 +189,12 @@ class EmployeeManage:
             password = self.view.return_choice("Entrez le mot de passe de l'employé ( vide pour annuler ): ", True)
             if not password:
                 return None
-            confirm_password = self.view.return_choice("Confirmez le mot de passe de l'employé ( vide pour annuler ): ", True)
+            confirm_password = self.view.return_choice(
+                "Confirmez le mot de passe de l'employé ( vide pour annuler ): ", True
+            )
             if not confirm_password:
                 return None
-            
+
             if password == confirm_password:
                 try:
                     Employee.validate_password_hash(self, "PasswordHash", password)
@@ -191,5 +204,3 @@ class EmployeeManage:
                     return password
             else:
                 self.view.display_red_message("Les mots de passe ne correspondent pas.")
-
-
