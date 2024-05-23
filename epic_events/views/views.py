@@ -33,11 +33,11 @@ class View:
 
         Args:
             table (Table): Données du tableau
-            title (str): Titre du tableeau
+            title (str): Titre du tableau ou None
         """
+        if title:
+            self.console.print(Panel.fit(f"[underline green bold]{title}[/underline green bold]"))
 
-        
-        self.console.print(Panel.fit(f"[underline green bold]{title}[/underline green bold]"))
         self.console.print(table)
 
     def display_green_message(self, message):
@@ -49,7 +49,15 @@ class View:
         self.console.print(f"[bold red]{message}[/bold red]")
 
     def return_choice(self, text, hidden):
-        """pose une question selon un texte caché ou non et renvoie la réponse"""
+        """Pose une question et renvoie la réponse, la saisie de la réponse peut etre cachée ou non.
+
+        Args:
+            text (str): Texte à afficher
+            hidden (bool): Saisie cachée si True
+
+        Returns:
+            str: Réponse
+        """
         self.console.print("")
         answer = self.console.input(f"{text}", password=hidden)
         return answer

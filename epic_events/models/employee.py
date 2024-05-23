@@ -6,7 +6,6 @@ from sqlalchemy import TIMESTAMP, Column, ForeignKey, Integer, String, func
 from sqlalchemy.orm import relationship, validates
 
 from .database import Base
-from .role import Role
 
 
 class Employee(Base):
@@ -46,14 +45,14 @@ class Employee(Base):
             email (str): Adresse email à valider.
 
         Returns:
-            str: L'adresse email si elle est valide.
+            str: L'adresse email en minuscules si elle est valide.
 
         Raises:
             ValueError: Si l'adresse email n'est pas valide.
         """
         _, parsed_email = parseaddr(email)
-        if re.match(r"^[\w\.-]+@[\w\.-]+$", parsed_email):
-            return email
+        if re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", parsed_email):
+            return email.lower()
         else:
             raise ValueError("Adresse email invalide")
 
@@ -68,7 +67,22 @@ class Employee(Base):
 
         Returns:
             str: Le hash du mot de passe.
+        Raises:
+            exceptions avec messages d'erreurs
         """
+
+        # régles du mot de passe
+        if not password:
+            raise ValueError("Le mot de passe ne peut pas être vide")
+        if len(password) < 8:
+            raise ValueError("Le mot de passe doit contenir au moins 8 caractères")
+        if not re.search(r"[A-Z]", password):
+            raise ValueError("Le mot de passe doit contenir au moins une lettre majuscule")
+        if not re.search(r"[a-z]", password):
+            raise ValueError("Le mot de passe doit contenir au moins une lettre minuscule")
+        if not re.search(r"\d", password):
+            raise ValueError("Le mot de passe doit contenir au moins un chiffre")
+
         password_hash = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
 
         # Postgre : Postgres comme DDBB et son driver, ou le système DDBB, encode toujours une chaîne déjà encodée.
