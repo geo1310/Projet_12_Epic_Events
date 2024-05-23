@@ -22,6 +22,7 @@ class ContractManage:
 
         # création du tableau
         table = Table(show_header=True, header_style="bold green")
+        
         # Ajouter des colonnes
         table.add_column("ID", style="dim", width=5)
         table.add_column("Titre")

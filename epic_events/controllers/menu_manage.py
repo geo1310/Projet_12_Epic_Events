@@ -203,10 +203,10 @@ class MenuManage:
         # vérifie la validité de la session
         while self.verify_jwt():
 
-            self.view.display_green_message(
-                f"Bienvenue {self.employee.FirstName} {self.employee.LastName} - Status : {self.employee.Role.RoleName}"
-            )
+            user_connected = f"{self.employee.FirstName} {self.employee.LastName}"
+            user_connected_status = self.employee.Role.RoleName
 
+            self.view.show_intro(user_connected, user_connected_status)
             choice = self.view.display_menu(title, menu_list)
 
             # analyse du choix utilisateur

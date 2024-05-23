@@ -1,12 +1,21 @@
 import os
 
 from rich.console import Console
+from rich.panel import Panel
 
 
 class View:
 
     def __init__(self):
         self.console = Console()
+
+    def show_intro(self, user_connected, user_connected_status):
+
+        self.console.print(Panel(
+            "[bold underline blue]Bienvenue sur le CRM Epic Events[/bold underline blue]\n"
+            f"\nUtilisateur connecté: [bold blue]{user_connected}[/bold blue]"
+            f"\nStatus: [bold blue]{user_connected_status}[/bold blue]"
+        ))
 
     def display_menu(self, title, menu_list):
         """Affiche le menu d'apres un titre et une liste de menus et renvoie le choix"""
@@ -20,7 +29,15 @@ class View:
         return choice
 
     def display_table(self, table, title):
-        self.console.print(f"[underline green]{title}[/underline green]")
+        """Affichage d'un tableau
+
+        Args:
+            table (Table): Données du tableau
+            title (str): Titre du tableeau
+        """
+
+        
+        self.console.print(Panel.fit(f"[underline green bold]{title}[/underline green bold]"))
         self.console.print(table)
 
     def display_green_message(self, message):
