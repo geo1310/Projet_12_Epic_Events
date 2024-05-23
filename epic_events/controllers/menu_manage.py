@@ -204,7 +204,7 @@ class MenuManage:
         while self.verify_jwt():
 
             user_connected = f"{self.employee.FirstName} {self.employee.LastName}"
-            user_connected_status = self.employee.Role.RoleName
+            user_connected_status = self.employee.RoleRel.RoleName
 
             self.view.show_intro(user_connected, user_connected_status)
             choice = self.view.display_menu(title, menu_list)

@@ -40,8 +40,8 @@ class Event(Base):
     DateEnd = Column(Date)
     DateCreated = Column(TIMESTAMP, server_default=func.current_timestamp())
 
-    Contract = relationship("Contract", backref="Events")
-    EmployeeSupport = relationship("Employee", backref="Events")
+    ContractRel = relationship("Contract", backref="EventsRel")
+    EmployeeSupportRel = relationship("Employee", backref="EventsRel")
 
     # Valider la date de fin après la date de début
     @validates("DateStart", "DateEnd")

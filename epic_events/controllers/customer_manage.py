@@ -42,7 +42,7 @@ class CustomerManage:
                 customer.Email,
                 customer.PhoneNumber,
                 customer.Company,
-                customer.Commercial.Email,
+                customer.CommercialRel.Email,
                 self.format_date(customer.DateCreated),
                 self.format_date(customer.DateLastUpdate),
             )

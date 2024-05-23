@@ -41,7 +41,7 @@ class Customer(Base):
         server_default=func.current_timestamp(),
         onupdate=func.current_timestamp(),
     )
-    Commercial = relationship("Employee", backref="Customers")  # relation bidirectionnelles entre les classes
+    CommercialRel = relationship("Employee", backref="CustomersRel")  # relation bidirectionnelles entre les classes
 
     @validates("Email")
     def validate_email(self, key, email):

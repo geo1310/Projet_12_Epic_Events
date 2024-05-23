@@ -38,8 +38,8 @@ class ContractManage:
             table.add_row(
                 str(contract.Id),
                 contract.Title,
-                contract.Customer.FirstName,
-                contract.Customer.Email,
+                contract.CustomerRel.FirstName,
+                contract.CustomerRel.Email,
                 str(contract.Amount),
                 str(contract.AmountOutstanding),
                 str(contract.ContractSigned),

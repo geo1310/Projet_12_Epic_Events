@@ -204,14 +204,25 @@ def init_base():
         session.commit()
 
         # Création d'un événement associé au contrat
-        new_event = Event(
+        event_1 = Event(
             Title="Event_1",
-            Contract=contract_1,
+            ContractRel=contract_1,
+            EmployeeSupportRel = support_1,
             Location="Lieu de l'événement",
             Attendees=20,
             DateStart="2024-05-14",
         )
-        session.add(new_event)
+        session.add(event_1)
+
+        # Création d'un événement associé au contrat
+        event_2 = Event(
+            Title="Event_2",
+            ContractRel=contract_1,
+            EmployeeSupportRel = support_1,
+            Location="Lieu de l'événement",
+            Attendees=15,
+        )
+        session.add(event_2)
 
         session.commit()
 

@@ -36,8 +36,8 @@ class EventManage:
         for event in events:
 
             employee_support = ""
-            if event.EmployeeSupport:
-                employee_support = event.EmployeeSupport.FirstName
+            if event.EmployeeSupportRel:
+                employee_support = event.EmployeeSupportRel.FirstName
 
             table.add_row(
                 str(event.Id),
@@ -45,7 +45,7 @@ class EventManage:
                 event.Notes,
                 event.Location,
                 str(event.Attendees),
-                event.Contract.Title,
+                event.ContractRel.Title,
                 employee_support,
                 self.format_date(event.DateStart),
                 self.format_date(event.DateEnd),

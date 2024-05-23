@@ -32,4 +32,4 @@ class Contract(Base):
     ContractSigned = Column(Boolean, default=False)
     DateCreated = Column(TIMESTAMP, server_default=func.current_timestamp())
 
-    Customer = relationship("Customer", backref="Contracts")
+    CustomerRel = relationship("Customer", backref="ContractsRel")

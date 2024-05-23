@@ -29,21 +29,27 @@ class EmployeeManage:
         table.add_column("Email")
         table.add_column("Status")
         table.add_column("Client(s)")
+        table.add_column("Evènements(s)")
         table.add_column("Date de création")
 
         for employee in employees:
 
             customer_list = []
-            for customer in employee.Customers:
+            for customer in employee.CustomersRel:
                 customer_list.append(customer.FirstName)
+
+            event_list = []
+            for event in employee.EventsRel:
+                event_list.append(event.Title)
 
             table.add_row(
                 str(employee.Id),
                 employee.FirstName,
                 employee.LastName,
                 employee.Email,
-                employee.Role.RoleName,
+                employee.RoleRel.RoleName,
                 str(customer_list),
+                str(event_list),
                 self.format_date(employee.DateCreated),
             )
 
