@@ -77,7 +77,7 @@ class EmployeeManage:
         Args:
             arg: Argument optionnel pour passer des paramètres supplémentaires.
         """
-        self.view.display_title_panel_color_fit("Création d'un nouvel employé", "green")
+        self.view.display_title_panel_color_fit("Création d'un employé", "green")
 
         # Collecte les informations de l'utilisateur
 
@@ -130,7 +130,7 @@ class EmployeeManage:
             self.session.add(self.employee)
             self.session.flush()
             # Affichage et confirmation
-            if not self.confirm_table_recap("Création"):
+            if not self.confirm_table_recap("Création", "green"):
                 self.session.expunge(self.employee)
                 self.session.rollback()
                 return
@@ -154,8 +154,38 @@ class EmployeeManage:
         pass
 
     def delete(self, arg):
-        # TODO
-        pass
+
+        self.view.display_title_panel_color_fit("Suppression d'un employé", "red")
+
+        while True:
+            employee_id = self.view.return_choice("Entrez l'identifiant de l'employé à supprimer ( vide pour annuler ): ", False)
+            
+            if not employee_id:
+                return
+            
+            try:
+                self.employee = self.session.query(Employee).filter_by(Id=int(employee_id)).one()
+                break
+            except Exception:
+                self.view.display_red_message("Identifiant non valide !")
+
+
+        if not self.confirm_table_recap("Suppression", "red"):
+            return
+
+        try:
+            self.session.delete(self.employee)
+            self.session.commit()
+            self.view.display_green_message("Employé supprimé avec succès !")
+        except IntegrityError as e:
+            self.session.rollback()
+            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
+            self.view.display_red_message(f"Erreur : {error_detail}")
+        except Exception as e:
+            self.session.rollback()
+            self.view.display_red_message(f"Erreur lors de la suppression de l'employé : {e}")
+
+        self.view.prompt_wait_enter()
 
     def format_date(self, date):
         if date:
@@ -220,7 +250,7 @@ class EmployeeManage:
             else:
                 self.view.display_red_message("Les mots de passe ne correspondent pas.")
 
-    def confirm_table_recap(self,oper:str):
+    def confirm_table_recap(self,oper:str, color:str="white"):
         """
         Affiche un tableau récapitulatif des informations de l'employé et demande une confirmation.
 
@@ -230,13 +260,14 @@ class EmployeeManage:
 
         Args:
         oper (str): L'opération à confirmer (par exemple, 'Création', 'Mise à jour', 'Suppression').
+        color (str): Couleur du texte
 
         Returns:
             bool: True si l'utilisateur confirme l'opération, False sinon.
 
         """
 
-        self.view.display_title_panel_color_fit(f"{oper} d'un employé", "green",True)
+        self.view.display_title_panel_color_fit(f"{oper} d'un employé", f"{color}",True)
 
         # Tableau récapitulatif
         summary_table = Table()
