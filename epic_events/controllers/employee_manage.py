@@ -24,6 +24,12 @@ class EmployeeManage:
         self.console = Console()
 
     def list(self, arg):
+        """
+        Affiche la liste des employés dans un tableau.
+
+        Args:
+            arg: Argument optionnel pour passer des paramètres supplémentaires.
+        """
 
         employees = self.session.query(Employee).all()
 
@@ -65,8 +71,13 @@ class EmployeeManage:
         self.view.prompt_wait_enter()
 
     def create(self, arg):
+        """
+        Crée un nouvel employé après avoir collecté et validé les informations de l'utilisateur.
 
-        self.console.print(Panel("[bold underline]Création d'un nouvel employé[/bold underline]", style="green"))
+        Args:
+            arg: Argument optionnel pour passer des paramètres supplémentaires.
+        """
+        self.view.display_title_panel_color_fit("Création d'un nouvel employé", "green")
 
         # Collecte les informations de l'utilisateur
 
@@ -75,62 +86,66 @@ class EmployeeManage:
         email = self.validation_email()
         if not email:
             return
+        
+        self.view.display_green_message("Email validé !")
 
         password_hash = self.validation_password()
         if not password_hash:
             return
+        
+        self.view.display_green_message("Mot de passe validé !")
+        
         # validation du role
         # Tableau de choix pour les roles
         roles_list = Role.get_roles_list(self.session)
-        table = Table(title="\nListe des roles")
+        table = Table()
         table.add_column("ID", style="cyan")
         table.add_column("Nom", style="magenta")
+        table.add_row("0", "Annuler")
         for role in roles_list:
             table.add_row(str(role.Id), role.RoleName)
 
-        self.view.display_table(table, None)
+        self.view.display_table(table, "Liste des roles")
 
-        role_id = self.view.return_choice("Entrez l'identifiant du rôle de l'employé ( vide pour annuler ): ", False)
-        if not role_id:
-            return
+        while True:
+            role_id = self.view.return_choice("Entrez l'identifiant du rôle de l'employé: ", False)
+            try:
+                selected_role = next((role for role in roles_list if role.Id == int(role_id)), None)
+                if selected_role:
+                    self.view.display_green_message(f"Rôle sélectionné : {selected_role.RoleName}")
+                    break
+                else:
+                    return
+            except ValueError as e:
+                self.view.display_red_message("Choix invalide !")
+            
 
         # Instance du nouvel objet Employee
-        new_employee = Employee(
+        self.employee = Employee(
             FirstName=first_name, LastName=last_name, Email=email, PasswordHash=password_hash, RoleId=int(role_id)
         )
 
-        # Afficher un tableau récapitulatif
-        summary_table = Table(title="\nRésumé de la création de l'employé")
-        summary_table.add_column("Champ", style="cyan")
-        summary_table.add_column("Valeur", style="magenta")
-        summary_table.add_row("Prénom", first_name if first_name else "N/A")
-        summary_table.add_row("Nom de famille", last_name if last_name else "N/A")
-        summary_table.add_row("Email", email)
-        summary_table.add_row("Rôle", next((role.RoleName for role in roles_list if role.Id == int(role_id)), "Inconnu"))
-
-        self.console.print(summary_table)
-
-        # Demander une confirmation avant validation
-        confirm = self.view.return_choice("Confirmez-vous la création de cet employé ? (oui/non): ", False)
-        if confirm.lower() != 'oui':
-            self.console.print("[bold red]Création annulée.[/bold red]")
-            return
-
         # Ajouter à la session et commit
         try:
-            self.session.add(new_employee)
+            self.session.add(self.employee)
+            self.session.flush()
+            # Affichage et confirmation
+            if not self.confirm_table_recap("Création"):
+                self.session.expunge(self.employee)
+                self.session.rollback()
+                return
             self.session.commit()
-            self.console.print("[bold green]\nEmployé créé avec succès ![/bold green]")
+            self.view.display_green_message("\nEmployé créé avec succès !")
         except IntegrityError as e:
             self.session.rollback()
             error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
-            self.console.print(f"[bold red]Erreur : {error_detail}[/bold red]")
+            self.view.display_red_message(f"Erreur : {error_detail}")
         except ValueError as e:
             self.session.rollback()
-            self.console.print(f"[bold red]Erreur de validation : {e}[/bold red]")
+            self.view.display_red_message(f"Erreur de validation : {e}")
         except Exception as e:
             self.session.rollback()
-            self.console.print(f"[bold red]Erreur lors de la création de l'employé : {e}[/bold red]")
+            self.view.display_red_message(f"Erreur lors de la création de l'employé : {e}")
 
         self.view.prompt_wait_enter()
 
@@ -204,3 +219,40 @@ class EmployeeManage:
                     return password
             else:
                 self.view.display_red_message("Les mots de passe ne correspondent pas.")
+
+    def confirm_table_recap(self,oper:str):
+        """
+        Affiche un tableau récapitulatif des informations de l'employé et demande une confirmation.
+
+        Cette méthode crée et affiche un tableau récapitulatif contenant les informations de l'employé.
+        Ensuite, elle demande à l'utilisateur de confirmer l'opération en saisissant 'oui' ou 'non'. 
+        Si l'utilisateur confirme, la méthode retourne True. 
+
+        Args:
+        oper (str): L'opération à confirmer (par exemple, 'Création', 'Mise à jour', 'Suppression').
+
+        Returns:
+            bool: True si l'utilisateur confirme l'opération, False sinon.
+
+        """
+
+        self.view.display_title_panel_color_fit(f"{oper} d'un employé", "green",True)
+
+        # Tableau récapitulatif
+        summary_table = Table()
+        summary_table.add_column("Champ", style="cyan")
+        summary_table.add_column("Valeur", style="magenta")
+        summary_table.add_row("Prénom", self.employee.FirstName)
+        summary_table.add_row("Nom", self.employee.LastName)
+        summary_table.add_row("Email", self.employee.Email)
+        summary_table.add_row("Rôle", self.employee.RoleRel.RoleName)
+
+        self.view.display_table(summary_table, "Résumé de l'employé")
+
+        # Demander une confirmation avant validation
+        confirm = self.view.return_choice(f"Confirmation {oper} ? (oui/non): ", False)
+        if confirm.lower() != 'oui':
+            self.view.display_red_message("Opération annulée.")
+            self.view.prompt_wait_enter()
+            return False
+        return True
