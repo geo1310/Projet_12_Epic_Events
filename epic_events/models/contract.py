@@ -1,5 +1,4 @@
-from sqlalchemy import (TIMESTAMP, Boolean, Column, Float, ForeignKey, Integer,
-                        String, func)
+from sqlalchemy import TIMESTAMP, Boolean, Column, Float, ForeignKey, Integer, String, func
 from sqlalchemy.orm import relationship
 
 from epic_events.models.customer import Customer

@@ -1,11 +1,8 @@
+from email.utils import parseaddr
+
 from rich.console import Console
 from rich.table import Table
-from rich.prompt import Prompt
-from rich.panel import Panel
-import bcrypt
 from sqlalchemy.exc import IntegrityError
-from email.utils import parseaddr
-import re
 
 from ..models.database import Session
 from ..models.employee import Employee
@@ -26,9 +23,6 @@ class EmployeeManage:
     def list(self, arg):
         """
         Affiche la liste des employés dans un tableau.
-
-        Args:
-            arg: Argument optionnel pour passer des paramètres supplémentaires.
         """
 
         employees = self.session.query(Employee).all()
@@ -73,52 +67,30 @@ class EmployeeManage:
     def create(self, arg):
         """
         Crée un nouvel employé après avoir collecté et validé les informations de l'utilisateur.
-
-        Args:
-            arg: Argument optionnel pour passer des paramètres supplémentaires.
         """
         self.view.display_title_panel_color_fit("Création d'un employé", "green")
 
         # Collecte les informations de l'utilisateur
 
-        first_name = self.view.return_choice("Entrez le prénom de l'employé ( facultatif ): ", False)
-        last_name = self.view.return_choice("Entrez le nom de famille de l'employé ( facultatif ): ", False)
+        first_name = self.view.return_choice("Entrez le prénom de l'employé ( facultatif )", False)
+        last_name = self.view.return_choice("Entrez le nom de famille de l'employé ( facultatif )", False)
+
+        # Validation de l'email
         email = self.validation_email()
         if not email:
             return
-        
         self.view.display_green_message("Email validé !")
 
+        # Validation du mot de passe
         password_hash = self.validation_password()
         if not password_hash:
             return
-        
         self.view.display_green_message("Mot de passe validé !")
-        
+
         # validation du role
-        # Tableau de choix pour les roles
-        roles_list = Role.get_roles_list(self.session)
-        table = Table()
-        table.add_column("ID", style="cyan")
-        table.add_column("Nom", style="magenta")
-        table.add_row("0", "Annuler")
-        for role in roles_list:
-            table.add_row(str(role.Id), role.RoleName)
-
-        self.view.display_table(table, "Liste des roles")
-
-        while True:
-            role_id = self.view.return_choice("Entrez l'identifiant du rôle de l'employé: ", False)
-            try:
-                selected_role = next((role for role in roles_list if role.Id == int(role_id)), None)
-                if selected_role:
-                    self.view.display_green_message(f"Rôle sélectionné : {selected_role.RoleName}")
-                    break
-                else:
-                    return
-            except ValueError as e:
-                self.view.display_red_message("Choix invalide !")
-            
+        role_id = self.valid_role()
+        if not role_id:
+            return
 
         # Instance du nouvel objet Employee
         self.employee = Employee(
@@ -129,7 +101,8 @@ class EmployeeManage:
         try:
             self.session.add(self.employee)
             self.session.flush()
-            # Affichage et confirmation
+
+            # Affichage et confirmation de la création
             if not self.confirm_table_recap("Création", "green"):
                 self.session.expunge(self.employee)
                 self.session.rollback()
@@ -150,25 +123,111 @@ class EmployeeManage:
         self.view.prompt_wait_enter()
 
     def update(self, arg):
-        # TODO
-        pass
+        """
+        Mets à jour les informations d'un employé existant.
 
-    def delete(self, arg):
+        Cette méthode permet de modifier les informations d'un employé en demandant à l'utilisateur
+        de saisir un identifiant d'employé, puis de valider les nouvelles informations fournies. Les
+        modifications sont affichées pour confirmation avant d'être enregistrées dans la base de données.
 
-        self.view.display_title_panel_color_fit("Suppression d'un employé", "red")
+        Args:
+            arg: Argument optionnel pour passer des paramètres supplémentaires.
+        """
+        self.view.display_title_panel_color_fit("Modification d'un employé", "yellow")
 
+        # Validation de l'employé à modifier par son Id
         while True:
-            employee_id = self.view.return_choice("Entrez l'identifiant de l'employé à supprimer ( vide pour annuler ): ", False)
-            
+            employee_id = self.view.return_choice(
+                "Entrez l'identifiant de l'employé à supprimer ( vide pour annuler )", False
+            )
+
             if not employee_id:
                 return
-            
+
             try:
                 self.employee = self.session.query(Employee).filter_by(Id=int(employee_id)).one()
                 break
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
+        # Affichage et confirmation de la modification
+        if not self.confirm_table_recap("Modification", "yellow"):
+            return
+
+        self.view.display_title_panel_color_fit("Modification d'un employé", "yellow", True)
+        self.employee.FirstName = self.view.return_choice("Prénom", False, f"{self.employee.FirstName}")
+        self.employee.LastName = self.view.return_choice("Nom", False, f"{self.employee.LastName}")
+        self.employee.Email = self.view.return_choice("Email", False, f"{self.employee.Email}")
+
+        # validation du role
+        role_id = self.valid_role(self.employee.RoleId)
+
+        if not role_id:
+            return
+        self.employee.RoleId = role_id
+
+        # Modification du mot de passe
+        confirm = self.view.return_choice("Voulez-vous modifier le mot de passe ? (oui/non)", False)
+        if confirm:
+            password_hash = self.validation_password()
+            if not password_hash:
+                return
+            self.view.display_green_message("Mot de passe validé !")
+
+            self.employee.PasswordHash = password_hash
+
+        # Ajouter à la session et commit
+        try:
+            self.session.commit()
+
+            # Affichage et confirmation de la modification
+            if not self.confirm_table_recap("Modification", "yellow"):
+                self.session.expunge(self.employee)
+                self.session.rollback()
+                return
+
+            self.view.display_green_message("\nEmployé modifié avec succès !")
+        except IntegrityError as e:
+            self.session.rollback()
+            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
+            self.view.display_red_message(f"Erreur : {error_detail}")
+        except ValueError as e:
+            self.session.rollback()
+            self.view.display_red_message(f"Erreur de validation : {e}")
+        except Exception as e:
+            self.session.rollback()
+            self.view.display_red_message(f"Erreur lors de la création de l'employé : {e}")
+
+        self.view.prompt_wait_enter()
+
+    def delete(self, arg):
+        """
+        Supprime un employé existant.
+
+        Cette méthode permet de supprimer un employé en demandant à l'utilisateur
+        de saisir un identifiant d'employé, puis de valider la suppression.
+        La suppression est affichée pour confirmation avant d'être exécutée.
+
+        Args:
+            arg: Argument optionnel pour passer des paramètres supplémentaires.
+        """
+
+        self.view.display_title_panel_color_fit("Suppression d'un employé", "red")
+
+        # Validation de l'employé à supprimer par son Id
+        while True:
+            employee_id = self.view.return_choice(
+                "Entrez l'identifiant de l'employé à supprimer ( vide pour annuler )", False
+            )
+
+            if not employee_id:
+                return
+
+            try:
+                self.employee = self.session.query(Employee).filter_by(Id=int(employee_id)).one()
+                break
+            except Exception:
+                self.view.display_red_message("Identifiant non valide !")
 
         if not self.confirm_table_recap("Suppression", "red"):
             return
@@ -188,6 +247,18 @@ class EmployeeManage:
         self.view.prompt_wait_enter()
 
     def format_date(self, date):
+        """
+        Formate une date en chaîne de caractères au format "JJ/MM/AAAA".
+
+        Cette méthode prend un objet date et le formate en une chaîne de caractères
+        selon le format "jour/mois/année". Si la date est None, la méthode retourne None.
+
+        Args:
+            date (datetime.date): La date à formater.
+
+        Returns:
+            str: La date formatée en chaîne de caractères si la date est fournie, None sinon.
+        """
         if date:
             return date.strftime("%d/%m/%Y")
         return None
@@ -206,7 +277,7 @@ class EmployeeManage:
         """
 
         while True:
-            email = self.view.return_choice("Entrez l'adresse email de l'employé ( vide pour annuler ): ", False)
+            email = self.view.return_choice("Entrez l'adresse email de l'employé ( vide pour annuler )", False)
             if not email:
                 return None
             try:
@@ -231,11 +302,11 @@ class EmployeeManage:
         """
 
         while True:
-            password = self.view.return_choice("Entrez le mot de passe de l'employé ( vide pour annuler ): ", True)
+            password = self.view.return_choice("Entrez le mot de passe de l'employé ( vide pour annuler )", True)
             if not password:
                 return None
             confirm_password = self.view.return_choice(
-                "Confirmez le mot de passe de l'employé ( vide pour annuler ): ", True
+                "Confirmez le mot de passe de l'employé ( vide pour annuler )", True
             )
             if not confirm_password:
                 return None
@@ -250,13 +321,13 @@ class EmployeeManage:
             else:
                 self.view.display_red_message("Les mots de passe ne correspondent pas.")
 
-    def confirm_table_recap(self,oper:str, color:str="white"):
+    def confirm_table_recap(self, oper: str, color: str = "white"):
         """
         Affiche un tableau récapitulatif des informations de l'employé et demande une confirmation.
 
         Cette méthode crée et affiche un tableau récapitulatif contenant les informations de l'employé.
-        Ensuite, elle demande à l'utilisateur de confirmer l'opération en saisissant 'oui' ou 'non'. 
-        Si l'utilisateur confirme, la méthode retourne True. 
+        Ensuite, elle demande à l'utilisateur de confirmer l'opération en saisissant 'oui' ou 'non'.
+        Si l'utilisateur confirme, la méthode retourne True.
 
         Args:
         oper (str): L'opération à confirmer (par exemple, 'Création', 'Mise à jour', 'Suppression').
@@ -267,7 +338,7 @@ class EmployeeManage:
 
         """
 
-        self.view.display_title_panel_color_fit(f"{oper} d'un employé", f"{color}",True)
+        self.view.display_title_panel_color_fit(f"{oper} d'un employé", f"{color}", True)
 
         # Tableau récapitulatif
         summary_table = Table()
@@ -281,9 +352,51 @@ class EmployeeManage:
         self.view.display_table(summary_table, "Résumé de l'employé")
 
         # Demander une confirmation avant validation
-        confirm = self.view.return_choice(f"Confirmation {oper} ? (oui/non): ", False)
-        if confirm.lower() != 'oui':
+        confirm = self.view.return_choice(f"Confirmation {oper} ? (oui/non)", False)
+        if confirm:
+            confirm = confirm.lower()
+        if confirm != "oui":
             self.view.display_red_message("Opération annulée.")
             self.view.prompt_wait_enter()
             return False
         return True
+
+    def valid_role(self, role_default: int = None):
+        """
+        Affiche un tableau de choix pour les rôles et demande à l'utilisateur de sélectionner un rôle.
+
+        Cette méthode affiche un tableau contenant tous les rôles disponibles et demande à l'utilisateur
+        de saisir l'identifiant du rôle souhaité. Si un identifiant par défaut est fourni, il sera proposé par défaut.
+        Si l'utilisateur saisit une valeur valide, la méthode retourne l'identifiant du rôle. Sinon, elle retourne None.
+
+        Args:
+            role_default (int, optional): Identifiant du rôle par défaut. Défaut à None.
+
+        Returns:
+            int: L'identifiant du rôle sélectionné si valide, sinon None.
+        """
+
+        # Tableau de choix pour les roles
+        roles_list = Role.get_roles_list(self.session)
+        table = Table()
+        table.add_column("ID", style="cyan")
+        table.add_column("Nom", style="magenta")
+        table.add_row("0", "Annuler")
+        for role in roles_list:
+            table.add_row(str(role.Id), role.RoleName)
+
+        self.view.display_table(table, "Liste des roles")
+
+        while True:
+
+            role_id = self.view.return_choice("Entrez l'identifiant du rôle de l'employé", False, f"{role_default}")
+
+            try:
+                selected_role = next((role for role in roles_list if role.Id == int(role_id)), None)
+                if selected_role:
+                    self.view.display_green_message(f"Rôle sélectionné : {selected_role.RoleName}")
+                    return int(role_id)
+                else:
+                    return None
+            except ValueError:
+                self.view.display_red_message("Choix invalide !")

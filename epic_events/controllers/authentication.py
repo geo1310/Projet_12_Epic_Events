@@ -1,8 +1,8 @@
 import os
-from dotenv import load_dotenv
 from datetime import datetime, timedelta, timezone
 
 import jwt
+from dotenv import load_dotenv
 
 from ..models.database import Session
 from ..models.employee import Employee
@@ -43,7 +43,7 @@ class AuthenticationManager:
             if self.session:
                 self.session.close()
 
-    def generate_jwt_token(self, user_id):
+    def generate_jwt_token(self, user_id: int):
         """
         Génère un jeton JWT pour l'utilisateur authentifié.
 

@@ -7,6 +7,7 @@ from epic_events.models.employee import Employee
 from epic_events.models.event import Event
 from epic_events.models.role import Role
 
+
 def init_base():
     # Configuration du logger
     logging.basicConfig(level=logging.INFO)
@@ -97,7 +98,6 @@ def init_base():
 
     finally:
         session.close()
-
 
     # création d'un employé et d'un client
     try:
@@ -207,7 +207,7 @@ def init_base():
         event_1 = Event(
             Title="Event_1",
             ContractRel=contract_1,
-            EmployeeSupportRel = support_1,
+            EmployeeSupportRel=support_1,
             Location="Lieu de l'événement",
             Attendees=20,
             DateStart="2024-05-14",
@@ -218,7 +218,7 @@ def init_base():
         event_2 = Event(
             Title="Event_2",
             ContractRel=contract_1,
-            EmployeeSupportRel = support_1,
+            EmployeeSupportRel=support_1,
             Location="Lieu de l'événement",
             Attendees=15,
         )
@@ -235,6 +235,6 @@ def init_base():
     finally:
         session.close()
 
+
 if __name__ == "__main__":
     init_base()
-
