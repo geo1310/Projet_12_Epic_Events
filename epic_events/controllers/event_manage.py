@@ -16,7 +16,7 @@ class EventManage:
         self.view = View()
         self.console = Console()
 
-    def list(self, arg):
+    def list(self):
         events = self.session.query(Event).all()
 
         # création du tableau
@@ -56,19 +56,31 @@ class EventManage:
         self.view.display_table(table, "\nListe des Evènements")
         self.view.prompt_wait_enter()
 
-    def create(self, arg):
+    def create(self):
         # TODO
         pass
 
-    def update(self, arg):
+    def update(self):
         # TODO
         pass
 
-    def delete(self, arg):
+    def delete(self):
         # TODO
         pass
 
-    def format_date(self, date):
+    def format_date(self, date:str):
+        """
+        Formate une date en chaîne de caractères au format "JJ/MM/AAAA HH:MN".
+
+        Cette méthode prend un objet date et le formate en une chaîne de caractères
+        selon le format "jour/mois/année". Si la date est None, la méthode retourne None.
+
+        Args:
+            date: La date à formater.
+
+        Returns:
+            str: La date formatée en chaîne de caractères si la date est fournie, None sinon.
+        """
         if date:
-            return date.strftime("%d/%m/%Y")
+            return date.strftime("%d/%m/%Y %H:%M")
         return None
