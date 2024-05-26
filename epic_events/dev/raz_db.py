@@ -7,6 +7,7 @@ from epic_events.models.employee import Employee
 from epic_events.models.event import Event
 from epic_events.models.role import Role
 
+
 def init_base():
     # Configuration du logger
     logging.basicConfig(level=logging.INFO)
@@ -98,7 +99,6 @@ def init_base():
     finally:
         session.close()
 
-
     # création d'un employé et d'un client
     try:
         session = Session()
@@ -108,7 +108,7 @@ def init_base():
             FirstName="commercial_1",
             LastName="",
             Email="commercial_1@email.com",
-            PasswordHash="password123",
+            PasswordHash="Password123",
             RoleId=1,
         )
         session.add(commercial_1)
@@ -118,7 +118,7 @@ def init_base():
             FirstName="commercial_2",
             LastName="",
             Email="commercial_2@email.com",
-            PasswordHash="password123",
+            PasswordHash="Password123",
             RoleId=1,
         )
         session.add(commercial_2)
@@ -128,7 +128,7 @@ def init_base():
             FirstName="support_1",
             LastName="",
             Email="support_1@email.com",
-            PasswordHash="password123",
+            PasswordHash="Password123",
             RoleId=2,
         )
         session.add(support_1)
@@ -138,7 +138,7 @@ def init_base():
             FirstName="support_2",
             LastName="",
             Email="support_2@email.com",
-            PasswordHash="password123",
+            PasswordHash="Password123",
             RoleId=2,
         )
         session.add(support_2)
@@ -148,7 +148,7 @@ def init_base():
             FirstName="manager_1",
             LastName="",
             Email="manager_1@email.com",
-            PasswordHash="password123",
+            PasswordHash="Password123",
             RoleId=3,
         )
         session.add(manager_1)
@@ -207,7 +207,7 @@ def init_base():
         event_1 = Event(
             Title="Event_1",
             ContractRel=contract_1,
-            EmployeeSupportRel = support_1,
+            EmployeeSupportRel=support_1,
             Location="Lieu de l'événement",
             Attendees=20,
             DateStart="2024-05-14",
@@ -218,7 +218,7 @@ def init_base():
         event_2 = Event(
             Title="Event_2",
             ContractRel=contract_1,
-            EmployeeSupportRel = support_1,
+            EmployeeSupportRel=support_1,
             Location="Lieu de l'événement",
             Attendees=15,
         )
@@ -235,6 +235,6 @@ def init_base():
     finally:
         session.close()
 
+
 if __name__ == "__main__":
     init_base()
-

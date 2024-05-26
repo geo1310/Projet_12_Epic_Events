@@ -59,7 +59,7 @@ class Customer(Base):
             ValueError: Si l'adresse email n'est pas valide.
         """
         _, parsed_email = parseaddr(email)
-        if re.match(r"^[\w\.-]+@[\w\.-]+$", parsed_email):
+        if re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", parsed_email):
             return email
         else:
             raise ValueError("Adresse email invalide")

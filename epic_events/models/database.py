@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 # Charge les variables d'environnement depuis le fichier .envrc
-load_dotenv()
+load_dotenv(override=True)
 
 # Informations de connexion à la base de données depuis les variables d'environnement
 db_user = os.environ.get("DB_USER")

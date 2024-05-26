@@ -1,4 +1,4 @@
-from sqlalchemy import TIMESTAMP, Boolean, Column, Integer, String, func
+from sqlalchemy import TIMESTAMP, Boolean, Column, Integer, String, func, select
 
 from .database import Base
 
@@ -48,3 +48,17 @@ class Role(Base):
     Can_ru_Event = Column(Boolean, nullable=False, default=False)
     Can_crud_Event = Column(Boolean, nullable=False, default=False)
     DateCreated = Column(TIMESTAMP, server_default=func.current_timestamp())
+
+    @classmethod
+    def get_roles_list(cls, session):
+        """
+        Retourne une liste des rôles avec leur ID et leur nom.
+
+        Args:
+            session: Session SQLAlchemy active.
+
+        Returns:
+            list: Liste de tuples contenant l'ID et le nom de chaque rôle.
+        """
+        roles = session.query(cls.Id, cls.RoleName).all()
+        return roles
