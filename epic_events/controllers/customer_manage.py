@@ -28,7 +28,10 @@ class CustomerManage:
 
     def list(self):
 
-        self.customers = self.employee.CustomersRel
+        if self.permissions.can_access_all_customer(self.role):
+            self.customers = self.session.query(Customer).all()
+        else:
+            self.customers = self.employee.CustomersRel
 
         # création du tableau
         table = Table(show_header=True, header_style="bold green")
@@ -142,7 +145,7 @@ class CustomerManage:
         # Validation du client à modifier par son Id
         while True:
             customer_id = self.view.return_choice(
-                "Entrez l'identifiant du client à modofier ( vide pour annuler )", False
+                "Entrez l'identifiant du client à modifier ( vide pour annuler )", False
             )
 
             if not customer_id:
@@ -152,7 +155,7 @@ class CustomerManage:
                 self.customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
                 
                 # vérifie que le client est dans la liste des clients de l'employé
-                if self.customer in self.customers:
+                if self.customer in self.customers or self.permissions.can_access_all_customer(self.role):
                     break
                 self.view.display_red_message("Vous n'etes pas autorisé à modifier ce client !")
 
@@ -227,7 +230,7 @@ class CustomerManage:
                 self.customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
                 
                 # vérifie que le client est dans la liste des clients de l'employé
-                if self.customer in self.customers:
+                if self.customer in self.customers or self.permissions.can_access_all_customer(self.role):
                     break
                 self.view.display_red_message("Vous n'etes pas autorisé à supprimer ce client !")
             except Exception:

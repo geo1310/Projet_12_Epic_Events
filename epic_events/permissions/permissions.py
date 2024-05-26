@@ -45,6 +45,13 @@ class Permissions:
             return True
         else:
             return False
+        
+    @staticmethod
+    def can_access_all_customer(role):
+        if role.Can_access_all_Customer:
+            return True
+        else:
+            return False
 
     @staticmethod
     def can_update_customer(role):
@@ -63,6 +70,13 @@ class Permissions:
             return True
         else:
             return False
+        
+    @staticmethod
+    def can_access_all_contract(role):
+        if role.Can_access_all_Contract:
+            return True
+        else:
+            return False
 
     @staticmethod
     def can_update_contract(role):
@@ -78,6 +92,13 @@ class Permissions:
     @staticmethod
     def can_read_event(role):
         if role.Can_r_Event or role.Can_ru_Event or role.Can_crud_Event:
+            return True
+        else:
+            return False
+        
+    @staticmethod
+    def can_access_all_event(role):
+        if role.Can_access_all_Event:
             return True
         else:
             return False

@@ -116,20 +116,25 @@ class View:
         else:
             self.console.print(Panel(panel_text, border_style=f"{color}"))
 
-    def return_choice(self, text: str, hidden: bool = False, default: str = None):
+    def return_choice(self, text: str, hidden: bool = False, default: str = None, choices: list = None):
         """Pose une question et renvoie la réponse, la saisie de la réponse peut être cachée ou non.
 
         Args:
-            text (str): Texte à afficher
-            hidden (bool): Si True, la saisie sera cachée (par défaut False)
-            default (str): Valeur par défaut pour la saisie (par défaut None)
+            text (str): Texte à afficher pour la question.
+            hidden (bool): Si True, la saisie sera cachée (utile pour les mots de passe). Par défaut False.
+            default (str, optional): Valeur par défaut pour la saisie. Si None, il n'y a pas de valeur par défaut. Par défaut None.
+            choices (list, optional): Liste des choix possibles pour la réponse. Par défaut None.
 
         Returns:
-            str: Réponse saisie par l'utilisateur
+            str: Réponse saisie par l'utilisateur.
         """
         self.console.print("")
         answer = Prompt.ask(
-            f"{text}", console=self.console, password=hidden, default=default if default is not None else None
+            f"{text}",
+            console=self.console,
+            password=hidden,
+            default=default if default is not None else None,
+            choices=choices if choices is not None else None,
         )
         return answer
 
