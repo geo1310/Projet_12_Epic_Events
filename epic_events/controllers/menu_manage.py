@@ -64,14 +64,16 @@ class MenuManage:
         Composition du menu principal selon les permissions de l'utilisateur.
         """
 
-        menu_items = [
-            "Menu principal : ",
-            {
-                "Gestion des clients": self.menu_customer,
-                "Gestion des contrats": self.menu_contract,
-                "Gestion des évènement": self.menu_event,
-            },
-        ]
+        menu_items = ["Menu principal : ", {}]
+
+        if self.permissions.can_read_customer(self.role):
+            menu_items[1]["Gestion des clients"] = self.menu_customer
+
+        if self.permissions.can_read_contract(self.role):
+            menu_items[1]["Gestion des contrats"] = self.menu_contract
+
+        if self.permissions.can_read_event(self.role):
+            menu_items[1]["Gestion des évènements"] = self.menu_event
 
         if self.permissions.can_read_employee(self.role):
             menu_items[1]["Gestion des employés"] = self.menu_employee
