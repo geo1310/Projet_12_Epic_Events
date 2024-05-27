@@ -1,5 +1,6 @@
 from sqlalchemy import TIMESTAMP, Column, Date, ForeignKey, Integer, String, Text, func
 from sqlalchemy.orm import relationship, validates
+from datetime import datetime
 
 from epic_events.models.contract import Contract
 from epic_events.models.employee import Employee
@@ -42,9 +43,17 @@ class Event(Base):
     ContractRel = relationship("Contract", backref="EventsRel")
     EmployeeSupportRel = relationship("Employee", backref="EventsRel")
 
-    # Valider la date de fin après la date de début
+    # Valider la date de fin après la date de début et le format de date
     @validates("DateStart", "DateEnd")
     def check_dates(self, key, value):
+        if value:
+            try:
+                datetime.strptime(value, "%d-%m-%Y")
+            except ValueError:
+                raise ValueError("Format de date invalide. Utilisez le format dd-mm-yyyy")
         if key == "DateEnd" and self.DateStart and value and value <= self.DateStart:
             raise ValueError("La date de fin doit être après la date de début")
+        
         return value
+    
+        
