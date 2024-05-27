@@ -1,13 +1,14 @@
 from datetime import datetime
+
 from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
-from ..permissions.permissions import Permissions
 from ..models.customer import Customer
+from ..models.database import Session
 from ..models.employee import Employee
 from ..models.role import Role
-from ..models.database import Session
+from ..permissions.permissions import Permissions
 from ..views.views import View
 
 
@@ -24,7 +25,6 @@ class CustomerManage:
         self.user_connected_id = user_connected_id
         self.employee = self.session.query(Employee).filter_by(Id=user_connected_id).one()
         self.role = self.session.query(Role).filter_by(Id=self.employee.RoleId).one()
-
 
     def list(self):
 
@@ -78,7 +78,7 @@ class CustomerManage:
         Returns:
             None
         """
-        
+
         self.view.display_title_panel_color_fit("Création d'un client", "green")
 
         first_name = self.view.return_choice("Entrez le prénom du client ( facultatif )", False)
@@ -97,9 +97,14 @@ class CustomerManage:
 
         # Instance du nouvel objet Employee
         self.customer = Customer(
-            FirstName=first_name, LastName=last_name, Email=email, PhoneNumber=phone_number, Company=company_name, CommercialId=commercial_id
+            FirstName=first_name,
+            LastName=last_name,
+            Email=email,
+            PhoneNumber=phone_number,
+            Company=company_name,
+            CommercialId=commercial_id,
         )
-        
+
         # Ajouter à la session et commit
         try:
             self.session.add(self.customer)
@@ -122,7 +127,7 @@ class CustomerManage:
         except Exception as e:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création du client : {e}")
-        
+
         self.view.prompt_wait_enter()
 
     def update(self):
@@ -153,7 +158,7 @@ class CustomerManage:
 
             try:
                 self.customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
-                
+
                 # vérifie que le client est dans la liste des clients de l'employé
                 if self.customer in self.customers or self.permissions.can_access_all_customer(self.role):
                     break
@@ -165,12 +170,14 @@ class CustomerManage:
         # affichage et confirmation de modification
         if not self.confirm_table_recap("Modification", "yellow"):
             return
-        
+
         self.view.display_title_panel_color_fit("Modification d'un employé", "yellow", True)
         self.customer.FirstName = self.view.return_choice("Prénom", False, f"{self.customer.FirstName}")
         self.customer.LastName = self.view.return_choice("Nom", False, f"{self.customer.LastName}")
         self.customer.Email = self.view.return_choice("Email", False, f"{self.customer.Email}")
-        self.customer.PhoneNumber = self.view.return_choice("Numéro de Téléphone", False, f"{self.customer.PhoneNumber}")
+        self.customer.PhoneNumber = self.view.return_choice(
+            "Numéro de Téléphone", False, f"{self.customer.PhoneNumber}"
+        )
         self.customer.Company = self.view.return_choice("Entreprise", False, f"{self.customer.Company}")
         self.customer.DateLastUpdate = datetime.now()
 
@@ -228,7 +235,7 @@ class CustomerManage:
                 return
             try:
                 self.customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
-                
+
                 # vérifie que le client est dans la liste des clients de l'employé
                 if self.customer in self.customers or self.permissions.can_access_all_customer(self.role):
                     break
@@ -239,7 +246,7 @@ class CustomerManage:
         # confirmation de suppression
         if not self.confirm_table_recap("Suppression", "red"):
             return
-        
+
         try:
             self.session.delete(self.customer)
             self.session.commit()
@@ -251,10 +258,10 @@ class CustomerManage:
         except Exception as e:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la suppression : {e}")
-        
+
         self.view.prompt_wait_enter()
 
-    def format_date(self, date:str):
+    def format_date(self, date: str):
         """
         Formate une date en chaîne de caractères au format "JJ/MM/AAAA HH:MN".
 
@@ -270,7 +277,7 @@ class CustomerManage:
         if date:
             return date.strftime("%d/%m/%Y %H:%M")
         return None
-    
+
     def validation_email(self):
         """
         Valide l'adresse e-mail saisie par l'utilisateur.
@@ -294,7 +301,7 @@ class CustomerManage:
                 self.view.display_red_message(f"Erreur de validation : {e}")
             else:
                 return email
-            
+
     def confirm_table_recap(self, oper: str, color: str = "white"):
         """
         Affiche un tableau récapitulatif des informations du client et demande une confirmation.

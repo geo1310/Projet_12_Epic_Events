@@ -48,6 +48,8 @@ class RoleManage:
 
         for role in roles:
 
+            self.session.refresh(role)
+
             table.add_row(
                 str(role.Id),
                 role.RoleName,
@@ -417,6 +419,6 @@ class RoleManage:
 
     def str_to_bool(self, str_value):
 
-        if str_value.lower() in ("true", "1"):
+        if str_value.lower() in ("true", "1", "oui"):
             return True
         return False

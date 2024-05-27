@@ -63,3 +63,23 @@ class Customer(Base):
             return email
         else:
             raise ValueError("Adresse email invalide")
+
+    @classmethod
+    def get_customers_list(cls, session, user_connected_id):
+        """
+        Retourne une liste des clients associés à un utilisateur connecté.
+
+        Args:
+            session: Session SQLAlchemy active.
+            user_connected_id (int): Identifiant de l'utilisateur connecté.
+
+        Returns:
+            list: Liste de tuples contenant l'ID et le nom de chaque client.
+        """
+
+        customers_list = (
+            session.query(cls.Id, cls.FirstName, cls.LastName, cls.Email)
+            .filter_by(CommercialId=user_connected_id)
+            .all()
+        )
+        return customers_list

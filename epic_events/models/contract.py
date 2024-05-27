@@ -1,5 +1,5 @@
 from sqlalchemy import TIMESTAMP, Boolean, Column, Float, ForeignKey, Integer, String, func
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, validates
 
 from epic_events.models.customer import Customer
 
@@ -32,3 +32,37 @@ class Contract(Base):
     DateCreated = Column(TIMESTAMP, server_default=func.current_timestamp())
 
     CustomerRel = relationship("Customer", backref="ContractsRel")
+
+    @validates("Amount", "AmountOutstanding")
+    def validate_amount(self, key, value):
+        """
+        Valide que les montants (Amount et AmountOutstanding) sont des floats positifs et que AmountOutstanding
+        n'est pas supérieur à Amount.
+
+        Args:
+            key (str): Le nom du champ à valider.
+            value (float): La valeur du montant à valider.
+
+        Returns:
+            float: La valeur validée du montant.
+
+        Raises:
+            ValueError: Si le montant n'est pas un float, s'il est négatif ou si AmountOutstanding est supérieur à Amount.
+        """
+
+        try:
+            value = float(value)
+        except (TypeError, ValueError):
+            raise ValueError(f"{key} doit être un nombre valide.")
+
+        if value < 0:
+            raise ValueError(f"{key} doit être positif.")
+
+        if key == "amount":
+            self._amount = value
+        elif key == "amount_outstanding":
+            self._amount_outstanding = value
+            if hasattr(self, "_amount") and value > self._amount:
+                raise ValueError("AmountOutstanding ne peut pas être supérieur à Amount.")
+
+        return value
