@@ -68,7 +68,7 @@ class EventManage:
         # TODO
         pass
 
-    def format_date(self, date:str):
+    def format_date(self, date: str):
         """
         Formate une date en chaîne de caractères au format "JJ/MM/AAAA HH:MN".
 

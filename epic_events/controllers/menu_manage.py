@@ -35,7 +35,7 @@ class MenuManage:
         self.user_connected_id = user_connected_id
         self.employee_manage = EmployeeManage()
         self.customer_manage = CustomerManage(user_connected_id)
-        self.contract_manage = ContractManage()
+        self.contract_manage = ContractManage(user_connected_id)
         self.event_manage = EventManage()
         self.role_manage = RoleManage()
         self.permissions = Permissions()

@@ -41,6 +41,8 @@ class EmployeeManage:
 
         for employee in employees:
 
+            self.session.refresh(employee)
+
             customer_list = []
             for customer in employee.CustomersRel:
                 customer_list.append(customer.FirstName)
@@ -246,7 +248,7 @@ class EmployeeManage:
 
         self.view.prompt_wait_enter()
 
-    def format_date(self, date:str):
+    def format_date(self, date: str):
         """
         Formate une date en chaîne de caractères au format "JJ/MM/AAAA HH:MN".
 

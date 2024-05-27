@@ -45,7 +45,7 @@ class Permissions:
             return True
         else:
             return False
-        
+
     @staticmethod
     def can_access_all_customer(role):
         if role.Can_access_all_Customer:
@@ -70,7 +70,7 @@ class Permissions:
             return True
         else:
             return False
-        
+
     @staticmethod
     def can_access_all_contract(role):
         if role.Can_access_all_Contract:
@@ -95,7 +95,7 @@ class Permissions:
             return True
         else:
             return False
-        
+
     @staticmethod
     def can_access_all_event(role):
         if role.Can_access_all_Event:
