@@ -26,25 +26,44 @@ class ContractManage:
         self.employee = self.session.query(Employee).filter_by(Id=user_connected_id).one()
         self.role = self.session.query(Role).filter_by(Id=self.employee.RoleId).one()
 
-    def _get_data(self):
-        """
-        Récupère et initialise les données nécessaires.
-        incluant les contrats et les clients selon les autorisations de l'utilisateur connecté.
+    def get_permissions_contracts(self):
 
-        Attributs:
-            self.contracts (list): Liste des contrats accessibles par l'utilisateur connecté.
-            self.customers_list (list): Liste des clients accessibles par l'utilisateur connecté.
+        # liste des contrats autorisés
+        if self.permissions.all_contract(self.role):
+            contracts = self.filter("All", None, Contract)
 
-        """
+        elif self.permissions.role_name(self.role) == "Commercial":
+            contracts = (
+                self.session.query(Contract)
+                .join(Customer, Contract.CustomerId == Customer.Id)
+                .filter(Customer.CommercialId == self.user_connected_id)
+                .all()
+            )
+        
+        else:
+            contracts = []
 
-        # liste des contrats selon autorisation
+        return contracts
+    
+    def get_permissions_customers(self):
 
-        self.contracts = self.session.query(Contract).all()
+        # liste des clients autorisés
+        if self.permissions.all_customer(self.role):
+            customers = self.filter("All", None, Customer)
 
-        # liste des clients selon autorisation
+        elif self.permissions.role_name(self.role) == "Commercial":
+            customers = (
+                self.session.query(Customer)
+                .join(Contract, Customer.CommercialId == Contract.CustomerId)
+                .filter(Customer.CommercialId == self.user_connected_id)
+                .all()
+            )
+        
+        else:
+            customers = []
 
-        self.customers_list = self.session.query(Customer).all()
-        # self.customers_list = Customer.get_customers_list(self.session, self.user_connected_id)
+        return customers
+        
 
     def list(self) -> None:
         """
@@ -60,19 +79,39 @@ class ContractManage:
         contracts = self.filter("All", None, Contract)
         table = self.table_contract_create(contracts)
         self.view.display_table(table, "Liste des Contrats")
-        self.view.prompt_wait_enter()
+        
 
     def list_yours_contracts(self):
-        # TODO
-        pass
+        
+        contracts = self.get_permissions_contracts()
+
+        table = self.table_contract_create(contracts)
+        self.view.display_table(table, "Liste de vos Contrats")
 
     def list_yours_contracts_not_signed(self):
-        # TODO
-        pass
+
+        contracts_not_signed = (
+                self.session.query(Contract)
+                .join(Customer, Contract.CustomerId == Customer.Id)
+                .filter(Customer.CommercialId == self.user_connected_id)
+                .filter(Contract.ContractSigned == False)
+                .all()
+            )
+        
+        table = self.table_contract_create(contracts_not_signed)
+        self.view.display_table(table, "Liste de vos Contrats non signés")
 
     def list_yours_contracts_not_payed(self):
-        # TODO
-        pass
+        contracts_not_payed= (
+                self.session.query(Contract)
+                .join(Customer, Contract.CustomerId == Customer.Id)
+                .filter(Customer.CommercialId == self.user_connected_id)
+                .filter(Contract.AmountOutstanding != 0)
+                .all()
+            )
+        
+        table = self.table_contract_create(contracts_not_payed)
+        self.view.display_table(table, "Liste de vos Contrats non payés")
 
     def create(self):
         """
@@ -103,7 +142,7 @@ class ContractManage:
             None
         """
 
-        self._get_data()
+        customers = self.get_permissions_customers()
 
         self.view.display_title_panel_color_fit("Création d'un contrat", "green")
 
@@ -112,7 +151,7 @@ class ContractManage:
             return
 
         # validation du client lié au contrat
-        customer_id = self.valid_customer()
+        customer_id = self.valid_customer(customers)
         if not customer_id:
             return
 
@@ -155,7 +194,6 @@ class ContractManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création du contrat : {e}")
 
-        self.view.prompt_wait_enter()
 
     def update(self):
         """
@@ -183,9 +221,14 @@ class ContractManage:
             None
         """
 
-        self._get_data()
+        contracts = self.get_permissions_contracts()
+        customers = self.get_permissions_customers()
 
         self.view.display_title_panel_color_fit("Modification d'un contrat", "yellow")
+
+        if not contracts:    
+            self.view.display_red_message("Vous n'avez aucuns contrats à modifier !!!")
+            return
 
         # Validation du contrat à modifier par son Id
         while True:
@@ -200,7 +243,7 @@ class ContractManage:
                 contract = self.session.query(Contract).filter_by(Id=int(contract_id)).one()
 
                 # vérifie que le contrat est dans la liste autorisée.
-                if contract in self.contracts:
+                if contract in contracts:
                     break
                 self.view.display_red_message("Vous n'etes pas autorisé à modifier ce contrat !")
 
@@ -218,15 +261,19 @@ class ContractManage:
         contract.AmountOutstanding = self.validation_amount(
             "Montant restant du", "amount_outstanding", contract.AmountOutstanding
         )
+
         contract.ContractSigned = self.str_to_bool(
             self.view.return_choice(
                 "Contrat signé", False, f"{'oui' if contract.ContractSigned else 'non'}", ("oui", "non")
+                )
             )
-        )
-        # validation du client lié au contrat
-        contract.CustomerId = self.valid_customer(contract.CustomerId)
-        if not contract.CustomerId:
-            return
+
+        if self.permissions.role_name(self.role) == "Gestion":
+
+            # validation du client lié au contrat
+            contract.CustomerId = self.valid_customer(customers, contract.CustomerId)
+            if not contract.CustomerId:
+                return
 
         # Ajouter à la session et commit
         try:
@@ -250,7 +297,6 @@ class ContractManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la modification : {e}")
 
-        self.view.prompt_wait_enter()
 
     def delete(self):
         """
@@ -267,7 +313,7 @@ class ContractManage:
             Exception: Pour toute autre erreur lors de la suppression du contrat.
         """
 
-        self._get_data()
+        contracts = self.get_permissions_contracts()
 
         self.view.display_title_panel_color_fit("Suppression d'un contrat", "red")
 
@@ -283,7 +329,7 @@ class ContractManage:
                 contract = self.session.query(Contract).filter_by(Id=int(contract_id)).one()
 
                 # vérifie que le contrat est dans la liste autorisée
-                if contract in self.contracts:
+                if contract in contracts:
                     break
                 self.view.display_red_message("Vous n'etes pas autorisé à supprimer ce contrat !")
             except Exception:
@@ -294,7 +340,7 @@ class ContractManage:
             return
 
         try:
-            self.session.delete(self.contract)
+            self.session.delete(contract)
             self.session.commit()
             self.view.display_red_message("Contrat supprimé avec succès !")
         except IntegrityError as e:
@@ -305,7 +351,6 @@ class ContractManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la suppression : {e}")
 
-        self.view.prompt_wait_enter()
 
     def format_date(self, date: str):
         """
@@ -364,18 +409,8 @@ class ContractManage:
             else:
                 return amount
 
-    def valid_customer(self, default=None):
-        """
-        Valide et récupère l'identifiant d'un client sélectionné pour un contrat.
-
-        Cette méthode affiche une liste des clients disponibles pour la création d'un contrat.
-        Elle demande à l'utilisateur de saisir l'identifiant du client choisi.
-        Si l'identifiant est valide et correspond à un client dans la liste, celui-ci est sélectionné.
-        Sinon, l'utilisateur est invité à saisir à nouveau un identifiant valide.
-
-        Returns:
-            int or None: L'identifiant du client sélectionné, ou None si aucun client n'est sélectionné.
-        """
+    def valid_customer(self, customers: List[Customer], default=None):
+        
 
         # Tableau de choix pour les clients
         table = Table()
@@ -385,7 +420,7 @@ class ContractManage:
         table.add_column("Email", style="magenta")
         table.add_row("0", "Annuler")
 
-        for customer in self.customers_list:
+        for customer in customers:
             table.add_row(str(customer.Id), customer.FirstName, customer.LastName, customer.Email)
 
         self.view.display_table(table, "Liste des clients")
@@ -398,7 +433,7 @@ class ContractManage:
 
             try:
                 selected_customer = next(
-                    (customer for customer in self.customers_list if customer.Id == int(customer_id)), None
+                    (customer for customer in customers if customer.Id == int(customer_id)), None
                 )
                 if selected_customer:
                     self.view.display_green_message(f"Client sélectionné : {selected_customer.Email}")
@@ -440,7 +475,6 @@ class ContractManage:
             confirm = confirm.lower()
         if confirm != "oui":
             self.view.display_red_message("Opération annulée.")
-            self.view.prompt_wait_enter()
             return False
         return True
 

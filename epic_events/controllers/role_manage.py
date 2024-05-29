@@ -23,7 +23,6 @@ class RoleManage:
         roles = self.filter("All", None, Role)
         table = self.table_role_create(roles)
         self.view.display_table(table, "Liste des Roles")
-        self.view.prompt_wait_enter()
 
     def create(self):
         self.view.display_title_panel_color_fit("Création d'un role", "green")
@@ -124,8 +123,6 @@ class RoleManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création du role : {e}")
 
-        self.view.prompt_wait_enter()
-
     def update(self):
         self.view.display_title_panel_color_fit("Modification d'un role", "yellow")
 
@@ -219,8 +216,6 @@ class RoleManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création du role : {e}")
 
-        self.view.prompt_wait_enter()
-
     def delete(self):
         self.view.display_title_panel_color_fit("Suppression d'un role", "red")
 
@@ -252,8 +247,6 @@ class RoleManage:
         except Exception as e:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la suppression du role : {e}")
-
-        self.view.prompt_wait_enter()
 
     def format_date(self, date: str):
         """
@@ -302,7 +295,6 @@ class RoleManage:
             confirm = confirm.lower()
         if confirm != "oui":
             self.view.display_red_message("Opération annulée.")
-            self.view.prompt_wait_enter()
             return False
         return True
 

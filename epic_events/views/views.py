@@ -147,6 +147,15 @@ class View:
         self.console.print()
         self.console.input("[bold]Appuyer sur Entrée[/bold]")
         return True
+    
+    def pass_n_lines(self, n:int=1):
+        """
+        Affiche un certain nombre de lignes vides dans la console.
+
+        Args:
+            n (int): Le nombre de lignes vides à afficher. Par défaut, 1 ligne vide.
+        """
+        self.console.print(n*"\n")
 
     def clear_screen(self):
         """

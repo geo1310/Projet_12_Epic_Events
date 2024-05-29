@@ -25,7 +25,6 @@ class EmployeeManage:
         employees = self.filter("All", None, Employee)
         table = self.table_employee_create(employees)
         self.view.display_table(table, "Liste des Employés")
-        self.view.prompt_wait_enter()
         
 
     def create(self):
@@ -84,7 +83,6 @@ class EmployeeManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création de l'employé : {e}")
 
-        self.view.prompt_wait_enter()
 
     def update(self):
         """
@@ -162,8 +160,6 @@ class EmployeeManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création de l'employé : {e}")
 
-        self.view.prompt_wait_enter()
-
     def delete(self):
         """
         Supprime un employé existant.
@@ -207,8 +203,6 @@ class EmployeeManage:
         except Exception as e:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la suppression de l'employé : {e}")
-
-        self.view.prompt_wait_enter()
 
     def format_date(self, date: str):
         """
@@ -314,7 +308,6 @@ class EmployeeManage:
             confirm = confirm.lower()
         if confirm != "oui":
             self.view.display_red_message("Opération annulée.")
-            self.view.prompt_wait_enter()
             return False
         return True
 

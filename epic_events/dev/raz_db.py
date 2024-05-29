@@ -38,7 +38,7 @@ def init_base():
             Can_ru_Customer=True,
             Can_crud_Customer=True,
             Can_access_all_Customer=False,
-            Can_ru_Contract=False,
+            Can_ru_Contract=True,
             Can_crud_Contract=False,
             Can_access_all_Contract=False,
             Can_ru_Event=True,

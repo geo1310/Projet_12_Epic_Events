@@ -59,7 +59,6 @@ class CustomerManage:
 
         # Affiche le tableau
         self.view.display_table(table, "\nListe des Clients")
-        self.view.prompt_wait_enter()
 
     def list_yours_customers(self):
         # TODO
@@ -129,7 +128,6 @@ class CustomerManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création du client : {e}")
 
-        self.view.prompt_wait_enter()
 
     def update(self):
         """
@@ -204,7 +202,6 @@ class CustomerManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la modification : {e}")
 
-        self.view.prompt_wait_enter()
 
     def delete(self):
         """
@@ -260,7 +257,6 @@ class CustomerManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la suppression : {e}")
 
-        self.view.prompt_wait_enter()
 
     def format_date(self, date: str):
         """
@@ -340,6 +336,5 @@ class CustomerManage:
             confirm = confirm.lower()
         if confirm != "oui":
             self.view.display_red_message("Opération annulée.")
-            self.view.prompt_wait_enter()
             return False
         return True

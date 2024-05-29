@@ -53,6 +53,24 @@ class EventManage:
             events = []
 
         return events
+    
+    def get_permissions_contracts_signed(self):
+
+        if self.permissions.all_contract(self.role):
+            contracts_signed = self.filter("ContractSigned", True, Contract)
+        
+        elif self.permissions.role_name(self.role) == "Commercial":
+            contracts_signed = (
+                self.session.query(Contract)
+                .join(Customer, Contract.CustomerId == Customer.Id)
+                .filter(Customer.CommercialId == self.user_connected_id)
+                .filter(Contract.ContractSigned == True)
+                .all()
+            )
+        else:
+            contracts_signed = []
+
+        return contracts_signed
 
     def list(self) -> None:
         """
@@ -68,7 +86,6 @@ class EventManage:
         events = self.filter("All", None, Event)
         table = self.table_event_create(events)
         self.view.display_table(table, "Liste des Evènements")
-        self.view.prompt_wait_enter()
 
     def list_no_support(self) -> None:
         """
@@ -84,7 +101,6 @@ class EventManage:
         events = self.filter("EmployeeSupportId", None, Event)
         table = self.table_event_create(events)
         self.view.display_table(table, "Liste des Evènements sans support")
-        self.view.prompt_wait_enter()
 
     def list_yours_events(self)-> None:
 
@@ -92,7 +108,6 @@ class EventManage:
 
         table = self.table_event_create(events)
         self.view.display_table(table, "Liste de vos Evènements")
-        self.view.prompt_wait_enter()
 
     def create(self):
         """
@@ -116,23 +131,11 @@ class EventManage:
 
         self.view.display_title_panel_color_fit("Création d'un évènement", "green")
 
-        # liste des contrats signés
-        if self.permissions.all_contract(self.role):
-            contracts = self.filter("ContractSigned", True, Contract)
-        elif self.permissions.role_name(self.role) == "Commercial":
-            contracts = (
-                self.session.query(Contract)
-                .join(Customer, Contract.CustomerId == Customer.Id)
-                .filter(Customer.CommercialId == self.user_connected_id)
-                .filter(Contract.ContractSigned == True)
-                .all()
-            )
-        else:
-            contracts = []
+        contracts_signed = self.get_permissions_contracts_signed()
+        
 
-        if not contracts:    
+        if not contracts_signed:    
             self.view.display_red_message("Il n'y a aucuns de vos contrats signés pour affecter l'évènement !!!")
-            self.view.prompt_wait_enter()
             return
 
         title = self.view.return_choice("Entrez le Titre de l'évènement ( vide pour annuler )", False)
@@ -150,7 +153,7 @@ class EventManage:
         date_end = self.validation_date("date_end", "Date de fin au format jj-mm-aaaa ( facultatif )")
 
 
-        contract_id = self.valid_contract(contracts)
+        contract_id = self.valid_contract(contracts_signed)
         if not contract_id:
             return
 
@@ -201,15 +204,14 @@ class EventManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création: {e}")
 
-        self.view.prompt_wait_enter()
 
     def update(self):
 
         events = self.get_permissions_events()
+        contracts_signed = self.get_permissions_contracts_signed()
 
         if not events:    
             self.view.display_red_message("Vous n'avez aucuns évènements à modifier !!!")
-            self.view.prompt_wait_enter()
             return
 
         self.view.display_title_panel_color_fit("Modification d'un évènement", "yellow")
@@ -253,8 +255,7 @@ class EventManage:
 
         # validation du contrat
         if self.permissions.role_name(self.role) != "Support":
-            contracts = self.filter("ContractSigned", True, Contract)
-            event.ContractId = self.valid_contract(contracts, event.ContractId)
+            event.ContractId = self.valid_contract(contracts_signed, event.ContractId)
 
         # validation du support pour l'évènement
         if self.permissions.can_access_support(self.role):
@@ -285,8 +286,6 @@ class EventManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la modification : {e}")
 
-        self.view.prompt_wait_enter()
-
     def delete(self):
         """
         Supprime un événement après validation de son identifiant et confirmation de l'utilisateur.
@@ -310,7 +309,6 @@ class EventManage:
 
         if not events:    
             self.view.display_red_message("Vous n'avez aucuns évènements à supprimer !!!")
-            self.view.prompt_wait_enter()
             return
 
         # Validation de l'évènement à supprimer par son Id
@@ -346,8 +344,6 @@ class EventManage:
         except Exception as e:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la suppression : {e}")
-
-        self.view.prompt_wait_enter()
 
     def format_date(self, date: str) -> Optional[str]:
         """
@@ -505,7 +501,6 @@ class EventManage:
             confirm = confirm.lower()
         if confirm != "oui":
             self.view.display_red_message("Opération annulée.")
-            self.view.prompt_wait_enter()
             return False
         return True
 

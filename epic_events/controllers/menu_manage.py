@@ -39,6 +39,7 @@ class MenuManage:
         self.event_manage = EventManage(user_connected_id)
         self.role_manage = RoleManage()
         self.permissions = Permissions()
+        self.show_intro = False
 
     def run(self):
 
@@ -63,6 +64,9 @@ class MenuManage:
         """
         Composition du menu principal selon les permissions de l'utilisateur.
         """
+
+        self.show_intro = True
+        self.view.clear_screen()
 
         menu_items = ["Menu principal : ", {}]
         menu_items[1]["Gestion des clients"] = self.menu_customer
@@ -192,7 +196,7 @@ class MenuManage:
             les éléments du menu sous forme de paires (index, nom_du_menu: méthode).
 
         """
-        self.view.clear_screen()
+        
         title = menu_items[0]
 
         # ajoute la ligne de retour selon le menu
@@ -212,8 +216,12 @@ class MenuManage:
             user_connected = f"{self.employee.FirstName} {self.employee.LastName}"
             user_connected_status = self.employee.RoleRel.RoleName
 
+            self.view.pass_n_lines()
+
             # affiche l'entete de l'application
-            self.view.show_intro(user_connected, user_connected_status)
+            if self.show_intro:
+                self.view.show_intro(user_connected, user_connected_status)
+                self.show_intro = False
 
             # analyse du choix utilisateur
             choice = self.view.display_menu(title, menu_list)
@@ -223,12 +231,10 @@ class MenuManage:
                     if menu[0] == choice:
                         # Envoie vers la méthode choisie
                         menu_items[1][menu[1]]()
-                    self.view.clear_screen()
+                    
 
             else:
                 self.view.invalid_choice()
-                self.view.prompt_wait_enter()
-                self.view.clear_screen()
 
         self.view.display_red_message("Votre session a expirée, veuillez vous re-connecter.\n")
         self.quit_app()
