@@ -464,9 +464,7 @@ class ContractManage:
         """
 
         self.view.display_title_panel_color_fit(f"{oper} d'un contrat", f"{color}", True)
-
         summary_table = self.table_contract_create([contract])
-
         self.view.display_table(summary_table, "Résumé du contrat")
 
         # Demander une confirmation avant validation

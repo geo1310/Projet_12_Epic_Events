@@ -1,5 +1,5 @@
+from typing import List, Optional, Type
 from datetime import datetime
-
 from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
@@ -28,41 +28,18 @@ class CustomerManage:
 
     def list(self):
 
-        self.customers = self.session.query(Customer).all()
-
-        # création du tableau
-        table = Table(show_header=True, header_style="bold green")
-        # Ajouter des colonnes
-        table.add_column("ID", style="dim", width=5)
-        table.add_column("Prénom")
-        table.add_column("Nom")
-        table.add_column("Email")
-        table.add_column("Tél")
-        table.add_column("Entreprise")
-        table.add_column("Email du commercial")
-        table.add_column("Date de création")
-        table.add_column("Date de modification")
-
-        for customer in self.customers:
-
-            table.add_row(
-                str(customer.Id),
-                customer.FirstName,
-                customer.LastName,
-                customer.Email,
-                customer.PhoneNumber,
-                customer.Company,
-                customer.CommercialRel.Email,
-                self.format_date(customer.DateCreated),
-                self.format_date(customer.DateLastUpdate),
-            )
-
-        # Affiche le tableau
-        self.view.display_table(table, "\nListe des Clients")
+        customers = self.filter("All", None, Customer)
+        table = self.table_customer_create(customers)
+        self.view.display_table(table, "Liste des Clients")
 
     def list_yours_customers(self):
-        # TODO
-        pass
+        if self.permissions.role_name(self.role) == "Commercial":
+            customers = self.filter("CommercialId", self.user_connected_id, Customer)
+        else:
+            customers = []
+            
+        table = self.table_customer_create(customers)
+        self.view.display_table(table, "Liste des Clients")
 
     def create(self):
         """
@@ -156,10 +133,10 @@ class CustomerManage:
                 return
 
             try:
-                self.customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
+                customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
 
                 # vérifie que le client est dans la liste des clients de l'employé
-                if self.customer in self.customers:
+                if customer in self.customers:
                     break
                 self.view.display_red_message("Vous n'etes pas autorisé à modifier ce client !")
 
@@ -167,26 +144,26 @@ class CustomerManage:
                 self.view.display_red_message("Identifiant non valide !")
 
         # affichage et confirmation de modification
-        if not self.confirm_table_recap("Modification", "yellow"):
+        if not self.confirm_table_recap(customer, "Modification", "yellow"):
             return
 
         self.view.display_title_panel_color_fit("Modification d'un client", "yellow", True)
-        self.customer.FirstName = self.view.return_choice("Prénom", False, f"{self.customer.FirstName}")
-        self.customer.LastName = self.view.return_choice("Nom", False, f"{self.customer.LastName}")
-        self.customer.Email = self.view.return_choice("Email", False, f"{self.customer.Email}")
-        self.customer.PhoneNumber = self.view.return_choice(
-            "Numéro de Téléphone", False, f"{self.customer.PhoneNumber}"
+        customer.FirstName = self.view.return_choice("Prénom", False, f"{customer.FirstName}")
+        customer.LastName = self.view.return_choice("Nom", False, f"{customer.LastName}")
+        customer.Email = self.view.return_choice("Email", False, f"{customer.Email}")
+        customer.PhoneNumber = self.view.return_choice(
+            "Numéro de Téléphone", False, f"{customer.PhoneNumber}"
         )
-        self.customer.Company = self.view.return_choice("Entreprise", False, f"{self.customer.Company}")
-        self.customer.DateLastUpdate = datetime.now()
+        customer.Company = self.view.return_choice("Entreprise", False, f"{customer.Company}")
+        customer.DateLastUpdate = datetime.now()
 
         # Ajouter à la session et commit
         try:
             self.session.commit()
 
             # Affichage et confirmation de la modification
-            if not self.confirm_table_recap("Modification", "yellow"):
-                self.session.expunge(self.customer)
+            if not self.confirm_table_recap(customer, "Modification", "yellow"):
+                self.session.expunge(customer)
                 self.session.rollback()
                 return
 
@@ -232,21 +209,21 @@ class CustomerManage:
             if not customer_id:
                 return
             try:
-                self.customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
+                customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
 
                 # vérifie que le client est dans la liste des clients de l'employé
-                if self.customer in self.customers:
+                if customer in self.customers:
                     break
                 self.view.display_red_message("Vous n'etes pas autorisé à supprimer ce client !")
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
         # confirmation de suppression
-        if not self.confirm_table_recap("Suppression", "red"):
+        if not self.confirm_table_recap(customer, "Suppression", "red"):
             return
 
         try:
-            self.session.delete(self.customer)
+            self.session.delete(customer)
             self.session.commit()
             self.view.display_green_message("Client supprimé avec succès !")
         except IntegrityError as e:
@@ -299,35 +276,10 @@ class CustomerManage:
             else:
                 return email
 
-    def confirm_table_recap(self, oper: str, color: str = "white"):
-        """
-        Affiche un tableau récapitulatif des informations du client et demande une confirmation.
-
-        Cette méthode crée et affiche un tableau récapitulatif contenant les informations du client.
-        Ensuite, elle demande à l'utilisateur de confirmer l'opération en saisissant 'oui' ou 'non'.
-        Si l'utilisateur confirme, la méthode retourne True.
-
-        Args:
-        oper (str): L'opération à confirmer (par exemple, 'Création', 'Mise à jour', 'Suppression').
-        color (str): Couleur du texte
-
-        Returns:
-            bool: True si l'utilisateur confirme l'opération, False sinon.
-
-        """
-
+    def confirm_table_recap(self, customer: Customer, oper: str, color: str = "white"):
+        
         self.view.display_title_panel_color_fit(f"{oper} d'un client", f"{color}", True)
-
-        # Tableau récapitulatif
-        summary_table = Table()
-        summary_table.add_column("Champ", style="cyan")
-        summary_table.add_column("Valeur", style="magenta")
-        summary_table.add_row("Prénom", self.customer.FirstName)
-        summary_table.add_row("Nom", self.customer.LastName)
-        summary_table.add_row("Email", self.customer.Email)
-        summary_table.add_row("Tél", self.customer.PhoneNumber)
-        summary_table.add_row("Companie", self.customer.Company)
-
+        summary_table = self.table_customer_create([customer])
         self.view.display_table(summary_table, "Résumé du client")
 
         # Demander une confirmation avant validation
@@ -338,3 +290,56 @@ class CustomerManage:
             self.view.display_red_message("Opération annulée.")
             return False
         return True
+    
+    def table_customer_create(self, customers: List[Customer]) -> Table:
+        
+
+        table = Table(show_header=True, header_style="bold green")
+        table.add_column("ID", style="dim", width=5)
+        table.add_column("Prénom")
+        table.add_column("Nom")
+        table.add_column("Email")
+        table.add_column("Tél")
+        table.add_column("Entreprise")
+        table.add_column("Email du commercial")
+        table.add_column("Date de création")
+        table.add_column("Date de modification")
+
+        for customer in customers:
+            
+            table.add_row(
+                str(customer.Id),
+                customer.FirstName,
+                customer.LastName,
+                customer.Email,
+                customer.PhoneNumber,
+                customer.Company,
+                customer.CommercialRel.Email,
+                self.format_date(customer.DateCreated),
+                self.format_date(customer.DateLastUpdate),
+            )
+
+        return table
+
+    def filter(self, attribute: str, value: any, model: Type) -> List:
+        """
+        Filtre les instances du modèle en fonction d'un attribut et d'une valeur spécifiés.
+
+        Args:
+            attribute (str): L'attribut du modèle par lequel filtrer. Si "All", aucun filtrage n'est appliqué.
+            value (Any): La valeur de l'attribut pour filtrer les instances du modèle. Peut être n'importe quelle valeur,
+                         y compris None pour filtrer les valeurs NULL.
+            model (Type): La classe du modèle SQLAlchemy à filtrer (par exemple, Event, Employee).
+
+        Returns:
+            List: Une liste des instances du modèle qui correspondent aux critères de filtrage.
+        """
+        query = self.session.query(model)
+
+        if attribute != "All":
+            if value is None:
+                query = query.filter(getattr(model, attribute) == None)
+            else:
+                query = query.filter(getattr(model, attribute) == value)
+
+        return query.all()
