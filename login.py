@@ -6,14 +6,14 @@ from epic_events.controllers.menu_manage import MenuManage
 from epic_events.views.views import View
 from epic_events.utils.token_manage_json import delete_token
 
-view = View()
-auth_manager = AuthenticationManager(view)
-
 
 def main():
     """
     Point d'entrée principal pour l'authentification en ligne de commande.
     """
+
+    view = View()
+    auth_manager = AuthenticationManager(view)
 
     # crée l'argument user_email
     parser = argparse.ArgumentParser(description="Authentification en ligne de commande")

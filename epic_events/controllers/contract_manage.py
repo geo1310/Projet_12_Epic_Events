@@ -1,3 +1,4 @@
+from typing import List, Optional, Type
 from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
@@ -37,63 +38,41 @@ class ContractManage:
         """
 
         # liste des contrats selon autorisation
-        if self.permissions.can_access_all_contract(self.role):
-            self.contracts = self.session.query(Contract).all()
-        else:
-            self.contracts = (
-                self.session.query(Contract)
-                .join(Customer, Contract.CustomerId == Customer.Id)
-                .filter(Customer.CommercialId == self.user_connected_id)
-                .all()
-            )
+
+        self.contracts = self.session.query(Contract).all()
 
         # liste des clients selon autorisation
-        if self.permissions.can_access_all_customer(self.role):
-            self.customers_list = self.session.query(Customer).all()
-        else:
-            self.customers_list = Customer.get_customers_list(self.session, self.user_connected_id)
 
-    def list(self):
+        self.customers_list = self.session.query(Customer).all()
+        # self.customers_list = Customer.get_customers_list(self.session, self.user_connected_id)
+
+    def list(self) -> None:
         """
-        Affiche la liste des contrats.
+        Affiche une liste de tous les contrats.
 
-        Cette méthode récupère la liste des contrats à afficher en fonction des autorisations de l'utilisateur connecté.
-        Si l'utilisateur a la permission d'accéder à tous les contrats, tous les contrats sont récupérés.
-        Sinon, seuls les contrats associés aux clients de l'utilisateur connecté sont récupérés.
+        Cette méthode récupère tous les contrats en utilisant la méthode `filter` avec les paramètres appropriés,
+        crée un tableau avec les événements récupérés en utilisant `table_event_create`, et affiche ce tableau via
+        la vue.
 
+        Returns:
+            None
         """
-
-        self._get_data()
-
-        # création du tableau
-        table = Table(show_header=True, header_style="bold green")
-
-        # Ajouter des colonnes
-        table.add_column("ID", style="dim", width=5)
-        table.add_column("Titre")
-        table.add_column("Nom du Client")
-        table.add_column("Email du Client")
-        table.add_column("Montant")
-        table.add_column("Montant restant du")
-        table.add_column("Contrat signé")
-        table.add_column("Date de création")
-
-        for contract in self.contracts:
-
-            table.add_row(
-                str(contract.Id),
-                contract.Title,
-                contract.CustomerRel.FirstName,
-                contract.CustomerRel.Email,
-                str(contract.Amount),
-                str(contract.AmountOutstanding),
-                str(contract.ContractSigned),
-                self.format_date(contract.DateCreated),
-            )
-
-        # Affiche le tableau
-        self.view.display_table(table, "\nListe des Contrats")
+        contracts = self.filter("All", None, Contract)
+        table = self.table_contract_create(contracts)
+        self.view.display_table(table, "Liste des Contrats")
         self.view.prompt_wait_enter()
+
+    def list_yours_contracts(self):
+        # TODO
+        pass
+
+    def list_yours_contracts_not_signed(self):
+        # TODO
+        pass
+
+    def list_yours_contracts_not_payed(self):
+        # TODO
+        pass
 
     def create(self):
         """
@@ -145,7 +124,7 @@ class ContractManage:
         contract_signed = self.str_to_bool(self.view.return_choice("Contrat signé", False, "non", ("oui", "non")))
 
         # Instance du nouveau contrat
-        self.contract = Contract(
+        contract = Contract(
             CustomerId=customer_id,
             Title=title,
             Amount=amount,
@@ -155,12 +134,12 @@ class ContractManage:
 
         # Ajouter à la session et commit
         try:
-            self.session.add(self.contract)
+            self.session.add(contract)
             self.session.flush()
 
             # Affichage et confirmation de la création
-            if not self.confirm_table_recap("Création", "green"):
-                self.session.expunge(self.contract)
+            if not self.confirm_table_recap(contract, "Création", "green"):
+                self.session.expunge(contract)
                 self.session.rollback()
                 return
             self.session.commit()
@@ -218,10 +197,10 @@ class ContractManage:
                 return
 
             try:
-                self.contract = self.session.query(Contract).filter_by(Id=int(contract_id)).one()
+                contract = self.session.query(Contract).filter_by(Id=int(contract_id)).one()
 
                 # vérifie que le contrat est dans la liste autorisée.
-                if self.contract in self.contracts:
+                if contract in self.contracts:
                     break
                 self.view.display_red_message("Vous n'etes pas autorisé à modifier ce contrat !")
 
@@ -229,24 +208,24 @@ class ContractManage:
                 self.view.display_red_message("Identifiant non valide !")
 
         # affichage et confirmation de modification
-        if not self.confirm_table_recap("Modification", "yellow"):
+        if not self.confirm_table_recap(contract, "Modification", "yellow"):
             return
 
         self.view.display_title_panel_color_fit("Modification d'un contrat", "yellow", True)
 
-        self.contract.Title = self.view.return_choice("Titre", False, f"{self.contract.Title}")
-        self.contract.Amount = self.validation_amount("Montant du contrat", "amount", self.contract.Amount)
-        self.contract.AmountOutstanding = self.validation_amount(
-            "Montant restant du", "amount_outstanding", self.contract.AmountOutstanding
+        contract.Title = self.view.return_choice("Titre", False, f"{contract.Title}")
+        contract.Amount = self.validation_amount("Montant du contrat", "amount", contract.Amount)
+        contract.AmountOutstanding = self.validation_amount(
+            "Montant restant du", "amount_outstanding", contract.AmountOutstanding
         )
-        self.contract.ContractSigned = self.str_to_bool(
+        contract.ContractSigned = self.str_to_bool(
             self.view.return_choice(
-                "Contrat signé", False, f"{'oui' if self.contract.ContractSigned else 'non'}", ("oui", "non")
+                "Contrat signé", False, f"{'oui' if contract.ContractSigned else 'non'}", ("oui", "non")
             )
         )
         # validation du client lié au contrat
-        self.contract.CustomerId = self.valid_customer(self.contract.CustomerId)
-        if not self.contract.CustomerId:
+        contract.CustomerId = self.valid_customer(contract.CustomerId)
+        if not contract.CustomerId:
             return
 
         # Ajouter à la session et commit
@@ -254,8 +233,8 @@ class ContractManage:
             self.session.commit()
 
             # Affichage et confirmation de la modification
-            if not self.confirm_table_recap("Modification", "yellow"):
-                self.session.expunge(self.contract)
+            if not self.confirm_table_recap(contract, "Modification", "yellow"):
+                self.session.expunge(contract)
                 self.session.rollback()
                 return
 
@@ -301,23 +280,23 @@ class ContractManage:
             if not contract_id:
                 return
             try:
-                self.contract = self.session.query(Contract).filter_by(Id=int(contract_id)).one()
+                contract = self.session.query(Contract).filter_by(Id=int(contract_id)).one()
 
                 # vérifie que le contrat est dans la liste autorisée
-                if self.contract in self.contracts:
+                if contract in self.contracts:
                     break
                 self.view.display_red_message("Vous n'etes pas autorisé à supprimer ce contrat !")
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
         # confirmation de suppression
-        if not self.confirm_table_recap("Suppression", "red"):
+        if not self.confirm_table_recap(contract, "Suppression", "red"):
             return
 
         try:
             self.session.delete(self.contract)
             self.session.commit()
-            self.view.display_green_message("Contrat supprimé avec succès !")
+            self.view.display_red_message("Contrat supprimé avec succès !")
         except IntegrityError as e:
             self.session.rollback()
             error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
@@ -431,41 +410,27 @@ class ContractManage:
             except Exception:
                 self.view.display_red_message("Choix invalide !")
 
-    def confirm_table_recap(self, oper: str, color: str = "white"):
+    def confirm_table_recap(self, contract: Contract, oper: str, color: str = "white")-> bool:
         """
-        Affiche un tableau récapitulatif des informations du contrat et demande une confirmation à l'utilisateur.
+        Affiche un récapitulatif des détails d'un contrat et demande une confirmation.
 
-        Cette méthode affiche les détails du contrat dans un tableau et demande à l'utilisateur de confirmer
-        l'opération en cours (création, modification, suppression, etc.). Si l'utilisateur ne confirme pas,
-        l'opération est annulée.
+        Cette méthode affiche un tableau récapitulatif des détails du contrat en cours,
+        puis demande à l'utilisateur de confirmer l'opération (par exemple, création, modification,
+        suppression). Si l'utilisateur confirme, la méthode retourne True. Sinon, elle affiche
+        un message d'annulation et retourne False.
 
         Args:
-            oper (str): Le nom de l'opération en cours (par exemple, "Création", "Modification", "Suppression").
-            color (str, optional): La couleur du titre de la section pour l'affichage (par défaut "white").
+            contract (Contract): L'instance du contrat pour laquelle le récapitulatif est affiché.
+            oper (str): Le type d'opération à confirmer (par exemple, "Création", "Modification", "Suppression").
+            color (str): La couleur à utiliser pour le titre du récapitulatif (par défaut "white").
 
         Returns:
             bool: True si l'utilisateur confirme l'opération, False sinon.
-
-        Workflow:
-            1. Affiche le titre de la section avec le nom de l'opération et la couleur spécifiée.
-            2. Crée un tableau récapitulatif des détails du contrat.
-            3. Affiche le tableau avec les informations du contrat.
-            4. Demande à l'utilisateur de confirmer l'opération.
-            5. Si l'utilisateur ne confirme pas, affiche un message d'annulation et renvoie False.
-            6. Si l'utilisateur confirme, renvoie True.
         """
 
         self.view.display_title_panel_color_fit(f"{oper} d'un contrat", f"{color}", True)
 
-        # Tableau récapitulatif
-        summary_table = Table()
-        summary_table.add_column("Champ", style="cyan")
-        summary_table.add_column("Valeur", style="magenta")
-        summary_table.add_row("Client", self.contract.CustomerRel.Email)
-        summary_table.add_row("Title", self.contract.Title)
-        summary_table.add_row("Montant", str(self.contract.Amount))
-        summary_table.add_row("Restant du", str(self.contract.AmountOutstanding))
-        summary_table.add_row("Contrat signé", str(self.contract.ContractSigned))
+        summary_table = self.table_contract_create([contract])
 
         self.view.display_table(summary_table, "Résumé du contrat")
 
@@ -478,3 +443,75 @@ class ContractManage:
             self.view.prompt_wait_enter()
             return False
         return True
+
+    def table_contract_create(self, contracts: List[Contract]) -> Table:
+        """
+        Crée un tableau pour afficher les contrats.
+
+        Cette méthode prend une liste de contrats en entrée et génère un tableau contenant les détails de chaque contrat
+        pour affichage.
+
+        Args:
+            contracts (List[Contract]): Une liste d'objets Contract à afficher dans le tableau.
+
+        Returns:
+            Table: Un objet Table de la bibliothèque Rich contenant les informations des contrats.
+        """
+
+        # Création du tableau pour afficher les contrats
+        table = Table(show_header=True, header_style="bold green")
+        table.add_column("ID", style="dim", width=5)
+        table.add_column("Titre")
+        table.add_column("Nom du Client")
+        table.add_column("Email du Client")
+        table.add_column("Nom du Commercial")
+        table.add_column("Email du Commercial")
+        table.add_column("Montant")
+        table.add_column("Montant restant")
+        table.add_column("Contrat signé")
+        table.add_column("Date de création")
+
+        for contract in contracts:
+            # Récupérer les infos du commercial associé au client
+            commercial_last_name = (
+                contract.CustomerRel.CommercialRel.LastName if contract.CustomerRel.CommercialRel else None
+            )
+            commercial_email = contract.CustomerRel.CommercialRel.Email if contract.CustomerRel.CommercialRel else None
+
+            table.add_row(
+                str(contract.Id),
+                contract.Title,
+                contract.CustomerRel.FirstName,
+                contract.CustomerRel.Email,
+                commercial_last_name,
+                commercial_email,
+                str(contract.Amount),
+                str(contract.AmountOutstanding),
+                str(contract.ContractSigned),
+                self.format_date(contract.DateCreated),
+            )
+
+        return table
+
+    def filter(self, attribute: str, value: any, model: Type) -> List:
+        """
+        Filtre les instances du modèle en fonction d'un attribut et d'une valeur spécifiés.
+
+        Args:
+            attribute (str): L'attribut du modèle par lequel filtrer. Si "All", aucun filtrage n'est appliqué.
+            value (Any): La valeur de l'attribut pour filtrer les instances du modèle. Peut être n'importe quelle valeur,
+                         y compris None pour filtrer les valeurs NULL.
+            model (Type): La classe du modèle SQLAlchemy à filtrer (par exemple, Event, Employee).
+
+        Returns:
+            List: Une liste des instances du modèle qui correspondent aux critères de filtrage.
+        """
+        query = self.session.query(model)
+
+        if attribute != "All":
+            if value is None:
+                query = query.filter(getattr(model, attribute) == None)
+            else:
+                query = query.filter(getattr(model, attribute) == value)
+
+        return query.all()

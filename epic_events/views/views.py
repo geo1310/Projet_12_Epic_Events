@@ -168,3 +168,4 @@ class View:
             os.system("cls")
         elif os_name == "posix":  # Mac, Linux, Unix
             os.system("clear")
+        

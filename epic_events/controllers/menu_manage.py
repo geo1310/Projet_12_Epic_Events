@@ -36,7 +36,7 @@ class MenuManage:
         self.employee_manage = EmployeeManage()
         self.customer_manage = CustomerManage(user_connected_id)
         self.contract_manage = ContractManage(user_connected_id)
-        self.event_manage = EventManage()
+        self.event_manage = EventManage(user_connected_id)
         self.role_manage = RoleManage()
         self.permissions = Permissions()
 
@@ -65,15 +65,9 @@ class MenuManage:
         """
 
         menu_items = ["Menu principal : ", {}]
-
-        if self.permissions.can_read_customer(self.role):
-            menu_items[1]["Gestion des clients"] = self.menu_customer
-
-        if self.permissions.can_read_contract(self.role):
-            menu_items[1]["Gestion des contrats"] = self.menu_contract
-
-        if self.permissions.can_read_event(self.role):
-            menu_items[1]["Gestion des évènements"] = self.menu_event
+        menu_items[1]["Gestion des clients"] = self.menu_customer
+        menu_items[1]["Gestion des contrats"] = self.menu_contract
+        menu_items[1]["Gestion des évènements"] = self.menu_event
 
         if self.permissions.can_read_employee(self.role):
             menu_items[1]["Gestion des employés"] = self.menu_employee
@@ -89,8 +83,11 @@ class MenuManage:
         """
         menu_items = ["Gestion des Clients : ", {}]
 
-        if self.permissions.can_read_customer(self.role):
-            menu_items[1]["Liste des clients"] = self.customer_manage.list
+        menu_items[1]["Liste des clients"] = self.customer_manage.list
+
+        if self.permissions.role_name(self.role) == "Commercial":
+            menu_items[1]["Liste de vos clients"] = self.customer_manage.list_yours_customers
+
 
         if self.permissions.can_update_customer(self.role):
             menu_items[1]["Modifier un client"] = self.customer_manage.update
@@ -108,8 +105,13 @@ class MenuManage:
 
         menu_items = ["Gestion des Contrats : ", {}]
 
-        if self.permissions.can_read_contract(self.role):
-            menu_items[1]["Liste des contrats"] = self.contract_manage.list
+        menu_items[1]["Liste des contrats"] = self.contract_manage.list
+
+        if self.permissions.role_name(self.role) == "Commercial":
+            menu_items[1]["Liste de vos contrats"] = self.contract_manage.list_yours_contracts
+            menu_items[1]["Liste de vos contrats non signés"] = self.contract_manage.list_yours_contracts_not_signed
+            menu_items[1]["Liste de vos contrats non payés"] = self.contract_manage.list_yours_contracts_not_payed
+
 
         if self.permissions.can_update_contract(self.role):
             menu_items[1]["Modifier un contrat"] = self.contract_manage.update
@@ -126,9 +128,11 @@ class MenuManage:
         """
 
         menu_items = ["Gestion des Evènements : ", {}]
+        menu_items[1]["Liste des évènements"] = self.event_manage.list
+        menu_items[1]["Liste des évènements sans support"] = self.event_manage.list_no_support
 
-        if self.permissions.can_read_event(self.role):
-            menu_items[1]["Liste des évènements"] = self.event_manage.list
+        if self.permissions.role_name(self.role) in ("Support", "Commercial"):
+            menu_items[1]["Liste de vos évènements"] = self.event_manage.list_yours_events
 
         if self.permissions.can_update_event(self.role):
             menu_items[1]["Modifier un évènement"] = self.event_manage.update
@@ -217,7 +221,7 @@ class MenuManage:
                 choice = int(choice)
                 for menu in menu_list:
                     if menu[0] == choice:
-                        # Envoie vers la méthode choisie avec l id de l'utilisateur connecté
+                        # Envoie vers la méthode choisie
                         menu_items[1][menu[1]]()
                     self.view.clear_screen()
 
