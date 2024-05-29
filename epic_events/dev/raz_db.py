@@ -35,18 +35,16 @@ def init_base():
             Can_r_Role=False,
             Can_ru_Role=False,
             Can_crud_Role=False,
-            Can_r_Customer=True,
-            Can_access_all_Customer=False,
             Can_ru_Customer=True,
             Can_crud_Customer=True,
-            Can_r_Contract=True,
+            Can_access_all_Customer=False,
+            Can_ru_Contract=False,
+            Can_crud_Contract=False,
             Can_access_all_Contract=False,
-            Can_ru_Contract=True,
-            Can_crud_Contract=True,
-            Can_r_Event=True,
-            Can_access_all_Event=False,
             Can_ru_Event=True,
             Can_crud_Event=True,
+            Can_access_all_Event=False,
+            Can_access_support_Event=False,
         )
         session.add(commercial)
 
@@ -59,44 +57,40 @@ def init_base():
             Can_r_Role=False,
             Can_ru_Role=False,
             Can_crud_Role=False,
-            Can_r_Customer=False,
-            Can_access_all_Customer=False,
             Can_ru_Customer=False,
             Can_crud_Customer=False,
-            Can_r_Contract=False,
-            Can_access_all_Contract=False,
+            Can_access_all_Customer=False,
             Can_ru_Contract=False,
             Can_crud_Contract=False,
-            Can_r_Event=True,
-            Can_access_all_Event=False,
+            Can_access_all_Contract=False,
             Can_ru_Event=True,
             Can_crud_Event=False,
+            Can_access_all_Event=False,
+            Can_access_support_Event=False,
         )
         session.add(support)
 
-        # rôle Management
-        management = Role(
-            RoleName="Management",
+        # rôle gestion
+        gestion = Role(
+            RoleName="Gestion",
             Can_r_Employee=True,
             Can_ru_Employee=True,
             Can_crud_Employee=True,
             Can_r_Role=True,
             Can_ru_Role=True,
             Can_crud_Role=True,
-            Can_r_Customer=True,
-            Can_access_all_Customer=True,
             Can_ru_Customer=True,
             Can_crud_Customer=True,
-            Can_r_Contract=True,
-            Can_access_all_Contract=True,
+            Can_access_all_Customer=True,
             Can_ru_Contract=True,
             Can_crud_Contract=True,
-            Can_r_Event=True,
-            Can_access_all_Event=True,
+            Can_access_all_Contract=True,
             Can_ru_Event=True,
-            Can_crud_Event=True,
+            Can_crud_Event=False,
+            Can_access_all_Event=True,
+            Can_access_support_Event=True,
         )
-        session.add(management)
+        session.add(gestion)
 
         session.commit()
         logging.info("the roles have been successfully created !")
@@ -112,51 +106,51 @@ def init_base():
     try:
         session = Session()
 
-        # Création d'un commercial
+        # Création d'un membre commercial
         commercial_1 = Employee(
             FirstName="commercial_1",
-            LastName="",
+            LastName="commercial_1",
             Email="commercial_1@email.com",
             PasswordHash="Password123",
             RoleId=1,
         )
         session.add(commercial_1)
 
-        # Création d'un commercial
+        # Création d'un membre commercial
         commercial_2 = Employee(
             FirstName="commercial_2",
-            LastName="",
+            LastName="commercial_2",
             Email="commercial_2@email.com",
             PasswordHash="Password123",
             RoleId=1,
         )
         session.add(commercial_2)
 
-        # Création d'un support
+        # Création d'un membre support
         support_1 = Employee(
             FirstName="support_1",
-            LastName="",
+            LastName="support_1",
             Email="support_1@email.com",
             PasswordHash="Password123",
             RoleId=2,
         )
         session.add(support_1)
 
-        # Création d'un support
+        # Création d'un membre support
         support_2 = Employee(
             FirstName="support_2",
-            LastName="",
+            LastName="support_2",
             Email="support_2@email.com",
             PasswordHash="Password123",
             RoleId=2,
         )
         session.add(support_2)
 
-        # Création d'un manager
+        # Création d'un membre gestion
         manager_1 = Employee(
-            FirstName="manager_1",
-            LastName="",
-            Email="manager_1@email.com",
+            FirstName="gestion_1",
+            LastName="gestion_1",
+            Email="gestion_1@email.com",
             PasswordHash="Password123",
             RoleId=3,
         )
@@ -165,7 +159,7 @@ def init_base():
         # Création d'un client
         customer_1 = Customer(
             FirstName="customer_1",
-            LastName="",
+            LastName="customer_1",
             Email="customer_1@email.com",
             PhoneNumber="123456789",
             Company="Company_1",
@@ -176,7 +170,7 @@ def init_base():
         # Création d'un client
         customer_2 = Customer(
             FirstName="customer_2",
-            LastName="",
+            LastName="customer_2",
             Email="customer_2@email.com",
             PhoneNumber="123456789",
             Company="Company_2",
@@ -195,7 +189,7 @@ def init_base():
     finally:
         session.close()
 
-    # Création d'un contrat et d'un évènement
+    # Création des contrats
     try:
         session = Session()
         # Création d'un contrat
@@ -212,30 +206,7 @@ def init_base():
 
         session.commit()
 
-        # Création d'un événement associé au contrat
-        event_1 = Event(
-            Title="Event_1",
-            ContractRel=contract_1,
-            EmployeeSupportRel=support_1,
-            Location="Lieu de l'événement",
-            Attendees=20,
-            DateStart="2024-05-14",
-        )
-        session.add(event_1)
-
-        # Création d'un événement associé au contrat
-        event_2 = Event(
-            Title="Event_2",
-            ContractRel=contract_1,
-            EmployeeSupportRel=support_1,
-            Location="Lieu de l'événement",
-            Attendees=15,
-        )
-        session.add(event_2)
-
-        session.commit()
-
-        logging.info("contracts and events have been successfully created !")
+        logging.info("contracts have been successfully created !")
 
     except Exception as e:
         session.rollback()

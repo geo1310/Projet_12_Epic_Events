@@ -1,3 +1,4 @@
+from typing import List, Type
 from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
@@ -19,63 +20,9 @@ class RoleManage:
 
     def list(self):
 
-        roles = self.session.query(Role).all()
-
-        # création du tableau
-        table = Table(show_header=True, header_style="bold green")
-        # Ajouter des colonnes
-        table.add_column("ID", style="dim", width=3)
-        table.add_column("Nom")
-        table.add_column("r_ employee")
-        table.add_column("ru_ employee")
-        table.add_column("crud employee")
-        table.add_column("r_ role")
-        table.add_column("ru_ role")
-        table.add_column("crud role")
-        table.add_column("r_ customer")
-        table.add_column("all_ customer")
-        table.add_column("ru_ customer")
-        table.add_column("crud customer")
-        table.add_column("r_ contract")
-        table.add_column("all_ contract")
-        table.add_column("ru_ contract")
-        table.add_column("crud contract")
-        table.add_column("r_ event")
-        table.add_column("all_ event")
-        table.add_column("ru_ event")
-        table.add_column("crud event")
-        table.add_column("Date de création")
-
-        for role in roles:
-
-            self.session.refresh(role)
-
-            table.add_row(
-                str(role.Id),
-                role.RoleName,
-                str(role.Can_r_Employee),
-                str(role.Can_ru_Employee),
-                str(role.Can_crud_Employee),
-                str(role.Can_r_Role),
-                str(role.Can_ru_Role),
-                str(role.Can_crud_Role),
-                str(role.Can_r_Customer),
-                str(role.Can_access_all_Customer),
-                str(role.Can_ru_Customer),
-                str(role.Can_crud_Customer),
-                str(role.Can_r_Contract),
-                str(role.Can_access_all_Contract),
-                str(role.Can_ru_Contract),
-                str(role.Can_crud_Contract),
-                str(role.Can_r_Event),
-                str(role.Can_access_all_Event),
-                str(role.Can_ru_Event),
-                str(role.Can_crud_Event),
-                self.format_date(role.DateCreated),
-            )
-
-        # Affiche le tableau
-        self.view.display_table(table, "\nListe des Permissions")
+        roles = self.filter("All", None, Role)
+        table = self.table_role_create(roles)
+        self.view.display_table(table, "Liste des Roles")
         self.view.prompt_wait_enter()
 
     def create(self):
@@ -102,23 +49,14 @@ class RoleManage:
         crud_role = self.str_to_bool(
             self.view.return_choice("Création et Suppression des roles ( 0:non(défaut) / 1:oui )", False, "0")
         )
-        r_customer = self.str_to_bool(
-            self.view.return_choice("Liste partielle des clients ( 0:non(défaut) / 1:oui )", False, "0")
-        )
-        all_customer = self.str_to_bool(
-            self.view.return_choice("Liste Totale des clients ( 0:non(défaut) / 1:oui )", False, "0")
-        )
         ru_customer = self.str_to_bool(
             self.view.return_choice("Modification des clients ( 0:non(défaut) / 1:oui )", False, "0")
         )
         crud_customer = self.str_to_bool(
             self.view.return_choice("Création et Suppression des clients ( 0:non(défaut) / 1:oui )", False, "0")
         )
-        r_contract = self.str_to_bool(
-            self.view.return_choice("Liste partielle des contrats ( 0:non(défaut) / 1:oui )", False, "0")
-        )
-        all_contract = self.str_to_bool(
-            self.view.return_choice("Liste Totale des contrats ( 0:non(défaut) / 1:oui )", False, "0")
+        all_customer = self.str_to_bool(
+            self.view.return_choice("Acces à tous les clients ( 0:non(défaut) / 1:oui )", False, "0")
         )
         ru_contract = self.str_to_bool(
             self.view.return_choice("Modification des contrats ( 0:non(défaut) / 1:oui )", False, "0")
@@ -126,17 +64,20 @@ class RoleManage:
         crud_contract = self.str_to_bool(
             self.view.return_choice("Création et Suppression des contrats ( 0:non(défaut) / 1:oui )", False, "0")
         )
-        r_event = self.str_to_bool(
-            self.view.return_choice("Liste partielle des évènements ( 0:non(défaut) / 1:oui )", False, "0")
-        )
-        all_event = self.str_to_bool(
-            self.view.return_choice("Liste Totale des évènements ( 0:non(défaut) / 1:oui )", False, "0")
+        all_contract = self.str_to_bool(
+            self.view.return_choice("Acces à tous les contrats ( 0:non(défaut) / 1:oui )", False, "0")
         )
         ru_event = self.str_to_bool(
             self.view.return_choice("Modification des évènements ( 0:non(défaut) / 1:oui )", False, "0")
         )
         crud_event = self.str_to_bool(
             self.view.return_choice("Création et Suppression des évènements ( 0:non(défaut) / 1:oui )", False, "0")
+        )
+        all_event = self.str_to_bool(
+            self.view.return_choice("Acces à tous les évènements ( 0:non(défaut) / 1:oui )", False, "0")
+        )
+        support_event = self.str_to_bool(
+            self.view.return_choice("Accés au support des évènements ( 0:non(défaut) / 1:oui )", False, "0")
         )
 
         # Instance du nouveau role
@@ -148,18 +89,16 @@ class RoleManage:
             Can_r_Role=r_role,
             Can_ru_Role=ru_role,
             Can_crud_Role=crud_role,
-            Can_r_Customer=r_customer,
-            Can_access_all_Customer=all_customer,
             Can_ru_Customer=ru_customer,
             Can_crud_Customer=crud_customer,
-            Can_r_Contract=r_contract,
-            Can_access_all_Contract=all_contract,
+            Can_access_all_Customer=all_customer,
             Can_ru_Contract=ru_contract,
             Can_crud_Contract=crud_contract,
-            Can_r_Event=r_event,
-            Can_access_all_Event=all_event,
+            Can_access_all_Contract=all_contract,
             Can_ru_Event=ru_event,
             Can_crud_Event=crud_event,
+            Can_access_all_Event=all_event,
+            Can_access_support_Event=support_event,
         )
 
         # Ajouter à la session et commit
@@ -227,23 +166,14 @@ class RoleManage:
         self.role.Can_crud_Role = self.str_to_bool(
             self.view.return_choice("Création et Suppression des roles", False, f"{self.role.Can_crud_Role}")
         )
-        self.role.Can_r_Customer = self.str_to_bool(
-            self.view.return_choice("Liste partielle des clients", False, f"{self.role.Can_r_Customer}")
-        )
-        self.role.Can_access_all_Customer = self.str_to_bool(
-            self.view.return_choice("Liste Totale des clients", False, f"{self.role.Can_access_all_Customer}")
-        )
         self.role.Can_ru_Customer = self.str_to_bool(
             self.view.return_choice("Modification des clients", False, f"{self.role.Can_ru_Customer}")
         )
         self.role.Can_crud_Customer = self.str_to_bool(
             self.view.return_choice("Création et Suppression des clients", False, f"{self.role.Can_crud_Customer}")
         )
-        self.role.Can_r_Contract = self.str_to_bool(
-            self.view.return_choice("Liste partielle des contrats", False, f"{self.role.Can_r_Contract}")
-        )
-        self.role.Can_access_all_Contract = self.str_to_bool(
-            self.view.return_choice("Liste Totale des contrats", False, f"{self.role.Can_access_all_Contract}")
+        self.role.Can_access_all_Customer = self.str_to_bool(
+            self.view.return_choice("Acces à tous les clients", False, f"{self.role.Can_access_all_Customer}")
         )
         self.role.Can_ru_Contract = self.str_to_bool(
             self.view.return_choice("Modification des contrats", False, f"{self.role.Can_ru_Contract}")
@@ -251,17 +181,20 @@ class RoleManage:
         self.role.Can_crud_Contract = self.str_to_bool(
             self.view.return_choice("Création et Suppression des contrats", False, f"{self.role.Can_crud_Contract}")
         )
-        self.role.Can_r_Event = self.str_to_bool(
-            self.view.return_choice("Liste partielle des évènements", False, f"{self.role.Can_r_Event}")
-        )
-        self.role.Can_access_all_Event = self.str_to_bool(
-            self.view.return_choice("Liste Totale des évènements", False, f"{self.role.Can_access_all_Event}")
+        self.role.Can_access_all_Contract = self.str_to_bool(
+            self.view.return_choice("Acces à tous les contrats", False, f"{self.role.Can_access_all_Contract}")
         )
         self.role.Can_ru_Event = self.str_to_bool(
             self.view.return_choice("Modification des évènements", False, f"{self.role.Can_ru_Event}")
         )
         self.role.Can_crud_Event = self.str_to_bool(
             self.view.return_choice("Création et Suppression des évènements", False, f"{self.role.Can_crud_Event}")
+        )
+        self.role.Can_access_all_Event = self.str_to_bool(
+            self.view.return_choice("Acces à tous les évènements", False, f"{self.role.Can_access_all_Event}")
+        )
+        self.role.Can_access_support_Event = self.str_to_bool(
+            self.view.return_choice("Accés au support des évènements", False, f"{self.role.Can_access_support_Event}")
         )
 
         # Ajouter à la session et commit
@@ -359,51 +292,7 @@ class RoleManage:
         self.view.display_title_panel_color_fit(f"{oper} d'un role", f"{color}", True)
 
         # Tableau récapitulatif
-        table = Table()
-        table.add_column("ID", style="dim", width=3)
-        table.add_column("Nom")
-        table.add_column("r_ employee")
-        table.add_column("ru_ employee")
-        table.add_column("crud employee")
-        table.add_column("r_ role")
-        table.add_column("ru_ role")
-        table.add_column("crud role")
-        table.add_column("r_ customer")
-        table.add_column("all_ customer")
-        table.add_column("ru_ customer")
-        table.add_column("crud customer")
-        table.add_column("r_ contract")
-        table.add_column("all_ contract")
-        table.add_column("ru_ contract")
-        table.add_column("crud contract")
-        table.add_column("r_ event")
-        table.add_column("all_ event")
-        table.add_column("ru_ event")
-        table.add_column("crud event")
-        table.add_column("Date de création")
-        table.add_row(
-            str(self.role.Id),
-            self.role.RoleName,
-            str(self.role.Can_r_Employee),
-            str(self.role.Can_ru_Employee),
-            str(self.role.Can_crud_Employee),
-            str(self.role.Can_r_Role),
-            str(self.role.Can_ru_Role),
-            str(self.role.Can_crud_Role),
-            str(self.role.Can_r_Customer),
-            str(self.role.Can_access_all_Customer),
-            str(self.role.Can_ru_Customer),
-            str(self.role.Can_crud_Customer),
-            str(self.role.Can_r_Contract),
-            str(self.role.Can_access_all_Contract),
-            str(self.role.Can_ru_Contract),
-            str(self.role.Can_crud_Contract),
-            str(self.role.Can_r_Event),
-            str(self.role.Can_access_all_Event),
-            str(self.role.Can_ru_Event),
-            str(self.role.Can_crud_Event),
-            self.format_date(self.role.DateCreated),
-        )
+        table = self.table_role_create([self.role])
 
         self.view.display_table(table, "Résumé du role")
 
@@ -422,3 +311,90 @@ class RoleManage:
         if str_value.lower() in ("true", "1", "oui"):
             return True
         return False
+    
+    def table_role_create(self, roles: List[Role]) -> Table:
+        """
+        Crée un tableau pour afficher les roles.
+
+        Cette méthode prend une liste d'événements en entrée et génère un tableau contenant les détails de chaque événement
+        pour affichage.
+
+        Args:
+            roles (List[Role]): Une liste d'objets Role à afficher dans le tableau.
+
+        Returns:
+            Table: Un objet Table de la bibliothèque Rich contenant les informations des événements.
+        """
+
+        # Création du tableau pour afficher les événements
+        table = Table(show_header=True, header_style="bold green")
+        table.add_column("ID", style="dim", width=3)
+        table.add_column("Nom")
+        table.add_column("R. employee")
+        table.add_column("U. employee")
+        table.add_column("CRUD. employee")
+        table.add_column("R. role")
+        table.add_column("U. role")
+        table.add_column("CRUD. role")
+        table.add_column("U. customer")
+        table.add_column("CRUD customer")
+        table.add_column("ALL customer")
+        table.add_column("U. contract")
+        table.add_column("CRUD contract")
+        table.add_column("ALL contract")
+        table.add_column("U event")
+        table.add_column("CRUD event")
+        table.add_column("ALL event")
+        table.add_column("Support event")
+        table.add_column("Date de création")
+
+        for role in roles:
+            
+            table.add_row(
+                str(role.Id),
+                role.RoleName,
+                str(role.Can_r_Employee),
+                str(role.Can_ru_Employee),
+                str(role.Can_crud_Employee),
+                str(role.Can_r_Role),
+                str(role.Can_ru_Role),
+                str(role.Can_crud_Role),
+                str(role.Can_ru_Customer),
+                str(role.Can_crud_Customer),
+                str(role.Can_access_all_Customer),
+                str(role.Can_ru_Contract),
+                str(role.Can_crud_Contract),
+                str(role.Can_access_all_Contract),
+                str(role.Can_ru_Event),
+                str(role.Can_crud_Event),
+                str(role.Can_access_all_Event),
+                str(role.Can_access_support_Event),
+                self.format_date(role.DateCreated),
+            )
+
+        return table
+    
+    def filter(self, attribute: str, value: any, model: Type) -> List:
+        """
+        Filtre les instances du modèle en fonction d'un attribut et d'une valeur spécifiés.
+
+        Args:
+            attribute (str): L'attribut du modèle par lequel filtrer. Si "All", aucun filtrage n'est appliqué.
+            value (Any): La valeur de l'attribut pour filtrer les instances du modèle. Peut être n'importe quelle valeur,
+                         y compris None pour filtrer les valeurs NULL.
+            model (Type): La classe du modèle SQLAlchemy à filtrer (par exemple, Event, Employee).
+
+        Returns:
+            List: Une liste des instances du modèle qui correspondent aux critères de filtrage.
+        """
+        query = self.session.query(model)
+
+        if attribute != "All":
+            if value is None:
+                query = query.filter(getattr(model, attribute) == None)
+            else:
+                query = query.filter(getattr(model, attribute) == value)
+
+        return query.all()
+    
+    

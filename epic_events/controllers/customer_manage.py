@@ -28,10 +28,7 @@ class CustomerManage:
 
     def list(self):
 
-        if self.permissions.can_access_all_customer(self.role):
-            self.customers = self.session.query(Customer).all()
-        else:
-            self.customers = self.employee.CustomersRel
+        self.customers = self.session.query(Customer).all()
 
         # création du tableau
         table = Table(show_header=True, header_style="bold green")
@@ -63,6 +60,10 @@ class CustomerManage:
         # Affiche le tableau
         self.view.display_table(table, "\nListe des Clients")
         self.view.prompt_wait_enter()
+
+    def list_yours_customers(self):
+        # TODO
+        pass
 
     def create(self):
         """
@@ -160,7 +161,7 @@ class CustomerManage:
                 self.customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
 
                 # vérifie que le client est dans la liste des clients de l'employé
-                if self.customer in self.customers or self.permissions.can_access_all_customer(self.role):
+                if self.customer in self.customers:
                     break
                 self.view.display_red_message("Vous n'etes pas autorisé à modifier ce client !")
 
@@ -171,7 +172,7 @@ class CustomerManage:
         if not self.confirm_table_recap("Modification", "yellow"):
             return
 
-        self.view.display_title_panel_color_fit("Modification d'un employé", "yellow", True)
+        self.view.display_title_panel_color_fit("Modification d'un client", "yellow", True)
         self.customer.FirstName = self.view.return_choice("Prénom", False, f"{self.customer.FirstName}")
         self.customer.LastName = self.view.return_choice("Nom", False, f"{self.customer.LastName}")
         self.customer.Email = self.view.return_choice("Email", False, f"{self.customer.Email}")
@@ -237,7 +238,7 @@ class CustomerManage:
                 self.customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
 
                 # vérifie que le client est dans la liste des clients de l'employé
-                if self.customer in self.customers or self.permissions.can_access_all_customer(self.role):
+                if self.customer in self.customers:
                     break
                 self.view.display_red_message("Vous n'etes pas autorisé à supprimer ce client !")
             except Exception:
@@ -292,7 +293,7 @@ class CustomerManage:
         """
 
         while True:
-            email = self.view.return_choice("Entrez l'adresse email de l'employé ( vide pour annuler )", False)
+            email = self.view.return_choice("Entrez l'adresse email ( vide pour annuler )", False)
             if not email:
                 return None
             try:
