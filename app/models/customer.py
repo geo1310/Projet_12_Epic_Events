@@ -4,7 +4,7 @@ from email.utils import parseaddr
 from sqlalchemy import TIMESTAMP, Column, ForeignKey, Integer, String, func
 from sqlalchemy.orm import relationship, validates
 
-from epic_events.models.employee import Employee
+from models.employee import Employee
 
 from .database import Base
 

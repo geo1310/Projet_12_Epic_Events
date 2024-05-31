@@ -1,14 +1,18 @@
 from typing import List, Type
+import sentry_sdk
 from email.utils import parseaddr
 
 from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
-from ..models.database import Session
-from ..models.employee import Employee
-from ..models.role import Role
-from ..views.views import View
+from models.database import SessionLocal
+from models.employee import Employee
+from models.role import Role
+from views.views import View
+
+from .utils_manage import sentry_event
+
 
 
 class EmployeeManage:
@@ -16,21 +20,25 @@ class EmployeeManage:
     Gère les opérations liées aux employés, telles que l'affichage, la création, la mise à jour et la suppression.
     """
 
-    def __init__(self):
-        self.session = Session()
+    def __init__(self, user_connected_id):
+        self.session = SessionLocal()
         self.view = View()
         self.console = Console()
+        self.employee = self.session.query(Employee).filter_by(Id=user_connected_id).one()
+        self.role = self.session.query(Role).filter_by(Id=self.employee.RoleId).one()
+        
 
     def list(self):
         employees = self.filter("All", None, Employee)
         table = self.table_employee_create(employees)
         self.view.display_table(table, "Liste des Employés")
-        
 
+    @sentry_sdk.trace
     def create(self):
         """
         Crée un nouvel employé après avoir collecté et validé les informations de l'utilisateur.
         """
+
         self.view.display_title_panel_color_fit("Création d'un employé", "green")
 
         # Collecte les informations de l'utilisateur
@@ -56,22 +64,26 @@ class EmployeeManage:
             return
 
         # Instance du nouvel objet Employee
-        self.employee = Employee(
+        employee = Employee(
             FirstName=first_name, LastName=last_name, Email=email, PasswordHash=password_hash, RoleId=int(role_id)
         )
 
         # Ajouter à la session et commit
         try:
-            self.session.add(self.employee)
+            self.session.add(employee)
             self.session.flush()
 
             # Affichage et confirmation de la création
-            if not self.confirm_table_recap("Création", "green"):
-                self.session.expunge(self.employee)
+            if not self.confirm_table_recap(employee, "Création", "green"):
+                self.session.expunge(employee)
                 self.session.rollback()
                 return
             self.session.commit()
             self.view.display_green_message("\nEmployé créé avec succès !")
+            
+            # évènement sentry
+            sentry_event(self.employee.Email, f"Employé créé: Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}", "Employee_create")
+            
         except IntegrityError as e:
             self.session.rollback()
             error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
@@ -82,7 +94,6 @@ class EmployeeManage:
         except Exception as e:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création de l'employé : {e}")
-
 
     def update(self):
         """
@@ -107,26 +118,26 @@ class EmployeeManage:
                 return
 
             try:
-                self.employee = self.session.query(Employee).filter_by(Id=int(employee_id)).one()
+                employee = self.session.query(Employee).filter_by(Id=int(employee_id)).one()
                 break
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
         # Affichage et confirmation de la modification
-        if not self.confirm_table_recap("Modification", "yellow"):
+        if not self.confirm_table_recap(employee, "Modification", "yellow"):
             return
 
         self.view.display_title_panel_color_fit("Modification d'un employé", "yellow", True)
-        self.employee.FirstName = self.view.return_choice("Prénom", False, f"{self.employee.FirstName}")
-        self.employee.LastName = self.view.return_choice("Nom", False, f"{self.employee.LastName}")
-        self.employee.Email = self.view.return_choice("Email", False, f"{self.employee.Email}")
+        employee.FirstName = self.view.return_choice("Prénom", False, f"{employee.FirstName}")
+        employee.LastName = self.view.return_choice("Nom", False, f"{employee.LastName}")
+        employee.Email = self.view.return_choice("Email", False, f"{employee.Email}")
 
         # validation du role
-        role_id = self.valid_role(self.employee.RoleId)
+        role_id = self.valid_role(employee.RoleId)
 
         if not role_id:
             return
-        self.employee.RoleId = role_id
+        employee.RoleId = role_id
 
         # Modification du mot de passe
         confirm = self.view.return_choice("Voulez-vous modifier le mot de passe ? (oui/non)", False)
@@ -136,15 +147,15 @@ class EmployeeManage:
                 return
             self.view.display_green_message("Mot de passe validé !")
 
-            self.employee.PasswordHash = password_hash
+            employee.PasswordHash = password_hash
 
         # Ajouter à la session et commit
         try:
             self.session.commit()
 
             # Affichage et confirmation de la modification
-            if not self.confirm_table_recap("Modification", "yellow"):
-                self.session.expunge(self.employee)
+            if not self.confirm_table_recap(employee, "Modification", "yellow"):
+                self.session.expunge(employee)
                 self.session.rollback()
                 return
 
@@ -160,6 +171,7 @@ class EmployeeManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création de l'employé : {e}")
 
+    @sentry_sdk.trace
     def delete(self):
         """
         Supprime un employé existant.
@@ -184,18 +196,22 @@ class EmployeeManage:
                 return
 
             try:
-                self.employee = self.session.query(Employee).filter_by(Id=int(employee_id)).one()
+                employee = self.session.query(Employee).filter_by(Id=int(employee_id)).one()
                 break
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
-        if not self.confirm_table_recap("Suppression", "red"):
+        if not self.confirm_table_recap(employee, "Suppression", "red"):
             return
 
         try:
-            self.session.delete(self.employee)
+            self.session.delete(employee)
             self.session.commit()
             self.view.display_green_message("Employé supprimé avec succès !")
+
+            # évènement sentry
+            sentry_event(self.employee.Email, f"Employé supprimé : Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}", "Employee_create")
+
         except IntegrityError as e:
             self.session.rollback()
             error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
@@ -279,26 +295,11 @@ class EmployeeManage:
             else:
                 self.view.display_red_message("Les mots de passe ne correspondent pas.")
 
-    def confirm_table_recap(self, oper: str, color: str = "white"):
-        """
-        Affiche un tableau récapitulatif des informations de l'employé et demande une confirmation.
-
-        Cette méthode crée et affiche un tableau récapitulatif contenant les informations de l'employé.
-        Ensuite, elle demande à l'utilisateur de confirmer l'opération en saisissant 'oui' ou 'non'.
-        Si l'utilisateur confirme, la méthode retourne True.
-
-        Args:
-        oper (str): L'opération à confirmer (par exemple, 'Création', 'Mise à jour', 'Suppression').
-        color (str): Couleur du texte
-
-        Returns:
-            bool: True si l'utilisateur confirme l'opération, False sinon.
-
-        """
+    def confirm_table_recap(self, employee: Employee, oper: str, color: str = "white"):
 
         self.view.display_title_panel_color_fit(f"{oper} d'un employé", f"{color}", True)
 
-        summary_table = self.table_employee_create([self.employee])
+        summary_table = self.table_employee_create([employee])
 
         self.view.display_table(summary_table, "Résumé de l'employé")
 
@@ -398,7 +399,6 @@ class EmployeeManage:
             )
 
         return table
-    
 
     def filter(self, attribute: str, value: any, model: Type) -> List:
         """

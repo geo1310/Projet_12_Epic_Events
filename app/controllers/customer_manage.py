@@ -4,12 +4,12 @@ from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
-from ..models.customer import Customer
-from ..models.database import Session
-from ..models.employee import Employee
-from ..models.role import Role
-from ..permissions.permissions import Permissions
-from ..views.views import View
+from models.customer import Customer
+from models.database import SessionLocal
+from models.employee import Employee
+from models.role import Role
+from permissions.permissions import Permissions
+from views.views import View
 
 
 class CustomerManage:
@@ -18,7 +18,7 @@ class CustomerManage:
     """
 
     def __init__(self, user_connected_id):
-        self.session = Session()
+        self.session = SessionLocal()
         self.view = View()
         self.console = Console()
         self.permissions = Permissions()

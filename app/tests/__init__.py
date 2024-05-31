@@ -2,12 +2,12 @@ from collections import namedtuple
 
 import pytest
 
-from epic_events.models.contract import Contract
-from epic_events.models.customer import Customer
-from epic_events.models.database import Session
-from epic_events.models.employee import Employee
-from epic_events.models.event import Event
-from epic_events.models.role import Role
+from app.models.contract import Contract
+from app.models.customer import Customer
+from app.models.database import Session
+from app.models.employee import Employee
+from app.models.event import Event
+from app.models.role import Role
 
 
 @pytest.fixture(scope="function")

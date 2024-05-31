@@ -4,9 +4,9 @@ from datetime import datetime, timedelta, timezone
 import jwt
 from dotenv import load_dotenv
 
-from ..models.database import Session
-from ..models.employee import Employee
-from ..utils.token_manage_json import delete_token, load_token_from_json, save_token_to_json
+from models.database import SessionLocal
+from models.employee import Employee
+from utils.token_manage_json import delete_token, load_token_from_json, save_token_to_json
 
 
 class AuthenticationManager:
@@ -15,7 +15,7 @@ class AuthenticationManager:
         self.view = view
         self.SECRET_KEY = os.environ.get("SECRET_KEY")
         self.TOKEN_EXPIRY = int(os.environ.get("TOKEN_EXPIRY"))
-        self.session = None
+        self.session = SessionLocal()
 
     def authenticate(self, email, password):
         """
@@ -30,18 +30,16 @@ class AuthenticationManager:
             s'il est authentifié.
         """
         try:
-            self.session = Session()
-            employee = self.session.query(Employee).filter_by(Email=email).first()
-            if employee and employee.verify_password(password):
-                return True, employee
-            else:
-                return False, None
+            with self.session.begin():
+                employee = self.session.query(Employee).filter_by(Email=email).first()
+                if employee and employee.verify_password(password):
+                    return True, employee
+                else:
+                    return False, None
         except Exception as e:
             self.view.display_red_message(f"Une erreur s'est produite : {e}")
             return False, None
-        finally:
-            if self.session:
-                self.session.close()
+        
 
     def generate_jwt_token(self, user_id: int):
         """

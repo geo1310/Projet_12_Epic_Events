@@ -1,9 +1,9 @@
 import sys
 
-from ..models.database import Session
-from ..models.employee import Employee
-from ..models.role import Role
-from ..permissions.permissions import Permissions
+from models.database import SessionLocal
+from models.employee import Employee
+from models.role import Role
+from permissions.permissions import Permissions
 from .contract_manage import ContractManage
 from .customer_manage import CustomerManage
 from .employee_manage import EmployeeManage
@@ -33,7 +33,7 @@ class MenuManage:
         self.verify_jwt = verify_jwt
         self.delete_token = delete_token
         self.user_connected_id = user_connected_id
-        self.employee_manage = EmployeeManage()
+        self.employee_manage = EmployeeManage(user_connected_id)
         self.customer_manage = CustomerManage(user_connected_id)
         self.contract_manage = ContractManage(user_connected_id)
         self.event_manage = EventManage(user_connected_id)
@@ -50,7 +50,7 @@ class MenuManage:
         if self.user_connected_id == decoded_payload["user_id"]:
 
             # crée l'instance de l'utilisateur connecté
-            self.session = Session()
+            self.session = SessionLocal()
             self.employee = self.session.query(Employee).filter_by(Id=self.user_connected_id).one()
             self.role = self.session.query(Role).filter_by(Id=self.employee.RoleId).one()
 
@@ -85,6 +85,7 @@ class MenuManage:
         """
         Composition du menu client selon les permissions de l'utilisateur.
         """
+
         menu_items = ["Gestion des Clients : ", {}]
 
         menu_items[1]["Liste des clients"] = self.customer_manage.list
@@ -196,6 +197,8 @@ class MenuManage:
             les éléments du menu sous forme de paires (index, nom_du_menu: méthode).
 
         """
+
+        self.session.refresh(self.role)
         
         title = menu_items[0]
 

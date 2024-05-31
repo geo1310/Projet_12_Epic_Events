@@ -3,9 +3,9 @@ from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
-from ..models.database import Session
-from ..models.role import Role
-from ..views.views import View
+from models.database import SessionLocal
+from models.role import Role
+from views.views import View
 
 
 class RoleManage:
@@ -14,7 +14,7 @@ class RoleManage:
     """
 
     def __init__(self):
-        self.session = Session()
+        self.session = SessionLocal()
         self.view = View()
         self.console = Console()
 

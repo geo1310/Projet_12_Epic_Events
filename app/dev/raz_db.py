@@ -1,11 +1,11 @@
 import logging
 
-from epic_events.models.contract import Contract
-from epic_events.models.customer import Customer
-from epic_events.models.database import Base, Session, engine
-from epic_events.models.employee import Employee
-from epic_events.models.event import Event
-from epic_events.models.role import Role
+from app.models.contract import Contract
+from app.models.customer import Customer
+from app.models.database import Base, Session, engine
+from app.models.employee import Employee
+from app.models.event import Event
+from app.models.role import Role
 
 
 def init_base():
@@ -81,7 +81,7 @@ def init_base():
             Can_crud_Role=True,
             Can_ru_Customer=False,
             Can_crud_Customer=False,
-            Can_access_all_Customer=False,
+            Can_access_all_Customer=True,
             Can_ru_Contract=True,
             Can_crud_Contract=True,
             Can_access_all_Contract=True,

@@ -39,7 +39,7 @@ db_url = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db
 engine = create_engine(db_url)
 
 # Créer une sessionmaker pour interagir avec la base de données
-Session = sessionmaker(bind=engine)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Déclarer une base de données SQLAlchemy pour être utilisée dans les modèles
 Base = declarative_base()

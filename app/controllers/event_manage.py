@@ -2,15 +2,15 @@ from typing import List, Optional, Type
 from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
-from ..permissions.permissions import Permissions
-from ..models.contract import Contract
-from ..models.customer import Customer
-from ..models.employee import Employee
-from ..models.role import Role
+from permissions.permissions import Permissions
+from models.contract import Contract
+from models.customer import Customer
+from models.employee import Employee
+from models.role import Role
 
-from ..models.database import Session
-from ..models.event import Event
-from ..views.views import View
+from models.database import SessionLocal
+from models.event import Event
+from views.views import View
 
 
 class EventManage:
@@ -19,7 +19,7 @@ class EventManage:
     """
 
     def __init__(self, user_connected_id):
-        self.session = Session()
+        self.session = SessionLocal()
         self.view = View()
         self.console = Console()
         self.permissions = Permissions()

@@ -1,9 +1,9 @@
 import pytest
 
-from epic_events.models.contract import Contract
-from epic_events.models.customer import Customer
-from epic_events.models.employee import Employee
-from epic_events.models.event import Event
+from app.models.contract import Contract
+from app.models.customer import Customer
+from app.models.employee import Employee
+from app.models.event import Event
 
 from . import create_test_data, session
 

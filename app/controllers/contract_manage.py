@@ -1,15 +1,16 @@
-from typing import List, Optional, Type
+from typing import List, Type
 from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
-from ..models.contract import Contract
-from ..models.customer import Customer
-from ..models.database import Session
-from ..models.employee import Employee
-from ..models.role import Role
-from ..permissions.permissions import Permissions
-from ..views.views import View
+from models.contract import Contract
+from models.customer import Customer
+from models.database import SessionLocal
+from models.employee import Employee
+from models.role import Role
+from permissions.permissions import Permissions
+from views.views import View
+from .utils_manage import sentry_event
 
 
 class ContractManage:
@@ -18,7 +19,7 @@ class ContractManage:
     """
 
     def __init__(self, user_connected_id):
-        self.session = Session()
+        self.session = SessionLocal()
         self.view = View()
         self.console = Console()
         self.permissions = Permissions()
@@ -60,7 +61,7 @@ class ContractManage:
             )
         
         else:
-            customers = []
+            return None
 
         return customers
         
@@ -143,6 +144,9 @@ class ContractManage:
         """
 
         customers = self.get_permissions_customers()
+        if not customers:
+            self.view.display_red_message("Aucuns clients autorisés pour le contrat !")
+            return
 
         self.view.display_title_panel_color_fit("Création d'un contrat", "green")
 
@@ -183,6 +187,11 @@ class ContractManage:
                 return
             self.session.commit()
             self.view.display_green_message("\nContrat créé avec succès !")
+
+            # évènement sentry
+            if contract.ContractSigned:
+                sentry_event(self.employee.Email, f"Contrat Signé: Titre: {contract.Title} - Email du Client: {contract.CustomerRel.Email}", "Contract_signed")
+        
         except IntegrityError as e:
             self.session.rollback()
             error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
@@ -222,7 +231,11 @@ class ContractManage:
         """
 
         contracts = self.get_permissions_contracts()
+
         customers = self.get_permissions_customers()
+        if not customers:
+            self.view.display_red_message("Aucuns clients autorisés pour le contrat !")
+            return
 
         self.view.display_title_panel_color_fit("Modification d'un contrat", "yellow")
 
@@ -286,6 +299,11 @@ class ContractManage:
                 return
 
             self.view.display_green_message("\nContrat modifié avec succès !")
+
+            # évènement sentry
+            if contract.ContractSigned:
+                sentry_event(self.employee.Email, f"Contrat Signé: Titre: {contract.Title} - Email du Client: {contract.CustomerRel.Email}", "Contract_signed")
+
         except IntegrityError as e:
             self.session.rollback()
             error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
@@ -505,10 +523,14 @@ class ContractManage:
 
         for contract in contracts:
             # Récupérer les infos du commercial associé au client
-            commercial_last_name = (
-                contract.CustomerRel.CommercialRel.LastName if contract.CustomerRel.CommercialRel else None
-            )
-            commercial_email = contract.CustomerRel.CommercialRel.Email if contract.CustomerRel.CommercialRel else None
+            if contract.CustomerRel:
+                commercial_last_name = (
+                    contract.CustomerRel.CommercialRel.LastName if contract.CustomerRel.CommercialRel else None
+                )
+                commercial_email = contract.CustomerRel.CommercialRel.Email if contract.CustomerRel.CommercialRel else None
+            else:
+                commercial_last_name = ""
+                commercial_email =  ""
 
             table.add_row(
                 str(contract.Id),

@@ -2,8 +2,8 @@ from sqlalchemy import TIMESTAMP, Column, Date, ForeignKey, Integer, String, Tex
 from sqlalchemy.orm import relationship, validates
 from datetime import datetime
 
-from epic_events.models.contract import Contract
-from epic_events.models.employee import Employee
+from models.contract import Contract
+from models.employee import Employee
 
 from .database import Base
 
