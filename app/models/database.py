@@ -33,7 +33,8 @@ db_port = os.environ.get("DB_PORT_POSTGRE")
 db_name = os.environ.get("DB_NAME")
 
 # URL de connexion à la base de données PostgreSQL
-db_url = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+db_url = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}?client_encoding=utf8"
+#db_url = f"postgresql+pg8000://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
 
 # Créer l'engine SQLAlchemy
 engine = create_engine(db_url)
