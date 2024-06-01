@@ -204,12 +204,13 @@ def init_base():
         logging.info("All tables created successfully.")
 
     except Exception as e:
-        logging.error(f"An error has occurred while resetting the base: {e}", exc_info=True)
-    finally:
+        logging.error(f"An error has occurred while resetting the base: {e}", exc_info=False)
+    else:
         create_roles(session)
         create_users(session)
         create_customers(session)
         create_contracts(session)
+    finally:
         session.close()
 
 
