@@ -14,20 +14,19 @@ from views.views import View
 from .utils_manage import sentry_event
 
 
-
 class EmployeeManage:
     """
     Gère les opérations liées aux employés, telles que l'affichage, la création, la mise à jour et la suppression.
     """
 
-    def __init__(self, user_connected_id):
-        self.session = SessionLocal()
+    def __init__(self, session, employee, role):
+        self.session = session
         self.view = View()
         self.console = Console()
-        self.employee = self.session.query(Employee).filter_by(Id=user_connected_id).one()
-        self.role = self.session.query(Role).filter_by(Id=self.employee.RoleId).one()
+        self.employee = employee
+        self.role = role
+        self.user_connected_id = employee.Id
         
-
     def list(self):
         employees = self.filter("All", None, Employee)
         table = self.table_employee_create(employees)

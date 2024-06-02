@@ -1,11 +1,13 @@
 import os
+from sqlalchemy.orm import Session
+from typing import Tuple, Optional
 from datetime import datetime, timedelta, timezone
 
 import jwt
 from dotenv import load_dotenv
 
-from models.database import SessionLocal
 from models.employee import Employee
+from models.role import Role
 from utils.token_manage_json import delete_token, load_token_from_json, save_token_to_json
 
 
@@ -15,32 +17,39 @@ class AuthenticationManager:
         self.view = view
         self.SECRET_KEY = os.environ.get("SECRET_KEY")
         self.TOKEN_EXPIRY = int(os.environ.get("TOKEN_EXPIRY"))
-        self.session = SessionLocal()
 
-    def authenticate(self, email, password):
+    def authenticate(self, email: str, password: str, session: Session) -> Tuple[bool, Optional[Employee], Optional[Role]]:
+
         """
-        Authentifie un utilisateur en vérifiant les informations d'identification dans la base de données.
+        Authentifie un utilisateur en vérifiant les informations d'identification dans la base de données et 
+        récupère le rôle associé.
 
         Args:
             email (str): Adresse e-mail de l'utilisateur.
             password (str): Mot de passe de l'utilisateur.
+            session (Session): La session SQLAlchemy à utiliser pour interagir avec la base de données.
 
         Returns:
-            tuple: Un tuple contenant un booléen indiquant si l'authentification réussit et les données utilisateur.
-            s'il est authentifié.
+            tuple: Un tuple contenant un booléen indiquant si l'authentification réussit, l'objet Employee 
+                correspondant s'il est authentifié, et l'objet Role associé. Retourne (False, None, None) en cas d'échec.
+
+        Exceptions:
+            Affiche un message d'erreur en cas d'exception et retourne (False, None, None).
         """
         try:
-            with self.session.begin():
-                employee = self.session.query(Employee).filter_by(Email=email).first()
+            self.view.display_green_message("Authentification en cours ...")
+            with session.begin():
+                employee = session.query(Employee).filter_by(Email=email).first()
                 if employee and employee.verify_password(password):
-                    return True, employee
+                    role = session.query(Role).filter_by(Id=employee.RoleId).one()
+                    return True, employee, role
                 else:
-                    return False, None
+                    return False, None, None
         except Exception as e:
             self.view.display_red_message(f"Une erreur s'est produite : {e}")
-            return False, None
-        
-
+            session.close()
+            return False, None, None
+   
     def generate_jwt_token(self, user_id: int):
         """
         Génère un jeton JWT pour l'utilisateur authentifié.

@@ -13,8 +13,8 @@ class RoleManage:
     Gère les opérations liées aux permissions, telles que l'affichage, la création, la mise à jour et la suppression.
     """
 
-    def __init__(self):
-        self.session = SessionLocal()
+    def __init__(self, session):
+        self.session = session
         self.view = View()
         self.console = Console()
 

@@ -1,13 +1,10 @@
-from typing import List, Optional, Type
+from typing import List, Type
 from datetime import datetime
 from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
 from models.customer import Customer
-from models.database import SessionLocal
-from models.employee import Employee
-from models.role import Role
 from permissions.permissions import Permissions
 from views.views import View
 
@@ -17,14 +14,14 @@ class CustomerManage:
     Gère les opérations liées aux clients, telles que l'affichage, la création, la mise à jour et la suppression.
     """
 
-    def __init__(self, user_connected_id):
-        self.session = SessionLocal()
+    def __init__(self, session, employee, role):
+        self.session = session
         self.view = View()
         self.console = Console()
         self.permissions = Permissions()
-        self.user_connected_id = user_connected_id
-        self.employee = self.session.query(Employee).filter_by(Id=user_connected_id).one()
-        self.role = self.session.query(Role).filter_by(Id=self.employee.RoleId).one()
+        self.employee = employee
+        self.role = role
+        self.user_connected_id = employee.Id
 
     def list(self):
 

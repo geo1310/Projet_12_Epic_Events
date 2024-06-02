@@ -5,9 +5,6 @@ from sqlalchemy.exc import IntegrityError
 
 from models.contract import Contract
 from models.customer import Customer
-from models.database import SessionLocal
-from models.employee import Employee
-from models.role import Role
 from permissions.permissions import Permissions
 from views.views import View
 from .utils_manage import sentry_event
@@ -18,14 +15,14 @@ class ContractManage:
     Gère les opérations liées aux contrats, telles que l'affichage, la création, la mise à jour et la suppression.
     """
 
-    def __init__(self, user_connected_id):
-        self.session = SessionLocal()
+    def __init__(self, session, employee, role):
+        self.session = session
         self.view = View()
         self.console = Console()
         self.permissions = Permissions()
-        self.user_connected_id = user_connected_id
-        self.employee = self.session.query(Employee).filter_by(Id=user_connected_id).one()
-        self.role = self.session.query(Role).filter_by(Id=self.employee.RoleId).one()
+        self.employee = employee
+        self.role = role
+        self.user_connected_id = employee.Id
 
     def get_permissions_contracts(self):
 

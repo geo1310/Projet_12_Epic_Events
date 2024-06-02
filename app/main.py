@@ -4,6 +4,7 @@ import socket
 import sentry_sdk
 from dotenv import load_dotenv
 
+from models.database import SessionLocal
 from controllers.authentication import AuthenticationManager
 from controllers.menu_manage import MenuManage
 from views.views import View
@@ -45,27 +46,38 @@ def main():
 
     view = View()
     auth_manager = AuthenticationManager(view)
+    session = SessionLocal()
 
-    view.clear_screen()
+    while True:
+        view.clear_screen()
+        view.display_title_panel_color_fit("Connexion Epic-Events", "magenta")
 
-    email = view.return_choice("Entrez votre email", False)
-    password = view.return_choice("Entrez votre mot de passe", True)
+        email = view.return_choice("Entrez votre email ( vide pour quitter )", False)
+        if not email:
+            break
 
-    # authentifie l'utilisateur dans la base de données
-    auth_success, employee = auth_manager.authenticate(email, password)
+        password = view.return_choice("Entrez votre mot de passe ( vide pour annuler )", True)
+        
+        if password:
+            # authentifie l'utilisateur dans la base de données
+            auth_success, employee, role = auth_manager.authenticate(email, password, session)
 
-    if auth_success:
+            if auth_success:
 
-        auth_manager.generate_jwt_token(employee.Id)
+                auth_manager.generate_jwt_token(employee.Id)
 
-        # lance l'application
-        app = MenuManage(view, auth_manager.verify_and_decode_jwt_token, delete_token, employee.Id)
-        app.run()
+                # lance l'application
+                app = MenuManage(view, auth_manager.verify_and_decode_jwt_token, delete_token, session, employee, role)
+                app.run()
 
-    else:
-        print(hostname)
-        view.display_red_message("Nom d'utilisateur ou mot de passe incorrect\n")
-        sentry_sdk.capture_message("Tentative de connexion : Nom d'utilisateur ou mot de passe incorrect.")
+            else:
+                view.display_red_message("Nom d'utilisateur ou mot de passe incorrect\n")
+                sentry_sdk.capture_message("Tentative de connexion : Nom d'utilisateur ou mot de passe incorrect.")
+
+                view.prompt_wait_enter()
+
+    if session:
+        session.close()
 
 
 if __name__ == "__main__":

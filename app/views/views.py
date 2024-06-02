@@ -24,9 +24,9 @@ class View:
         """
         text = Text("", style="")
         text.append("Utilisateur connecté: ")
-        text.append(f"{user_connected}", style="bold blue")
+        text.append(f"{user_connected}", style="bright_cyan")
         text.append("\nStatus: ")
-        text.append(f"{user_connected_status}", style="bold blue")
+        text.append(f"{user_connected_status}", style="bright_cyan")
 
         self.console.print(Panel(text, title="[bold]Bienvenue sur le CRM Epic Events[/bold]"))
 
@@ -49,7 +49,7 @@ class View:
         text = Text()
         # affichage du menu
         for menu in menu_list:
-            text.append(f"\n\t{menu[0]} - {menu[1]}", style="bold blue")
+            text.append(f"\n\t{menu[0]} - {menu[1]}", style="bold bright_cyan")
         text.append("\n")
         self.console.print(Panel(text, title=f"[bold]{title}[/bold]", width=50))
         choice = self.console.input("[bold]\nchoix :[/bold]")
@@ -148,7 +148,7 @@ class View:
         self.console.input("[bold]Appuyer sur Entrée[/bold]")
         return True
     
-    def pass_n_lines(self, n:int=1):
+    def pass_n_lines(self, n: int=1):
         """
         Affiche un certain nombre de lignes vides dans la console.
 
