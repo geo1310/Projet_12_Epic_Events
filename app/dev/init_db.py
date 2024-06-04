@@ -4,7 +4,6 @@ from models.contract import Contract
 from models.customer import Customer
 from models.database import Base, SessionLocal, engine
 from models.employee import Employee
-from models.event import Event
 from models.role import Role
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')

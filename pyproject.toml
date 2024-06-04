@@ -27,6 +27,7 @@ pyjwt = "^2.8.0"
 rich = "^13.7.1"
 sentry-sdk = "^2.3.1"
 pg8000 = "^1.31.2"
+colorlog = "^6.8.2"
 
 
 [build-system]

@@ -1,14 +1,11 @@
 import sys
-
-from models.database import SessionLocal
-from models.employee import Employee
-from models.role import Role
 from permissions.permissions import Permissions
 from .contract_manage import ContractManage
 from .customer_manage import CustomerManage
 from .employee_manage import EmployeeManage
 from .event_manage import EventManage
 from .role_manage import RoleManage
+from utils.logging_config import logger
 
 
 class MenuManage:
@@ -28,16 +25,19 @@ class MenuManage:
         permissions: L'instance de la gestion des permissions.
     """
 
-    def __init__(self, view, verify_jwt, delete_token, user_connected_id):
+    def __init__(self, view, verify_jwt, delete_token, session, employee, role):
         self.view = view
+        self.session = session
         self.verify_jwt = verify_jwt
         self.delete_token = delete_token
-        self.user_connected_id = user_connected_id
-        self.employee_manage = EmployeeManage(user_connected_id)
-        self.customer_manage = CustomerManage(user_connected_id)
-        self.contract_manage = ContractManage(user_connected_id)
-        self.event_manage = EventManage(user_connected_id)
-        self.role_manage = RoleManage()
+        self.employee = employee
+        self.role = role
+        self.user_connected_id = employee.Id
+        self.employee_manage = EmployeeManage(session, employee, role)
+        self.customer_manage = CustomerManage(session, employee, role)
+        self.contract_manage = ContractManage(session, employee, role)
+        self.event_manage = EventManage(session, employee, role)
+        self.role_manage = RoleManage(session)
         self.permissions = Permissions()
         self.show_intro = False
 
@@ -48,19 +48,14 @@ class MenuManage:
 
         # validation de l'authentification par rapport à l'utilisateur connecté
         if self.user_connected_id == decoded_payload["user_id"]:
-
-            # crée l'instance de l'utilisateur connecté
-            self.session = SessionLocal()
-            self.employee = self.session.query(Employee).filter_by(Id=self.user_connected_id).one()
-            self.role = self.session.query(Role).filter_by(Id=self.employee.RoleId).one()
-
             # affiche le menu principal
-            self.main_menu()
+            self.menu_main()
         else:
             self.view.display_red_message("Authentification invalide pour cet utilisateur.")
+            self.view.prompt_wait_enter()
             self.quit_app()
 
-    def main_menu(self):
+    def menu_main(self):
         """
         Composition du menu principal selon les permissions de l'utilisateur.
         """
@@ -79,6 +74,8 @@ class MenuManage:
         if self.permissions.can_read_role(self.role):
             menu_items[1]["Gestion des permissions"] = self.menu_role
 
+        menu_items[1]["Deconnexion"] = self.logout
+        
         self.run_menu(menu_items, main=True)
 
     def menu_customer(self):
@@ -199,14 +196,12 @@ class MenuManage:
         """
 
         self.session.refresh(self.role)
-        
+    
         title = menu_items[0]
 
         # ajoute la ligne de retour selon le menu
-        if main:
-            menu_items[1]["Quitter"] = self.quit_app
-        else:
-            menu_items[1]["Retour au menu principal"] = self.main_menu
+        if not main:
+            menu_items[1]["Retour au menu principal"] = self.menu_main
 
         # Crée la liste du menu indexée
         menu_list = []
@@ -234,19 +229,22 @@ class MenuManage:
                     if menu[0] == choice:
                         # Envoie vers la méthode choisie
                         menu_items[1][menu[1]]()
-                    
-
+                  
             else:
                 self.view.invalid_choice()
 
-        self.view.display_red_message("Votre session a expirée, veuillez vous re-connecter.\n")
-        self.quit_app()
+        return
 
     def quit_app(self):
         """
         Quitte l'application en supprimant le jeton JWT et en arrêtant le script.
         """
+        self.view.clear_screen()
+        logger.warning(f"Close App: {self.employee.Email}")
+        sys.exit()
+
+    def logout(self):
         if self.session:
             self.session.close()
         self.delete_token()
-        sys.exit()
+        logger.info(f"Déconnexion: {self.employee.Email}")

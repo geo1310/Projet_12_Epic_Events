@@ -7,7 +7,7 @@
 ![PostgreSQL 16](https://img.shields.io/badge/PostgreSQL-16-blue)
 
 [![pytest](https://img.shields.io/badge/pytest-passing-success)](https://pytest.org)
-[![Coverage](https://img.shields.io/badge/coverage-%25-green)](https://coverage.readthedocs.io/en/latest/)
+[![Coverage](https://img.shields.io/badge/coverage-%25-brightgreen)](https://coverage.readthedocs.io/en/latest/)
 [![Locust](https://img.shields.io/badge/locust-ready-brightgreen)](https://locust.io/)
 
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
@@ -19,7 +19,7 @@
 
 Création d'une solution de CRM (Customer Relationship Management) en CLI.
 
-Objectif principal est de mettre en place une base de données qui permette de stocker et de manipuler de manière sécurisée les informations de nos clients, ainsi que les contrats et les événements que nous organisons.
+Objectif principal est de mettre en place une base de données qui permette de stocker et de manipuler de manière sécurisée les informations des clients, ainsi que les contrats et les événements organisés.Une gestion des collaborateurs et des permissions est aussi mise en place.
 
 ## Documents du Projet
 
@@ -48,6 +48,20 @@ poetry install
 ```
 ## Usage
 
+Le projet utilise une base de données __PostgréSQL__ hébergée sur render.com par défaut, mais il peut etre utilisé avec une base locale en utilisant les données suivantes :
+
+* Nom de la base locale : `epic_events`
+* Utilisateur pour la base locale : `epic_events_user`
+* Mot de passe pour la base locale : `user_pass_123`
+
+Le choix de la base se fait en activant la variable d'environnement __DB_USE__ dans le fichier __.env__
+
+Pour initialiser la base éxécuter la commande suivante dans le dosier app du projet
+
+```bash
+python init_base.py
+```
+
 Liste des utilisateurs par défaut :
 
 1. __email:__ commercial_1@email.com  __password:__ password123
@@ -56,16 +70,19 @@ Liste des utilisateurs par défaut :
 4. __email:__ support_2@email.com  __password:__ password123
 5. __email:__ manager_1@email.com  __password:__ password123
 
-Exécuter la commande suivante dans le dossier racine pour se connecter et lancer l'application :
+Exécuter la commande suivante dans le dossier app du projet pour se connecter et lancer l'application :
 
 ```bash
-python login.py [email]
+python main.py
 ```
-Renseigner votre mot de passe :
 
-```bash
-[email] entrez votre mot de passe :
-```
+![image](./docs/images/Epic_Events_connexion.png)
+
+Renseigner l'email et le mot de passe pour arriver sur le menu principal
+
+![image](./docs/images/Epic_Events_menu.png)
+
+
 
 ## Contribuer
 
