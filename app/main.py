@@ -1,8 +1,8 @@
-import sys
 import os
 import socket
-import sentry_sdk
 from dotenv import load_dotenv
+import sentry_sdk
+from sentry_sdk.integrations.logging import LoggingIntegration
 
 from models.database import SessionLocal
 from controllers.authentication import AuthenticationManager
@@ -10,22 +10,30 @@ from controllers.menu_manage import MenuManage
 from views.views import View
 from utils.token_manage_json import delete_token
 
+import logging
+from utils.logging_config import logger
+
 load_dotenv()
 
 sentry_sdk.init(
     dsn=os.environ.get("SENTRY_DSN"),
-    environment="development",
+    environment=os.environ.get("ENVIRONMENT"),
     # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
     traces_sample_rate=1.0,
     # Set profiles_sample_rate to 1.0 to profile 100%
-    # of sampled transactions.
-    # We recommend adjusting this value in production.
     profiles_sample_rate=1.0,
     enable_tracing=True,
+
+    # logger attach
+    # level ERROR en event et level INFO en données agrégées par sentry
+    integrations=[LoggingIntegration(
+        level=logging.INFO, # Capture les événements info et plus
+        event_level=logging.WARNING # Envoie les erreurs comme des événements
+    )]
+
 )
 
-
+logger.info("Run App")
 # informations sur la machine hote
 hostname = socket.gethostname()
 ip_address = socket.gethostbyname(hostname)
@@ -67,15 +75,17 @@ def main():
                 auth_manager.generate_jwt_token(employee.Id)
 
                 # lance l'application
+                logger.info(f"Connexion: {employee.Email}", exc_info=False)
                 app = MenuManage(view, auth_manager.verify_and_decode_jwt_token, delete_token, session, employee, role)
                 app.run()
 
             else:
-                view.display_red_message("Nom d'utilisateur ou mot de passe incorrect\n")
-                sentry_sdk.capture_message("Tentative de connexion : Nom d'utilisateur ou mot de passe incorrect.")
+                logger.warning(f"Nom d'utilisateur ou mot de passe incorrect -> Email : {email}")
+                # sentry_sdk.capture_message("Tentative de connexion : Nom d'utilisateur ou mot de passe incorrect.")
 
                 view.prompt_wait_enter()
 
+    logger.info("Close App")
     if session:
         session.close()
 

@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from models.employee import Employee
 from models.role import Role
 from utils.token_manage_json import delete_token, load_token_from_json, save_token_to_json
-
+from utils.logging_config import logger
 
 class AuthenticationManager:
     def __init__(self, view):

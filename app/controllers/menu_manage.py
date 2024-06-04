@@ -5,6 +5,7 @@ from .customer_manage import CustomerManage
 from .employee_manage import EmployeeManage
 from .event_manage import EventManage
 from .role_manage import RoleManage
+from utils.logging_config import logger
 
 
 class MenuManage:
@@ -239,9 +240,11 @@ class MenuManage:
         Quitte l'application en supprimant le jeton JWT et en arrêtant le script.
         """
         self.view.clear_screen()
+        logger.warning(f"Close App: {self.employee.Email}")
         sys.exit()
 
     def logout(self):
         if self.session:
             self.session.close()
         self.delete_token()
+        logger.info(f"Déconnexion: {self.employee.Email}")
