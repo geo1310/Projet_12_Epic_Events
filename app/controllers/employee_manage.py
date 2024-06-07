@@ -6,10 +6,10 @@ from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
-from models.database import SessionLocal
-from models.employee import Employee
-from models.role import Role
-from views.views import View
+from app.models.database import SessionLocal
+from app.models.employee import Employee
+from app.models.role import Role
+from app.views.views import View
 
 from .utils_manage import sentry_event
 

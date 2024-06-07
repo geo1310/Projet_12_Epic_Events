@@ -1,3 +1,4 @@
+from pathlib import Path
 import logging
 import colorlog
 from logging.handlers import RotatingFileHandler
@@ -30,7 +31,10 @@ console_handler.setLevel(logging.WARNING)  # Seuls les messages INFO et supérie
 console_handler.setFormatter(color_formatter)  # Appliquer le formatter coloré au handler
 
 # Créer un handler pour écrire dans un fichier de log avec rotation
-file_handler = RotatingFileHandler('data/epic_events.log', maxBytes=1000000, backupCount=3, encoding='utf-8')
+file_path = Path(__file__).parent.parent / 'data'/ 'epic_events.log'
+# file_path = os.path.abspath(os.path.dirname(__file__))
+
+file_handler = RotatingFileHandler(file_path, maxBytes=1000000, backupCount=3, encoding='utf-8')
 file_handler.setLevel(logging.DEBUG)  # Tous les messages de log seront écrits dans le fichier
 file_handler.setFormatter(formatter)  # Appliquer le formatter au handler
 

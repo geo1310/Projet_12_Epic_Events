@@ -1,10 +1,11 @@
 import sys
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-from utils.logging_config import logger
+from app.utils.logging_config import logger
 
 
 
@@ -37,22 +38,22 @@ Exceptions gérées :
 """
 
 try:
-    env_path = ".env"
-    if not os.path.exists(env_path):
-        raise FileNotFoundError(f"File {env_path} not found.")
+    file_env_path = Path(__file__).parent.parent / '.env'
+    if not os.path.exists(file_env_path):
+        raise FileNotFoundError(f"File {file_env_path} not found.")
 
-    load_dotenv(env_path, override=True)
+    load_dotenv(file_env_path, override=True)
     # Informations de connexion à la base de données en locale ou à distance selon db_use
     db_use = os.environ['DB_USE']
     db_user = os.environ['DB_USER']
     db_port = os.environ['DB_PORT_POSTGRE']
     db_name = os.environ['DB_NAME']
-    logger.info(f"Variables d'environnement chargées depuis {env_path}")
+    logger.info(f"Variables d'environnement chargées depuis {file_env_path}")
 except FileNotFoundError as e:
     logger.error(e)
     sys.exit(1)
 except KeyError as e:
-    logger.error(f"Erreur lors du chargement des variables d'environnement depuis {env_path}")
+    logger.error(f"Erreur lors du chargement des variables d'environnement depuis {file_env_path}")
     sys.exit(1)
 
 try:

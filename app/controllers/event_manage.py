@@ -2,13 +2,13 @@ from typing import List, Optional, Type
 from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
-from permissions.permissions import Permissions
-from models.contract import Contract
-from models.customer import Customer
-from models.employee import Employee
-from models.role import Role
-from models.event import Event
-from views.views import View
+from app.permissions.permissions import Permissions
+from app.models.contract import Contract
+from app.models.customer import Customer
+from app.models.employee import Employee
+from app.models.role import Role
+from app.models.event import Event
+from app.views.views import View
 
 
 class EventManage:

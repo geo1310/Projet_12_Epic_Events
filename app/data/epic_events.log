@@ -1,37 +1,1538 @@
-04-06-2024 08:34:17 - utils.logging_config - INFO - Variables d'environnement chargées depuis .env
-04-06-2024 08:34:18 - utils.logging_config - INFO - Database connection successful
-04-06-2024 08:34:18 - utils.logging_config - INFO - Run App
-04-06-2024 08:34:27 - utils.logging_config - INFO - Connexion: commercial_1@email.com
-04-06-2024 08:50:12 - utils.logging_config - INFO - Déconnexion: commercial_1@email.com
-04-06-2024 08:50:29 - utils.logging_config - INFO - Close App
-04-06-2024 08:51:01 - utils.logging_config - INFO - Variables d'environnement chargées depuis .env
-04-06-2024 08:51:01 - utils.logging_config - INFO - Database connection successful
-04-06-2024 08:51:02 - utils.logging_config - INFO - Run App
-04-06-2024 08:57:15 - utils.logging_config - INFO - Close App
-04-06-2024 09:16:28 - utils.logging_config - INFO - Variables d'environnement chargées depuis .env
-04-06-2024 09:16:28 - utils.logging_config - INFO - Database connection successful
-04-06-2024 09:16:29 - utils.logging_config - INFO - Run App
-04-06-2024 09:16:37 - utils.logging_config - INFO - Connexion: commercial_1@email.com
-04-06-2024 09:17:00 - utils.logging_config - INFO - Déconnexion: commercial_1@email.com
-04-06-2024 09:17:16 - utils.logging_config - INFO - Close App
-04-06-2024 09:17:39 - utils.logging_config - INFO - Variables d'environnement chargées depuis .env
-04-06-2024 09:17:40 - utils.logging_config - INFO - Database connection successful
-04-06-2024 09:17:40 - utils.logging_config - INFO - Run App
-04-06-2024 09:17:50 - utils.logging_config - INFO - Connexion: support_1@email.com
-04-06-2024 09:18:18 - utils.logging_config - INFO - Déconnexion: support_1@email.com
-04-06-2024 09:18:21 - utils.logging_config - INFO - Close App
-04-06-2024 09:18:24 - utils.logging_config - INFO - Variables d'environnement chargées depuis .env
-04-06-2024 09:18:24 - utils.logging_config - INFO - Database connection successful
-04-06-2024 09:18:25 - utils.logging_config - INFO - Run App
-04-06-2024 09:18:35 - utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect: gestion_1@
-04-06-2024 09:22:58 - utils.logging_config - INFO - Close App
-04-06-2024 09:23:22 - utils.logging_config - INFO - Variables d'environnement chargées depuis .env
-04-06-2024 09:23:22 - utils.logging_config - INFO - Database connection successful
-04-06-2024 09:23:23 - utils.logging_config - INFO - Run App
-04-06-2024 09:28:11 - utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect: gdfgdf
-04-06-2024 09:30:47 - utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect: dfgdfgd
-04-06-2024 09:31:10 - utils.logging_config - INFO - Variables d'environnement chargées depuis .env
-04-06-2024 09:31:10 - utils.logging_config - INFO - Database connection successful
-04-06-2024 09:31:11 - utils.logging_config - INFO - Run App
-04-06-2024 09:31:15 - utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect -> Email : fdsfdsf
-04-06-2024 09:31:57 - utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect -> Email : dsfdsfdsf
+04-06-2024 17:40:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+04-06-2024 17:40:28 - app.utils.logging_config - INFO - Database connection successful
+04-06-2024 17:40:30 - app.utils.logging_config - INFO - Run App
+04-06-2024 17:40:31 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2393742458512'>
+04-06-2024 17:40:31 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2393742458512'>
+04-06-2024 17:41:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+04-06-2024 17:41:23 - app.utils.logging_config - INFO - Database connection successful
+04-06-2024 17:42:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+04-06-2024 17:42:06 - app.utils.logging_config - INFO - Database connection successful
+04-06-2024 17:42:09 - app.utils.logging_config - INFO - Run App
+04-06-2024 17:42:10 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2675171531728'>
+04-06-2024 17:42:10 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2675171531728'>
+04-06-2024 17:52:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+04-06-2024 17:52:31 - app.utils.logging_config - INFO - Database connection successful
+04-06-2024 17:52:33 - app.utils.logging_config - INFO - Run App
+04-06-2024 17:52:35 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2848114977552'>
+04-06-2024 17:52:35 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2848114977552'>
+04-06-2024 17:54:23 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+04-06-2024 17:54:24 - app.utils.logging_config - INFO - Database connection successful
+04-06-2024 17:58:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+04-06-2024 17:58:47 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 08:48:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 08:48:15 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 08:48:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 08:49:01 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 08:54:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 08:54:47 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 08:56:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 08:56:09 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 08:57:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 08:57:09 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 08:57:12 - app.utils.logging_config - INFO - Run App
+05-06-2024 08:57:14 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2001952460688'>
+05-06-2024 08:57:14 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2001952460688'>
+05-06-2024 08:58:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 08:58:15 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:05:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:05:49 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:08:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:08:43 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:21:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:21:55 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:23:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:23:53 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:25:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:25:44 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:26:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:26:42 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:27:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:27:13 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:27:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:27:21 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:27:44 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:27:45 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:27:46 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:27:46 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:27:53 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:27:54 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:28:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:28:03 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:29:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:30:01 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:32:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:32:34 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:32:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:32:49 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:33:51 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:33:52 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:34:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:34:20 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:37:16 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:37:17 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:49:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:49:21 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:52:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:52:29 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:53:35 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:53:36 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:55:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:55:14 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:56:07 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:56:08 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:57:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:57:15 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 09:58:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 09:58:05 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:03:17 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:03:19 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:03:47 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:03:48 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:06:53 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:06:54 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:07:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:07:38 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:22:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:22:14 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:23:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:23:35 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:24:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:24:16 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:27:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:27:06 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:28:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:28:03 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:28:23 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:28:25 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:28:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:28:43 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:30:43 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:30:45 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:31:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:31:33 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:31:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:31:41 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:39:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:39:37 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:40:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:40:35 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:41:38 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:41:39 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:42:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:42:16 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:42:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:42:26 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:46:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:46:39 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:53:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:53:23 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 10:58:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 10:58:32 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:25:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:25:38 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:28:51 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:28:52 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:28:53 - app.utils.logging_config - INFO - Run App
+05-06-2024 11:29:09 - app.utils.logging_config - INFO - Connexion: gestion_1@email.com
+05-06-2024 11:30:25 - app.utils.logging_config - INFO - Déconnexion: gestion_1@email.com
+05-06-2024 11:30:25 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:30:33 - app.utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect -> Email : None
+05-06-2024 11:30:45 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:30:46 - app.utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect -> Email : None
+05-06-2024 11:35:25 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:35:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:35:30 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:35:30 - app.utils.logging_config - INFO - Run App
+05-06-2024 11:37:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:37:28 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:37:28 - app.utils.logging_config - INFO - Run App
+05-06-2024 11:37:30 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:37:31 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:37:31 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:38:03 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:38:03 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:38:04 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:38:04 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:38:16 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:38:17 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:38:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:38:47 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:38:48 - app.utils.logging_config - INFO - Run App
+05-06-2024 11:38:49 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:38:50 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:41:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:41:51 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:41:52 - app.utils.logging_config - INFO - Run App
+05-06-2024 11:41:53 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:42:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:42:04 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:42:04 - app.utils.logging_config - INFO - Run App
+05-06-2024 11:42:16 - app.utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect -> Email : None
+05-06-2024 11:42:23 - app.utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect -> Email : None
+05-06-2024 11:44:29 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:44:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:44:32 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:44:33 - app.utils.logging_config - INFO - Run App
+05-06-2024 11:44:43 - app.utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect -> Email : None
+05-06-2024 11:50:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:50:11 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:50:11 - app.utils.logging_config - INFO - Run App
+05-06-2024 11:50:13 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:50:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:50:16 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:50:16 - app.utils.logging_config - INFO - Run App
+05-06-2024 11:50:28 - app.utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect -> Email : None
+05-06-2024 11:51:45 - app.utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect -> Email : None
+05-06-2024 11:52:54 - app.utils.logging_config - INFO - Close App
+05-06-2024 11:52:56 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 11:52:57 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 11:52:58 - app.utils.logging_config - INFO - Run App
+05-06-2024 11:53:02 - app.utils.logging_config - WARNING - Nom d'utilisateur ou mot de passe incorrect !
+05-06-2024 12:01:55 - app.utils.logging_config - INFO - Connexion: gestion_1@email.com
+05-06-2024 12:01:58 - app.utils.logging_config - INFO - Déconnexion: gestion_1@email.com
+05-06-2024 12:02:07 - app.utils.logging_config - INFO - Connexion: gestion_1@email.com
+05-06-2024 12:04:06 - app.utils.logging_config - INFO - Déconnexion: gestion_1@email.com
+05-06-2024 12:04:07 - app.utils.logging_config - INFO - Close App
+05-06-2024 12:05:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:05:17 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:05:38 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:05:39 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:06:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:06:55 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:07:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:07:04 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:07:24 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:07:26 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:07:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:07:35 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:08:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:08:13 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:09:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:09:29 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:09:41 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:09:42 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:09:53 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:09:54 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:10:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:10:20 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:28:11 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:28:13 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:28:15 - app.utils.logging_config - INFO - Run App
+05-06-2024 12:28:17 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2004180843152'>
+05-06-2024 12:28:17 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2004180843152'>
+05-06-2024 12:28:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:28:37 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:28:39 - app.utils.logging_config - INFO - Run App
+05-06-2024 12:28:40 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1840703004048'>
+05-06-2024 12:28:40 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1840703004048'>
+05-06-2024 12:37:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:37:20 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:37:22 - app.utils.logging_config - INFO - Run App
+05-06-2024 12:37:23 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2236552554448'>
+05-06-2024 12:37:23 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2236552554448'>
+05-06-2024 12:40:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:40:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 12:40:55 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:40:55 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 12:40:55 - app.utils.logging_config - INFO - Run App
+05-06-2024 12:40:56 - app.utils.logging_config - INFO - Run App
+05-06-2024 13:05:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:05:52 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:05:53 - app.utils.logging_config - INFO - Run App
+05-06-2024 13:05:54 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2166002665872'>
+05-06-2024 13:05:54 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2166002665872'>
+05-06-2024 13:07:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:07:07 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:07:58 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:07:59 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:09:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:09:38 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:09:40 - app.utils.logging_config - INFO - Run App
+05-06-2024 13:09:41 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2684719998416'>
+05-06-2024 13:09:41 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2684719998416'>
+05-06-2024 13:10:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:11:00 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:12:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:12:14 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:12:15 - app.utils.logging_config - INFO - Run App
+05-06-2024 13:12:16 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1828823024656'>
+05-06-2024 13:12:16 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1828823024656'>
+05-06-2024 13:12:58 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:12:59 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:13:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:13:06 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:13:07 - app.utils.logging_config - INFO - Run App
+05-06-2024 13:13:08 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2038619636240'>
+05-06-2024 13:13:08 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2038619636240'>
+05-06-2024 13:13:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:13:44 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:16:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:16:03 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:23:57 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:23:58 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:24:00 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:24:02 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:24:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:24:16 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:24:24 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:24:27 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:25:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:25:11 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 13:26:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 13:26:37 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:32:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:32:16 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:32:17 - app.utils.logging_config - INFO - Run App
+05-06-2024 17:32:18 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1908283262736'>
+05-06-2024 17:32:19 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1908283262736'>
+05-06-2024 17:34:55 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:34:57 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:34:58 - app.utils.logging_config - INFO - Run App
+05-06-2024 17:34:58 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2768866759568'>
+05-06-2024 17:34:58 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2768866759568'>
+05-06-2024 17:36:38 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:36:40 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:38:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:38:06 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:38:08 - app.utils.logging_config - INFO - Run App
+05-06-2024 17:38:08 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2859416640464'>
+05-06-2024 17:38:08 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2859416640464'>
+05-06-2024 17:38:45 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:38:46 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:38:47 - app.utils.logging_config - INFO - Run App
+05-06-2024 17:38:47 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2196139563216'>
+05-06-2024 17:38:47 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2196139563216'>
+05-06-2024 17:42:35 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:42:37 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:42:39 - app.utils.logging_config - INFO - Run App
+05-06-2024 17:42:39 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1904406121168'>
+05-06-2024 17:42:39 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1904406121168'>
+05-06-2024 17:43:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:43:09 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:43:10 - app.utils.logging_config - INFO - Run App
+05-06-2024 17:43:10 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2388234490512'>
+05-06-2024 17:43:10 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2388234490512'>
+05-06-2024 17:45:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:45:40 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:45:41 - app.utils.logging_config - INFO - Run App
+05-06-2024 17:45:41 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1843853551248'>
+05-06-2024 17:45:41 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1843853551248'>
+05-06-2024 17:46:38 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:46:39 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:48:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:48:40 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:49:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:49:51 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:50:51 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:50:53 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:51:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:51:35 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:52:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:52:19 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:53:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:53:51 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:54:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:54:13 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:54:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:54:20 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 17:59:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 17:59:33 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:00:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:00:13 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:22:38 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:22:39 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:23:17 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:23:18 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:29:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:29:22 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:29:58 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:30:00 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:30:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:30:32 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:31:06 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:31:07 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:31:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:31:22 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:31:38 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:31:39 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:32:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:32:03 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:32:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:32:13 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:32:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:32:30 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:34:30 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:34:31 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:35:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:35:15 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:35:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:35:34 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:35:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:35:53 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:36:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:36:11 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:36:30 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:36:31 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:36:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:36:56 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:37:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:37:21 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:37:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:38:00 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:38:56 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:38:57 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:39:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:39:47 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:42:23 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:42:25 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:45:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:45:15 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:46:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:46:53 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:47:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:47:35 - app.utils.logging_config - INFO - Database connection successful
+05-06-2024 18:48:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+05-06-2024 18:48:20 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 13:28:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 13:28:05 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 13:46:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 13:46:54 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 13:49:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 13:49:20 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 13:50:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 13:50:30 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 13:50:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 13:50:51 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 13:55:56 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 13:55:58 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 13:56:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 13:56:27 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 13:58:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 13:58:22 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 13:58:30 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 13:58:32 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:01:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:01:07 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:01:49 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:01:50 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:05:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:05:10 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:08:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:08:35 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:09:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:09:30 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:13:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:13:07 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:13:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:13:28 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:16:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:16:10 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:19:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:19:41 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:28:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:28:17 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:28:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:28:35 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:30:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:30:23 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:30:51 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:30:52 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:31:57 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:31:58 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:36:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:36:40 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:38:23 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:38:25 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:39:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:39:34 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:40:24 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:40:25 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:40:57 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:40:58 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:42:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:42:05 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:43:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:43:50 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:45:07 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:45:08 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:45:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:45:55 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:46:51 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:46:52 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:47:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:47:24 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:47:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:47:49 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:49:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:49:03 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:49:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:49:26 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:49:49 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:49:50 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:52:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:52:07 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:53:06 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:53:08 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:55:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:55:03 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:56:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:56:12 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:57:00 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:57:02 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:59:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:59:05 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 14:59:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 14:59:15 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:01:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:01:14 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:02:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:02:51 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:03:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:03:06 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:03:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:03:30 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:04:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:04:15 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:04:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:04:54 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:15:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:15:22 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:19:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:19:06 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:32:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:32:30 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:34:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:34:43 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:36:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:36:47 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:40:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:40:16 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:42:58 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:43:00 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:43:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:43:41 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:47:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:47:16 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:50:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:51:00 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:52:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:52:29 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:52:43 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:52:44 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 15:55:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 15:55:20 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:11:11 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:11:13 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:11:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:11:47 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:13:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:13:35 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:15:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:15:42 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:16:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:16:23 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:18:47 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:18:48 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:19:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:19:27 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:20:16 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:20:17 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:25:47 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:25:48 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:26:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:26:26 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:28:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:28:38 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:32:06 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:32:07 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:32:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:32:38 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:35:24 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:35:25 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:46:51 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:46:52 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:48:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:48:23 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:50:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:50:21 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:53:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:53:30 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:53:51 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:53:52 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:54:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:54:22 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:54:51 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:54:52 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 16:56:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 16:57:01 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:07:53 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:07:54 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:07:56 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:07:57 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:09:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:09:41 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:09:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:09:49 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:11:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:11:11 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:14:56 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:14:57 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:15:55 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:15:56 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:16:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:16:41 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:21:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:21:29 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:22:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:22:27 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:26:51 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:26:52 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:28:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:28:13 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:28:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:28:19 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:28:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:28:35 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:29:57 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:29:58 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:30:17 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:30:18 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:30:55 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:30:56 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:32:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:33:01 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:33:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:33:28 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:39:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:39:22 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:40:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:40:04 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:43:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:43:39 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:50:45 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:50:47 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:52:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:52:16 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:52:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:52:49 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:53:30 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:53:31 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:53:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:53:43 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:54:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:54:29 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:54:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:54:35 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:57:43 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:57:44 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 17:59:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 17:59:33 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:00:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:00:27 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:01:06 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:01:07 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:03:56 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:03:58 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:04:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:04:13 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:04:24 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:04:25 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:04:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:04:40 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:05:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:05:13 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:08:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:08:23 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:09:06 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:09:07 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:09:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:09:32 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:09:55 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:09:57 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:10:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:10:16 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:12:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:12:28 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:14:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:14:14 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:23:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:23:40 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:25:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:25:26 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:26:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:26:06 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:26:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:26:49 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:27:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:27:09 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:27:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:27:34 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:27:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:27:41 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:28:58 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:28:59 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:31:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:31:44 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:35:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:35:21 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:37:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:37:50 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:53:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:53:04 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:53:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:53:38 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:54:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:54:06 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:54:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:54:41 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:55:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:55:02 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:56:35 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:56:37 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:57:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:57:26 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 18:58:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 18:58:32 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:10:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:10:19 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:11:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:11:34 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:12:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:12:23 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:14:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:14:19 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:14:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:14:34 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:15:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:15:29 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:18:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:18:27 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:19:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:19:09 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:20:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:20:14 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:25:49 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:25:51 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:28:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:28:11 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:28:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:28:52 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:29:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:29:55 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:32:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:32:33 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:33:07 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:33:08 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:33:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:34:01 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:34:07 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:34:08 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:34:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:34:10 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:34:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:34:35 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:37:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:37:03 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:41:07 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:41:09 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:41:30 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:41:32 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:43:06 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:43:07 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:44:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:44:36 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:46:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:46:07 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:48:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:48:23 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:48:45 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:48:46 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:50:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:50:28 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:51:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:51:16 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:51:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:51:41 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:53:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:53:26 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:55:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:55:14 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:55:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:55:39 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:56:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:56:11 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 19:57:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 19:57:26 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:00:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:00:24 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:01:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:01:34 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:02:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:02:27 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:04:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:04:09 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:04:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:04:54 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:05:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:05:44 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:06:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:06:10 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:07:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:07:10 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:08:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:08:10 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:08:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:08:30 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:10:45 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:10:46 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:10:55 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:10:56 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:11:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:11:40 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:12:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:12:03 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:12:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:12:29 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:12:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:12:37 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:12:47 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:12:48 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:13:43 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:13:45 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:15:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:15:14 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:16:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:16:28 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:19:41 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:19:42 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:20:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:20:04 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:20:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:20:16 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:20:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:20:53 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:21:24 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:21:27 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:23:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:23:05 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:23:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:23:37 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:24:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:24:02 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:25:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:25:39 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:26:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:26:19 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:26:35 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:26:36 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:26:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:26:43 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:28:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:28:37 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:31:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:31:07 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:32:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:32:15 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:42:47 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:42:49 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:43:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:43:24 - app.utils.logging_config - INFO - Database connection successful
+06-06-2024 20:45:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+06-06-2024 20:45:09 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 00:03:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 00:03:28 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 00:03:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 00:03:53 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 00:04:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 00:04:38 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 00:05:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 00:05:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:37:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:37:56 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:43:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:43:43 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:44:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:44:21 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:44:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:44:51 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:45:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:45:04 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:46:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:46:02 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:47:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:47:19 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:47:44 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:47:45 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:48:35 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:48:37 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:49:53 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:49:54 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:50:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:50:40 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:52:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:52:30 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:54:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:54:05 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:55:57 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:55:58 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:56:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:56:20 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:57:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:57:21 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:58:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:58:53 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:59:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:59:20 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 07:59:57 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 07:59:59 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:00:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:00:22 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:02:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:02:33 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:03:45 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:03:47 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:04:11 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:04:12 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:08:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:08:43 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:15:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:15:23 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:20:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:20:06 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:21:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:21:09 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:21:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:21:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:22:17 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:22:18 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:25:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:25:07 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:25:43 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:25:44 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:26:57 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:26:58 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:28:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:28:35 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:28:45 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:28:47 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:29:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:29:24 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:30:00 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:30:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:30:03 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:30:03 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:30:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:30:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:32:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:32:19 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:34:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:34:15 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:35:00 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:35:01 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:36:58 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:36:59 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:37:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:37:14 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:53:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:53:38 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:53:57 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:53:58 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:54:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:54:32 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:54:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:54:51 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:55:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:55:02 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:55:16 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:55:17 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:55:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:55:38 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 08:55:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 08:55:51 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:01:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:01:05 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:01:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:01:11 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:01:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:01:29 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:02:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:02:11 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:03:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:03:55 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:04:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:04:19 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:04:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:04:43 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:06:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:06:22 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:08:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:09:00 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:09:30 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:09:31 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:11:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:11:05 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:16:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:17:00 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:17:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:17:29 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:18:49 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:18:50 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:19:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:19:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:22:16 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:22:17 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:24:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:24:21 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:24:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:24:41 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:25:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:25:11 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:25:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:25:32 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:26:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:26:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:26:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:26:55 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:28:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:28:28 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:28:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:28:44 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:29:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:29:06 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:31:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:31:06 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:31:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:31:29 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:35:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:35:28 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:35:57 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:35:58 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:38:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:38:02 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:44:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:44:02 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:47:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:48:00 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:50:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:50:38 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:50:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:51:01 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:51:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:51:34 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:52:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:52:38 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:53:53 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:53:54 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 09:59:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 09:59:03 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:01:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:01:04 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:01:45 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:01:46 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:03:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:03:20 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:17:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:17:55 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:19:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:19:40 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:20:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:20:40 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:23:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:23:20 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:24:35 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:24:36 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:25:38 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:25:40 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:26:51 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:26:52 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:27:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:27:15 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:27:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:27:30 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:29:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:29:22 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:29:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:29:29 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:31:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:31:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:31:30 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:31:32 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:32:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:32:04 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:33:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:33:06 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:33:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:33:39 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:35:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:35:17 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:35:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:35:33 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:35:41 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:35:42 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:38:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:38:55 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:56:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:56:26 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:56:56 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:56:57 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:58:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:58:41 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:59:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:59:03 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 10:59:55 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 10:59:57 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:00:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:00:41 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:02:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:02:09 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:02:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:02:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:06:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:06:22 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:08:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:08:13 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:09:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:09:23 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:12:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:12:54 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:16:57 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:16:58 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:17:00 - app.utils.logging_config - INFO - Run App
+07-06-2024 11:17:00 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2617613811152'>
+07-06-2024 11:17:00 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2617613811152'>
+07-06-2024 11:20:58 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:20:59 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:23:24 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:23:25 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:28:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:28:41 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:29:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:29:47 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:31:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:31:03 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:34:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:34:27 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:35:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:35:20 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:35:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:35:29 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:36:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:36:13 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:36:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:36:20 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:37:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:37:20 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:37:43 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:37:44 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:39:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:39:36 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:43:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:43:05 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:44:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:44:14 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:48:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:48:05 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:48:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:48:23 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:53:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:53:23 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:55:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:55:10 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:58:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:58:03 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:58:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:58:50 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 11:59:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 11:59:23 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:00:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:00:37 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:05:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:05:34 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:12:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:12:38 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:21:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:21:53 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:24:07 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:24:08 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:24:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:24:20 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:28:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:28:26 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:49:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:49:10 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:49:24 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:49:26 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:52:12 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:52:14 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:52:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:52:48 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:53:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:53:02 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:53:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:53:27 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 12:53:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 12:53:35 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 13:00:00 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 13:00:02 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 13:00:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 13:00:31 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:04:40 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:04:41 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:04:43 - app.utils.logging_config - INFO - Run App
+07-06-2024 14:05:07 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:05:08 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:05:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:05:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:05:18 - app.utils.logging_config - INFO - Run App
+07-06-2024 14:05:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:05:33 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:05:49 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:05:51 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:05:53 - app.utils.logging_config - INFO - Run App
+07-06-2024 14:07:11 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:07:12 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:08:16 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:08:18 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:08:20 - app.utils.logging_config - INFO - Run App
+07-06-2024 14:09:49 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:09:51 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:10:16 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:10:18 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:12:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:12:11 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:13:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:13:03 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:13:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:13:22 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:13:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:13:52 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:14:47 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:14:48 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:14:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:14:49 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:16:56 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:16:57 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:20:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:20:23 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:20:47 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:20:48 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:21:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:21:35 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:21:36 - app.utils.logging_config - INFO - Run App
+07-06-2024 14:21:41 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2372910789520'>
+07-06-2024 14:21:41 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2372910789520'>
+07-06-2024 14:24:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:24:02 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:24:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:24:28 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:25:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:25:40 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:25:41 - app.utils.logging_config - INFO - Run App
+07-06-2024 14:25:46 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1886778501520'>
+07-06-2024 14:25:46 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1886778501520'>
+07-06-2024 14:26:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:26:14 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:27:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:27:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:27:04 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:27:05 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:27:06 - app.utils.logging_config - INFO - Run App
+07-06-2024 14:27:11 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1685960798288'>
+07-06-2024 14:27:11 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1685960798288'>
+07-06-2024 14:27:16 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:27:18 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:27:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:27:28 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:27:45 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:27:47 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:27:53 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:27:55 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:29:06 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:29:07 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:29:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:29:37 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:29:38 - app.utils.logging_config - INFO - Run App
+07-06-2024 14:29:43 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2724026366928'>
+07-06-2024 14:29:43 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2724026366928'>
+07-06-2024 14:29:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:30:01 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:30:04 - app.utils.logging_config - INFO - Run App
+07-06-2024 14:30:10 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2065500448976'>
+07-06-2024 14:30:10 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2065500448976'>
+07-06-2024 14:30:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:30:50 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:31:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:31:04 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:31:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:31:07 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:31:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:31:38 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:31:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:31:47 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:31:47 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:31:48 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:31:55 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:31:56 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:32:11 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:32:13 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:34:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:34:04 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:34:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:34:31 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:35:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:35:33 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:36:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:36:40 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:38:11 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:38:12 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:38:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:38:32 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:38:49 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:38:50 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:41:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:41:05 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:41:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:41:12 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:41:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:41:15 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:42:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:42:51 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:43:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:44:00 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:47:06 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:47:07 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:52:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:52:33 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:53:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:53:14 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:53:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:53:53 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:53:54 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:53:56 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:55:24 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:55:26 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:55:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:55:47 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:56:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:56:19 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 14:58:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 14:58:24 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:00:43 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:00:45 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:02:49 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:02:50 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:05:24 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:05:25 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:06:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:06:09 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:07:00 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:07:01 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:07:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:07:33 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:07:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:07:40 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:07:44 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:07:45 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:09:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:09:40 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:10:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:10:30 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:11:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:11:04 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:14:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:14:37 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:15:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:15:30 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:15:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:16:00 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:17:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:17:54 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:19:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:19:27 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:24:05 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:24:07 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:24:48 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:24:49 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:26:50 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:26:51 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:27:34 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:27:35 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:27:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:27:54 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:28:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:28:03 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:28:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:28:20 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:30:09 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:30:11 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:30:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:30:15 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:30:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:30:38 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:30:44 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:30:45 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:30:53 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:30:54 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:30:55 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:30:56 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:31:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:31:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:31:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:31:33 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:31:47 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:31:49 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:31:58 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:32:00 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:34:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:34:22 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:35:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:35:27 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:35:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:35:40 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:36:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:36:19 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:36:46 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:36:47 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:38:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:38:05 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:38:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:38:53 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:40:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:41:00 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:41:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:41:39 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:42:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:42:09 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:50:28 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:50:29 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:52:03 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:52:05 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:52:17 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:52:18 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:52:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:52:32 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:52:39 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:52:41 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:53:23 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:53:24 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:53:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:54:00 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:57:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:57:33 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:58:01 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:58:02 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:58:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:58:24 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:59:20 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:59:21 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 15:59:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 15:59:27 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:01:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:01:32 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:01:33 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:01:33 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:02:11 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:02:12 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:02:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:02:53 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:02:55 - app.utils.logging_config - INFO - Run App
+07-06-2024 16:03:03 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1327975605968'>
+07-06-2024 16:03:03 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1327975605968'>
+07-06-2024 16:04:14 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:04:15 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:04:33 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:04:34 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:04:34 - app.utils.logging_config - INFO - Run App
+07-06-2024 16:04:49 - app.utils.logging_config - INFO - Connexion: gestion_1@email.com
+07-06-2024 16:08:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:08:11 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:08:12 - app.utils.logging_config - INFO - Run App
+07-06-2024 16:08:27 - app.utils.logging_config - INFO - Connexion: gestion_1@email.com
+07-06-2024 16:10:18 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:10:19 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:10:19 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:10:20 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:12:55 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:12:56 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:13:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:13:32 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:14:22 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:14:23 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:16:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:16:15 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:17:00 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:17:01 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:20:37 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:20:38 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:21:25 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:21:26 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:21:52 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:21:54 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:24:08 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:24:09 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:26:36 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:26:37 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:26:38 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:26:39 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:29:31 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:29:32 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:30:59 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:31:00 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:31:44 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:31:45 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:33:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:33:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:34:27 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:34:28 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:35:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:35:22 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:36:16 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:36:18 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:38:04 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:38:05 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:39:10 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:39:11 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:39:42 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:39:43 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:40:02 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:40:03 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:40:06 - app.utils.logging_config - INFO - Run App
+07-06-2024 16:40:14 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1451834882896'>
+07-06-2024 16:40:14 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1451834882896'>
+07-06-2024 16:42:13 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:42:14 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:42:21 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:42:22 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:47:26 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:47:27 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:47:45 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:47:46 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:47:49 - app.utils.logging_config - INFO - Run App
+07-06-2024 16:47:57 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2040671147792'>
+07-06-2024 16:47:57 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2040671147792'>
+07-06-2024 16:49:00 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:49:02 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:50:15 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:50:16 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:50:19 - app.utils.logging_config - INFO - Run App
+07-06-2024 16:50:27 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2218803696464'>
+07-06-2024 16:50:27 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2218803696464'>
+07-06-2024 16:51:06 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:51:08 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:51:11 - app.utils.logging_config - INFO - Run App
+07-06-2024 16:51:18 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1713194768400'>
+07-06-2024 16:51:18 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1713194768400'>
+07-06-2024 16:53:29 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:53:30 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:53:33 - app.utils.logging_config - INFO - Run App
+07-06-2024 16:53:40 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='2283348106448'>
+07-06-2024 16:53:40 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='2283348106448'>
+07-06-2024 16:53:49 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:53:50 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 16:53:53 - app.utils.logging_config - INFO - Run App
+07-06-2024 16:54:00 - app.utils.logging_config - INFO - Connexion: <MagicMock name='mock.Email' id='1913142237392'>
+07-06-2024 16:54:00 - app.utils.logging_config - WARNING - Close App: <MagicMock name='mock.Email' id='1913142237392'>
+07-06-2024 16:54:44 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 16:54:46 - app.utils.logging_config - INFO - Database connection successful
+07-06-2024 17:05:49 - app.utils.logging_config - INFO - Variables d'environnement chargées depuis c:\Users\gbric\Nouveau dossier (9)\Projet_12_Epic_Events\app\.env
+07-06-2024 17:05:50 - app.utils.logging_config - INFO - Database connection successful

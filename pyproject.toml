@@ -35,21 +35,21 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.locust]
-locustfile = "epic_events/tests/performance_tests/locustfile.py"
+locustfile = "app/tests/performance_tests/locustfile.py"
 host = "http://127.0.0.1:5000"
 users = 6
 spawn-rate = 1
 
 [tool.pytest]
-testpaths = "epic_events/tests"
+testpaths = "app/tests/"
 
 [tool.coverage.run]
 branch = true
-omit = ["epic_events/tests/*", "__*", "config.py"]
+omit = ["app/tests/*", "__*", "config.py", "app/dev", "init*", "views*"]
 
 [tool.flake8]
 max-line-length = 119
-exclude = "env/, docs/"
+exclude = ".venv/, docs/"
 extend-ignore = [
     # PEP 8 recommends to treat : in slices as a binary operator with the lowest priority, and to leave an equal
     # amount of space on either side, except if a parameter is omitted (e.g. ham[1 + 1 :]).

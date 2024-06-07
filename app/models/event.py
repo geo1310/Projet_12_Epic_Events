@@ -2,8 +2,8 @@ from sqlalchemy import TIMESTAMP, Column, Date, ForeignKey, Integer, String, Tex
 from sqlalchemy.orm import relationship, validates
 from datetime import datetime
 
-from models.contract import Contract
-from models.employee import Employee
+from app.models.contract import Contract
+from app.models.employee import Employee
 
 from .database import Base
 

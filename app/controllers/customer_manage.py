@@ -4,9 +4,9 @@ from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
-from models.customer import Customer
-from permissions.permissions import Permissions
-from views.views import View
+from app.models.customer import Customer
+from app.permissions.permissions import Permissions
+from app.views.views import View
 
 
 class CustomerManage:
@@ -70,7 +70,7 @@ class CustomerManage:
         commercial_id = self.user_connected_id
 
         # Instance du nouvel objet Employee
-        self.customer = Customer(
+        customer = Customer(
             FirstName=first_name,
             LastName=last_name,
             Email=email,
@@ -81,12 +81,12 @@ class CustomerManage:
 
         # Ajouter à la session et commit
         try:
-            self.session.add(self.customer)
+            self.session.add(customer)
             self.session.flush()
 
             # Affichage et confirmation de la création
-            if not self.confirm_table_recap("Création", "green"):
-                self.session.expunge(self.customer)
+            if not self.confirm_table_recap(customer, "Création", "green"):
+                self.session.expunge(customer)
                 self.session.rollback()
                 return
             self.session.commit()

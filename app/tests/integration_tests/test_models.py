@@ -1,11 +1,87 @@
 import pytest
+from collections import namedtuple
+import pytest
 
 from app.models.contract import Contract
 from app.models.customer import Customer
+from app.models.database import SessionLocal
 from app.models.employee import Employee
 from app.models.event import Event
+from app.models.role import Role
 
-from . import create_test_data, session
+
+@pytest.fixture()
+def session():
+    """
+    Fixture pour obtenir une session de base de données.
+
+    Cette fixture crée une nouvelle session SQLAlchemy et la passe aux tests.
+    Une fois les tests terminés, la session est fermée.
+
+    Yields:
+        sqlalchemy.orm.Session: Une session SQLAlchemy.
+    """
+    session = SessionLocal()
+    yield session
+    session.close()
+
+
+@pytest.fixture
+def create_test_data(session):
+    """
+    Fixture pour créer des données de test dans la base de données.
+
+    Cette fixture crée des données de test pour les modèles de votre application,
+    les ajoute à la session SQLAlchemy et les retourne pour être utilisées dans les tests.
+    Une fois les tests terminés, les données de test sont nettoyées de la base de données.
+
+    Args:
+        session (sqlalchemy.orm.Session): Session SQLAlchemy pour interagir avec la base de données.
+
+    Yields:
+        tuple: Un namedtuple contenant les données de test pour les modèles.
+    """
+
+    TestData = namedtuple("TestData", ["role", "employee", "customer", "contract", "event"])
+
+    role = Role(RoleName="test_role_1")
+    session.add(role)
+    session.commit()
+
+    employee = Employee(
+        FirstName="test_employee_1",
+        LastName="",
+        Email="employee@email.com",
+        PasswordHash="Password123",
+        RoleId=role.Id,
+    )
+    session.add(employee)
+    session.commit()
+
+    customer = Customer(FirstName="test_customer_1", LastName="", Email="customer@email.com", CommercialId = employee.Id)
+    session.add(customer)
+    session.commit()
+
+    contract = Contract(CustomerId=customer.Id, Title="test_contract", ContractSigned=True)
+    session.add(contract)
+    session.commit()
+
+    event = Event(ContractId=contract.Id, Title="test_event")
+    session.add(event)
+    session.commit()
+
+    # Retourne les données de test
+    yield TestData(role, employee, customer, contract, event)
+
+    # Nettoyer les données après chaque test
+    session.delete(role)
+    session.delete(employee)
+    session.delete(customer)
+    session.delete(contract)
+    session.delete(event)
+    session.commit()
+    session.close()
+
 
 
 def test_employee(session, create_test_data):
@@ -32,7 +108,7 @@ def test_employee(session, create_test_data):
             FirstName="Duplicate",
             LastName="Employee",
             Email=test_data.employee.Email,  # Utilise l'email existant
-            PasswordHash="password123",
+            PasswordHash="Password123",
             RoleId=test_data.employee.RoleId,
         )
         session.add(employee_duplicate_email)
@@ -45,7 +121,7 @@ def test_employee(session, create_test_data):
             FirstName="Duplicate",
             LastName="Employee",
             Email="fdsfdsfds",
-            PasswordHash="password123",
+            PasswordHash="Password123",
             RoleId=test_data.employee.RoleId,
         )
         session.add(employee_invalid_email)
@@ -137,3 +213,6 @@ def test_event(session, create_test_data):
         session.add(event_invalid_date)
         session.commit()
     session.rollback()
+
+if __name__ == "__main__":
+    pytest.main([__file__])

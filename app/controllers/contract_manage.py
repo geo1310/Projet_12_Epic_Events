@@ -3,10 +3,10 @@ from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
-from models.contract import Contract
-from models.customer import Customer
-from permissions.permissions import Permissions
-from views.views import View
+from app.models.contract import Contract
+from app.models.customer import Customer
+from app.permissions.permissions import Permissions
+from app.views.views import View
 from .utils_manage import sentry_event
 
 
@@ -521,6 +521,8 @@ class ContractManage:
         for contract in contracts:
             # Récupérer les infos du commercial associé au client
             if contract.CustomerRel:
+                customer_last_name = contract.CustomerRel.LastName
+                customer_email = contract.CustomerRel.Email
                 commercial_last_name = (
                     contract.CustomerRel.CommercialRel.LastName if contract.CustomerRel.CommercialRel else None
                 )
@@ -528,12 +530,14 @@ class ContractManage:
             else:
                 commercial_last_name = ""
                 commercial_email =  ""
+                customer_last_name = ""
+                customer_email = ""
 
             table.add_row(
                 str(contract.Id),
                 contract.Title,
-                contract.CustomerRel.FirstName,
-                contract.CustomerRel.Email,
+                customer_last_name,
+                customer_email,
                 commercial_last_name,
                 commercial_email,
                 str(contract.Amount),

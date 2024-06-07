@@ -54,9 +54,9 @@ Le projet utilise une base de données __PostgréSQL__ hébergée sur render.com
 * Utilisateur pour la base locale : `epic_events_user`
 * Mot de passe pour la base locale : `user_pass_123`
 
-Le choix de la base se fait en activant la variable d'environnement __DB_USE__ dans le fichier __.env__
+Le choix de la base se fait en activant la variable d'environnement __DB_USE__ dans le fichier __.env__ en __local__ ou __render__, par défaut on se connecte à la base distante render.
 
-Pour initialiser la base éxécuter la commande suivante dans le dosier app du projet
+Pour initialiser la base en locale après avoir configuré votre serveur postgré et ajouter la base et le user,  éxécuter la commande suivante dans le dosier __app__ du projet
 
 ```bash
 python init_base.py

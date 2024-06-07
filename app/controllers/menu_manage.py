@@ -1,11 +1,11 @@
 import sys
-from permissions.permissions import Permissions
+from app.permissions.permissions import Permissions
 from .contract_manage import ContractManage
 from .customer_manage import CustomerManage
 from .employee_manage import EmployeeManage
 from .event_manage import EventManage
 from .role_manage import RoleManage
-from utils.logging_config import logger
+from app.utils.logging_config import logger
 
 
 class MenuManage:
@@ -241,7 +241,8 @@ class MenuManage:
         """
         self.view.clear_screen()
         logger.warning(f"Close App: {self.employee.Email}")
-        sys.exit()
+        #sys.exit()
+        raise SystemExit
 
     def logout(self):
         if self.session:

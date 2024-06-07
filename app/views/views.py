@@ -30,7 +30,7 @@ class View:
 
         self.console.print(Panel(text, title="[bold]Bienvenue sur le CRM Epic Events[/bold]"))
 
-    def display_menu(self, title: str, menu_list: list):
+    def display_menu(self, title: str, menu_list: list, user_input: str = None):
         """
         Affiche un menu avec un titre et une liste d'options, et demande à l'utilisateur de faire un choix.
 
@@ -41,6 +41,7 @@ class View:
         Args:
             title (str): Le titre du menu.
             menu_list (list): Une liste de tuples, chaque tuple contenant un numéro et une description du menu.
+            user_input (str, optional): L'entrée de l'utilisateur. Par défaut None.
 
         Returns:
             str: Le choix de l'utilisateur.
@@ -52,7 +53,12 @@ class View:
             text.append(f"\n\t{menu[0]} - {menu[1]}", style="bold bright_cyan")
         text.append("\n")
         self.console.print(Panel(text, title=f"[bold]{title}[/bold]", width=50))
-        choice = self.console.input("[bold]\nchoix :[/bold]")
+        
+        if user_input is not None:
+            choice = user_input
+        else:
+            choice = self.console.input("[bold]\nchoix :[/bold]")
+            
         return choice
 
     def display_table(self, table, title: str):
