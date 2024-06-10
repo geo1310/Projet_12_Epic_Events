@@ -7,7 +7,7 @@ from app.models.contract import Contract
 from app.models.customer import Customer
 from app.permissions.permissions import Permissions
 from app.views.views import View
-from .utils_manage import sentry_event
+from app.utils.sentry_logger import SentryLogger 
 
 
 class ContractManage:
@@ -23,9 +23,9 @@ class ContractManage:
         self.employee = employee
         self.role = role
         self.user_connected_id = employee.Id
+        self.sentry = SentryLogger()
 
     def get_permissions_contracts(self):
-
         # liste des contrats autorisés
         if self.permissions.all_contract(self.role):
             contracts = self.filter("All", None, Contract)
@@ -187,11 +187,11 @@ class ContractManage:
 
             # évènement sentry
             if contract.ContractSigned:
-                sentry_event(self.employee.Email, f"Contrat Signé: Titre: {contract.Title} - Email du Client: {contract.CustomerRel.Email}", "Contract_signed")
+                self.sentry.sentry_event(self.employee.Email, f"Contrat Signé: Titre: {contract.Title} - Email du Client: {contract.CustomerRel.Email}", "info", "Contract_signed")
         
         except IntegrityError as e:
             self.session.rollback()
-            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
+            error_detail = e
             self.view.display_red_message(f"Erreur : {error_detail}")
         except ValueError as e:
             self.session.rollback()
@@ -299,7 +299,7 @@ class ContractManage:
 
             # évènement sentry
             if contract.ContractSigned:
-                sentry_event(self.employee.Email, f"Contrat Signé: Titre: {contract.Title} - Email du Client: {contract.CustomerRel.Email}", "Contract_signed")
+                self.sentry.sentry_event(self.employee.Email, f"Contrat Signé: Titre: {contract.Title} - Email du Client: {contract.CustomerRel.Email}","info", "Contract_signed")
 
         except IntegrityError as e:
             self.session.rollback()

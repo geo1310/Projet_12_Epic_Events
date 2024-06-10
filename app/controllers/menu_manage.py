@@ -1,12 +1,9 @@
-import sys
 from app.permissions.permissions import Permissions
 from .contract_manage import ContractManage
 from .customer_manage import CustomerManage
 from .employee_manage import EmployeeManage
 from .event_manage import EventManage
 from .role_manage import RoleManage
-from app.utils.logging_config import logger
-
 
 class MenuManage:
     """
@@ -25,7 +22,7 @@ class MenuManage:
         permissions: L'instance de la gestion des permissions.
     """
 
-    def __init__(self, view, verify_jwt, delete_token, session, employee, role):
+    def __init__(self, view, verify_jwt, delete_token, session, employee, role, logger):
         self.view = view
         self.session = session
         self.verify_jwt = verify_jwt
@@ -40,6 +37,9 @@ class MenuManage:
         self.role_manage = RoleManage(session)
         self.permissions = Permissions()
         self.show_intro = False
+        self.logger = logger
+        self.is_logout = False
+
 
     def run(self):
 
@@ -53,7 +53,7 @@ class MenuManage:
         else:
             self.view.display_red_message("Authentification invalide pour cet utilisateur.")
             self.view.prompt_wait_enter()
-            self.quit_app()
+            self.logout()
 
     def menu_main(self):
         """
@@ -232,20 +232,17 @@ class MenuManage:
                   
             else:
                 self.view.invalid_choice()
+        
+        if not self.verify_jwt() and not self.is_logout:
+            self.logger.info(f"Session Expirée: {self.employee.Email}")
+            self.logout()
 
-        return
-
-    def quit_app(self):
-        """
-        Quitte l'application en supprimant le jeton JWT et en arrêtant le script.
-        """
-        self.view.clear_screen()
-        logger.warning(f"Close App: {self.employee.Email}")
-        #sys.exit()
-        raise SystemExit
-
+            
     def logout(self):
+        self.is_logout = True
         if self.session:
             self.session.close()
         self.delete_token()
-        logger.info(f"Déconnexion: {self.employee.Email}")
+        self.logger.info(f"Déconnexion: {self.employee.Email}")
+        
+        

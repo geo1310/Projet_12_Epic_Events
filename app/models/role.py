@@ -1,9 +1,9 @@
 from sqlalchemy import TIMESTAMP, Boolean, Column, Integer, String, func, select
 
-from .database import Base
+from .database import DatabaseConfig
 
 
-class Role(Base):
+class Role(DatabaseConfig.BASE):
     """
     Représente un rôle dans la base de données.
 

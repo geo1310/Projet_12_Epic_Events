@@ -1,17 +1,15 @@
 from typing import List, Type
-import sentry_sdk
 from email.utils import parseaddr
 
 from rich.console import Console
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
-from app.models.database import SessionLocal
 from app.models.employee import Employee
 from app.models.role import Role
 from app.views.views import View
 
-from .utils_manage import sentry_event
+from app.utils.sentry_logger import SentryLogger
 
 
 class EmployeeManage:
@@ -26,13 +24,14 @@ class EmployeeManage:
         self.employee = employee
         self.role = role
         self.user_connected_id = employee.Id
+        self.sentry = SentryLogger()
         
     def list(self):
         employees = self.filter("All", None, Employee)
         table = self.table_employee_create(employees)
         self.view.display_table(table, "Liste des Employés")
 
-    @sentry_sdk.trace
+
     def create(self):
         """
         Crée un nouvel employé après avoir collecté et validé les informations de l'utilisateur.
@@ -81,11 +80,11 @@ class EmployeeManage:
             self.view.display_green_message("\nEmployé créé avec succès !")
             
             # évènement sentry
-            sentry_event(self.employee.Email, f"Employé créé: Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}", "Employee_create")
+            self.sentry.sentry_event(self.employee.Email, f"Employé créé: Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}", "info", "Employee_create")
             
         except IntegrityError as e:
             self.session.rollback()
-            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
+            error_detail = e
             self.view.display_red_message(f"Erreur : {error_detail}")
         except ValueError as e:
             self.session.rollback()
@@ -170,7 +169,7 @@ class EmployeeManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création de l'employé : {e}")
 
-    @sentry_sdk.trace
+
     def delete(self):
         """
         Supprime un employé existant.
@@ -209,7 +208,7 @@ class EmployeeManage:
             self.view.display_green_message("Employé supprimé avec succès !")
 
             # évènement sentry
-            sentry_event(self.employee.Email, f"Employé supprimé : Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}", "Employee_create")
+            self.sentry.sentry_event(self.employee.Email, f"Employé supprimé : Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}", "info", "Employee_delete")
 
         except IntegrityError as e:
             self.session.rollback()
