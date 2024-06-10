@@ -1,8 +1,5 @@
-from typing import List, Type
 from datetime import datetime
 from rich.console import Console
-from rich.table import Table
-from sqlalchemy.exc import IntegrityError
 
 from app.models.customer import Customer
 from app.permissions.permissions import Permissions
@@ -24,7 +21,7 @@ class CustomerManage:
         self.employee = employee
         self.role = role
         self.user_connected_id = employee.Id
-        self.utils = UtilsManage()
+        self.utils = UtilsManage(self.employee)
 
     def list(self):
 
@@ -82,28 +79,7 @@ class CustomerManage:
             CommercialId=commercial_id,
         )
 
-        # Ajouter à la session et commit
-        try:
-            self.session.add(customer)
-            self.session.flush()
-
-            # Affichage et confirmation de la création
-            if not self.utils.confirm_table_recap("customer", customer, "Création", "green"):
-                self.session.expunge(customer)
-                self.session.rollback()
-                return
-            self.session.commit()
-            self.view.display_green_message("\nClient créé avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la création du client : {e}")
+        self.utils.valid_oper(self.session, "customer", "create", customer)
 
 
     def update(self):
@@ -157,27 +133,7 @@ class CustomerManage:
         customer.Company = self.view.return_choice("Entreprise", False, f"{customer.Company}")
         customer.DateLastUpdate = datetime.now()
 
-        # Ajouter à la session et commit
-        try:
-            self.session.commit()
-
-            # Affichage et confirmation de la modification
-            if not self.utils.confirm_table_recap("customer", customer, "Modification", "yellow"):
-                self.session.expunge(customer)
-                self.session.rollback()
-                return
-
-            self.view.display_green_message("\nClient modifié avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la modification : {e}")
+        self.utils.valid_oper(self.session, "customer", "update", customer)
 
 
     def delete(self):
@@ -218,22 +174,7 @@ class CustomerManage:
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
-        # confirmation de suppression
-        if not self.utils.confirm_table_recap("customer", customer, "Suppression", "red"):
-            return
-
-        try:
-            self.session.delete(customer)
-            self.session.commit()
-            self.view.display_green_message("Client supprimé avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la suppression : {e}")
-
+        self.utils.valid_oper(self.session, "customer", "delete", customer)
 
     def validation_email(self):
         """

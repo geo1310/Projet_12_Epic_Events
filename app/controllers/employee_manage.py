@@ -1,9 +1,6 @@
-from typing import List, Type
-from email.utils import parseaddr
-
 from rich.console import Console
 from rich.table import Table
-from sqlalchemy.exc import IntegrityError
+
 
 from app.models.employee import Employee
 from app.models.role import Role
@@ -27,7 +24,7 @@ class EmployeeManage:
         self.role = role
         self.user_connected_id = employee.Id
         self.sentry = SentryLogger()
-        self.utils = UtilsManage()
+        self.utils = UtilsManage(self.employee)
 
     def list(self):
         employees = self.utils.filter(self.session, "All", None, Employee)
@@ -68,37 +65,7 @@ class EmployeeManage:
             FirstName=first_name, LastName=last_name, Email=email, PasswordHash=password_hash, RoleId=int(role_id)
         )
 
-        # Ajouter à la session et commit
-        try:
-            self.session.add(employee)
-            self.session.flush()
-
-            # Affichage et confirmation de la création
-            if not self.utils.confirm_table_recap("employee", employee, "Création", "green"):
-                self.session.expunge(employee)
-                self.session.rollback()
-                return
-            self.session.commit()
-            self.view.display_green_message("\nEmployé créé avec succès !")
-
-            # évènement sentry
-            self.sentry.sentry_event(
-                self.employee.Email,
-                f"Employé créé: Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}",
-                "info",
-                "Employee_create",
-            )
-
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la création de l'employé : {e}")
+        self.utils.valid_oper(self.session, "employee", "create", employee)
 
     def update(self):
         """
@@ -154,27 +121,7 @@ class EmployeeManage:
 
             employee.PasswordHash = password_hash
 
-        # Ajouter à la session et commit
-        try:
-            self.session.commit()
-
-            # Affichage et confirmation de la modification
-            if not self.utils.confirm_table_recap("employee", employee, "Modification", "yellow"):
-                self.session.expunge(employee)
-                self.session.rollback()
-                return
-
-            self.view.display_green_message("\nEmployé modifié avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la création de l'employé : {e}")
+        self.utils.valid_oper(self.session, "employee", "update", employee)
 
     def delete(self):
         """
@@ -205,29 +152,7 @@ class EmployeeManage:
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
-        if not self.utils.confirm_table_recap("employee", employee, "Suppression", "red"):
-            return
-
-        try:
-            self.session.delete(employee)
-            self.session.commit()
-            self.view.display_green_message("Employé supprimé avec succès !")
-
-            # évènement sentry
-            self.sentry.sentry_event(
-                self.employee.Email,
-                f"Employé supprimé : Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}",
-                "info",
-                "Employee_delete",
-            )
-
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la suppression de l'employé : {e}")
+        self.utils.valid_oper(self.session, "employee", "delete", employee)
 
     def validation_email(self):
         """

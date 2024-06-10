@@ -34,7 +34,7 @@ class MenuManage:
         self.customer_manage = CustomerManage(session, employee, role)
         self.contract_manage = ContractManage(session, employee, role)
         self.event_manage = EventManage(session, employee, role)
-        self.role_manage = RoleManage(session)
+        self.role_manage = RoleManage(session, self.employee)
         self.permissions = Permissions()
         self.show_intro = False
         self.logger = logger

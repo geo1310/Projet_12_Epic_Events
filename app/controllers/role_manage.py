@@ -1,6 +1,3 @@
-from typing import List, Type
-from rich.table import Table
-from sqlalchemy.exc import IntegrityError
 from app.models.role import Role
 from app.views.views import View
 
@@ -12,10 +9,11 @@ class RoleManage:
     Gère les opérations liées aux permissions, telles que l'affichage, la création, la mise à jour et la suppression.
     """
 
-    def __init__(self, session):
+    def __init__(self, session, employee):
         self.session = session
         self.view = View()
-        self.utils = UtilsManage()
+        self.employee = employee
+        self.utils = UtilsManage(self.employee)
 
     def list(self):
 
@@ -99,28 +97,7 @@ class RoleManage:
             Can_access_support_Event=support_event,
         )
 
-        # Ajouter à la session et commit
-        try:
-            self.session.add(role)
-            self.session.flush()
-
-            # Affichage et confirmation de la création
-            if not self.utils.confirm_table_recap("role", role, "Création", "green"):
-                self.session.expunge(role)
-                self.session.rollback()
-                return
-            self.session.commit()
-            self.view.display_green_message("\nRole créé avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la création du role : {e}")
+        self.utils.valid_oper(self.session, "role", "create", role)
 
     def update(self):
         self.view.display_title_panel_color_fit("Modification d'un role", "yellow")
@@ -191,27 +168,7 @@ class RoleManage:
             self.view.return_choice("Accés au support des évènements", False, f"{role.Can_access_support_Event}")
         )
 
-        # Ajouter à la session et commit
-        try:
-            self.session.commit()
-
-            # Affichage et confirmation de la modification
-            if not self.utils.confirm_table_recap("role", role, "Modification", "yellow"):
-                self.session.expunge(role)
-                self.session.rollback()
-                return
-
-            self.view.display_green_message("\nRole modifié avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la création du role : {e}")
+        self.utils.valid_oper(self.session, "role", "update", role)
 
     def delete(self):
         self.view.display_title_panel_color_fit("Suppression d'un role", "red")
@@ -229,21 +186,7 @@ class RoleManage:
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
-        # confirmation de la suppression
-        if not self.utils.confirm_table_recap("role", role, "Suppression", "red"):
-            return
-
-        try:
-            self.session.delete(role)
-            self.session.commit()
-            self.view.display_green_message("Role supprimé avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la suppression du role : {e}")
+        self.utils.valid_oper(self.session, "role", "delete", role)
 
     def str_to_bool(self, str_value):
 

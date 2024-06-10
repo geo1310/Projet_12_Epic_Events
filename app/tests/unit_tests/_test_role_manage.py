@@ -5,7 +5,6 @@ from rich.table import Table
 from datetime import datetime
 from app.models.role import Role
 from app.views.views import View
-from app.models.database import SessionLocal
 from app.controllers.role_manage import RoleManage
 
 
@@ -14,7 +13,7 @@ class TestRoleManage:
 
     @pytest.fixture(autouse=True)
     def setup_method(self):
-        self.session = Mock(spec=SessionLocal)
+        self.session = Mock()
         self.view = Mock()
         self.session.rollback = Mock()
         self.session.add = Mock()

@@ -1,6 +1,9 @@
 from typing import List, Type
 from rich.table import Table
+from sqlalchemy.exc import IntegrityError
 from app.views.views import View
+from app.utils.sentry_logger import SentryLogger 
+
 
 from app.models.role import Role
 from app.models.employee import Employee
@@ -11,8 +14,10 @@ from app.models.event import Event
 
 class UtilsManage:
 
-    def __init__(self):
+    def __init__(self, employee):
         self.view = View()
+        self.sentry = SentryLogger()
+        self.employee = employee
 
     def confirm_table_recap(self, model_name: str, model_instance, oper: str, color: str = "white") -> bool:
         """
@@ -359,5 +364,67 @@ class UtilsManage:
                 query = query.filter(getattr(model, attribute) == value)
 
         return query.all()
+    
+
+    def valid_oper(self, session, model_name, oper: str, model_instance):
+        """
+        Valide et exécute une opération de création, mise à jour ou suppression sur une instance de modèle.
+
+        Cette méthode effectue l'opération spécifiée sur l'instance de modèle, demande une confirmation de l'utilisateur,
+        puis enregistre l'opération dans la base de données si elle est confirmée. Elle gère également les erreurs 
+        potentielles et enregistre un événement dans Sentry.
+
+        Args:
+            session (Session): La session de base de données utilisée pour effectuer les opérations.
+            model_name (str): Le nom du modèle sur lequel l'opération est effectuée.
+            oper (str): L'opération à effectuer. Doit être l'une des valeurs 'create', 'update' ou 'delete'.
+            model_instance (Any): L'instance de modèle sur laquelle l'opération doit être effectuée.
+
+        Raises:
+            ValueError: Si l'opération spécifiée n'est pas valide.
+            IntegrityError: Si une erreur d'intégrité de la base de données se produit.
+            Exception: Pour toute autre exception non gérée.
+
+        Returns:
+            None
+        """
+        
+        try:
+            if oper == "create":
+                session.add(model_instance)
+            elif oper == "update":
+                session.merge(model_instance)
+            elif oper == "delete":
+                session.delete(model_instance)
+            else:
+                raise ValueError("Invalid operation. Supported operations: 'create', 'update', 'delete'.")
+
+            session.flush()
+
+            # Affichage et confirmation de la création
+            if not self.confirm_table_recap(model_name, model_instance, oper, "green"):
+                session.expunge(model_instance)
+                session.rollback()
+                return
+            session.commit()
+            self.view.display_green_message(f"\n{model_name} - {oper} -> Success")
+
+            # évènement sentry
+            self.sentry.sentry_event(
+                self.employee.Email,
+                f"{model_name} - {oper}",
+                "info",
+                f"{model_name}-{oper}",
+            )
+
+        except IntegrityError as e:
+            session.rollback()
+            self.view.display_red_message(f"Erreur d'intégrité : {e.orig}")
+        except ValueError as e:
+            session.rollback()
+            self.view.display_red_message(f"Erreur de validation : {e}")
+        except Exception as e:
+            session.rollback()
+            self.view.display_red_message(f"Erreur: {e}")
 
 

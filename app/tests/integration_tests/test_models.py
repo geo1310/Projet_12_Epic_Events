@@ -2,9 +2,11 @@ import pytest
 from collections import namedtuple
 import pytest
 
+from app.utils.logger_config import LoggerConfig
+
 from app.models.contract import Contract
 from app.models.customer import Customer
-from app.models.database import SessionLocal
+from app.models.database import DatabaseConfig
 from app.models.employee import Employee
 from app.models.event import Event
 from app.models.role import Role
@@ -21,7 +23,11 @@ def session():
     Yields:
         sqlalchemy.orm.Session: Une session SQLAlchemy.
     """
-    session = SessionLocal()
+    # Loggers
+    logger_config = LoggerConfig()
+    logger = logger_config.get_logger()
+    session_config = DatabaseConfig(logger)
+    session = session_config.db_session_local()
     yield session
     session.close()
 

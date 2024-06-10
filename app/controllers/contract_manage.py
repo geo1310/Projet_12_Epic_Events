@@ -1,7 +1,6 @@
 from typing import List
 from rich.console import Console
 from rich.table import Table
-from sqlalchemy.exc import IntegrityError
 
 from app.models.contract import Contract
 from app.models.customer import Customer
@@ -26,7 +25,7 @@ class ContractManage:
         self.role = role
         self.user_connected_id = employee.Id
         self.sentry = SentryLogger()
-        self.utils = UtilsManage()
+        self.utils = UtilsManage(self.employee)
 
     def get_permissions_contracts(self):
         # liste des contrats autorisés
@@ -175,33 +174,7 @@ class ContractManage:
             ContractSigned=contract_signed,
         )
 
-        # Ajouter à la session et commit
-        try:
-            self.session.add(contract)
-            self.session.flush()
-
-            # Affichage et confirmation de la création
-            if not self.utils.confirm_table_recap("contract", contract, "Création", "green"):
-                self.session.expunge(contract)
-                self.session.rollback()
-                return
-            self.session.commit()
-            self.view.display_green_message("\nContrat créé avec succès !")
-
-            # évènement sentry
-            if contract.ContractSigned:
-                self.sentry.sentry_event(self.employee.Email, f"Contrat Signé: Titre: {contract.Title} - Email du Client: {contract.CustomerRel.Email}", "info", "Contract_signed")
-        
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la création du contrat : {e}")
+        self.utils.valid_oper(self.session, "contract", "create", contract)
 
 
     def update(self):
@@ -288,32 +261,7 @@ class ContractManage:
             if not contract.CustomerId:
                 return
 
-        # Ajouter à la session et commit
-        try:
-            self.session.commit()
-
-            # Affichage et confirmation de la modification
-            if not self.utils.confirm_table_recap("contract", contract, "Modification", "yellow"):
-                self.session.expunge(contract)
-                self.session.rollback()
-                return
-
-            self.view.display_green_message("\nContrat modifié avec succès !")
-
-            # évènement sentry
-            if contract.ContractSigned:
-                self.sentry.sentry_event(self.employee.Email, f"Contrat Signé: Titre: {contract.Title} - Email du Client: {contract.CustomerRel.Email}","info", "Contract_signed")
-
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la modification : {e}")
+        self.utils.valid_oper(self.session, "contract", "update", contract)
 
 
     def delete(self):
@@ -353,21 +301,7 @@ class ContractManage:
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
-        # confirmation de suppression
-        if not self.utils.confirm_table_recap("contract", contract, "Suppression", "red"):
-            return
-
-        try:
-            self.session.delete(contract)
-            self.session.commit()
-            self.view.display_red_message("Contrat supprimé avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la suppression : {e}")
+        self.utils.valid_oper(self.session, "contract", "delete", contract)
 
 
     def str_to_bool(self, str_value):

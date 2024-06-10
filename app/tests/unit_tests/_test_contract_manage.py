@@ -8,7 +8,6 @@ from app.models.role import Role
 from app.models.contract import Contract
 from app.models.customer import Customer
 from app.views.views import View
-from app.models.database import SessionLocal
 from app.controllers.contract_manage import ContractManage
 
 
@@ -17,7 +16,7 @@ class TestContractManage:
 
     @pytest.fixture(autouse=True)
     def setup_method(self):
-        self.session = Mock(spec=SessionLocal)
+        self.session = Mock()
         self.view = Mock()
         self.session.rollback = Mock()
         self.session.add = Mock()

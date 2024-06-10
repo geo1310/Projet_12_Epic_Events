@@ -1,7 +1,6 @@
 from typing import List, Optional
 from rich.console import Console
 from rich.table import Table
-from sqlalchemy.exc import IntegrityError
 from app.permissions.permissions import Permissions
 from app.models.contract import Contract
 from app.models.customer import Customer
@@ -26,7 +25,7 @@ class EventManage:
         self.employee = employee
         self.role = role
         self.user_connected_id = employee.Id
-        self.utils = UtilsManage()
+        self.utils = UtilsManage(self.employee)
 
 
     def get_permissions_events(self):
@@ -182,28 +181,7 @@ class EventManage:
         if employee_support_id:
             event.EmployeeSupportId = employee_support_id
 
-        # Ajouter à la session et commit
-        try:
-            self.session.add(event)
-            self.session.flush()
-
-            # Affichage et confirmation de la création
-            if not self.utils.confirm_table_recap("event", event, "Création", "green"):
-                self.session.expunge(event)
-                self.session.rollback()
-                return
-            self.session.commit()
-            self.view.display_green_message("\nEvènement créé avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la création: {e}")
+        self.utils.valid_oper(self.session, "event", "create", event)
 
 
     def update(self):
@@ -265,27 +243,8 @@ class EventManage:
             employees_support = role.EmployeesRel
             event.EmployeeSupportId = self.valid_list(employees_support, event.EmployeeSupportId)
 
-        # Ajouter à la session et commit
-        try:
-            self.session.commit()
+        self.utils.valid_oper(self.session, "event", "update", event)
 
-            # Affichage et confirmation de la modification
-            if not self.utils.confirm_table_recap("event", event, "Modification", "yellow"):
-                self.session.expunge(event)
-                self.session.rollback()
-                return
-
-            self.view.display_green_message("\nEvènement modifié avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la modification : {e}")
 
     def delete(self):
         """
@@ -330,21 +289,7 @@ class EventManage:
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
-        # confirmation de suppression
-        if not self.utils.confirm_table_recap("event", event, "Suppression", "red"):
-            return
-
-        try:
-            self.session.delete(event)
-            self.session.commit()
-            self.view.display_red_message("Evènement supprimé avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la suppression : {e}")
+        self.utils.valid_oper(self.session, "event", "delete", event)
 
 
     def valid_contract(self, contracts: List[Contract], default: Optional[int] = None) -> Optional[int]:
