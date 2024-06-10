@@ -163,7 +163,7 @@ class ContractManage:
         amount_outstanding = self.validation_amount(
             "Montant restant du", "amount_outstanding", f"{amount if amount else None}"
         )
-        contract_signed = self.str_to_bool(self.view.return_choice("Contrat signé", False, "non", ("oui", "non")))
+        contract_signed = self.utils.str_to_bool(self.view.return_choice("Contrat signé", False, "non", ("oui", "non")))
 
         # Instance du nouveau contrat
         contract = Contract(
@@ -217,24 +217,9 @@ class ContractManage:
             return
 
         # Validation du contrat à modifier par son Id
-        while True:
-            contract_id = self.view.return_choice(
-                "Entrez l'identifiant du client à modifier ( vide pour annuler )", False
-            )
-
-            if not contract_id:
-                return
-
-            try:
-                contract = self.session.query(Contract).filter_by(Id=int(contract_id)).one()
-
-                # vérifie que le contrat est dans la liste autorisée.
-                if contract in contracts:
-                    break
-                self.view.display_red_message("Vous n'etes pas autorisé à modifier ce contrat !")
-
-            except Exception:
-                self.view.display_red_message("Identifiant non valide !")
+        contract = self.utils.valid_id(self.session, Contract, "contrat à modifier", contracts)
+        if not contract:
+            return
 
         # affichage et confirmation de modification
         if not self.utils.confirm_table_recap("contract", contract, "Modification", "yellow"):
@@ -248,7 +233,7 @@ class ContractManage:
             "Montant restant du", "amount_outstanding", contract.AmountOutstanding
         )
 
-        contract.ContractSigned = self.str_to_bool(
+        contract.ContractSigned = self.utils.str_to_bool(
             self.view.return_choice(
                 "Contrat signé", False, f"{'oui' if contract.ContractSigned else 'non'}", ("oui", "non")
                 )
@@ -283,41 +268,13 @@ class ContractManage:
 
         self.view.display_title_panel_color_fit("Suppression d'un contrat", "red")
 
-        # Validation du contrat à supprimer par son Id
-        while True:
-            contract_id = self.view.return_choice(
-                "Entrez l'identifiant du contrat à supprimer ( vide pour annuler )", False
-            )
-
-            if not contract_id:
-                return
-            try:
-                contract = self.session.query(Contract).filter_by(Id=int(contract_id)).one()
-
-                # vérifie que le contrat est dans la liste autorisée
-                if contract in contracts:
-                    break
-                self.view.display_red_message("Vous n'etes pas autorisé à supprimer ce contrat !")
-            except Exception:
-                self.view.display_red_message("Identifiant non valide !")
+        # Validation du contrat à modifier par son Id
+        contract = self.utils.valid_id(self.session, Contract, "contrat à supprimer",contracts)
+        if not contract:
+            return
 
         self.utils.valid_oper(self.session, "contract", "delete", contract)
 
-
-    def str_to_bool(self, str_value):
-        """
-        Convertit une chaîne de caractères en une valeur booléenne.
-
-        Args:
-            str_value (str): La chaîne de caractères à convertir.
-
-        Returns:
-            bool: Retourne True si la chaîne de caractères représente une valeur vraie, sinon False.
-        """
-
-        if str_value.lower() in ("true", "1", "oui"):
-            return True
-        return False
 
     def validation_amount(self, message: str, key: str, default: str = "0"):
         """
@@ -347,8 +304,20 @@ class ContractManage:
                 return amount
 
     def valid_customer(self, customers: List[Customer], default=None):
-        
+        """
+        Affiche une liste de clients et permet à l'utilisateur de sélectionner un client pour un contrat.
 
+        Args:
+            customers (List[Customer]): La liste des clients disponibles pour sélection.
+            default (optional): Valeur par défaut à afficher pour la sélection. Par défaut, None.
+
+        Returns:
+            int or None: L'identifiant du client sélectionné si un client est sélectionné, sinon None.
+
+        Exceptions:
+            Affiche un message d'erreur en cas de choix invalide ou si une exception se produit.
+        """
+        
         # Tableau de choix pour les clients
         table = Table()
         table.add_column("ID", style="cyan")
@@ -381,4 +350,5 @@ class ContractManage:
                 self.view.display_red_message("Choix invalide !")
             except Exception:
                 self.view.display_red_message("Choix invalide !")
+
 

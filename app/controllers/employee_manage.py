@@ -81,19 +81,9 @@ class EmployeeManage:
         self.view.display_title_panel_color_fit("Modification d'un employé", "yellow")
 
         # Validation de l'employé à modifier par son Id
-        while True:
-            employee_id = self.view.return_choice(
-                "Entrez l'identifiant de l'employé à supprimer ( vide pour annuler )", False
-            )
-
-            if not employee_id:
-                return
-
-            try:
-                employee = self.session.query(Employee).filter_by(Id=int(employee_id)).one()
-                break
-            except Exception:
-                self.view.display_red_message("Identifiant non valide !")
+        employee = self.utils.valid_id(self.session, Employee, "employé à modifier")
+        if not employee:
+            return
 
         # Affichage et confirmation de la modification
         if not self.utils.confirm_table_recap("employee", employee, "Modification", "yellow"):
@@ -138,19 +128,9 @@ class EmployeeManage:
         self.view.display_title_panel_color_fit("Suppression d'un employé", "red")
 
         # Validation de l'employé à supprimer par son Id
-        while True:
-            employee_id = self.view.return_choice(
-                "Entrez l'identifiant de l'employé à supprimer ( vide pour annuler )", False
-            )
-
-            if not employee_id:
-                return
-
-            try:
-                employee = self.session.query(Employee).filter_by(Id=int(employee_id)).one()
-                break
-            except Exception:
-                self.view.display_red_message("Identifiant non valide !")
+        employee = self.utils.valid_id(self.session, Employee, "employé à supprimer")
+        if not employee:
+            return
 
         self.utils.valid_oper(self.session, "employee", "delete", employee)
 
@@ -168,7 +148,7 @@ class EmployeeManage:
         """
 
         while True:
-            email = self.view.return_choice("Entrez l'adresse email de l'employé ( vide pour annuler )", False)
+            email = self.view.return_choice("Entrez l'adresse email ( vide pour annuler )", False)
             if not email:
                 return None
             try:

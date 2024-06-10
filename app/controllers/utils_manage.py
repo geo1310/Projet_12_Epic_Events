@@ -13,6 +13,18 @@ from app.models.event import Event
 
 
 class UtilsManage:
+    """
+    Classe utilitaire pour gérer diverses opérations sur les modèles de l'application.
+
+    Cette classe contient des méthodes pour afficher des récapitulatifs, créer des tableaux, formater des dates,
+    convertir des chaînes en booléens, filtrer des instances de modèles, et valider des identifiants et des opérations.
+
+    Attributs:
+        view (View): Instance de la classe View pour gérer l'affichage.
+        sentry (SentryLogger): Instance de la classe SentryLogger pour gérer la journalisation des événements.
+        employee (Employee): L'employé qui effectue les opérations.
+
+    """
 
     def __init__(self, employee):
         self.view = View()
@@ -35,6 +47,7 @@ class UtilsManage:
         Returns:
             bool: True si l'utilisateur confirme l'opération, False sinon.
         """
+
         self.view.display_title_panel_color_fit(f"{model_name} - {oper}", f"{color}", True)
 
         summary_table = self.table_create(model_name, [model_instance])
@@ -340,6 +353,22 @@ class UtilsManage:
         return None
     
 
+    def str_to_bool(self, str_value):
+        """
+        Convertit une chaîne de caractères en une valeur booléenne.
+
+        Args:
+            str_value (str): La chaîne de caractères à convertir.
+
+        Returns:
+            bool: Retourne True si la chaîne de caractères représente une valeur vraie, sinon False.
+        """
+
+        if str_value.lower() in ("true", "1", "oui"):
+            return True
+        return False
+    
+
     def filter(self, session, attribute: str, value: any, model: Type) -> List:
         """
         Filtre les instances d'un modèle en fonction d'un attribut et d'une valeur spécifiques.
@@ -366,27 +395,60 @@ class UtilsManage:
         return query.all()
     
 
-    def valid_oper(self, session, model_name, oper: str, model_instance):
+    def valid_id(self, session, model, message: str,  auhtorized_list: List= None):
         """
-        Valide et exécute une opération de création, mise à jour ou suppression sur une instance de modèle.
-
-        Cette méthode effectue l'opération spécifiée sur l'instance de modèle, demande une confirmation de l'utilisateur,
-        puis enregistre l'opération dans la base de données si elle est confirmée. Elle gère également les erreurs 
-        potentielles et enregistre un événement dans Sentry.
+        Valide l'identifiant d'un élément en vérifiant qu'il existe dans la base de données et qu'il est autorisé.
 
         Args:
-            session (Session): La session de base de données utilisée pour effectuer les opérations.
-            model_name (str): Le nom du modèle sur lequel l'opération est effectuée.
-            oper (str): L'opération à effectuer. Doit être l'une des valeurs 'create', 'update' ou 'delete'.
-            model_instance (Any): L'instance de modèle sur laquelle l'opération doit être effectuée.
-
-        Raises:
-            ValueError: Si l'opération spécifiée n'est pas valide.
-            IntegrityError: Si une erreur d'intégrité de la base de données se produit.
-            Exception: Pour toute autre exception non gérée.
+            session (Session): La session SQLAlchemy à utiliser pour interagir avec la base de données.
+            model (Type): Le modèle de base de données SQLAlchemy à interroger.
+            message (str): Le message à afficher pour demander l'identifiant.
+            authorized_list (List): La liste des éléments autorisés pour cette opération.
 
         Returns:
-            None
+            object or None: L'élément correspondant à l'identifiant s'il est valide et autorisé, sinon None.
+
+        Exceptions:
+            Affiche un message d'erreur en cas d'identifiant invalide ou si l'opération n'est pas autorisée.
+        """
+
+        while True:
+            element_id = self.view.return_choice(
+                f"Entrez l'Id: {message}  ( vide pour annuler )", False
+            )
+
+            if not element_id:
+                return None
+
+            try:
+                element = session.query(model).filter_by(Id=int(element_id)).one()
+
+                # vérifie que le contrat est dans la liste autorisée.
+                if not auhtorized_list or element in auhtorized_list:
+                    return element
+                self.view.display_red_message("Opération non autorisée")
+
+            except Exception as e:
+                self.view.display_red_message(f"Identifiant non valide ! {e}")
+
+
+    def valid_oper(self, session, model_name, oper: str, model_instance):
+        """
+        Valide l'identifiant d'un élément en vérifiant qu'il existe dans la base de données et qu'il est autorisé.
+
+        Args:
+            session (Session): La session SQLAlchemy à utiliser pour interagir avec la base de données.
+            model (Type): Le modèle de base de données SQLAlchemy à interroger.
+            message (str): Le message à afficher pour demander l'identifiant.
+            authorized_list (List, optional): La liste des éléments autorisés pour cette opération. 
+                Si spécifiée, l'élément doit appartenir à cette liste pour être considéré comme autorisé.
+                Par défaut, None.
+
+        Returns:
+            object or None: L'élément correspondant à l'identifiant s'il est valide et autorisé, sinon None.
+
+        Exceptions:
+            Affiche un message d'erreur en cas d'identifiant invalide ou si l'opération n'est pas autorisée.
         """
         
         try:

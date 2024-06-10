@@ -97,27 +97,12 @@ class CustomerManage:
         """
         self.view.display_title_panel_color_fit("Modification d'un client", "yellow")
 
-        self.customers = self.employee.CustomersRel
+        customers = self.employee.CustomersRel
 
         # Validation du client à modifier par son Id
-        while True:
-            customer_id = self.view.return_choice(
-                "Entrez l'identifiant du client à modifier ( vide pour annuler )", False
-            )
-
-            if not customer_id:
-                return
-
-            try:
-                customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
-
-                # vérifie que le client est dans la liste des clients de l'employé
-                if customer in self.customers:
-                    break
-                self.view.display_red_message("Vous n'etes pas autorisé à modifier ce client !")
-
-            except Exception:
-                self.view.display_red_message("Identifiant non valide !")
+        customer = self.utils.valid_id(self.session, Customer, "client à modifier", customers)
+        if not customer:
+            return
 
         # affichage et confirmation de modification
         if not self.utils.confirm_table_recap("customer", customer, "Modification", "yellow"):
@@ -154,26 +139,13 @@ class CustomerManage:
 
         self.view.display_title_panel_color_fit("Suppression d'un client", "red")
 
-        self.customers = self.employee.CustomersRel
+        customers = self.employee.CustomersRel
 
         # Validation du client à supprimer par son Id
-        while True:
-            customer_id = self.view.return_choice(
-                "Entrez l'identifiant de l'employé à supprimer ( vide pour annuler )", False
-            )
-
-            if not customer_id:
-                return
-            try:
-                customer = self.session.query(Customer).filter_by(Id=int(customer_id)).one()
-
-                # vérifie que le client est dans la liste des clients de l'employé
-                if customer in self.customers:
-                    break
-                self.view.display_red_message("Vous n'etes pas autorisé à supprimer ce client !")
-            except Exception:
-                self.view.display_red_message("Identifiant non valide !")
-
+        customer = self.utils.valid_id(self.session, Customer, "client à supprimer", customers)
+        if not customer:
+            return
+        
         self.utils.valid_oper(self.session, "customer", "delete", customer)
 
     def validation_email(self):

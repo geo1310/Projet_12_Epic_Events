@@ -196,24 +196,9 @@ class EventManage:
         self.view.display_title_panel_color_fit("Modification d'un évènement", "yellow")
 
         # Validation de l'évènement à modifier par son Id
-        while True:
-            event_id = self.view.return_choice(
-                "Entrez l'identifiant de l'évènement à modifier ( vide pour annuler )", False
-            )
-
-            if not event_id:
-                return
-
-            try:
-                event = self.session.query(Event).filter_by(Id=int(event_id)).one()
-
-                # vérifie que l'évènement est dans la liste autorisée.
-                if event in events:
-                    break
-                self.view.display_red_message("Vous n'etes pas autorisé à modifier cet évènement !")
-
-            except Exception:
-                self.view.display_red_message("Identifiant non valide !")
+        event = self.utils.valid_id(self.session, Event, "évènement à modifier", events)
+        if not event:
+            return
 
         # affichage et confirmation de modification
         if not self.utils.confirm_table_recap("event", event, "Modification", "yellow"):
@@ -272,22 +257,9 @@ class EventManage:
             return
 
         # Validation de l'évènement à supprimer par son Id
-        while True:
-            event_id = self.view.return_choice(
-                "Entrez l'identifiant de l'évènement à supprimer ( vide pour annuler )", False
-            )
-
-            if not event_id:
-                return
-            try:
-                event = self.session.query(Event).filter_by(Id=int(event_id)).one()
-
-                # vérifie que le contrat est dans la liste autorisée
-                if event in events:
-                    break
-                self.view.display_red_message("Vous n'etes pas autorisé à supprimer cet évènement !")
-            except Exception:
-                self.view.display_red_message("Identifiant non valide !")
+        event = self.utils.valid_id(self.session, Event, "évènement à supprimer", events)
+        if not event:
+            return
 
         self.utils.valid_oper(self.session, "event", "delete", event)
 
@@ -332,10 +304,9 @@ class EventManage:
                     return int(contract_id)
                 else:
                     return None
-            except ValueError:
-                self.view.display_red_message("Choix invalide !")
             except Exception:
                 self.view.display_red_message("Choix invalide !")
+
 
     def validation_date(self, key: str, message: str, default: Optional[str] = None) -> Optional[str]:
         """
@@ -363,8 +334,6 @@ class EventManage:
                 return None
             try:
                 Event.check_dates(self, key, date)
-            except ValueError as e:
-                self.view.display_red_message(f"Erreur de validation : {e}")
             except Exception as e:
                 self.view.display_red_message(f"Erreur de validation : {e}")
 
@@ -397,8 +366,6 @@ class EventManage:
                 return 0
             try:
                 Event.check_attendees(self, key, attendees)
-            except ValueError as e:
-                self.view.display_red_message(f"Erreur de validation : {e}")
             except Exception as e:
                 self.view.display_red_message(f"Erreur de validation : {e}")
             else:
