@@ -4,6 +4,8 @@ from sqlalchemy.exc import IntegrityError
 from app.models.role import Role
 from app.views.views import View
 
+from .utils_manage import UtilsManage
+
 
 class RoleManage:
     """
@@ -13,11 +15,12 @@ class RoleManage:
     def __init__(self, session):
         self.session = session
         self.view = View()
+        self.utils = UtilsManage()
 
     def list(self):
 
-        roles = self.filter("All", None, Role)
-        table = self.table_role_create(roles)
+        roles = self.utils.filter(self.session, "All", None, Role)
+        table = self.utils.table_create("role", roles)
         self.view.display_table(table, "Liste des Roles")
 
     def create(self):
@@ -102,7 +105,7 @@ class RoleManage:
             self.session.flush()
 
             # Affichage et confirmation de la création
-            if not self.confirm_table_recap(role, "Création", "green"):
+            if not self.utils.confirm_table_recap("role", role, "Création", "green"):
                 self.session.expunge(role)
                 self.session.rollback()
                 return
@@ -136,7 +139,7 @@ class RoleManage:
                 self.view.display_red_message("Identifiant non valide !")
 
         # Affichage et confirmation de la modification
-        if not self.confirm_table_recap(role, "Modification", "yellow"):
+        if not self.utils.confirm_table_recap("role", role, "Modification", "yellow"):
             return
 
         self.view.display_title_panel_color_fit("Modification d'un role", "yellow", True)
@@ -150,9 +153,7 @@ class RoleManage:
         role.Can_crud_Employee = self.str_to_bool(
             self.view.return_choice("Création et Suppression des employés", False, f"{role.Can_crud_Employee}")
         )
-        role.Can_r_Role = self.str_to_bool(
-            self.view.return_choice("Liste des roles", False, f"{role.Can_r_Role}")
-        )
+        role.Can_r_Role = self.str_to_bool(self.view.return_choice("Liste des roles", False, f"{role.Can_r_Role}"))
         role.Can_ru_Role = self.str_to_bool(
             self.view.return_choice("Modification des roles", False, f"{role.Can_ru_Role}")
         )
@@ -195,7 +196,7 @@ class RoleManage:
             self.session.commit()
 
             # Affichage et confirmation de la modification
-            if not self.confirm_table_recap(role, "Modification", "yellow"):
+            if not self.utils.confirm_table_recap("role", role, "Modification", "yellow"):
                 self.session.expunge(role)
                 self.session.rollback()
                 return
@@ -229,7 +230,7 @@ class RoleManage:
                 self.view.display_red_message("Identifiant non valide !")
 
         # confirmation de la suppression
-        if not self.confirm_table_recap(role, "Suppression", "red"):
+        if not self.utils.confirm_table_recap("role", role, "Suppression", "red"):
             return
 
         try:
@@ -244,131 +245,8 @@ class RoleManage:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la suppression du role : {e}")
 
-    def format_date(self, date: str):
-        """
-        Formate une date en chaîne de caractères au format "JJ/MM/AAAA HH:MN".
-
-        Cette méthode prend un objet date et le formate en une chaîne de caractères
-        selon le format "jour/mois/année". Si la date est None, la méthode retourne None.
-
-        Args:
-            date: La date à formater.
-
-        Returns:
-            str: La date formatée en chaîne de caractères si la date est fournie, None sinon.
-        """
-        if date:
-            return date.strftime("%d/%m/%Y %H:%M")
-        return None
-
-    def confirm_table_recap(self, role: Role, oper: str, color: str = "white"):
-        
-        self.view.display_title_panel_color_fit(f"{oper} d'un role", f"{color}", True)
-
-        # Tableau récapitulatif
-        table = self.table_role_create([role])
-
-        self.view.display_table(table, "Résumé du role")
-
-        # Demander une confirmation avant validation
-        confirm = self.view.return_choice(f"Confirmation {oper} ? (oui/non)", False)
-        if confirm:
-            confirm = confirm.lower()
-        if confirm != "oui":
-            self.view.display_red_message("Opération annulée.")
-            return False
-        return True
-
     def str_to_bool(self, str_value):
 
         if str_value.lower() in ("true", "1", "oui"):
             return True
         return False
-    
-    def table_role_create(self, roles: List[Role]) -> Table:
-        """
-        Crée un tableau pour afficher les roles.
-
-        Cette méthode prend une liste d'événements en entrée et génère un tableau contenant les détails de chaque événement
-        pour affichage.
-
-        Args:
-            roles (List[Role]): Une liste d'objets Role à afficher dans le tableau.
-
-        Returns:
-            Table: Un objet Table de la bibliothèque Rich contenant les informations des événements.
-        """
-
-        # Création du tableau pour afficher les événements
-        table = Table(show_header=True, header_style="bold green")
-        table.add_column("ID", style="dim", width=3)
-        table.add_column("Nom")
-        table.add_column("R. employee")
-        table.add_column("U. employee")
-        table.add_column("CRUD. employee")
-        table.add_column("R. role")
-        table.add_column("U. role")
-        table.add_column("CRUD. role")
-        table.add_column("U. customer")
-        table.add_column("CRUD customer")
-        table.add_column("ALL customer")
-        table.add_column("U. contract")
-        table.add_column("CRUD contract")
-        table.add_column("ALL contract")
-        table.add_column("U event")
-        table.add_column("CRUD event")
-        table.add_column("ALL event")
-        table.add_column("Support event")
-        table.add_column("Date de création")
-
-        for role in roles:
-            
-            table.add_row(
-                str(role.Id),
-                role.RoleName,
-                str(role.Can_r_Employee),
-                str(role.Can_ru_Employee),
-                str(role.Can_crud_Employee),
-                str(role.Can_r_Role),
-                str(role.Can_ru_Role),
-                str(role.Can_crud_Role),
-                str(role.Can_ru_Customer),
-                str(role.Can_crud_Customer),
-                str(role.Can_access_all_Customer),
-                str(role.Can_ru_Contract),
-                str(role.Can_crud_Contract),
-                str(role.Can_access_all_Contract),
-                str(role.Can_ru_Event),
-                str(role.Can_crud_Event),
-                str(role.Can_access_all_Event),
-                str(role.Can_access_support_Event),
-                self.format_date(role.DateCreated),
-            )
-
-        return table
-    
-    def filter(self, attribute: str, value: any, model: Type) -> List:
-        """
-        Filtre les instances du modèle en fonction d'un attribut et d'une valeur spécifiés.
-
-        Args:
-            attribute (str): L'attribut du modèle par lequel filtrer. Si "All", aucun filtrage n'est appliqué.
-            value (Any): La valeur de l'attribut pour filtrer les instances du modèle. Peut être n'importe quelle valeur,
-                         y compris None pour filtrer les valeurs NULL.
-            model (Type): La classe du modèle SQLAlchemy à filtrer (par exemple, Event, Employee).
-
-        Returns:
-            List: Une liste des instances du modèle qui correspondent aux critères de filtrage.
-        """
-        query = self.session.query(model)
-
-
-        if attribute != "All":
-            if value is None:
-                query = query.filter(getattr(model, attribute) == None)
-            else:
-                query = query.filter(getattr(model, attribute) == value)
-
-        return query.all()
-    
-    

@@ -11,6 +11,8 @@ from app.views.views import View
 
 from app.utils.sentry_logger import SentryLogger
 
+from .utils_manage import UtilsManage
+
 
 class EmployeeManage:
     """
@@ -25,12 +27,12 @@ class EmployeeManage:
         self.role = role
         self.user_connected_id = employee.Id
         self.sentry = SentryLogger()
-        
-    def list(self):
-        employees = self.filter("All", None, Employee)
-        table = self.table_employee_create(employees)
-        self.view.display_table(table, "Liste des Employés")
+        self.utils = UtilsManage()
 
+    def list(self):
+        employees = self.utils.filter(self.session, "All", None, Employee)
+        table = self.utils.table_create("employee", employees)
+        self.view.display_table(table, "Liste des Employés")
 
     def create(self):
         """
@@ -72,16 +74,21 @@ class EmployeeManage:
             self.session.flush()
 
             # Affichage et confirmation de la création
-            if not self.confirm_table_recap(employee, "Création", "green"):
+            if not self.utils.confirm_table_recap("employee", employee, "Création", "green"):
                 self.session.expunge(employee)
                 self.session.rollback()
                 return
             self.session.commit()
             self.view.display_green_message("\nEmployé créé avec succès !")
-            
+
             # évènement sentry
-            self.sentry.sentry_event(self.employee.Email, f"Employé créé: Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}", "info", "Employee_create")
-            
+            self.sentry.sentry_event(
+                self.employee.Email,
+                f"Employé créé: Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}",
+                "info",
+                "Employee_create",
+            )
+
         except IntegrityError as e:
             self.session.rollback()
             error_detail = e
@@ -122,7 +129,7 @@ class EmployeeManage:
                 self.view.display_red_message("Identifiant non valide !")
 
         # Affichage et confirmation de la modification
-        if not self.confirm_table_recap(employee, "Modification", "yellow"):
+        if not self.utils.confirm_table_recap("employee", employee, "Modification", "yellow"):
             return
 
         self.view.display_title_panel_color_fit("Modification d'un employé", "yellow", True)
@@ -152,7 +159,7 @@ class EmployeeManage:
             self.session.commit()
 
             # Affichage et confirmation de la modification
-            if not self.confirm_table_recap(employee, "Modification", "yellow"):
+            if not self.utils.confirm_table_recap("employee", employee, "Modification", "yellow"):
                 self.session.expunge(employee)
                 self.session.rollback()
                 return
@@ -168,7 +175,6 @@ class EmployeeManage:
         except Exception as e:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la création de l'employé : {e}")
-
 
     def delete(self):
         """
@@ -199,7 +205,7 @@ class EmployeeManage:
             except Exception:
                 self.view.display_red_message("Identifiant non valide !")
 
-        if not self.confirm_table_recap(employee, "Suppression", "red"):
+        if not self.utils.confirm_table_recap("employee", employee, "Suppression", "red"):
             return
 
         try:
@@ -208,7 +214,12 @@ class EmployeeManage:
             self.view.display_green_message("Employé supprimé avec succès !")
 
             # évènement sentry
-            self.sentry.sentry_event(self.employee.Email, f"Employé supprimé : Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}", "info", "Employee_delete")
+            self.sentry.sentry_event(
+                self.employee.Email,
+                f"Employé supprimé : Prénom: {employee.FirstName} - Nom: {employee.LastName} - Email: {employee.Email}",
+                "info",
+                "Employee_delete",
+            )
 
         except IntegrityError as e:
             self.session.rollback()
@@ -217,23 +228,6 @@ class EmployeeManage:
         except Exception as e:
             self.session.rollback()
             self.view.display_red_message(f"Erreur lors de la suppression de l'employé : {e}")
-
-    def format_date(self, date: str):
-        """
-        Formate une date en chaîne de caractères au format "JJ/MM/AAAA HH:MN".
-
-        Cette méthode prend un objet date et le formate en une chaîne de caractères
-        selon le format "jour/mois/année". Si la date est None, la méthode retourne None.
-
-        Args:
-            date: La date à formater.
-
-        Returns:
-            str: La date formatée en chaîne de caractères si la date est fournie, None sinon.
-        """
-        if date:
-            return date.strftime("%d/%m/%Y %H:%M")
-        return None
 
     def validation_email(self):
         """
@@ -293,23 +287,6 @@ class EmployeeManage:
             else:
                 self.view.display_red_message("Les mots de passe ne correspondent pas.")
 
-    def confirm_table_recap(self, employee: Employee, oper: str, color: str = "white"):
-
-        self.view.display_title_panel_color_fit(f"{oper} d'un employé", f"{color}", True)
-
-        summary_table = self.table_employee_create([employee])
-
-        self.view.display_table(summary_table, "Résumé de l'employé")
-
-        # Demander une confirmation avant validation
-        confirm = self.view.return_choice(f"Confirmation {oper} ? (oui/non)", False)
-        if confirm:
-            confirm = confirm.lower()
-        if confirm != "oui":
-            self.view.display_red_message("Opération annulée.")
-            return False
-        return True
-
     def valid_role(self, role_default: int = None):
         """
         Affiche un tableau de choix pour les rôles et demande à l'utilisateur de sélectionner un rôle.
@@ -349,74 +326,3 @@ class EmployeeManage:
                     return None
             except ValueError:
                 self.view.display_red_message("Choix invalide !")
-
-    def table_employee_create(self, employees: List[Employee]) -> Table:
-        """
-        Crée un tableau pour afficher les employés.
-
-        Cette méthode prend une liste d'employés en entrée et génère un tableau contenant les détails de chaque employé
-        pour affichage.
-
-        Args:
-            employees (List[Employee]): Une liste d'objets Employee à afficher dans le tableau.
-
-        Returns:
-            Table: Un objet Table de la bibliothèque Rich contenant les informations des employés.
-        """
-
-        # Création du tableau pour afficher les employés
-        table = Table(show_header=True, header_style="bold green")
-        table.add_column("ID", style="dim", width=5)
-        table.add_column("Prénom")
-        table.add_column("Nom")
-        table.add_column("Email")
-        table.add_column("Status")
-        table.add_column("Client(s)")
-        table.add_column("Evènements(s)")
-        table.add_column("Date de création")
-
-        for employee in employees:
-
-            customer_list = []
-            for customer in employee.CustomersRel:
-                customer_list.append(customer.FirstName)
-
-            event_list = []
-            for event in employee.EventsRel:
-                event_list.append(event.Title)
-
-            table.add_row(
-                str(employee.Id),
-                employee.FirstName,
-                employee.LastName,
-                employee.Email,
-                employee.RoleRel.RoleName,
-                str(customer_list),
-                str(event_list),
-                self.format_date(employee.DateCreated),
-            )
-
-        return table
-
-    def filter(self, attribute: str, value: any, model: Type) -> List:
-        """
-        Filtre les instances du modèle en fonction d'un attribut et d'une valeur spécifiés.
-
-        Args:
-            attribute (str): L'attribut du modèle par lequel filtrer. Si "All", aucun filtrage n'est appliqué.
-            value (Any): La valeur de l'attribut pour filtrer les instances du modèle. Peut être n'importe quelle valeur,
-                         y compris None pour filtrer les valeurs NULL.
-            model (Type): La classe du modèle SQLAlchemy à filtrer (par exemple, Event, Employee).
-
-        Returns:
-            List: Une liste des instances du modèle qui correspondent aux critères de filtrage.
-        """
-        query = self.session.query(model)
-
-        if attribute != "All":
-            if value is None:
-                query = query.filter(getattr(model, attribute) == None)
-            else:
-                query = query.filter(getattr(model, attribute) == value)
-
-        return query.all()
