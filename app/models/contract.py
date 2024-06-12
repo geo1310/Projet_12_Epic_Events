@@ -1,12 +1,12 @@
 from sqlalchemy import TIMESTAMP, Boolean, Column, Float, ForeignKey, Integer, String, func
 from sqlalchemy.orm import relationship, validates
 
-from models.customer import Customer
+from .database import DatabaseConfig
 
-from .database import Base
+from app.models.customer import Customer
 
 
-class Contract(Base):
+class Contract(DatabaseConfig.BASE):
     """
     Représente un contrat dans la base de données.
 

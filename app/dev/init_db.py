@@ -6,7 +6,7 @@ from models.database import Base, SessionLocal, engine
 from models.employee import Employee
 from models.role import Role
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s:%(message)s")
 
 ROLES = {
     "Commercial": {

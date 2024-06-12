@@ -1,15 +1,13 @@
 import re
 from email.utils import parseaddr
-
 from sqlalchemy import TIMESTAMP, Column, ForeignKey, Integer, String, func
 from sqlalchemy.orm import relationship, validates
 
-from models.employee import Employee
+from .database import DatabaseConfig
+from app.models.employee import Employee
 
-from .database import Base
 
-
-class Customer(Base):
+class Customer(DatabaseConfig.BASE):
     """
     Représente un client dans la base de données.
 
@@ -53,33 +51,13 @@ class Customer(Base):
             email (str): Adresse email à valider.
 
         Returns:
-            str: L'adresse email si elle est valide.
+            str: L'adresse email en minuscules si elle est valide.
 
         Raises:
             ValueError: Si l'adresse email n'est pas valide.
         """
         _, parsed_email = parseaddr(email)
         if re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", parsed_email):
-            return email
+            return email.lower()
         else:
             raise ValueError("Adresse email invalide")
-
-    @classmethod
-    def get_customers_list(cls, session, user_connected_id):
-        """
-        Retourne une liste des clients associés à un utilisateur connecté.
-
-        Args:
-            session: Session SQLAlchemy active.
-            user_connected_id (int): Identifiant de l'utilisateur connecté.
-
-        Returns:
-            list: Liste de tuples contenant l'ID et le nom de chaque client.
-        """
-
-        customers_list = (
-            session.query(cls.Id, cls.FirstName, cls.LastName, cls.Email)
-            .filter_by(CommercialId=user_connected_id)
-            .all()
-        )
-        return customers_list

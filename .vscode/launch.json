@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {"name":"Pytest",
+        "type":"debugpy",
+        "request":"launch",
+        "module":"pytest",
+        "args": [
+            "-s",
+            "app/tests/unit_tests/test_event_manage.py",
+            
+        ],
+        },
+
+        {
+            "name": "Python: pytest",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/app/tests",  // Remplacez par le chemin vers votre dossier ou fichier de tests
+            "args": [
+                "m",
+                "pytest",
+                "-s"  // Pour désactiver la capture de sortie
+            ],
+            "console": "integratedTerminal",  // Utilisez le terminal intégré
+            "justMyCode": false  // Pour inclure le code des bibliothèques externes dans le débogage
+        }
+    ]
+}

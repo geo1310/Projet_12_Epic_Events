@@ -1,14 +1,13 @@
 import re
 from email.utils import parseaddr
-
 import bcrypt
 from sqlalchemy import TIMESTAMP, Column, ForeignKey, Integer, String, func
 from sqlalchemy.orm import relationship, validates
 
-from .database import Base
+from .database import DatabaseConfig
 
 
-class Employee(Base):
+class Employee(DatabaseConfig.BASE):
     """
     Représente un employé dans la base de données.
 

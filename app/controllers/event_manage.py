@@ -1,14 +1,15 @@
-from typing import List, Optional, Type
+from typing import List, Optional
 from rich.console import Console
 from rich.table import Table
-from sqlalchemy.exc import IntegrityError
-from permissions.permissions import Permissions
-from models.contract import Contract
-from models.customer import Customer
-from models.employee import Employee
-from models.role import Role
-from models.event import Event
-from views.views import View
+from app.permissions.permissions import Permissions
+from app.models.contract import Contract
+from app.models.customer import Customer
+from app.models.employee import Employee
+from app.models.role import Role
+from app.models.event import Event
+from app.views.views import View
+
+from .utils_manage import UtilsManage
 
 
 class EventManage:
@@ -24,11 +25,12 @@ class EventManage:
         self.employee = employee
         self.role = role
         self.user_connected_id = employee.Id
+        self.utils = UtilsManage(self.employee)
 
     def get_permissions_events(self):
 
         if self.permissions.all_event(self.role):
-            events = self.filter("All", None, Event)
+            events = self.utils.filter(self.session, "All", None, Event)
 
         elif self.permissions.role_name(self.role) == "Commercial":
             events = (
@@ -40,22 +42,18 @@ class EventManage:
             )
 
         elif self.permissions.role_name(self.role) == "support":
-            events = (
-                self.session.query(Event)
-                .filter(Event.EmployeeSupportRel == self.user_connected_id)
-                .all()
-            )
-        
+            events = self.session.query(Event).filter(Event.EmployeeSupportRel == self.user_connected_id).all()
+
         else:
             events = []
 
         return events
-    
+
     def get_permissions_contracts_signed(self):
 
         if self.permissions.all_contract(self.role):
-            contracts_signed = self.filter("ContractSigned", True, Contract)
-        
+            contracts_signed = self.utils.filter(self.session, "ContractSigned", True, Contract)
+
         elif self.permissions.role_name(self.role) == "Commercial":
             contracts_signed = (
                 self.session.query(Contract)
@@ -80,8 +78,8 @@ class EventManage:
         Returns:
             None
         """
-        events = self.filter("All", None, Event)
-        table = self.table_event_create(events)
+        events = self.utils.filter(self.session, "All", None, Event)
+        table = self.utils.table_create("event", events)
         self.view.display_table(table, "Liste des Evènements")
 
     def list_no_support(self) -> None:
@@ -95,15 +93,15 @@ class EventManage:
         Returns:
             None
         """
-        events = self.filter("EmployeeSupportId", None, Event)
-        table = self.table_event_create(events)
+        events = self.utils.filter(self.session, "EmployeeSupportId", None, Event)
+        table = self.utils.table_create("event", events)
         self.view.display_table(table, "Liste des Evènements sans support")
 
-    def list_yours_events(self)-> None:
+    def list_yours_events(self) -> None:
 
         events = self.get_permissions_events()
 
-        table = self.table_event_create(events)
+        table = self.utils.table_create("event", events)
         self.view.display_table(table, "Liste de vos Evènements")
 
     def create(self):
@@ -129,9 +127,8 @@ class EventManage:
         self.view.display_title_panel_color_fit("Création d'un évènement", "green")
 
         contracts_signed = self.get_permissions_contracts_signed()
-        
 
-        if not contracts_signed:    
+        if not contracts_signed:
             self.view.display_red_message("Il n'y a aucuns de vos contrats signés pour affecter l'évènement !!!")
             return
 
@@ -148,7 +145,6 @@ class EventManage:
         # validation des dates
         date_start = self.validation_date("date_start", "Date de début au format jj-mm-aaaa ( facultatif )")
         date_end = self.validation_date("date_end", "Date de fin au format jj-mm-aaaa ( facultatif )")
-
 
         contract_id = self.valid_contract(contracts_signed)
         if not contract_id:
@@ -168,7 +164,7 @@ class EventManage:
         # validation du support pour l'évènement
         employee_support_id = None
         if self.permissions.can_access_support(self.role):
-            
+
             # liste des employes du support
             role = self.session.query(Role).filter_by(RoleName="Support").one()
             employees_support = role.EmployeesRel
@@ -178,63 +174,26 @@ class EventManage:
         if employee_support_id:
             event.EmployeeSupportId = employee_support_id
 
-        # Ajouter à la session et commit
-        try:
-            self.session.add(event)
-            self.session.flush()
-
-            # Affichage et confirmation de la création
-            if not self.confirm_table_recap(event, "Création", "green"):
-                self.session.expunge(event)
-                self.session.rollback()
-                return
-            self.session.commit()
-            self.view.display_green_message("\nEvènement créé avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la création: {e}")
-
+        self.utils.valid_oper(self.session, "event", "create", event)
 
     def update(self):
 
         events = self.get_permissions_events()
         contracts_signed = self.get_permissions_contracts_signed()
 
-        if not events:    
+        if not events:
             self.view.display_red_message("Vous n'avez aucuns évènements à modifier !!!")
             return
 
         self.view.display_title_panel_color_fit("Modification d'un évènement", "yellow")
 
         # Validation de l'évènement à modifier par son Id
-        while True:
-            event_id = self.view.return_choice(
-                "Entrez l'identifiant de l'évènement à modifier ( vide pour annuler )", False
-            )
-
-            if not event_id:
-                return
-
-            try:
-                event = self.session.query(Event).filter_by(Id=int(event_id)).one()
-
-                # vérifie que l'évènement est dans la liste autorisée.
-                if event in events:
-                    break
-                self.view.display_red_message("Vous n'etes pas autorisé à modifier cet évènement !")
-
-            except Exception:
-                self.view.display_red_message("Identifiant non valide !")
+        event = self.utils.valid_id(self.session, Event, "évènement à modifier", events)
+        if not event:
+            return
 
         # affichage et confirmation de modification
-        if not self.confirm_table_recap(event, "Modification", "yellow"):
+        if not self.utils.confirm_table_recap("event", event, "Modification", "yellow"):
             return
 
         self.view.display_title_panel_color_fit("Modification d'un évènement", "yellow", True)
@@ -261,27 +220,7 @@ class EventManage:
             employees_support = role.EmployeesRel
             event.EmployeeSupportId = self.valid_list(employees_support, event.EmployeeSupportId)
 
-        # Ajouter à la session et commit
-        try:
-            self.session.commit()
-
-            # Affichage et confirmation de la modification
-            if not self.confirm_table_recap(event, "Modification", "yellow"):
-                self.session.expunge(event)
-                self.session.rollback()
-                return
-
-            self.view.display_green_message("\nEvènement modifié avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except ValueError as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur de validation : {e}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la modification : {e}")
+        self.utils.valid_oper(self.session, "event", "update", event)
 
     def delete(self):
         """
@@ -304,57 +243,16 @@ class EventManage:
 
         self.view.display_title_panel_color_fit("Suppression d'un évènement", "red")
 
-        if not events:    
+        if not events:
             self.view.display_red_message("Vous n'avez aucuns évènements à supprimer !!!")
             return
 
         # Validation de l'évènement à supprimer par son Id
-        while True:
-            event_id = self.view.return_choice(
-                "Entrez l'identifiant de l'évènement à supprimer ( vide pour annuler )", False
-            )
-
-            if not event_id:
-                return
-            try:
-                event = self.session.query(Event).filter_by(Id=int(event_id)).one()
-
-                # vérifie que le contrat est dans la liste autorisée
-                if event in events:
-                    break
-                self.view.display_red_message("Vous n'etes pas autorisé à supprimer cet évènement !")
-            except Exception:
-                self.view.display_red_message("Identifiant non valide !")
-
-        # confirmation de suppression
-        if not self.confirm_table_recap(event, "Suppression", "red"):
+        event = self.utils.valid_id(self.session, Event, "évènement à supprimer", events)
+        if not event:
             return
 
-        try:
-            self.session.delete(event)
-            self.session.commit()
-            self.view.display_red_message("Evènement supprimé avec succès !")
-        except IntegrityError as e:
-            self.session.rollback()
-            error_detail = e.args[0].split("DETAIL:")[1] if e.args else "Erreur inconnue"
-            self.view.display_red_message(f"Erreur : {error_detail}")
-        except Exception as e:
-            self.session.rollback()
-            self.view.display_red_message(f"Erreur lors de la suppression : {e}")
-
-    def format_date(self, date: str) -> Optional[str]:
-        """
-        Formate une date en chaîne de caractères au format "JJ/MM/AAAA HH:MN".
-
-        Args:
-            date (str): La date à formater au format YYYY-MM-DD HH:MM.
-
-        Returns:
-            str: La date formatée au format "JJ/MM/AAAA HH:MN", ou None si la date fournie est vide.
-        """
-        if date:
-            return date.strftime("%d/%m/%Y %H:%M")
-        return None
+        self.utils.valid_oper(self.session, "event", "delete", event)
 
     def valid_contract(self, contracts: List[Contract], default: Optional[int] = None) -> Optional[int]:
         """
@@ -396,8 +294,6 @@ class EventManage:
                     return int(contract_id)
                 else:
                     return None
-            except ValueError:
-                self.view.display_red_message("Choix invalide !")
             except Exception:
                 self.view.display_red_message("Choix invalide !")
 
@@ -427,8 +323,6 @@ class EventManage:
                 return None
             try:
                 Event.check_dates(self, key, date)
-            except ValueError as e:
-                self.view.display_red_message(f"Erreur de validation : {e}")
             except Exception as e:
                 self.view.display_red_message(f"Erreur de validation : {e}")
 
@@ -461,156 +355,10 @@ class EventManage:
                 return 0
             try:
                 Event.check_attendees(self, key, attendees)
-            except ValueError as e:
-                self.view.display_red_message(f"Erreur de validation : {e}")
             except Exception as e:
                 self.view.display_red_message(f"Erreur de validation : {e}")
             else:
                 return int(attendees)
-
-    def confirm_table_recap(self, event: Event, oper: str, color: str = "white") -> bool:
-        """
-        Affiche un récapitulatif des détails de l'événement et demande une confirmation.
-
-        Cette méthode affiche un tableau récapitulatif des détails de l'événement passé en paramètre,
-        puis demande à l'utilisateur de confirmer l'opération spécifiée (par exemple, création, modification,
-        suppression). Si l'utilisateur confirme, la méthode retourne True. Sinon, elle affiche un message
-        d'annulation et retourne False.
-
-        Args:
-            event (Event): L'instance de l'événement à afficher dans le récapitulatif.
-            oper (str): Le type d'opération à confirmer (par exemple, "Création", "Modification", "Suppression").
-            color (str): La couleur à utiliser pour le titre du récapitulatif (par défaut "white").
-
-        Returns:
-            bool: True si l'utilisateur confirme l'opération, False sinon.
-        """
-
-        self.view.display_title_panel_color_fit(f"{oper} d'un évènement", f"{color}", True)
-
-        summary_table = self.table_event_create([event])
-
-        self.view.display_table(summary_table, "Résumé de l'évènement")
-
-        # Demander une confirmation avant validation
-        confirm = self.view.return_choice(f"Confirmation {oper} ? (oui/non)", False)
-        if confirm:
-            confirm = confirm.lower()
-        if confirm != "oui":
-            self.view.display_red_message("Opération annulée.")
-            return False
-        return True
-
-    def table_event_create(self, events: List[Event]) -> Table:
-        """
-        Crée un tableau pour afficher les événements.
-
-        Cette méthode prend une liste d'événements en entrée et génère un tableau contenant les détails de chaque événement
-        pour affichage.
-
-        Args:
-            events (List[Event]): Une liste d'objets Event à afficher dans le tableau.
-
-        Returns:
-            Table: Un objet Table de la bibliothèque Rich contenant les informations des événements.
-        """
-
-        # Création du tableau pour afficher les événements
-        table = Table(show_header=True, header_style="bold green")
-        table.add_column("ID", style="dim", width=5)
-        table.add_column("Titre")
-        table.add_column("Notes")
-        table.add_column("Location")
-        table.add_column("Places")
-        table.add_column("Contrat")
-        table.add_column("Employé Support")
-        table.add_column("Date de début")
-        table.add_column("Date de fin")
-        table.add_column("Date de création")
-
-        for event in events:
-
-            table.add_row(
-                str(event.Id),
-                event.Title,
-                event.Notes,
-                event.Location,
-                str(event.Attendees),
-                event.ContractRel.Title if event.ContractId else None,
-                event.EmployeeSupportRel.FirstName if event.EmployeeSupportId else None,
-                self.format_date(event.DateStart),
-                self.format_date(event.DateEnd),
-                self.format_date(event.DateCreated),
-            )
-
-        return table
-    
-    def table_contract_create(self, contracts: List[Contract]) -> Table:
-        """
-        Crée un tableau pour afficher les contrats.
-
-        Cette méthode prend une liste de contrats en entrée et génère un tableau contenant les détails de chaque contrat
-        pour affichage.
-
-        Args:
-            contracts (List[Contract]): Une liste d'objets Contract à afficher dans le tableau.
-
-        Returns:
-            Table: Un objet Table de la bibliothèque Rich contenant les informations des contrats.
-        """
-
-        # Création du tableau pour afficher les contrats
-        table = Table(show_header=True, header_style="bold green")
-        table.add_column("ID", style="dim", width=5)
-        table.add_column("Titre")
-        table.add_column("Nom du Client")
-        table.add_column("Email du Client")
-        table.add_column("Commercial")
-        table.add_column("Montant")
-        table.add_column("Montant restant")
-        table.add_column("Contrat signé")
-        table.add_column("Date de création")
-
-        for contract in contracts:
-            # Récupérer le nom du commercial associé au client
-            commercial_name = contract.CustomerRel.CommercialRel.FirstName if contract.CustomerRel.CommercialRel else None
-
-            table.add_row(
-                str(contract.Id),
-                contract.Title,
-                contract.CustomerRel.FirstName,
-                contract.CustomerRel.Email,
-                commercial_name,
-                str(contract.Amount),
-                str(contract.AmountOutstanding),
-                str(contract.ContractSigned),
-                self.format_date(contract.DateCreated),
-            )
-
-        return table
-
-    def filter(self, attribute: str, value: any, model: Type) -> List:
-        """
-        Filtre les instances du modèle en fonction d'un attribut et d'une valeur spécifiés.
-
-        Args:
-            attribute (str): L'attribut du modèle par lequel filtrer. Si "All", aucun filtrage n'est appliqué.
-            value (Any): La valeur de l'attribut pour filtrer les instances du modèle. Peut être n'importe quelle valeur,
-                         y compris None pour filtrer les valeurs NULL.
-            model (Type): La classe du modèle SQLAlchemy à filtrer (par exemple, Event, Employee).
-
-        Returns:
-            List: Une liste des instances du modèle qui correspondent aux critères de filtrage.
-        """
-        query = self.session.query(model)
-
-        if attribute != "All":
-            if value is None:
-                query = query.filter(getattr(model, attribute) == None)
-            else:
-                query = query.filter(getattr(model, attribute) == value)
-
-        return query.all()
 
     def valid_list(self, employees_support: List[Employee], default: Optional[int] = None) -> Optional[int]:
         """

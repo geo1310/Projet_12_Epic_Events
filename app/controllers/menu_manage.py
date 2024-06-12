@@ -1,11 +1,9 @@
-import sys
-from permissions.permissions import Permissions
+from app.permissions.permissions import Permissions
 from .contract_manage import ContractManage
 from .customer_manage import CustomerManage
 from .employee_manage import EmployeeManage
 from .event_manage import EventManage
 from .role_manage import RoleManage
-from utils.logging_config import logger
 
 
 class MenuManage:
@@ -25,7 +23,7 @@ class MenuManage:
         permissions: L'instance de la gestion des permissions.
     """
 
-    def __init__(self, view, verify_jwt, delete_token, session, employee, role):
+    def __init__(self, view, verify_jwt, delete_token, session, employee, role, logger):
         self.view = view
         self.session = session
         self.verify_jwt = verify_jwt
@@ -37,9 +35,11 @@ class MenuManage:
         self.customer_manage = CustomerManage(session, employee, role)
         self.contract_manage = ContractManage(session, employee, role)
         self.event_manage = EventManage(session, employee, role)
-        self.role_manage = RoleManage(session)
+        self.role_manage = RoleManage(session, self.employee)
         self.permissions = Permissions()
         self.show_intro = False
+        self.logger = logger
+        self.is_logout = False
 
     def run(self):
 
@@ -53,7 +53,7 @@ class MenuManage:
         else:
             self.view.display_red_message("Authentification invalide pour cet utilisateur.")
             self.view.prompt_wait_enter()
-            self.quit_app()
+            self.logout()
 
     def menu_main(self):
         """
@@ -75,7 +75,7 @@ class MenuManage:
             menu_items[1]["Gestion des permissions"] = self.menu_role
 
         menu_items[1]["Deconnexion"] = self.logout
-        
+
         self.run_menu(menu_items, main=True)
 
     def menu_customer(self):
@@ -89,7 +89,6 @@ class MenuManage:
 
         if self.permissions.role_name(self.role) == "Commercial":
             menu_items[1]["Liste de vos clients"] = self.customer_manage.list_yours_customers
-
 
         if self.permissions.can_update_customer(self.role):
             menu_items[1]["Modifier un client"] = self.customer_manage.update
@@ -113,7 +112,6 @@ class MenuManage:
             menu_items[1]["Liste de vos contrats"] = self.contract_manage.list_yours_contracts
             menu_items[1]["Liste de vos contrats non signés"] = self.contract_manage.list_yours_contracts_not_signed
             menu_items[1]["Liste de vos contrats non payés"] = self.contract_manage.list_yours_contracts_not_payed
-
 
         if self.permissions.can_update_contract(self.role):
             menu_items[1]["Modifier un contrat"] = self.contract_manage.update
@@ -196,7 +194,7 @@ class MenuManage:
         """
 
         self.session.refresh(self.role)
-    
+
         title = menu_items[0]
 
         # ajoute la ligne de retour selon le menu
@@ -229,22 +227,17 @@ class MenuManage:
                     if menu[0] == choice:
                         # Envoie vers la méthode choisie
                         menu_items[1][menu[1]]()
-                  
+
             else:
                 self.view.invalid_choice()
 
-        return
-
-    def quit_app(self):
-        """
-        Quitte l'application en supprimant le jeton JWT et en arrêtant le script.
-        """
-        self.view.clear_screen()
-        logger.warning(f"Close App: {self.employee.Email}")
-        sys.exit()
+        if not self.verify_jwt() and not self.is_logout:
+            self.logger.info(f"Session Expirée: {self.employee.Email}")
+            self.logout()
 
     def logout(self):
+        self.is_logout = True
         if self.session:
             self.session.close()
         self.delete_token()
-        logger.info(f"Déconnexion: {self.employee.Email}")
+        self.logger.info(f"Déconnexion: {self.employee.Email}")

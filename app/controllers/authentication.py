@@ -6,22 +6,34 @@ from datetime import datetime, timedelta, timezone
 import jwt
 from dotenv import load_dotenv
 
-from models.employee import Employee
-from models.role import Role
-from utils.token_manage_json import delete_token, load_token_from_json, save_token_to_json
-from utils.logging_config import logger
+from app.models.employee import Employee
+from app.models.role import Role
+from app.utils.token_manage_json import delete_token, load_token_from_json, save_token_to_json
+
 
 class AuthenticationManager:
-    def __init__(self, view):
+    """
+    Gère l'authentification des utilisateurs et la gestion des tokens JWT.
+
+    Attributes:
+        view: Objet de vue pour afficher les messages.
+        logger: Objet logger pour enregistrer les messages de log.
+        SECRET_KEY (str): Clé secrète pour signer les tokens JWT.
+        TOKEN_EXPIRY (int): Durée de validité des tokens JWT en minutes.
+    """
+
+    def __init__(self, view, logger):
         load_dotenv(override=True)
         self.view = view
         self.SECRET_KEY = os.environ.get("SECRET_KEY")
         self.TOKEN_EXPIRY = int(os.environ.get("TOKEN_EXPIRY"))
+        self.logger = logger
 
-    def authenticate(self, email: str, password: str, session: Session) -> Tuple[bool, Optional[Employee], Optional[Role]]:
-
+    def authenticate(
+        self, email: str, password: str, session: Session
+    ) -> Tuple[bool, Optional[Employee], Optional[Role]]:
         """
-        Authentifie un utilisateur en vérifiant les informations d'identification dans la base de données et 
+        Authentifie un utilisateur en vérifiant les informations d'identification dans la base de données et
         récupère le rôle associé.
 
         Args:
@@ -30,7 +42,7 @@ class AuthenticationManager:
             session (Session): La session SQLAlchemy à utiliser pour interagir avec la base de données.
 
         Returns:
-            tuple: Un tuple contenant un booléen indiquant si l'authentification réussit, l'objet Employee 
+            tuple: Un tuple contenant un booléen indiquant si l'authentification réussit, l'objet Employee
                 correspondant s'il est authentifié, et l'objet Role associé. Retourne (False, None, None) en cas d'échec.
 
         Exceptions:
@@ -49,7 +61,7 @@ class AuthenticationManager:
             self.view.display_red_message(f"Une erreur s'est produite : {e}")
             session.close()
             return False, None, None
-   
+
     def generate_jwt_token(self, user_id: int):
         """
         Génère un jeton JWT pour l'utilisateur authentifié.

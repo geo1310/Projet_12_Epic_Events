@@ -2,13 +2,13 @@ from sqlalchemy import TIMESTAMP, Column, Date, ForeignKey, Integer, String, Tex
 from sqlalchemy.orm import relationship, validates
 from datetime import datetime
 
-from models.contract import Contract
-from models.employee import Employee
+from .database import DatabaseConfig
 
-from .database import Base
+from app.models.contract import Contract
+from app.models.employee import Employee
 
 
-class Event(Base):
+class Event(DatabaseConfig.BASE):
     """
     Représente un événement dans la base de données.
 
