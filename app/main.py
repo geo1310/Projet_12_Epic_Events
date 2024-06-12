@@ -21,8 +21,9 @@ sentry_logger = SentryLogger()
 logger.info("Run App")
 
 
-
-def authenticate(view: View, auth_manager: AuthenticationManager, session)-> Tuple[Union[bool, None], Union[Employee, None], Union[Role, None]]:
+def authenticate(
+    view: View, auth_manager: AuthenticationManager, session
+) -> Tuple[Union[bool, None], Union[Employee, None], Union[Role, None]]:
     """
     Demande l'email et le mot de passe et Authentifie l'utilisateur.
 
@@ -50,6 +51,7 @@ def authenticate(view: View, auth_manager: AuthenticationManager, session)-> Tup
     else:
         return "retry", None, None
 
+
 def run_menu(view: View, auth_manager: AuthenticationManager, session, employee: Employee, role: Role) -> None:
     """
     Lance le menu principale et génère le token de la session.
@@ -66,6 +68,7 @@ def run_menu(view: View, auth_manager: AuthenticationManager, session, employee:
     app = MenuManage(view, auth_manager.verify_and_decode_jwt_token, delete_token, session, employee, role, logger)
     app.run()
 
+
 def main():
     """
     Point d'entrée principal pour l'authentification en ligne de commande.
@@ -80,13 +83,13 @@ def main():
         view.display_title_panel_color_fit("Connexion Epic-Events", "magenta")
 
         auth_success, employee, role = authenticate(view, auth_manager, session)
-        
+
         if auth_success:
-            if auth_success == 'quit':
+            if auth_success == "quit":
                 break
-            elif auth_success != 'retry':
+            elif auth_success != "retry":
                 run_menu(view, auth_manager, session, employee, role)
-            
+
         else:
             logger.warning("Nom d'utilisateur ou mot de passe incorrect")
             view.prompt_wait_enter()
@@ -94,6 +97,7 @@ def main():
     logger.info("Close App")
     if session:
         session.close()
+
 
 if __name__ == "__main__":
     delete_token()

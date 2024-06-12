@@ -5,6 +5,7 @@ from .employee_manage import EmployeeManage
 from .event_manage import EventManage
 from .role_manage import RoleManage
 
+
 class MenuManage:
     """
     Gère les menus et les actions associées dans l'application.
@@ -40,7 +41,6 @@ class MenuManage:
         self.logger = logger
         self.is_logout = False
 
-
     def run(self):
 
         # décode le token
@@ -75,7 +75,7 @@ class MenuManage:
             menu_items[1]["Gestion des permissions"] = self.menu_role
 
         menu_items[1]["Deconnexion"] = self.logout
-        
+
         self.run_menu(menu_items, main=True)
 
     def menu_customer(self):
@@ -89,7 +89,6 @@ class MenuManage:
 
         if self.permissions.role_name(self.role) == "Commercial":
             menu_items[1]["Liste de vos clients"] = self.customer_manage.list_yours_customers
-
 
         if self.permissions.can_update_customer(self.role):
             menu_items[1]["Modifier un client"] = self.customer_manage.update
@@ -113,7 +112,6 @@ class MenuManage:
             menu_items[1]["Liste de vos contrats"] = self.contract_manage.list_yours_contracts
             menu_items[1]["Liste de vos contrats non signés"] = self.contract_manage.list_yours_contracts_not_signed
             menu_items[1]["Liste de vos contrats non payés"] = self.contract_manage.list_yours_contracts_not_payed
-
 
         if self.permissions.can_update_contract(self.role):
             menu_items[1]["Modifier un contrat"] = self.contract_manage.update
@@ -196,7 +194,7 @@ class MenuManage:
         """
 
         self.session.refresh(self.role)
-    
+
         title = menu_items[0]
 
         # ajoute la ligne de retour selon le menu
@@ -229,20 +227,17 @@ class MenuManage:
                     if menu[0] == choice:
                         # Envoie vers la méthode choisie
                         menu_items[1][menu[1]]()
-                  
+
             else:
                 self.view.invalid_choice()
-        
+
         if not self.verify_jwt() and not self.is_logout:
             self.logger.info(f"Session Expirée: {self.employee.Email}")
             self.logout()
 
-            
     def logout(self):
         self.is_logout = True
         if self.session:
             self.session.close()
         self.delete_token()
         self.logger.info(f"Déconnexion: {self.employee.Email}")
-        
-        

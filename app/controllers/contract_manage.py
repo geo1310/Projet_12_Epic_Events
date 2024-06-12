@@ -6,7 +6,7 @@ from app.models.contract import Contract
 from app.models.customer import Customer
 from app.permissions.permissions import Permissions
 from app.views.views import View
-from app.utils.sentry_logger import SentryLogger 
+from app.utils.sentry_logger import SentryLogger
 
 from .utils_manage import UtilsManage
 
@@ -39,12 +39,12 @@ class ContractManage:
                 .filter(Customer.CommercialId == self.user_connected_id)
                 .all()
             )
-        
+
         else:
             contracts = []
 
         return contracts
-    
+
     def get_permissions_customers(self):
 
         # liste des clients autorisés
@@ -58,12 +58,11 @@ class ContractManage:
                 .filter(Customer.CommercialId == self.user_connected_id)
                 .all()
             )
-        
+
         else:
             return None
 
         return customers
-        
 
     def list(self) -> None:
         """
@@ -79,10 +78,9 @@ class ContractManage:
         contracts = self.utils.filter(self.session, "All", None, Contract)
         table = self.utils.table_create("contract", contracts)
         self.view.display_table(table, "Liste des Contrats")
-        
 
     def list_yours_contracts(self):
-        
+
         contracts = self.get_permissions_contracts()
 
         table = self.utils.table_create("contract", contracts)
@@ -91,25 +89,25 @@ class ContractManage:
     def list_yours_contracts_not_signed(self):
 
         contracts_not_signed = (
-                self.session.query(Contract)
-                .join(Customer, Contract.CustomerId == Customer.Id)
-                .filter(Customer.CommercialId == self.user_connected_id)
-                .filter(Contract.ContractSigned == False)
-                .all()
-            )
-        
+            self.session.query(Contract)
+            .join(Customer, Contract.CustomerId == Customer.Id)
+            .filter(Customer.CommercialId == self.user_connected_id)
+            .filter(Contract.ContractSigned == False)
+            .all()
+        )
+
         table = self.utils.table_create("contract", contracts_not_signed)
         self.view.display_table(table, "Liste de vos Contrats non signés")
 
     def list_yours_contracts_not_payed(self):
-        contracts_not_payed= (
-                self.session.query(Contract)
-                .join(Customer, Contract.CustomerId == Customer.Id)
-                .filter(Customer.CommercialId == self.user_connected_id)
-                .filter(Contract.AmountOutstanding != 0)
-                .all()
-            )
-        
+        contracts_not_payed = (
+            self.session.query(Contract)
+            .join(Customer, Contract.CustomerId == Customer.Id)
+            .filter(Customer.CommercialId == self.user_connected_id)
+            .filter(Contract.AmountOutstanding != 0)
+            .all()
+        )
+
         table = self.utils.table_create("contract", contracts_not_payed)
         self.view.display_table(table, "Liste de vos Contrats non payés")
 
@@ -163,7 +161,9 @@ class ContractManage:
         amount_outstanding = self.validation_amount(
             "Montant restant du", "amount_outstanding", f"{amount if amount else None}"
         )
-        contract_signed = self.utils.str_to_bool(self.view.return_choice("Contrat signé", False, "non", ("oui", "non")))
+        contract_signed = self.utils.str_to_bool(
+            self.view.return_choice("Contrat signé", False, "non", ("oui", "non"))
+        )
 
         # Instance du nouveau contrat
         contract = Contract(
@@ -175,7 +175,6 @@ class ContractManage:
         )
 
         self.utils.valid_oper(self.session, "contract", "create", contract)
-
 
     def update(self):
         """
@@ -212,7 +211,7 @@ class ContractManage:
 
         self.view.display_title_panel_color_fit("Modification d'un contrat", "yellow")
 
-        if not contracts:    
+        if not contracts:
             self.view.display_red_message("Vous n'avez aucuns contrats à modifier !!!")
             return
 
@@ -236,8 +235,8 @@ class ContractManage:
         contract.ContractSigned = self.utils.str_to_bool(
             self.view.return_choice(
                 "Contrat signé", False, f"{'oui' if contract.ContractSigned else 'non'}", ("oui", "non")
-                )
             )
+        )
 
         if self.permissions.role_name(self.role) == "Gestion":
 
@@ -247,7 +246,6 @@ class ContractManage:
                 return
 
         self.utils.valid_oper(self.session, "contract", "update", contract)
-
 
     def delete(self):
         """
@@ -269,12 +267,11 @@ class ContractManage:
         self.view.display_title_panel_color_fit("Suppression d'un contrat", "red")
 
         # Validation du contrat à modifier par son Id
-        contract = self.utils.valid_id(self.session, Contract, "contrat à supprimer",contracts)
+        contract = self.utils.valid_id(self.session, Contract, "contrat à supprimer", contracts)
         if not contract:
             return
 
         self.utils.valid_oper(self.session, "contract", "delete", contract)
-
 
     def validation_amount(self, message: str, key: str, default: str = "0"):
         """
@@ -317,7 +314,7 @@ class ContractManage:
         Exceptions:
             Affiche un message d'erreur en cas de choix invalide ou si une exception se produit.
         """
-        
+
         # Tableau de choix pour les clients
         table = Table()
         table.add_column("ID", style="cyan")
@@ -338,9 +335,7 @@ class ContractManage:
             )
 
             try:
-                selected_customer = next(
-                    (customer for customer in customers if customer.Id == int(customer_id)), None
-                )
+                selected_customer = next((customer for customer in customers if customer.Id == int(customer_id)), None)
                 if selected_customer:
                     self.view.display_green_message(f"Client sélectionné : {selected_customer.Email}")
                     return int(customer_id)
@@ -350,5 +345,3 @@ class ContractManage:
                 self.view.display_red_message("Choix invalide !")
             except Exception:
                 self.view.display_red_message("Choix invalide !")
-
-

@@ -53,12 +53,12 @@ class View:
             text.append(f"\n\t{menu[0]} - {menu[1]}", style="bold bright_cyan")
         text.append("\n")
         self.console.print(Panel(text, title=f"[bold]{title}[/bold]", width=50))
-        
+
         if user_input is not None:
             choice = user_input
         else:
             choice = self.console.input("[bold]\nchoix :[/bold]")
-            
+
         return choice
 
     def display_table(self, table, title: str):
@@ -153,15 +153,15 @@ class View:
         self.console.print()
         self.console.input("[bold]Appuyer sur Entrée[/bold]")
         return True
-    
-    def pass_n_lines(self, n: int=1):
+
+    def pass_n_lines(self, n: int = 1):
         """
         Affiche un certain nombre de lignes vides dans la console.
 
         Args:
             n (int): Le nombre de lignes vides à afficher. Par défaut, 1 ligne vide.
         """
-        self.console.print(n*"\n")
+        self.console.print(n * "\n")
 
     def clear_screen(self):
         """
@@ -183,4 +183,3 @@ class View:
             os.system("cls")
         elif os_name == "posix":  # Mac, Linux, Unix
             os.system("clear")
-        

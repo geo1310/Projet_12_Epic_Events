@@ -10,9 +10,8 @@
         "module":"pytest",
         "args": [
             "-s",
-            "app/tests/test_role_manage.py",
-            "-k",
-            "test_table_role_create"
+            "app/tests/unit_tests/test_event_manage.py",
+            
         ],
         },
 

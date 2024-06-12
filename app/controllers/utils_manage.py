@@ -2,7 +2,7 @@ from typing import List, Type
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 from app.views.views import View
-from app.utils.sentry_logger import SentryLogger 
+from app.utils.sentry_logger import SentryLogger
 
 
 from app.models.role import Role
@@ -62,16 +62,16 @@ class UtilsManage:
             self.view.display_red_message("Opération annulée.")
             return False
         return True
-    
+
     def table_create(self, arg1: str, list: List) -> Table:
         """
         Crée et retourne un tableau en fonction du type spécifié.
 
-        Cette méthode prend en entrée un type d'objet (event, contract, customer, employee, role) et une liste 
+        Cette méthode prend en entrée un type d'objet (event, contract, customer, employee, role) et une liste
         d'instances de ce type, puis retourne un tableau formaté pour afficher ces instances.
 
         Args:
-            arg1 (str): Le type d'objet pour lequel créer le tableau. Les valeurs possibles sont "event", "contract", 
+            arg1 (str): Le type d'objet pour lequel créer le tableau. Les valeurs possibles sont "event", "contract",
                         "customer", "employee" et "role".
             list (List): Une liste d'instances de l'objet spécifié.
 
@@ -84,24 +84,23 @@ class UtilsManage:
 
         if arg1 == "event":
             return self.table_event(list)
-        
+
         elif arg1 == "contract":
             return self.table_contract(list)
-        
+
         elif arg1 == "customer":
             return self.table_customer(list)
-        
+
         elif arg1 == "employee":
             return self.table_employee(list)
-        
+
         elif arg1 == "role":
             return self.table_role(list)
-        
+
         else:
             raise ValueError(f"Unknown type: {arg1}")
-            
-        
-    def table_event(self, events: List[Event])-> Table:
+
+    def table_event(self, events: List[Event]) -> Table:
         """
         Crée et retourne un tableau pour afficher les événements.
 
@@ -111,7 +110,7 @@ class UtilsManage:
         Returns:
             Table: Un tableau formaté pour afficher les événements avec leurs détails.
         """
-    
+
         table = Table(show_header=True, header_style="bold green")
         table.add_column("ID", style="dim", width=5)
         table.add_column("Titre")
@@ -140,7 +139,7 @@ class UtilsManage:
             )
 
         return table
-    
+
     def table_contract(self, contracts: List[Contract]):
         """
         Crée et retourne un tableau pour afficher les contrats.
@@ -172,10 +171,12 @@ class UtilsManage:
                 commercial_last_name = (
                     contract.CustomerRel.CommercialRel.LastName if contract.CustomerRel.CommercialRel else None
                 )
-                commercial_email = contract.CustomerRel.CommercialRel.Email if contract.CustomerRel.CommercialRel else None
+                commercial_email = (
+                    contract.CustomerRel.CommercialRel.Email if contract.CustomerRel.CommercialRel else None
+                )
             else:
                 commercial_last_name = ""
-                commercial_email =  ""
+                commercial_email = ""
                 customer_last_name = ""
                 customer_email = ""
 
@@ -193,8 +194,8 @@ class UtilsManage:
             )
 
         return table
-    
-    def table_customer(self, customers: List[Customer])-> Table:
+
+    def table_customer(self, customers: List[Customer]) -> Table:
         """
         Crée et retourne un tableau pour afficher les clients.
 
@@ -217,7 +218,7 @@ class UtilsManage:
         table.add_column("Date de modification")
 
         for customer in customers:
-            
+
             table.add_row(
                 str(customer.Id),
                 customer.FirstName,
@@ -231,8 +232,8 @@ class UtilsManage:
             )
 
         return table
-    
-    def table_employee(self, employees: List[Employee])-> Table:
+
+    def table_employee(self, employees: List[Employee]) -> Table:
         """
         Crée et retourne un tableau pour afficher les détails des employés.
 
@@ -275,8 +276,8 @@ class UtilsManage:
             )
 
         return table
-    
-    def table_role(self, roles: List[Role])-> Table:
+
+    def table_role(self, roles: List[Role]) -> Table:
         """
         Crée et retourne un tableau pour afficher les détails des rôles.
 
@@ -309,7 +310,7 @@ class UtilsManage:
         table.add_column("Date de création")
 
         for role in roles:
-            
+
             table.add_row(
                 str(role.Id),
                 role.RoleName,
@@ -333,7 +334,6 @@ class UtilsManage:
             )
 
         return table
-    
 
     def format_date(self, date: str):
         """
@@ -351,7 +351,6 @@ class UtilsManage:
         if date:
             return date.strftime("%d/%m/%Y %H:%M")
         return None
-    
 
     def str_to_bool(self, str_value):
         """
@@ -367,7 +366,6 @@ class UtilsManage:
         if str_value.lower() in ("true", "1", "oui"):
             return True
         return False
-    
 
     def filter(self, session, attribute: str, value: any, model: Type) -> List:
         """
@@ -375,9 +373,9 @@ class UtilsManage:
 
         Args:
             session (Session): La session SQLAlchemy utilisée pour interagir avec la base de données.
-            attribute (str): Le nom de l'attribut du modèle sur lequel effectuer le filtre. 
+            attribute (str): Le nom de l'attribut du modèle sur lequel effectuer le filtre.
                             Si "All", aucun filtre spécifique n'est appliqué.
-            value (any): La valeur de l'attribut à filtrer. Si `None`, les instances où l'attribut est `Null` 
+            value (any): La valeur de l'attribut à filtrer. Si `None`, les instances où l'attribut est `Null`
                         seront récupérées.
             model (Type): La classe du modèle SQLAlchemy à interroger.
 
@@ -393,9 +391,8 @@ class UtilsManage:
                 query = query.filter(getattr(model, attribute) == value)
 
         return query.all()
-    
 
-    def valid_id(self, session, model, message: str,  auhtorized_list: List= None):
+    def valid_id(self, session, model, message: str, auhtorized_list: List = None):
         """
         Valide l'identifiant d'un élément en vérifiant qu'il existe dans la base de données et qu'il est autorisé.
 
@@ -413,9 +410,7 @@ class UtilsManage:
         """
 
         while True:
-            element_id = self.view.return_choice(
-                f"Entrez l'Id: {message}  ( vide pour annuler )", False
-            )
+            element_id = self.view.return_choice(f"Entrez l'Id: {message}  ( vide pour annuler )", False)
 
             if not element_id:
                 return None
@@ -431,7 +426,6 @@ class UtilsManage:
             except Exception as e:
                 self.view.display_red_message(f"Identifiant non valide ! {e}")
 
-
     def valid_oper(self, session, model_name, oper: str, model_instance):
         """
         Valide l'identifiant d'un élément en vérifiant qu'il existe dans la base de données et qu'il est autorisé.
@@ -440,7 +434,7 @@ class UtilsManage:
             session (Session): La session SQLAlchemy à utiliser pour interagir avec la base de données.
             model (Type): Le modèle de base de données SQLAlchemy à interroger.
             message (str): Le message à afficher pour demander l'identifiant.
-            authorized_list (List, optional): La liste des éléments autorisés pour cette opération. 
+            authorized_list (List, optional): La liste des éléments autorisés pour cette opération.
                 Si spécifiée, l'élément doit appartenir à cette liste pour être considéré comme autorisé.
                 Par défaut, None.
 
@@ -450,7 +444,7 @@ class UtilsManage:
         Exceptions:
             Affiche un message d'erreur en cas d'identifiant invalide ou si l'opération n'est pas autorisée.
         """
-        
+
         try:
             if oper == "create":
                 session.add(model_instance)
@@ -488,5 +482,3 @@ class UtilsManage:
         except Exception as e:
             session.rollback()
             self.view.display_red_message(f"Erreur: {e}")
-
-

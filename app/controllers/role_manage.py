@@ -38,7 +38,9 @@ class RoleManage:
         crud_employee = self.utils.str_to_bool(
             self.view.return_choice("Création et Suppression des employés ( 0:non(défaut) / 1:oui )", False, "0")
         )
-        r_role = self.utils.str_to_bool(self.view.return_choice("Liste des roles ( 0:non(défaut) / 1:oui )", False, "0"))
+        r_role = self.utils.str_to_bool(
+            self.view.return_choice("Liste des roles ( 0:non(défaut) / 1:oui )", False, "0")
+        )
         ru_role = self.utils.str_to_bool(
             self.view.return_choice("Modification des roles ( 0:non(défaut) / 1:oui )", False, "0")
         )
@@ -122,7 +124,9 @@ class RoleManage:
         role.Can_crud_Employee = self.utils.str_to_bool(
             self.view.return_choice("Création et Suppression des employés", False, f"{role.Can_crud_Employee}")
         )
-        role.Can_r_Role = self.utils.str_to_bool(self.view.return_choice("Liste des roles", False, f"{role.Can_r_Role}"))
+        role.Can_r_Role = self.utils.str_to_bool(
+            self.view.return_choice("Liste des roles", False, f"{role.Can_r_Role}")
+        )
         role.Can_ru_Role = self.utils.str_to_bool(
             self.view.return_choice("Modification des roles", False, f"{role.Can_ru_Role}")
         )

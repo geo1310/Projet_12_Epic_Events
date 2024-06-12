@@ -2,7 +2,7 @@ import json
 import os
 
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-file_path_global= os.path.join(project_root, "data", "token.json")
+file_path_global = os.path.join(project_root, "data", "token.json")
 
 
 def save_token_to_json(token, file_path_arg=None):

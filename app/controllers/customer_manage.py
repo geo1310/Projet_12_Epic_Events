@@ -34,7 +34,7 @@ class CustomerManage:
             customers = self.utils.filter(self.session, "CommercialId", self.user_connected_id, Customer)
         else:
             customers = []
-            
+
         table = self.utils.table_create("customer", customers)
         self.view.display_table(table, "Liste des Clients")
 
@@ -81,7 +81,6 @@ class CustomerManage:
 
         self.utils.valid_oper(self.session, "customer", "create", customer)
 
-
     def update(self):
         """
         Met à jour les informations d'un client existant dans la base de données.
@@ -112,14 +111,11 @@ class CustomerManage:
         customer.FirstName = self.view.return_choice("Prénom", False, f"{customer.FirstName}")
         customer.LastName = self.view.return_choice("Nom", False, f"{customer.LastName}")
         customer.Email = self.view.return_choice("Email", False, f"{customer.Email}")
-        customer.PhoneNumber = self.view.return_choice(
-            "Numéro de Téléphone", False, f"{customer.PhoneNumber}"
-        )
+        customer.PhoneNumber = self.view.return_choice("Numéro de Téléphone", False, f"{customer.PhoneNumber}")
         customer.Company = self.view.return_choice("Entreprise", False, f"{customer.Company}")
         customer.DateLastUpdate = datetime.now()
 
         self.utils.valid_oper(self.session, "customer", "update", customer)
-
 
     def delete(self):
         """
@@ -145,7 +141,7 @@ class CustomerManage:
         customer = self.utils.valid_id(self.session, Customer, "client à supprimer", customers)
         if not customer:
             return
-        
+
         self.utils.valid_oper(self.session, "customer", "delete", customer)
 
     def validation_email(self):

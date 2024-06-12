@@ -27,7 +27,6 @@ class EventManage:
         self.user_connected_id = employee.Id
         self.utils = UtilsManage(self.employee)
 
-
     def get_permissions_events(self):
 
         if self.permissions.all_event(self.role):
@@ -43,22 +42,18 @@ class EventManage:
             )
 
         elif self.permissions.role_name(self.role) == "support":
-            events = (
-                self.session.query(Event)
-                .filter(Event.EmployeeSupportRel == self.user_connected_id)
-                .all()
-            )
-        
+            events = self.session.query(Event).filter(Event.EmployeeSupportRel == self.user_connected_id).all()
+
         else:
             events = []
 
         return events
-    
+
     def get_permissions_contracts_signed(self):
 
         if self.permissions.all_contract(self.role):
             contracts_signed = self.utils.filter(self.session, "ContractSigned", True, Contract)
-        
+
         elif self.permissions.role_name(self.role) == "Commercial":
             contracts_signed = (
                 self.session.query(Contract)
@@ -102,7 +97,7 @@ class EventManage:
         table = self.utils.table_create("event", events)
         self.view.display_table(table, "Liste des Evènements sans support")
 
-    def list_yours_events(self)-> None:
+    def list_yours_events(self) -> None:
 
         events = self.get_permissions_events()
 
@@ -132,9 +127,8 @@ class EventManage:
         self.view.display_title_panel_color_fit("Création d'un évènement", "green")
 
         contracts_signed = self.get_permissions_contracts_signed()
-        
 
-        if not contracts_signed:    
+        if not contracts_signed:
             self.view.display_red_message("Il n'y a aucuns de vos contrats signés pour affecter l'évènement !!!")
             return
 
@@ -151,7 +145,6 @@ class EventManage:
         # validation des dates
         date_start = self.validation_date("date_start", "Date de début au format jj-mm-aaaa ( facultatif )")
         date_end = self.validation_date("date_end", "Date de fin au format jj-mm-aaaa ( facultatif )")
-
 
         contract_id = self.valid_contract(contracts_signed)
         if not contract_id:
@@ -171,7 +164,7 @@ class EventManage:
         # validation du support pour l'évènement
         employee_support_id = None
         if self.permissions.can_access_support(self.role):
-            
+
             # liste des employes du support
             role = self.session.query(Role).filter_by(RoleName="Support").one()
             employees_support = role.EmployeesRel
@@ -183,13 +176,12 @@ class EventManage:
 
         self.utils.valid_oper(self.session, "event", "create", event)
 
-
     def update(self):
 
         events = self.get_permissions_events()
         contracts_signed = self.get_permissions_contracts_signed()
 
-        if not events:    
+        if not events:
             self.view.display_red_message("Vous n'avez aucuns évènements à modifier !!!")
             return
 
@@ -230,7 +222,6 @@ class EventManage:
 
         self.utils.valid_oper(self.session, "event", "update", event)
 
-
     def delete(self):
         """
         Supprime un événement après validation de son identifiant et confirmation de l'utilisateur.
@@ -252,7 +243,7 @@ class EventManage:
 
         self.view.display_title_panel_color_fit("Suppression d'un évènement", "red")
 
-        if not events:    
+        if not events:
             self.view.display_red_message("Vous n'avez aucuns évènements à supprimer !!!")
             return
 
@@ -262,7 +253,6 @@ class EventManage:
             return
 
         self.utils.valid_oper(self.session, "event", "delete", event)
-
 
     def valid_contract(self, contracts: List[Contract], default: Optional[int] = None) -> Optional[int]:
         """
@@ -306,7 +296,6 @@ class EventManage:
                     return None
             except Exception:
                 self.view.display_red_message("Choix invalide !")
-
 
     def validation_date(self, key: str, message: str, default: Optional[str] = None) -> Optional[str]:
         """
@@ -370,7 +359,6 @@ class EventManage:
                 self.view.display_red_message(f"Erreur de validation : {e}")
             else:
                 return int(attendees)
-
 
     def valid_list(self, employees_support: List[Employee], default: Optional[int] = None) -> Optional[int]:
         """

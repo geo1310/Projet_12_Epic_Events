@@ -34,16 +34,16 @@ class DatabaseConfig:
 
     def _load_env_variables(self):
         try:
-            file_env_path = Path(__file__).parent.parent / '.env'
+            file_env_path = Path(__file__).parent.parent / ".env"
             if not os.path.exists(file_env_path):
                 raise FileNotFoundError(f"File {file_env_path} not found.")
-            
+
             load_dotenv(file_env_path, override=True)
 
-            self.db_use = os.environ['DB_USE']
-            self.db_user = os.environ['DB_USER']
-            self.db_port = os.environ['DB_PORT_POSTGRE']
-            self.db_name = os.environ['DB_NAME']
+            self.db_use = os.environ["DB_USE"]
+            self.db_user = os.environ["DB_USER"]
+            self.db_port = os.environ["DB_PORT_POSTGRE"]
+            self.db_name = os.environ["DB_NAME"]
 
             self.logger.info(f"Variables d'environnement chargées depuis {file_env_path}")
         except FileNotFoundError as e:
@@ -59,11 +59,11 @@ class DatabaseConfig:
         """
         try:
             if self.db_use == "local":
-                self.db_password = os.environ['DB_PASSWORD_LOCAL']
-                self.db_host = os.environ['DB_HOST_LOCAL']
+                self.db_password = os.environ["DB_PASSWORD_LOCAL"]
+                self.db_host = os.environ["DB_HOST_LOCAL"]
             elif self.db_use == "render.com":
-                self.db_password = os.environ['DB_PASSWORD_RENDER']
-                self.db_host = os.environ['DB_HOST_RENDER']
+                self.db_password = os.environ["DB_PASSWORD_RENDER"]
+                self.db_host = os.environ["DB_HOST_RENDER"]
             else:
                 raise ValueError("DB_USE must be either 'local' or 'render.com'")
 
@@ -73,7 +73,6 @@ class DatabaseConfig:
             self._test_connection()
 
             self.db_session_local = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
-
 
         except KeyError as e:
             self.logger.error(f"Missing required environment variable: {e}")
@@ -96,6 +95,7 @@ class DatabaseConfig:
         except exc.SQLAlchemyError as e:
             self.logger.error(f"An error occurred during the database connection test: {e}")
             sys.exit(1)
+
 
 # Utilisation de la classe DatabaseConfig
 if __name__ == "__main__":

@@ -5,10 +5,11 @@ import logging
 import colorlog
 from logging.handlers import RotatingFileHandler
 
+
 class LoggerConfig:
     """Configuration de logger pour l'application"""
 
-    def __init__(self, name=__name__, log_file='epic_events.log', max_bytes=1000000, backup_count=3):
+    def __init__(self, name=__name__, log_file="epic_events.log", max_bytes=1000000, backup_count=3):
         """
         Initialise la configuration du logger.
 
@@ -21,29 +22,31 @@ class LoggerConfig:
         self.logger.setLevel(logging.DEBUG)
 
         # Créer un formatter pour définir le format des messages de log
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%d-%m-%Y %H:%M:%S')
+        formatter = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s", datefmt="%d-%m-%Y %H:%M:%S"
+        )
 
         # Créer un formatter coloré pour les messages de log sur la console
         color_formatter = colorlog.ColoredFormatter(
-            '%(log_color)s%(asctime)s - %(levelname)s - %(message)s',
-            datefmt='%d-%m-%Y %H:%M:%S',
+            "%(log_color)s%(asctime)s - %(levelname)s - %(message)s",
+            datefmt="%d-%m-%Y %H:%M:%S",
             log_colors={
-                'DEBUG': 'reset',
-                'INFO': 'green',
-                'WARNING': 'yellow',
-                'ERROR': 'red',
-                'CRITICAL': 'bold_red'
-            }
+                "DEBUG": "reset",
+                "INFO": "green",
+                "WARNING": "yellow",
+                "ERROR": "red",
+                "CRITICAL": "bold_red",
+            },
         )
 
         # Créer un handler pour afficher les messages sur la console avec des couleurs
         console_handler = logging.StreamHandler()
-        console_handler.setLevel(logging.DEBUG)  # Seuls les messages INFO et supérieurs seront affichés sur la console
+        console_handler.setLevel(logging.DEBUG)
         console_handler.setFormatter(color_formatter)  # Appliquer le formatter coloré au handler
 
         # Créer un handler pour écrire dans un fichier de log avec rotation
-        file_path = Path(__file__).parent.parent / 'data' / log_file
-        file_handler = RotatingFileHandler(file_path, maxBytes=max_bytes, backupCount=backup_count, encoding='utf-8')
+        file_path = Path(__file__).parent.parent / "data" / log_file
+        file_handler = RotatingFileHandler(file_path, maxBytes=max_bytes, backupCount=backup_count, encoding="utf-8")
         file_handler.setLevel(logging.DEBUG)  # Tous les messages de log seront écrits dans le fichier
         file_handler.setFormatter(formatter)  # Appliquer le formatter au handler
 
@@ -65,11 +68,12 @@ class LoggerConfig:
         """Retourne le logger configuré"""
         return self.logger
 
+
 # Utilisation de la classe LoggerConfig
 if __name__ == "__main__":
     logger_config = LoggerConfig()
     logger = logger_config.get_logger()
-    
+
     logger.debug("Ceci est un message de debug")
     logger.info("Ceci est un message d'information")
     logger.warning("Ceci est un message d'avertissement")
@@ -77,4 +81,4 @@ if __name__ == "__main__":
     logger.critical("Ceci est un message critique")
 
     # crée une exception
-    print(1/0)
+    print(1 / 0)

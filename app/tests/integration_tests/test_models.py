@@ -64,7 +64,7 @@ def create_test_data(session):
     session.add(employee)
     session.commit()
 
-    customer = Customer(FirstName="test_customer_1", LastName="", Email="customer@email.com", CommercialId = employee.Id)
+    customer = Customer(FirstName="test_customer_1", LastName="", Email="customer@email.com", CommercialId=employee.Id)
     session.add(customer)
     session.commit()
 
@@ -87,7 +87,6 @@ def create_test_data(session):
     session.delete(event)
     session.commit()
     session.close()
-
 
 
 def test_employee(session, create_test_data):
@@ -220,5 +219,6 @@ def test_event(session, create_test_data):
         session.commit()
     session.rollback()
 
+
 if __name__ == "__main__":
-    pytest.main([__file__])
+    pytest.main(["--cov=app/models/", "--cov-report=html", __file__])

@@ -5,6 +5,7 @@ import logging
 from dotenv import load_dotenv
 from sentry_sdk.integrations.logging import LoggingIntegration
 
+
 class SentryLogger:
     """
     Gestion des événements Sentry.
@@ -16,33 +17,36 @@ class SentryLogger:
         """
 
         load_dotenv()
-        
+
         sentry_sdk.init(
             dsn=os.environ.get("SENTRY_DSN"),
             environment=os.environ.get("ENVIRONMENT"),
             traces_sample_rate=1.0,  # Capture 100% des traces
             profiles_sample_rate=1.0,  # Profilage à 100%
             enable_tracing=True,
-            integrations=[LoggingIntegration(
-                level=logging.INFO,  # Capture les événements info et plus
-                event_level=logging.WARNING  # Envoie les erreurs comme des événements
-            )]
+            integrations=[
+                LoggingIntegration(
+                    level=logging.INFO,  # Capture les événements info et plus
+                    event_level=logging.WARNING,  # Envoie les erreurs comme des événements
+                )
+            ],
         )
 
-
-    def sentry_event(self, user_connected_email: str, message: str, level: str = "info", transaction: str = None) -> None:
+    def sentry_event(
+        self, user_connected_email: str, message: str, level: str = "info", transaction: str = None
+    ) -> None:
         """
         Envoie un événement à Sentry pour journaliser une action ou une information dans l'application.
 
         Args:
             user_connected_email (str): L'adresse e-mail de l'utilisateur connecté qui effectue l'action.
             message (str): Le message décrivant l'action ou l'information à journaliser.
-            transaction (str, optional): Le type de transaction associée à l'événement. 
+            transaction (str, optional): Le type de transaction associée à l'événement.
                 Par défaut, None.
-            level (str, optional): Le niveau de gravité de l'événement. 
-                Les valeurs possibles sont 'info', 'warning', 'error' ou 'fatal'. 
+            level (str, optional): Le niveau de gravité de l'événement.
+                Les valeurs possibles sont 'info', 'warning', 'error' ou 'fatal'.
                 Par défaut, 'info'.
-            ip_address (str, optional): L'adresse IP de l'utilisateur. 
+            ip_address (str, optional): L'adresse IP de l'utilisateur.
                 Par défaut, None.
 
         Returns:
@@ -64,6 +68,7 @@ class SentryLogger:
             "level": level,  # Niveau de gravité de l'événement
         }
         sentry_sdk.capture_event(event)
+
 
 # Exemple d'utilisation :
 if __name__ == "__main__":

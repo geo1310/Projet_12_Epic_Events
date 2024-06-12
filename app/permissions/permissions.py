@@ -49,7 +49,7 @@ class Permissions:
     @staticmethod
     def can_create_delete_customer(role):
         return role.Can_crud_Customer
-    
+
     @staticmethod
     def all_customer(role):
         return role.Can_access_all_Customer
@@ -64,7 +64,7 @@ class Permissions:
     @staticmethod
     def can_create_delete_contract(role):
         return role.Can_crud_Contract
-    
+
     @staticmethod
     def all_contract(role):
         return role.Can_access_all_Contract
@@ -86,11 +86,11 @@ class Permissions:
     @staticmethod
     def can_create_delete_event(role):
         return role.Can_crud_Event
-    
+
     @staticmethod
     def all_event(role):
         return role.Can_access_all_Event
-    
+
     @staticmethod
     def role_name(role):
         return role.RoleName

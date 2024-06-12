@@ -7,7 +7,7 @@ class Role(DatabaseConfig.BASE):
     """
     Représente un rôle dans la base de données.
 
-   """
+    """
 
     __tablename__ = "Role"
 
