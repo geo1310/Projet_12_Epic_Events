@@ -27,7 +27,7 @@ class Customer(DatabaseConfig.BASE):
     __tablename__ = "Customer"
 
     Id = Column(Integer, primary_key=True, autoincrement=True)
-    CommercialId = Column(Integer, ForeignKey("Employee.Id", ondelete="RESTRICT"), nullable=False)
+    CommercialId = Column(Integer, ForeignKey("Employee.Id", ondelete="SET NULL"))
     FirstName = Column(String(100))
     LastName = Column(String(100))
     Email = Column(String(100), unique=True, nullable=False)

@@ -27,6 +27,7 @@ class DatabaseConfig:
 
     BASE = declarative_base()
 
+
     def __init__(self, logger):
         self.logger = logger
         self._load_env_variables()
@@ -69,6 +70,7 @@ class DatabaseConfig:
 
             self.db_url = f"postgresql+psycopg2://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}?client_encoding=utf8"
             self.engine = create_engine(self.db_url)
+            
 
             self._test_connection()
 

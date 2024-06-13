@@ -29,7 +29,7 @@ class Employee(DatabaseConfig.BASE):
     LastName = Column(String(100))
     Email = Column(String(100), unique=True, nullable=False)
     PasswordHash = Column(String(255), nullable=False)
-    RoleId = Column(Integer, ForeignKey("Role.Id", ondelete="RESTRICT"))
+    RoleId = Column(Integer, ForeignKey("Role.Id", ondelete="SET NULL"))
     DateCreated = Column(TIMESTAMP, server_default=func.current_timestamp())
 
     RoleRel = relationship("Role", backref="EmployeesRel")
