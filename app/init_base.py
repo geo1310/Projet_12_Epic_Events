@@ -1,9 +1,11 @@
-from app.dev.init_db import init_base
+import subprocess
 
 """
-Ce script exécute la fonction `init_base` définie dans le module `dev.raz_db` pour initialiser la base de données.
-
+Ce script exécute le script `init_db.py` pour initialiser la base de données.
 """
 
 if __name__ == "__main__":
-    init_base()
+    try:
+        subprocess.run(["python", "dev/init_db.py"], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Une erreur s'est produite lors de l'exécution du script init_db.py : {e}")

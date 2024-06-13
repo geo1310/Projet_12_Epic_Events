@@ -1,6 +1,7 @@
 from typing import Tuple, Union
 from dotenv import load_dotenv
-
+from sqlalchemy import inspect
+from app.dev.init_db import DatabaseInitializer
 from app.models.database import DatabaseConfig
 from app.controllers.authentication import AuthenticationManager
 from app.controllers.menu_manage import MenuManage
@@ -12,14 +13,6 @@ from app.models.employee import Employee
 from app.models.role import Role
 
 load_dotenv()
-
-# Loggers
-logger_config = LoggerConfig()
-logger = logger_config.get_logger()
-sentry_logger = SentryLogger()
-
-logger.info("Run App")
-
 
 def authenticate(
     view: View, auth_manager: AuthenticationManager, session
@@ -52,7 +45,7 @@ def authenticate(
         return "retry", None, None
 
 
-def run_menu(view: View, auth_manager: AuthenticationManager, session, employee: Employee, role: Role) -> None:
+def run_menu(view: View, auth_manager: AuthenticationManager, session, employee: Employee, role: Role, logger) -> None:
     """
     Lance le menu principale et génère le token de la session.
 
@@ -68,15 +61,34 @@ def run_menu(view: View, auth_manager: AuthenticationManager, session, employee:
     app = MenuManage(view, auth_manager.verify_and_decode_jwt_token, delete_token, session, employee, role, logger)
     app.run()
 
+def check_tables_exist(engine, base):
+    """
+    Vérifie si toutes les tables définies dans les modèles SQLAlchemy existent dans la base de données.
 
-def main():
+    Args:
+        engine: L'objet engine de SQLAlchemy.
+        base: L'objet base de SQLAlchemy contenant les modèles.
+
+    Returns:
+        bool: True si toutes les tables existent, False sinon.
+        list: Liste des tables manquantes si certaines tables sont absentes.
+    """
+    inspector = inspect(engine)
+    existing_tables = inspector.get_table_names()
+    expected_tables = base.metadata.tables.keys()
+
+    missing_tables = [table for table in expected_tables if table not in existing_tables]
+
+    if missing_tables:
+        return False, missing_tables
+    return True, []
+
+def main(view, logger, session, auth_manager):
     """
     Point d'entrée principal pour l'authentification en ligne de commande.
     """
-    view = View()
-    auth_manager = AuthenticationManager(view, logger)
-    session_config = DatabaseConfig(logger)
-    session = session_config.db_session_local()
+    logger.info("Run App")
+
 
     while True:
         view.clear_screen()
@@ -88,7 +100,7 @@ def main():
             if auth_success == "quit":
                 break
             elif auth_success != "retry":
-                run_menu(view, auth_manager, session, employee, role)
+                run_menu(view, auth_manager, session, employee, role, logger)
 
         else:
             logger.warning("Nom d'utilisateur ou mot de passe incorrect")
@@ -100,5 +112,28 @@ def main():
 
 
 if __name__ == "__main__":
-    delete_token()
-    main()
+    
+    # Config Loggers
+    logger_config = LoggerConfig()
+    logger = logger_config.get_logger()
+    sentry_logger = SentryLogger()
+
+    view = View()
+    auth_manager = AuthenticationManager(view, logger)
+
+    # Config session
+    session_config = DatabaseConfig(logger)
+    session = session_config.db_session_local()
+    engine = session_config.engine
+    base = session_config.BASE
+
+    # Vérif tables base
+    check_table, missed_tables = check_tables_exist(engine, base)
+    if not check_table:
+        logger.error(f"Table(s) non trouvée(s) : {missed_tables}")
+        # Création des tables manquantes
+        init_db = DatabaseInitializer(session, engine, base, logger)
+        init_db.create_all_tables()
+
+    # Lance l'application
+    main(view, logger, session, auth_manager)

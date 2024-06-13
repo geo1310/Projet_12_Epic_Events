@@ -10,7 +10,9 @@
         "module":"pytest",
         "args": [
             "-s",
-            "app/tests/unit_tests/test_event_manage.py",
+            "app/tests/unit_tests/test_main.py",
+            "-k",
+            "test_main"
             
         ],
         },
