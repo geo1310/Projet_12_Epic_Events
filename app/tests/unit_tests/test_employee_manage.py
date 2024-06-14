@@ -276,6 +276,110 @@ class TestEmployeeManage:
         # Assert
         self.mock_valid_oper.assert_not_called()
 
+    def test_validation_password(self):
+
+        # Arrang 1 success
+        patch.stopall()
+        mock_return_choice = patch.object(View, "return_choice").start()
+        mock_validate_password_hash = patch.object(Employee, "validate_password_hash").start()
+        mock_display_red_message = patch.object(View, "display_red_message").start()
+        password = "Password123"
+        mock_return_choice.side_effect = [password, password, ""]
+        mock_validate_password_hash.return_value = password
+
+        # Act 1 success
+        result = self.employee_manage.validation_password()
+        
+        # Assert 1 sucess
+        assert result == password
+
+        # Arrang 2 fail no password
+        password = ""
+        mock_return_choice.side_effect = [password, ""]
+        mock_validate_password_hash.return_value = password
+
+        # Arrang 2 fail no password
+        result = self.employee_manage.validation_password()
+        
+        # Arrang 2 fail no password
+        assert result == None
+
+        # Arrang 3 fail no confirm password
+        password = "Password123"
+        mock_return_choice.side_effect = [password, "", ""]
+        mock_validate_password_hash.return_value = password
+
+        # Arrang 3 fail no confirm password
+        result = self.employee_manage.validation_password()
+        
+        # Arrang 3 fail no confirm password
+        assert result == None
+       
+        # Arrang 4 fail password != confirm password
+        password = "Password123"
+        mock_return_choice.side_effect = [password, password+"xxx", ""]
+        mock_validate_password_hash.return_value = password
+
+        # Arrang 4 fail password != confirm password
+        result = self.employee_manage.validation_password()
+        
+        # Arrang 4 fail password != confirm password
+        assert result == None
+        mock_display_red_message.assert_called_with("Les mots de passe ne correspondent pas.")
+
+        # Arrang 5 fail validate_password_hash
+        password = "Password123"
+        mock_return_choice.side_effect = [password, password, ""]
+        mock_validate_password_hash.side_effect = ValueError("Invalid password")
+
+        # Act 5 fail validate_password_hash
+        result = self.employee_manage.validation_password()
+        
+        # Assert 5 fail validate_password_hash
+        assert result == None
+        mock_display_red_message.assert_called_with("Erreur de validation : Invalid password")
+        
+    def test_validation_email(self):
+
+        # Arrang 1 success
+        patch.stopall()
+        mock_return_choice = patch.object(View, "return_choice").start()
+        mock_validate_email = patch.object(Employee, "validate_email").start()
+        mock_display_red_message = patch.object(View, "display_red_message").start()
+        email = "EMAIL@email.com"
+        mock_return_choice.side_effect = [email, ""]
+        mock_validate_email.return_value = email.lower()
+
+        # Act 1 success
+        result = self.employee_manage.validation_email()
+        
+        # Assert 1 sucess
+        assert result == email
+
+        # Arrang 2 fail no email
+        email = ""
+        mock_return_choice.side_effect = [email, ""]
+
+        # Act 2 fail no email
+        result = self.employee_manage.validation_email()
+        
+        # Assert 2 fail no email
+        assert result == None
+
+        # Arrang 3 fail bad email
+        email = "EMAIL@email.com"
+        mock_return_choice.side_effect = [email, ""]
+        mock_validate_email.side_effect = ValueError("Invalid email")
+
+        # Act 3 fail bad email
+        result = self.employee_manage.validation_email()
+        
+        # Assert 3 fail bad email
+        assert result == None
+        mock_display_red_message.assert_called_with("Erreur de validation : Invalid email")
+
+        
+        
 
 if __name__ == "__main__":
     pytest.main(["--cov=app/controllers/", "--cov-report=html", __file__])

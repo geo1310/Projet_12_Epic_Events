@@ -11,13 +11,12 @@ from app.controllers.utils_manage import UtilsManage
 from app.permissions.permissions import Permissions
 
 
-class TestCustomerManage:
+class TestEventManage:
     """Tests unitaires pour la classe CustomerManage"""
 
     @pytest.fixture(autouse=True)
     def setup_method(self):
         self.session = Mock()
-        self.session.query = Mock()
         self.customer = Mock(Customer)
         self.employee = Mock(Employee)
         self.role = Mock(Role)
@@ -285,6 +284,151 @@ class TestCustomerManage:
         # Assert
         self.mock_display_title_panel_color_fit.assert_called_with("Suppression d'un évènement", "red")
         self.mock_valid_oper.assert_not_called()
+
+    def test_get_permissions_events(self):
+
+        # Arrang 1 avec permission all_event
+        patch.stopall()
+        mock_filter = patch.object(UtilsManage, "filter").start()
+        mock_permissions_all_event = patch.object(Permissions, "all_event").start()
+        mock_permissions_role_name = patch.object(Permissions, "role_name").start()
+
+        mock_permissions_all_event.return_value = True
+        all_events = ["event 1", "event 2"]
+        mock_filter.return_value = all_events
+
+        # Act 1 avec permission all_event
+        result = self.event_manage.get_permissions_events()
+
+        # Assert 1 avec permission all_event
+        assert result == all_events
+
+        # Arrang 2 sans permissions all_event et role commercial
+        mock_permissions_all_event.return_value = False
+        mock_permissions_role_name.return_value = "Commercial"
+        all_events_query = ["event 1", "event 2", "event 3"]
+        self.session.query.return_value.join.return_value.join.return_value.filter.return_value.all.return_value = (
+            all_events_query
+        )
+
+        # Act 2 sans permissions all_event et role commercial
+        result = self.event_manage.get_permissions_events()
+
+        # Assert 2 sans permissions all_event et role commercial
+        assert result == all_events_query
+
+        # Arrang 3 sans permissions all_event et role support
+        mock_permissions_role_name.return_value = "support"
+        all_events_query = ["event 1"]
+        self.session.query.return_value.filter.return_value.all.return_value = all_events_query
+
+        # Act 3 sans permissions all_event et role support
+        result = self.event_manage.get_permissions_events()
+
+        # Assert 3 sans permissions all_event et role support
+        assert result == all_events_query
+
+        # Arrang 4 sans permissions all_event et autre role
+        mock_permissions_role_name.return_value = "xxx"
+
+        # Act 4 sans permissions all_event et autre role
+        result = self.event_manage.get_permissions_events()
+
+        # Assert 4 sans permissions all_event et autre role
+        assert result == []
+
+    def test_get_contracts_signed(self):
+
+        # Arrang 1 avec permission all_contract
+        patch.stopall()
+        mock_filter = patch.object(UtilsManage, "filter").start()
+        mock_permissions_all_contract = patch.object(Permissions, "all_contract").start()
+        mock_permissions_role_name = patch.object(Permissions, "role_name").start()
+
+        mock_permissions_all_contract.return_value = True
+        all_contracts = ["contract 1", "contract 2"]
+        mock_filter.return_value = all_contracts
+
+        # Act 1 avec permission all_contract
+        result = self.event_manage.get_permissions_contracts_signed()
+
+        # Assert 1 avec permission all_contract
+        assert result == all_contracts
+
+        # Arrang 2 sans permissions all_contract et role commercial
+        mock_permissions_all_contract.return_value = False
+        mock_permissions_role_name.return_value = "Commercial"
+        all_contracts_query = ["contract 1", "contract 2", "contract 3"]
+        self.session.query.return_value.join.return_value.filter.return_value.filter.return_value.all.return_value = (
+            all_contracts_query
+        )
+
+        # Act 2 sans permissions all_contract et role commercial
+        result = self.event_manage.get_permissions_contracts_signed()
+
+        # Assert 2 sans permissions all_contract et role commercial
+        assert result == all_contracts_query
+
+        # Arrang 3 sans permissions all_contract et autre role
+        mock_permissions_role_name.return_value = "xxx"
+
+        # Act 3 sans permissions all_contract et autre role
+        result = self.event_manage.get_permissions_contracts_signed()
+
+        # Assert 3 sans permissions all_contract et autre role
+        assert result == []
+
+    def test_validation_date(self):
+
+        # Arrang 1 success
+        patch.stopall()
+        mock_return_choice = patch.object(View, "return_choice").start()
+        mock_display_red_message = patch.object(View, "display_red_message").start()
+        date = "01-01-2000"
+        mock_return_choice.side_effect = [date]
+
+        # Act 1 success
+        result = self.event_manage.validation_date("DateStart", "message")
+
+        # Assert 1 success
+        assert result == date
+
+        # Arrang 2 fail
+        date = "2000/01/01"
+        mock_return_choice.side_effect = [date, ""]
+
+        # Act 2 fail
+        self.event_manage.validation_date("DateStart", "message")
+
+        # Assert 2 fail
+        args, _ = mock_display_red_message.call_args
+        assert "Erreur de validation :" in args[0]
+
+    def test_validation_attendees(self):
+
+        # Arrang 1 success
+        patch.stopall()
+        mock_return_choice = patch.object(View, "return_choice").start()
+        mock_display_red_message = patch.object(View, "display_red_message").start()
+        attendees = "20"
+        mock_return_choice.side_effect = [attendees]
+
+        # Act 1 success
+        result = self.event_manage.validation_attendees("Attendees", "message")
+
+        # Assert 1 sucess
+        assert result == int(attendees)
+
+        # Arrang 2 fail
+        mock_return_choice.side_effect = ["xxx", "-100", ""]
+
+        # Act 2 fail
+        self.event_manage.validation_attendees("Attendees", "message")
+
+        # Assert 2 fail
+        args, _ = mock_display_red_message.call_args
+        assert "Erreur de validation :" in args[0]
+
 
 
 if __name__ == "__main__":

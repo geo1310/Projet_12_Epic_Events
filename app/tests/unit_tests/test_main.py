@@ -2,13 +2,11 @@ import pytest
 from dotenv import load_dotenv
 from unittest.mock import Mock, patch
 from app.controllers.authentication import AuthenticationManager
-from app.controllers.menu_manage import MenuManage
 from app.views.views import View
 from app.utils.token_manage_json import delete_token
 from app.utils.logger_config import LoggerConfig
 from app.models.employee import Employee
 from app.models.role import Role
-from app.dev.init_db import DatabaseInitializer
 from app.models.database import DatabaseConfig
 from app import main
 
@@ -81,8 +79,7 @@ class TestApplication:
 
     def test_main_success(self):
 
-        with patch("app.main.run_menu") as mock_run_menu, \
-         patch("app.main.authenticate") as mock_main_authenticate:
+        with patch("app.main.run_menu") as mock_run_menu, patch("app.main.authenticate") as mock_main_authenticate:
 
             # Arrang
             result_success = (True, "employee", "role")
@@ -94,7 +91,9 @@ class TestApplication:
 
         # Assert
         self.mock_display_title_panel_color_fit.assert_called_with("Connexion Epic-Events", "magenta")
-        mock_run_menu.assert_called_once_with(self.view, self.auth_manager, self.session, "employee", "role", self.logger)
+        mock_run_menu.assert_called_once_with(
+            self.view, self.auth_manager, self.session, "employee", "role", self.logger
+        )
 
     def test_run_menu(self):
         """Test de la fonction run_menu"""
@@ -102,7 +101,7 @@ class TestApplication:
         with patch("app.controllers.menu_manage.MenuManage.run") as mock_run, patch.object(
             AuthenticationManager, "generate_jwt_token"
         ) as mock_generate_jwt_token:
-
+            # Act
             main.run_menu(self.view, self.auth_manager, self.session, self.employee, self.role, self.logger)
 
         # Assert

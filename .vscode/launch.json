@@ -10,9 +10,9 @@
         "module":"pytest",
         "args": [
             "-s",
-            "app/tests/unit_tests/test_main.py",
+            "app/tests/unit_tests/test_employee_manage.py",
             "-k",
-            "test_main"
+            "validation_email"
             
         ],
         },
