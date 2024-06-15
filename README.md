@@ -5,10 +5,11 @@
 ![Python](https://img.shields.io/badge/rich-13.7.1-green.svg)
 ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0.30-green.svg)
 ![PostgreSQL 16](https://img.shields.io/badge/PostgreSQL-16-blue)
+[![Sentry](https://img.shields.io/badge/Sentry-Enabled-brightgreen.svg)](https://sentry.io)
+
 
 [![pytest](https://img.shields.io/badge/pytest-passing-success)](https://pytest.org)
-[![Coverage](https://img.shields.io/badge/coverage-%25-brightgreen)](https://coverage.readthedocs.io/en/latest/)
-[![Locust](https://img.shields.io/badge/locust-ready-brightgreen)](https://locust.io/)
+[![Coverage](https://img.shields.io/badge/coverage-75%25-brightgreen)](https://coverage.readthedocs.io/en/latest/)
 
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 [![Flake8](https://img.shields.io/badge/flake8-checked-blueviolet)](https://flake8.pycqa.org/en/latest/)
@@ -54,12 +55,17 @@ Le projet utilise une base de données __PostgréSQL__ hébergée sur render.com
 * Utilisateur pour la base locale : `epic_events_user`
 * Mot de passe pour la base locale : `user_pass_123`
 
-Le choix de la base se fait en activant la variable d'environnement __DB_USE__ dans le fichier __.env__ en __local__ ou __render__, par défaut on se connecte à la base distante render.
+Le choix de la base se fait en activant la variable d'environnement __DB_USE__ sur local dans le fichier __.env__ en __local__ ou __render__, par défaut on se connecte à la base distante render.
 
-Pour initialiser la base en locale après avoir configuré votre serveur postgré et ajouter la base et le user,  éxécuter la commande suivante dans le dosier __app__ du projet
+Après avoir configuré votre serveur postgré et ajouter la base et le user, les tables et les données tests seront créées automatiquement en lancant l'application dans le dosier __app__ du projet : 
 
 ```bash
-python init_base.py
+python main.py
+```
+
+Pour ré-initialiser complètement la base se placer dans le dossier __app/dev__ et lancer le script :
+```bash
+python init_db.py
 ```
 
 Liste des utilisateurs par défaut :
@@ -68,7 +74,22 @@ Liste des utilisateurs par défaut :
 2. __email:__ commercial_2@email.com  __password:__ password123
 3. __email:__ support_1@email.com  __password:__ password123
 4. __email:__ support_2@email.com  __password:__ password123
-5. __email:__ manager_1@email.com  __password:__ password123
+5. __email:__ gestion_1@email.com  __password:__ password123
+
+* Tous les utilisateurs ont accés aux clients, contrats et évènements en lecture seule.
+
+* Equipe de gestion :
+    * Accés total aux utilisateurs et permissions.
+    * Accés total aux contrats.
+    * Accés aux évènements pour l'affection des supports.
+
+* Equipe commerciale :
+    * Création des clients
+    * Accés total à leurts clients
+    * Création d'évènement pour leurs clients avec contrat signé ( sans affectation de support ).
+
+* Equipe support :
+    * Modification des évènements qui leurs sont attribués par l'équipe gestion. 
 
 Exécuter la commande suivante dans le dossier app du projet pour se connecter et lancer l'application :
 
@@ -82,6 +103,44 @@ Renseigner l'email et le mot de passe pour arriver sur le menu principal
 
 ![image](./docs/images/Epic_Events_menu.png)
 
+## Journalisation
+
+L'application possède une __journalisation locale__ et __distante sur Sentry__
+
+### Journalisation locale :
+    
+    *   app/data/epic_events.log
+
+Logging géré avec un système de rotation de 3 fichiers max, la taille max de chaque fichier est de 1mo :
+
+`epic_events.log` , `epic_events.log1` et `epic_events.log2`
+
+### Journalisation Sentry :
+
+Compte test sur Sentry pour accéder au logging : 
+
+*   __Email :__ `ocstudentgeo@gmail.com`
+*   __Mot de passe :__ `Pass_P13_OC_Python`
+
+
+
+
+
+## Tests
+
+Pour executer les tests se placer dans le dossier racine du projet : 
+```
+pytest
+```
+Pour connaitre la couverture totale des tests :
+```
+pytest --cov=.
+```
+Pour effectuer un rapport html des tests : 
+```
+pytest --cov=. --cov-report html
+```
+Lancer index.html du dossier htlmcov
 
 
 ## Contribuer

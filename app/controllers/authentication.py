@@ -1,14 +1,15 @@
 import os
-from sqlalchemy.orm import Session
-from typing import Tuple, Optional
 from datetime import datetime, timedelta, timezone
+from typing import Optional, Tuple
 
 import jwt
 from dotenv import load_dotenv
+from sqlalchemy.orm import Session
 
 from app.models.employee import Employee
 from app.models.role import Role
-from app.utils.token_manage_json import delete_token, load_token_from_json, save_token_to_json
+from app.utils.token_manage_json import (delete_token, load_token_from_json,
+                                         save_token_to_json)
 
 
 class AuthenticationManager:

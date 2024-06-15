@@ -1,4 +1,5 @@
 import pytest
+
 from app.models.role import Role
 from app.permissions.permissions import Permissions
 

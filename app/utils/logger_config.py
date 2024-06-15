@@ -1,9 +1,9 @@
-import sys
-import traceback
-from pathlib import Path
 import logging
-import colorlog
+import sys
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
+
+import colorlog
 
 
 class LoggerConfig:

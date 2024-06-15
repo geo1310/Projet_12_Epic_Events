@@ -1,8 +1,11 @@
 import re
 from email.utils import parseaddr
+
 import bcrypt
 from sqlalchemy import TIMESTAMP, Column, ForeignKey, Integer, String, func
 from sqlalchemy.orm import relationship, validates
+
+from app.models.role import Role
 
 from .database import DatabaseConfig
 

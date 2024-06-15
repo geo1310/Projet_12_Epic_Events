@@ -1,11 +1,13 @@
-import pytest
-from unittest.mock import patch, Mock
 from datetime import datetime
-from app.models.role import Role
-from app.models.employee import Employee
-from app.views.views import View
+from unittest.mock import Mock, patch
+
+import pytest
+
 from app.controllers.employee_manage import EmployeeManage
 from app.controllers.utils_manage import UtilsManage
+from app.models.employee import Employee
+from app.models.role import Role
+from app.views.views import View
 
 
 class TestEmployeeManage:
@@ -75,7 +77,7 @@ class TestEmployeeManage:
     # test méthode create
 
     def test_create_success(self):
-        
+
         # Arrang
         first_name = "John"
         last_name = "Doe"
@@ -208,7 +210,7 @@ class TestEmployeeManage:
         # Act
         self.employee_manage.update()
 
-        #Assert
+        # Assert
         self.mock_display_title_panel_color_fit.assert_called_with("Modification d'un employé", "yellow")
         self.mock_valid_oper.assert_not_called()
 
@@ -289,7 +291,7 @@ class TestEmployeeManage:
 
         # Act 1 success
         result = self.employee_manage.validation_password()
-        
+
         # Assert 1 sucess
         assert result == password
 
@@ -300,7 +302,7 @@ class TestEmployeeManage:
 
         # Arrang 2 fail no password
         result = self.employee_manage.validation_password()
-        
+
         # Arrang 2 fail no password
         assert result == None
 
@@ -311,18 +313,18 @@ class TestEmployeeManage:
 
         # Arrang 3 fail no confirm password
         result = self.employee_manage.validation_password()
-        
+
         # Arrang 3 fail no confirm password
         assert result == None
-       
+
         # Arrang 4 fail password != confirm password
         password = "Password123"
-        mock_return_choice.side_effect = [password, password+"xxx", ""]
+        mock_return_choice.side_effect = [password, password + "xxx", ""]
         mock_validate_password_hash.return_value = password
 
         # Arrang 4 fail password != confirm password
         result = self.employee_manage.validation_password()
-        
+
         # Arrang 4 fail password != confirm password
         assert result == None
         mock_display_red_message.assert_called_with("Les mots de passe ne correspondent pas.")
@@ -334,11 +336,11 @@ class TestEmployeeManage:
 
         # Act 5 fail validate_password_hash
         result = self.employee_manage.validation_password()
-        
+
         # Assert 5 fail validate_password_hash
         assert result == None
         mock_display_red_message.assert_called_with("Erreur de validation : Invalid password")
-        
+
     def test_validation_email(self):
 
         # Arrang 1 success
@@ -352,7 +354,7 @@ class TestEmployeeManage:
 
         # Act 1 success
         result = self.employee_manage.validation_email()
-        
+
         # Assert 1 sucess
         assert result == email
 
@@ -362,7 +364,7 @@ class TestEmployeeManage:
 
         # Act 2 fail no email
         result = self.employee_manage.validation_email()
-        
+
         # Assert 2 fail no email
         assert result == None
 
@@ -373,13 +375,11 @@ class TestEmployeeManage:
 
         # Act 3 fail bad email
         result = self.employee_manage.validation_email()
-        
+
         # Assert 3 fail bad email
         assert result == None
         mock_display_red_message.assert_called_with("Erreur de validation : Invalid email")
 
-        
-        
 
 if __name__ == "__main__":
     pytest.main(["--cov=app/controllers/", "--cov-report=html", __file__])

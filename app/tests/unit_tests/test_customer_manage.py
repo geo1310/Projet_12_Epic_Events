@@ -1,13 +1,15 @@
-import pytest
-from unittest.mock import patch, Mock
 from datetime import datetime
+from unittest.mock import Mock, patch
+
+import pytest
+
+from app.controllers.customer_manage import CustomerManage
+from app.controllers.utils_manage import UtilsManage
 from app.models.customer import Customer
 from app.models.employee import Employee
 from app.models.role import Role
-from app.views.views import View
-from app.controllers.customer_manage import CustomerManage
-from app.controllers.utils_manage import UtilsManage
 from app.permissions.permissions import Permissions
+from app.views.views import View
 
 
 class TestCustomerManage:

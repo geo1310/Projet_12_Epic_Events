@@ -1,7 +1,8 @@
-import sentry_sdk
-import socket
-import os
 import logging
+import os
+import socket
+
+import sentry_sdk
 from dotenv import load_dotenv
 from sentry_sdk.integrations.logging import LoggingIntegration
 

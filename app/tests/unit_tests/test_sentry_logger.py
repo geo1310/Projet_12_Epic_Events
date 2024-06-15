@@ -1,9 +1,11 @@
-import pytest
-from unittest.mock import patch, MagicMock
-import socket
 import os
+import socket
+from unittest.mock import MagicMock, patch
+
+import pytest
 from sentry_sdk import capture_event, configure_scope, init
 from sentry_sdk.integrations.logging import LoggingIntegration
+
 from app.utils.sentry_logger import SentryLogger
 
 
@@ -28,7 +30,7 @@ class TestSentryLogger:
         patch.stopall()
 
     def test_sentry_logger_init(self):
-        
+
         # Arrang
         with patch("sentry_sdk.init") as mock_init:
             expected_dsn = os.environ.get("SENTRY_DSN")

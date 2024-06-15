@@ -1,18 +1,21 @@
 from typing import Tuple, Union
+
 from dotenv import load_dotenv
 from sqlalchemy import inspect
-from app.dev.init_db import DatabaseInitializer
-from app.models.database import DatabaseConfig
+
 from app.controllers.authentication import AuthenticationManager
 from app.controllers.menu_manage import MenuManage
-from app.views.views import View
-from app.utils.token_manage_json import delete_token
-from app.utils.logger_config import LoggerConfig
-from app.utils.sentry_logger import SentryLogger
+from app.dev.init_db import DatabaseInitializer
+from app.models.database import DatabaseConfig
 from app.models.employee import Employee
 from app.models.role import Role
+from app.utils.logger_config import LoggerConfig
+from app.utils.sentry_logger import SentryLogger
+from app.utils.token_manage_json import delete_token
+from app.views.views import View
 
 load_dotenv()
+
 
 def authenticate(
     view: View, auth_manager: AuthenticationManager, session
@@ -61,6 +64,7 @@ def run_menu(view: View, auth_manager: AuthenticationManager, session, employee:
     app = MenuManage(view, auth_manager.verify_and_decode_jwt_token, delete_token, session, employee, role, logger)
     app.run()
 
+
 def check_tables_exist(engine, base):
     """
     Vérifie si toutes les tables définies dans les modèles SQLAlchemy existent dans la base de données.
@@ -83,12 +87,12 @@ def check_tables_exist(engine, base):
         return False, missing_tables
     return True, []
 
+
 def main(view, logger, session, auth_manager):
     """
     Point d'entrée principal pour l'authentification en ligne de commande.
     """
     logger.info("Run App")
-
 
     while True:
         view.clear_screen()
@@ -112,7 +116,7 @@ def main(view, logger, session, auth_manager):
 
 
 if __name__ == "__main__":
-    
+
     # Config Loggers
     logger_config = LoggerConfig()
     logger = logger_config.get_logger()

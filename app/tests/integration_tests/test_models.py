@@ -1,8 +1,6 @@
-import pytest
 from collections import namedtuple
-import pytest
 
-from app.utils.logger_config import LoggerConfig
+import pytest
 
 from app.models.contract import Contract
 from app.models.customer import Customer
@@ -10,6 +8,7 @@ from app.models.database import DatabaseConfig
 from app.models.employee import Employee
 from app.models.event import Event
 from app.models.role import Role
+from app.utils.logger_config import LoggerConfig
 
 
 @pytest.fixture()

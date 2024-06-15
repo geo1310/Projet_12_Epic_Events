@@ -1,9 +1,10 @@
-from sqlalchemy import TIMESTAMP, Boolean, Column, Float, ForeignKey, Integer, String, func
+from sqlalchemy import (TIMESTAMP, Boolean, Column, Float, ForeignKey, Integer,
+                        String, func)
 from sqlalchemy.orm import relationship, validates
 
-from .database import DatabaseConfig
-
 from app.models.customer import Customer
+
+from .database import DatabaseConfig
 
 
 class Contract(DatabaseConfig.BASE):

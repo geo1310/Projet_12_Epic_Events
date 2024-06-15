@@ -1,14 +1,16 @@
+from unittest.mock import Mock, patch
+
 import pytest
 from dotenv import load_dotenv
-from unittest.mock import Mock, patch
+
+from app import main
 from app.controllers.authentication import AuthenticationManager
-from app.views.views import View
-from app.utils.token_manage_json import delete_token
-from app.utils.logger_config import LoggerConfig
+from app.models.database import DatabaseConfig
 from app.models.employee import Employee
 from app.models.role import Role
-from app.models.database import DatabaseConfig
-from app import main
+from app.utils.logger_config import LoggerConfig
+from app.utils.token_manage_json import delete_token
+from app.views.views import View
 
 # Charger les variables d'environnement pour les tests
 load_dotenv()

@@ -17,18 +17,5 @@
         ],
         },
 
-        {
-            "name": "Python: pytest",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${workspaceFolder}/app/tests",  // Remplacez par le chemin vers votre dossier ou fichier de tests
-            "args": [
-                "m",
-                "pytest",
-                "-s"  // Pour désactiver la capture de sortie
-            ],
-            "console": "integratedTerminal",  // Utilisez le terminal intégré
-            "justMyCode": false  // Pour inclure le code des bibliothèques externes dans le débogage
-        }
     ]
 }

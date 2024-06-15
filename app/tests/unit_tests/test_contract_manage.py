@@ -1,14 +1,16 @@
-import pytest
-from unittest.mock import patch, Mock, MagicMock
 from datetime import datetime
-from app.models.employee import Employee
-from app.models.role import Role
-from app.models.contract import Contract
-from app.models.customer import Customer
-from app.views.views import View
+from unittest.mock import MagicMock, Mock, patch
+
+import pytest
+
 from app.controllers.contract_manage import ContractManage
 from app.controllers.utils_manage import UtilsManage
+from app.models.contract import Contract
+from app.models.customer import Customer
+from app.models.employee import Employee
+from app.models.role import Role
 from app.permissions.permissions import Permissions
+from app.views.views import View
 
 
 class TestContractManage:
@@ -180,7 +182,7 @@ class TestContractManage:
         self.mock_table_create.assert_called_with("contract", mock_contracts)
         self.mock_display_table.assert_called_with(mock_table, "Liste de vos Contrats non payés")
 
-# test méthode create
+    # test méthode create
 
     def test_create_success(self):
 

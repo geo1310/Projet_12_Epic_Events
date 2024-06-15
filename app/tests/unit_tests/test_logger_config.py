@@ -1,7 +1,9 @@
-import pytest
 import logging
-from unittest.mock import patch, MagicMock
 import sys
+from unittest.mock import MagicMock, patch
+
+import pytest
+
 from app.utils.logger_config import LoggerConfig
 
 

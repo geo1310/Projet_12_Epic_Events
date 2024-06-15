@@ -1,11 +1,13 @@
 from datetime import datetime
 from unittest.mock import Mock
+
 import pytest
-from app.controllers.utils_manage import UtilsManage
-from app.utils.logger_config import LoggerConfig
-from app.models.database import DatabaseConfig
 from rich.table import Table
+
+from app.controllers.utils_manage import UtilsManage
 from app.models.contract import Contract
+from app.models.database import DatabaseConfig
+from app.utils.logger_config import LoggerConfig
 
 
 @pytest.fixture

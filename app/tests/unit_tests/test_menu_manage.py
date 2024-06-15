@@ -1,5 +1,7 @@
-import pytest
 from unittest.mock import Mock
+
+import pytest
+
 from app.controllers.menu_manage import MenuManage
 
 

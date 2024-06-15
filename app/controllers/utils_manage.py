@@ -1,15 +1,15 @@
 from typing import List, Type
+
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
-from app.views.views import View
-from app.utils.sentry_logger import SentryLogger
 
-
-from app.models.role import Role
-from app.models.employee import Employee
-from app.models.customer import Customer
 from app.models.contract import Contract
+from app.models.customer import Customer
+from app.models.employee import Employee
 from app.models.event import Event
+from app.models.role import Role
+from app.utils.sentry_logger import SentryLogger
+from app.views.views import View
 
 
 class UtilsManage:

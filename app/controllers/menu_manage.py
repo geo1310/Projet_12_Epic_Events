@@ -1,4 +1,5 @@
 from app.permissions.permissions import Permissions
+
 from .contract_manage import ContractManage
 from .customer_manage import CustomerManage
 from .employee_manage import EmployeeManage

@@ -1,11 +1,11 @@
-from app.utils.logger_config import LoggerConfig
-from app.utils.sentry_logger import SentryLogger
 from app.models.contract import Contract
 from app.models.customer import Customer
 from app.models.database import DatabaseConfig
 from app.models.employee import Employee
 from app.models.event import Event
 from app.models.role import Role
+from app.utils.logger_config import LoggerConfig
+from app.utils.sentry_logger import SentryLogger
 
 
 class DatabaseInitializer:
@@ -27,6 +27,7 @@ class DatabaseInitializer:
         create_all_tables(): Crée toutes les tables dans la base de données.
         init_base(): Réinitialise la base de données et la peuple avec des données prédéfinies.
     """
+
     def __init__(self, session, engine, base, logger):
 
         self.session = session
@@ -239,6 +240,7 @@ class DatabaseInitializer:
             self.create_contracts()
         finally:
             self.session.close()
+
 
 if __name__ == "__main__":
     # Config Loggers

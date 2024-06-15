@@ -1,11 +1,13 @@
-import pytest
-from unittest.mock import patch, Mock
 from datetime import datetime
-from app.models.role import Role
-from app.models.employee import Employee
-from app.views.views import View
+from unittest.mock import Mock, patch
+
+import pytest
+
 from app.controllers.role_manage import RoleManage
 from app.controllers.utils_manage import UtilsManage
+from app.models.employee import Employee
+from app.models.role import Role
+from app.views.views import View
 
 
 class TestRoleManage:
@@ -88,7 +90,7 @@ class TestRoleManage:
     # test méthode create
 
     def test_create_success(self):
-       
+
         # Arrang
         role_name = "Admin"
         self.mock_return_choice.side_effect = [
@@ -186,7 +188,7 @@ class TestRoleManage:
         self.mock_valid_oper.called_once()
 
     def test_update_cancelled_due_to_empty_id(self):
-        
+
         # Arrang
         self.mock_valid_id.return_value = None
 
@@ -233,7 +235,7 @@ class TestRoleManage:
     # test méthode delete
 
     def test_delete_success(self):
-        
+
         # Arrang
         self.mock_valid_id.return_value = Mock()
 
@@ -245,7 +247,7 @@ class TestRoleManage:
         self.mock_valid_oper.called_once()
 
     def test_delete_cancelled_due_to_empty_id(self):
-        
+
         # Arrang
         self.mock_valid_id.return_value = None
 

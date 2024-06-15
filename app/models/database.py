@@ -1,9 +1,11 @@
-import sys
 import os
+import sys
 from pathlib import Path
+
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, exc
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import declarative_base, sessionmaker
+
 from app.utils.logger_config import LoggerConfig
 
 
@@ -26,7 +28,6 @@ class DatabaseConfig:
     """
 
     BASE = declarative_base()
-
 
     def __init__(self, logger):
         self.logger = logger
@@ -70,7 +71,6 @@ class DatabaseConfig:
 
             self.db_url = f"postgresql+psycopg2://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}?client_encoding=utf8"
             self.engine = create_engine(self.db_url)
-            
 
             self._test_connection()
 

@@ -12,5 +12,3 @@
 - [ ] Add a new feature
 
 #### Todo
-- [ ] Use fu**ng shortcuts ;) 
-- [ ] Add Company to the model

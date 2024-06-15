@@ -1,14 +1,16 @@
-import pytest
-from unittest.mock import patch, Mock
 from datetime import datetime
-from app.models.customer import Customer
-from app.models.event import Event
-from app.models.employee import Employee
-from app.models.role import Role
-from app.views.views import View
+from unittest.mock import Mock, patch
+
+import pytest
+
 from app.controllers.event_manage import EventManage
 from app.controllers.utils_manage import UtilsManage
+from app.models.customer import Customer
+from app.models.employee import Employee
+from app.models.event import Event
+from app.models.role import Role
 from app.permissions.permissions import Permissions
+from app.views.views import View
 
 
 class TestEventManage:
@@ -428,7 +430,6 @@ class TestEventManage:
         # Assert 2 fail
         args, _ = mock_display_red_message.call_args
         assert "Erreur de validation :" in args[0]
-
 
 
 if __name__ == "__main__":
