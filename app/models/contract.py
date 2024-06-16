@@ -2,7 +2,7 @@ from sqlalchemy import (TIMESTAMP, Boolean, Column, Float, ForeignKey, Integer,
                         String, func)
 from sqlalchemy.orm import relationship, validates
 
-from app.models.customer import Customer
+from models.customer import Customer
 
 from .database import DatabaseConfig
 

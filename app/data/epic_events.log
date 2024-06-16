@@ -212,3 +212,141 @@
 15-06-2024 13:21:40 - app.utils.logger_config - INFO - Déconnexion: gestion_1@email.com
 15-06-2024 13:21:48 - app.utils.logger_config - WARNING - Nom d'utilisateur ou mot de passe incorrect
 15-06-2024 13:23:17 - app.utils.logger_config - INFO - Close App
+16-06-2024 10:55:59 - app.utils.logger_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\.env
+16-06-2024 10:56:00 - app.utils.logger_config - INFO - Database connection successful
+16-06-2024 10:56:00 - app.utils.logger_config - INFO - Run App
+16-06-2024 10:56:57 - app.utils.logger_config - INFO - Connexion: gestion_1@email.com
+16-06-2024 11:08:49 - app.utils.logger_config - INFO - Déconnexion: gestion_1@email.com
+16-06-2024 11:08:50 - app.utils.logger_config - INFO - Close App
+16-06-2024 12:11:20 - utils.logger_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\.env
+16-06-2024 12:11:22 - utils.logger_config - INFO - Database connection successful
+16-06-2024 12:11:22 - utils.logger_config - INFO - Run App
+16-06-2024 12:11:46 - utils.logger_config - INFO - Connexion: gestion_1@email.com
+16-06-2024 12:15:27 - utils.logger_config - INFO - Déconnexion: gestion_1@email.com
+16-06-2024 12:15:28 - utils.logger_config - INFO - Close App
+16-06-2024 12:16:41 - utils.logger_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\.env
+16-06-2024 12:16:42 - utils.logger_config - INFO - Database connection successful
+16-06-2024 12:16:42 - utils.logger_config - INFO - Run App
+16-06-2024 12:16:45 - utils.logger_config - INFO - Close App
+16-06-2024 12:23:34 - utils.logger_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\.env
+16-06-2024 12:23:36 - utils.logger_config - INFO - Database connection successful
+16-06-2024 12:23:36 - utils.logger_config - INFO - Run App
+16-06-2024 12:23:51 - utils.logger_config - INFO - Connexion: commercial_1@email.com
+16-06-2024 12:24:33 - utils.logger_config - INFO - Déconnexion: commercial_1@email.com
+16-06-2024 12:24:34 - utils.logger_config - INFO - Close App
+16-06-2024 14:14:34 - utils.logger_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\.env
+16-06-2024 14:14:35 - utils.logger_config - INFO - Database connection successful
+16-06-2024 14:14:35 - utils.logger_config - INFO - Run App
+16-06-2024 14:14:49 - utils.logger_config - INFO - Connexion: gestion_1@email.com
+16-06-2024 14:18:57 - utils.logger_config - INFO - Déconnexion: gestion_1@email.com
+16-06-2024 14:18:58 - utils.logger_config - INFO - Close App
+16-06-2024 14:19:03 - utils.logger_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\.env
+16-06-2024 14:19:04 - utils.logger_config - INFO - Database connection successful
+16-06-2024 14:19:04 - utils.logger_config - INFO - Run App
+16-06-2024 14:19:20 - utils.logger_config - INFO - Connexion: commercial_1@email.com
+16-06-2024 14:19:29 - utils.logger_config - INFO - Déconnexion: commercial_1@email.com
+16-06-2024 14:19:41 - utils.logger_config - INFO - Connexion: gestion_1@email.com
+16-06-2024 14:19:59 - utils.logger_config - INFO - Déconnexion: gestion_1@email.com
+16-06-2024 14:19:59 - utils.logger_config - INFO - Close App
+16-06-2024 19:10:46 - utils.logger_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\.env
+16-06-2024 19:10:47 - utils.logger_config - INFO - Database connection successful
+16-06-2024 19:10:47 - utils.logger_config - INFO - Run App
+16-06-2024 19:11:04 - utils.logger_config - INFO - Connexion: gestion_1@email.com
+16-06-2024 20:04:50 - utils.logger_config - ERROR - Uncaught exception
+Traceback (most recent call last):
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\main.py", line 143, in <module>
+    main(view, logger, session, auth_manager)
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\main.py", line 107, in main
+    run_menu(view, auth_manager, session, employee, role, logger)
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\main.py", line 65, in run_menu
+    app.run()
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\controllers\menu_manage.py", line 63, in run
+    self.menu_main()
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\controllers\menu_manage.py", line 90, in menu_main
+    self.run_menu(menu_items, main=True)
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\controllers\menu_manage.py", line 240, in run_menu
+    menu_items[1][menu[1]]()
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\controllers\menu_manage.py", line 111, in menu_customer
+    self.run_menu(menu_items, main=False)
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\controllers\menu_manage.py", line 207, in run_menu
+    self.session.refresh(self.role)
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 3153, in refresh
+    loading.load_on_ident(
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\orm\loading.py", line 509, in load_on_ident
+    return load_on_pk_identity(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\orm\loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2236, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2353, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+[SQL: SELECT "Role"."Id", "Role"."RoleName", "Role"."Can_r_Employee", "Role"."Can_ru_Employee", "Role"."Can_crud_Employee", "Role"."Can_r_Role", "Role"."Can_ru_Role", "Role"."Can_crud_Role", "Role"."Can_ru_Customer", "Role"."Can_crud_Customer", "Role"."Can_access_all_Customer", "Role"."Can_ru_Contract", "Role"."Can_crud_Contract", "Role"."Can_access_all_Contract", "Role"."Can_ru_Event", "Role"."Can_crud_Event", "Role"."Can_access_all_Event", "Role"."Can_access_support_Event", "Role"."DateCreated" 
+FROM "Role" 
+WHERE "Role"."Id" = %(pk_1)s]
+[parameters: {'pk_1': 3}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+16-06-2024 20:32:59 - utils.logger_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\.env
+16-06-2024 20:33:01 - utils.logger_config - INFO - Database connection successful
+16-06-2024 20:33:01 - utils.logger_config - INFO - Run App
+16-06-2024 20:33:20 - utils.logger_config - WARNING - Nom d'utilisateur ou mot de passe incorrect
+16-06-2024 20:33:40 - utils.logger_config - INFO - Connexion: gestion_1@email.com
+16-06-2024 20:36:34 - utils.logger_config - INFO - Déconnexion: gestion_1@email.com
+16-06-2024 20:36:36 - utils.logger_config - INFO - Close App
+16-06-2024 20:36:49 - utils.logger_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\.env
+16-06-2024 20:36:50 - utils.logger_config - INFO - Database connection successful
+16-06-2024 20:36:50 - utils.logger_config - INFO - Run App
+16-06-2024 20:42:40 - utils.logger_config - INFO - Close App
+16-06-2024 20:42:46 - utils.logger_config - INFO - Variables d'environnement chargées depuis C:\Users\gbric\OneDrive\Documents\P12_epic_events\Projet_12_Epic_Events\app\.env
+16-06-2024 20:42:47 - utils.logger_config - INFO - Database connection successful
+16-06-2024 20:42:47 - utils.logger_config - INFO - Run App
+16-06-2024 20:43:00 - utils.logger_config - INFO - Connexion: gestion_1@email.com
+16-06-2024 20:43:13 - utils.logger_config - INFO - Déconnexion: gestion_1@email.com
+16-06-2024 20:43:14 - utils.logger_config - INFO - Close App

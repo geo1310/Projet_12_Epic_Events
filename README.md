@@ -49,7 +49,7 @@ poetry install
 ```
 ## Usage
 
-Le projet utilise une base de données __PostgréSQL__ hébergée sur render.com par défaut, mais il peut etre utilisé avec une base locale en utilisant les données suivantes :
+Le projet utilise une base de données __PostgreSQL__ hébergée sur render.com par défaut, mais il peut etre utilisé avec une base locale en utilisant les données suivantes :
 
 * Nom de la base locale : `epic_events`
 * Utilisateur pour la base locale : `epic_events_user`
@@ -57,7 +57,7 @@ Le projet utilise une base de données __PostgréSQL__ hébergée sur render.com
 
 Le choix de la base se fait en activant la variable d'environnement __DB_USE__ sur local dans le fichier __.env__ en __local__ ou __render__, par défaut on se connecte à la base distante render.
 
-Après avoir configuré votre serveur postgré et ajouter la base et le user, les tables et les données tests seront créées automatiquement en lancant l'application dans le dosier __app__ du projet : 
+Après avoir configuré votre serveur postgreSQL et ajouter la base et le user, les tables et les données tests seront créées automatiquement en lancant l'application dans le dosier __app__ du projet : 
 
 ```bash
 python main.py
@@ -70,25 +70,25 @@ python init_db.py
 
 Liste des utilisateurs par défaut :
 
-1. __email:__ commercial_1@email.com  __password:__ password123
-2. __email:__ commercial_2@email.com  __password:__ password123
-3. __email:__ support_1@email.com  __password:__ password123
-4. __email:__ support_2@email.com  __password:__ password123
-5. __email:__ gestion_1@email.com  __password:__ password123
+1. __email:__ commercial_1@email.com  __password:__ Password123
+2. __email:__ commercial_2@email.com  __password:__ Password123
+3. __email:__ support_1@email.com  __password:__ Password123
+4. __email:__ support_2@email.com  __password:__ Password123
+5. __email:__ gestion_1@email.com  __password:__ Password123
 
 * Tous les utilisateurs ont accés aux clients, contrats et évènements en lecture seule.
 
-* Equipe de gestion :
+* __Equipe de gestion :__
     * Accés total aux utilisateurs et permissions.
     * Accés total aux contrats.
     * Accés aux évènements pour l'affection des supports.
 
-* Equipe commerciale :
+* __Equipe commerciale :__
     * Création des clients
     * Accés total à leurts clients
     * Création d'évènement pour leurs clients avec contrat signé ( sans affectation de support ).
 
-* Equipe support :
+* __Equipe support :__
     * Modification des évènements qui leurs sont attribués par l'équipe gestion. 
 
 Exécuter la commande suivante dans le dossier app du projet pour se connecter et lancer l'application :
@@ -113,7 +113,7 @@ L'application possède une __journalisation locale__ et __distante sur Sentry__
 
 Logging géré avec un système de rotation de 3 fichiers max, la taille max de chaque fichier est de 1mo :
 
-`epic_events.log` , `epic_events.log1` et `epic_events.log2`
+`epic_events.log` , `epic_events.log.1` et `epic_events.log.2`
 
 ### Journalisation Sentry :
 

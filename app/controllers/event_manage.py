@@ -3,13 +3,13 @@ from typing import List, Optional
 from rich.console import Console
 from rich.table import Table
 
-from app.models.contract import Contract
-from app.models.customer import Customer
-from app.models.employee import Employee
-from app.models.event import Event
-from app.models.role import Role
-from app.permissions.permissions import Permissions
-from app.views.views import View
+from models.contract import Contract
+from models.customer import Customer
+from models.employee import Employee
+from models.event import Event
+from models.role import Role
+from permissions.permissions import Permissions
+from views.views import View
 
 from .utils_manage import UtilsManage
 

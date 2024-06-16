@@ -1,4 +1,4 @@
-from app.permissions.permissions import Permissions
+from permissions.permissions import Permissions
 
 from .contract_manage import ContractManage
 from .customer_manage import CustomerManage
@@ -43,6 +43,16 @@ class MenuManage:
         self.is_logout = False
 
     def run(self):
+        """
+         Lance le menu principal, en vérifiant l'authentification
+        L'utilisateur doit etre authentifié et son Id doit correspondre  l'authentification.
+
+        Cette méthode effectue les étapes suivantes :
+        1. Décode le jeton JWT pour obtenir les informations de l'utilisateur.
+        2. Vérifie si l'utilisateur connecté correspond à l'utilisateur dans le jeton décodé.
+        3. Si l'authentification est valide, affiche le menu principal.
+        4. Si l'authentification est invalide, affiche un message d'erreur et déconnecte l'utilisateur.
+        """
 
         # décode le token
         decoded_payload = self.verify_jwt()
@@ -194,8 +204,6 @@ class MenuManage:
 
         """
 
-        self.session.refresh(self.role)
-
         title = menu_items[0]
 
         # ajoute la ligne de retour selon le menu
@@ -209,6 +217,8 @@ class MenuManage:
 
         # vérifie la validité de la session
         while self.verify_jwt():
+
+            self.session.refresh(self.role)
 
             user_connected = f"{self.employee.FirstName} {self.employee.LastName}"
             user_connected_status = self.employee.RoleRel.RoleName

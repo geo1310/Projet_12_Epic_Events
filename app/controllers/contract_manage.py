@@ -3,11 +3,11 @@ from typing import List
 from rich.console import Console
 from rich.table import Table
 
-from app.models.contract import Contract
-from app.models.customer import Customer
-from app.permissions.permissions import Permissions
-from app.utils.sentry_logger import SentryLogger
-from app.views.views import View
+from models.contract import Contract
+from models.customer import Customer
+from permissions.permissions import Permissions
+from utils.sentry_logger import SentryLogger
+from views.views import View
 
 from .utils_manage import UtilsManage
 
@@ -319,9 +319,9 @@ class ContractManage:
         # Tableau de choix pour les clients
         table = Table()
         table.add_column("ID", style="cyan")
-        table.add_column("Prénom", style="magenta")
-        table.add_column("Nom", style="magenta")
-        table.add_column("Email", style="magenta")
+        table.add_column("Prénom", style="cyan")
+        table.add_column("Nom", style="cyan")
+        table.add_column("Email", style="cyan")
         table.add_row("0", "Annuler")
 
         for customer in customers:

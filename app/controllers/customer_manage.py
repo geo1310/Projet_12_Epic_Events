@@ -2,9 +2,9 @@ from datetime import datetime
 
 from rich.console import Console
 
-from app.models.customer import Customer
-from app.permissions.permissions import Permissions
-from app.views.views import View
+from models.customer import Customer
+from permissions.permissions import Permissions
+from views.views import View
 
 from .utils_manage import UtilsManage
 

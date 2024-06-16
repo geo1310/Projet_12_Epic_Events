@@ -1,11 +1,11 @@
-from app.models.contract import Contract
-from app.models.customer import Customer
-from app.models.database import DatabaseConfig
-from app.models.employee import Employee
-from app.models.event import Event
-from app.models.role import Role
-from app.utils.logger_config import LoggerConfig
-from app.utils.sentry_logger import SentryLogger
+from models.contract import Contract
+from models.customer import Customer
+from models.database import DatabaseConfig
+from models.employee import Employee
+from models.event import Event
+from models.role import Role
+from utils.logger_config import LoggerConfig
+from utils.sentry_logger import SentryLogger
 
 
 class DatabaseInitializer:

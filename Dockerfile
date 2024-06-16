@@ -10,8 +10,8 @@ COPY pyproject.toml poetry.lock /app/
 #RUN poetry install --no-root
 RUN poetry install --no-root && poetry show --tree
 
-#COPY app /app
-ADD app /app
+COPY app /app
+#ADD app /app
 
 CMD ["poetry", "run", "python", "main.py"]
 

@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-from app.utils.logger_config import LoggerConfig
+from utils.logger_config import LoggerConfig
 
 
 class DatabaseConfig:

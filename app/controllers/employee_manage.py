@@ -1,10 +1,10 @@
 from rich.console import Console
 from rich.table import Table
 
-from app.models.employee import Employee
-from app.models.role import Role
-from app.utils.sentry_logger import SentryLogger
-from app.views.views import View
+from models.employee import Employee
+from models.role import Role
+from utils.sentry_logger import SentryLogger
+from views.views import View
 
 from .utils_manage import UtilsManage
 
