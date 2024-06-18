@@ -15,13 +15,20 @@ class RoleManage:
         self.employee = employee
         self.utils = UtilsManage(self.employee)
 
-    def list(self):
+    def list(self) -> None:
+        """
+        Affiche la liste des rôles.
+        """
 
         roles = self.utils.filter(self.session, "All", None, Role)
         table = self.utils.table_create("role", roles)
         self.view.display_table(table, "Liste des Roles")
 
-    def create(self):
+    def create(self) -> None:
+        """
+        Crée un nouveau rôle.
+        """
+
         self.view.display_title_panel_color_fit("Création d'un role", "green")
 
         # Collecte les informations sur le role
@@ -101,7 +108,11 @@ class RoleManage:
 
         self.utils.valid_oper(self.session, "role", "create", role)
 
-    def update(self):
+    def update(self) -> None:
+        """
+        Modifie un rôle existant.
+        """
+
         self.view.display_title_panel_color_fit("Modification d'un role", "yellow")
 
         # Validation du role à modifier par son Id
@@ -166,7 +177,14 @@ class RoleManage:
 
         self.utils.valid_oper(self.session, "role", "update", role)
 
-    def delete(self):
+    def delete(self) -> None:
+        """
+        Supprime un rôle existant.
+
+        Cette méthode permet de supprimer un rôle de la base de données en demandant à l'utilisateur
+        de saisir un identifiant de rôle, puis de valider la suppression.
+        """
+
         self.view.display_title_panel_color_fit("Suppression d'un role", "red")
 
         # Validation du role à supprimer par son Id

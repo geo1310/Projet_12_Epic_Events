@@ -1,3 +1,4 @@
+from typing import Optional
 from rich.console import Console
 from rich.table import Table
 
@@ -29,7 +30,7 @@ class EmployeeManage:
         table = self.utils.table_create("employee", employees)
         self.view.display_table(table, "Liste des Employés")
 
-    def create(self):
+    def create(self) -> None:
         """
         Crée un nouvel employé après avoir collecté et validé les informations de l'utilisateur.
         """
@@ -65,16 +66,13 @@ class EmployeeManage:
 
         self.utils.valid_oper(self.session, "employee", "create", employee)
 
-    def update(self):
+    def update(self) -> None:
         """
         Mets à jour les informations d'un employé existant.
 
         Cette méthode permet de modifier les informations d'un employé en demandant à l'utilisateur
         de saisir un identifiant d'employé, puis de valider les nouvelles informations fournies. Les
         modifications sont affichées pour confirmation avant d'être enregistrées dans la base de données.
-
-        Args:
-            arg: Argument optionnel pour passer des paramètres supplémentaires.
         """
         self.view.display_title_panel_color_fit("Modification d'un employé", "yellow")
 
@@ -111,16 +109,13 @@ class EmployeeManage:
 
         self.utils.valid_oper(self.session, "employee", "update", employee)
 
-    def delete(self):
+    def delete(self) -> None:
         """
         Supprime un employé existant.
 
         Cette méthode permet de supprimer un employé en demandant à l'utilisateur
         de saisir un identifiant d'employé, puis de valider la suppression.
         La suppression est affichée pour confirmation avant d'être exécutée.
-
-        Args:
-            arg: Argument optionnel pour passer des paramètres supplémentaires.
         """
 
         self.view.display_title_panel_color_fit("Suppression d'un employé", "red")
@@ -132,7 +127,7 @@ class EmployeeManage:
 
         self.utils.valid_oper(self.session, "employee", "delete", employee)
 
-    def validation_email(self):
+    def validation_email(self) -> Optional[str]:
         """
         Valide l'adresse e-mail saisie par l'utilisateur.
 
@@ -156,7 +151,7 @@ class EmployeeManage:
             else:
                 return email
 
-    def validation_password(self):
+    def validation_password(self) -> Optional[str]:
         """
         Valide le mot de passe saisi par l'utilisateur.
 
@@ -209,7 +204,7 @@ class EmployeeManage:
         roles_list = Role.get_roles_list(self.session)
         table = Table()
         table.add_column("ID", style="cyan")
-        table.add_column("Nom", style="magenta")
+        table.add_column("Nom", style="cyan")
         table.add_row("0", "Annuler")
         for role in roles_list:
             table.add_row(str(role.Id), role.RoleName)

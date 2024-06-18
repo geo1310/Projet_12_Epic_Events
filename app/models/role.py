@@ -1,5 +1,4 @@
-from sqlalchemy import (TIMESTAMP, Boolean, Column, Integer, String, func,
-                        select)
+from sqlalchemy import TIMESTAMP, Boolean, Column, Integer, String, func, select
 
 from .database import DatabaseConfig
 

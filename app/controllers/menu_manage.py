@@ -42,16 +42,13 @@ class MenuManage:
         self.logger = logger
         self.is_logout = False
 
-    def run(self):
+    def run(self) -> None:
         """
-         Lance le menu principal, en vérifiant l'authentification
-        L'utilisateur doit etre authentifié et son Id doit correspondre  l'authentification.
+        Lance le menu principal, en vérifiant l'authentification
+        L'utilisateur doit être authentifié et son Id doit correspondre à l'authentification.
 
-        Cette méthode effectue les étapes suivantes :
-        1. Décode le jeton JWT pour obtenir les informations de l'utilisateur.
-        2. Vérifie si l'utilisateur connecté correspond à l'utilisateur dans le jeton décodé.
-        3. Si l'authentification est valide, affiche le menu principal.
-        4. Si l'authentification est invalide, affiche un message d'erreur et déconnecte l'utilisateur.
+        Raises:
+            Exception: Si l'authentification échoue.
         """
 
         # décode le token
@@ -66,7 +63,7 @@ class MenuManage:
             self.view.prompt_wait_enter()
             self.logout()
 
-    def menu_main(self):
+    def menu_main(self) -> None:
         """
         Composition du menu principal selon les permissions de l'utilisateur.
         """
@@ -89,7 +86,7 @@ class MenuManage:
 
         self.run_menu(menu_items, main=True)
 
-    def menu_customer(self):
+    def menu_customer(self) -> None:
         """
         Composition du menu client selon les permissions de l'utilisateur.
         """
@@ -110,7 +107,7 @@ class MenuManage:
 
         self.run_menu(menu_items, main=False)
 
-    def menu_contract(self):
+    def menu_contract(self) -> None:
         """
         Composition du menu contrat selon les permissions de l'utilisateur..
         """
@@ -133,7 +130,7 @@ class MenuManage:
 
         self.run_menu(menu_items, main=False)
 
-    def menu_event(self):
+    def menu_event(self) -> None:
         """
         Composition du menu évènement selon les permissions de l'utilisateur.
         """
@@ -154,7 +151,7 @@ class MenuManage:
 
         self.run_menu(menu_items, main=False)
 
-    def menu_employee(self):
+    def menu_employee(self) -> None:
         """
         Composition du menu employé selon les permissions de l'utilisateur.
         """
@@ -173,7 +170,7 @@ class MenuManage:
 
         self.run_menu(menu_items, main=False)
 
-    def menu_role(self):
+    def menu_role(self) -> None:
         """
         Composition du menu role selon les permissions de l'utilisateur.
         """
@@ -192,16 +189,16 @@ class MenuManage:
 
         self.run_menu(menu_items, main=False)
 
-    def run_menu(self, menu_items, main):
+    def run_menu(self, menu_items: list, main: bool) -> None:
         """
         Gère l'affichage du menu et le choix de l'utilisateur.
-        Lance la méthode associé à chaque menu.
+        Lance la méthode associée à chaque menu.
         Déconnecte l'utilisateur si la session est expirée.
 
         Args:
-            menu_items (tuple): Un tuple contenant le titre du menu et une liste de tuples contenant
+            menu_items (list): Une liste contenant le titre du menu et une liste de tuples contenant
             les éléments du menu sous forme de paires (index, nom_du_menu: méthode).
-
+            main (bool): Indique si c'est le menu principal ou non.
         """
 
         title = menu_items[0]
@@ -246,7 +243,11 @@ class MenuManage:
             self.logger.info(f"Session Expirée: {self.employee.Email}")
             self.logout()
 
-    def logout(self):
+    def logout(self) -> None:
+        """
+        Déconnecte l'utilisateur en fermant la session et en supprimant le jeton JWT.
+        """
+
         self.is_logout = True
         if self.session:
             self.session.close()

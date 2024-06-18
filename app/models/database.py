@@ -34,7 +34,15 @@ class DatabaseConfig:
         self._load_env_variables()
         self._configure_database()
 
-    def _load_env_variables(self):
+    def _load_env_variables(self) -> None:
+        """
+        Charge les variables d'environnement à partir du fichier .env.
+
+        Raises:
+            FileNotFoundError: Si le fichier .env n'est pas trouvé.
+            KeyError: Si des clés d'environnement requises sont manquantes.
+        """
+
         try:
             file_env_path = Path(__file__).parent.parent / ".env"
             if not os.path.exists(file_env_path):
@@ -55,10 +63,16 @@ class DatabaseConfig:
             self.logger.error(f"Erreur lors du chargement des variables d'environnement depuis {file_env_path}: {e}")
             sys.exit(1)
 
-    def _configure_database(self):
+    def _configure_database(self) -> None:
         """
         Configure la connexion à la base de données PostgreSQL en utilisant les variables d'environnement chargées.
+
+        Raises:
+            KeyError: Si des clés d'environnement requises sont manquantes.
+            ValueError: Si la valeur de DB_USE n'est pas valide.
+            Exception: Pour toute autre erreur imprévue.
         """
+
         try:
             if self.db_use == "local":
                 self.db_password = os.environ["DB_PASSWORD_LOCAL"]
@@ -86,10 +100,14 @@ class DatabaseConfig:
             self.logger.error(f"An unexpected error occurred: {e}")
             sys.exit(1)
 
-    def _test_connection(self):
+    def _test_connection(self) -> None:
         """
         Teste la connexion à la base de données et enregistre un message de succès ou d'échec.
+
+        Raises:
+            SQLAlchemyError: Si une erreur SQLAlchemy se produit lors du test de connexion.
         """
+
         try:
             connection = self.engine.connect()
             self.logger.info("Database connection successful")

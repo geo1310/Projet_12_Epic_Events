@@ -1,7 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import (TIMESTAMP, Column, Date, ForeignKey, Integer, String,
-                        Text, func)
+from sqlalchemy import TIMESTAMP, Column, Date, ForeignKey, Integer, String, Text, func
 from sqlalchemy.orm import relationship, validates
 
 from models.contract import Contract

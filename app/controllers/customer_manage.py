@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from rich.console import Console
 
@@ -24,13 +25,30 @@ class CustomerManage:
         self.user_connected_id = employee.Id
         self.utils = UtilsManage(self.employee)
 
-    def list(self):
+    def list(self) -> None:
+        """
+        Affiche la liste de tous les clients.
+
+        Charge tous les clients depuis la base de données et les affiche dans un tableau.
+
+        Returns:
+            None
+        """
 
         customers = self.utils.filter(self.session, "All", None, Customer)
         table = self.utils.table_create("customer", customers)
         self.view.display_table(table, "Liste des Clients")
 
     def list_yours_customers(self):
+        """
+        Affiche la liste des clients associés au commercial connecté.
+
+        Charge les clients associés au commercial connecté depuis la base de données et les affiche dans un tableau.
+
+        Returns:
+            None
+        """
+
         if self.permissions.role_name(self.role) == "Commercial":
             customers = self.utils.filter(self.session, "CommercialId", self.user_connected_id, Customer)
         else:
@@ -39,7 +57,7 @@ class CustomerManage:
         table = self.utils.table_create("customer", customers)
         self.view.display_table(table, "Liste des Clients")
 
-    def create(self):
+    def create(self) -> None:
         """
         Crée un nouveau client associé au commercial connecté.
 
@@ -82,7 +100,7 @@ class CustomerManage:
 
         self.utils.valid_oper(self.session, "customer", "create", customer)
 
-    def update(self):
+    def update(self) -> None:
         """
         Met à jour les informations d'un client existant dans la base de données.
 
@@ -118,7 +136,7 @@ class CustomerManage:
 
         self.utils.valid_oper(self.session, "customer", "update", customer)
 
-    def delete(self):
+    def delete(self) -> None:
         """
         Supprime un client associé au commercial connecté.
 
@@ -145,7 +163,7 @@ class CustomerManage:
 
         self.utils.valid_oper(self.session, "customer", "delete", customer)
 
-    def validation_email(self):
+    def validation_email(self) -> Optional[str]:
         """
         Valide l'adresse e-mail saisie par l'utilisateur.
 
@@ -154,8 +172,7 @@ class CustomerManage:
         de saisir à nouveau l'adresse e-mail. Si l'adresse e-mail est valide, la retourne.
 
         Returns:
-            str: L'adresse e-mail validée.
-            None: Si l'utilisateur n'a pas fourni d'adresse e-mail.
+            Optional[str]: L'adresse e-mail validée, ou None si l'utilisateur n'a pas fourni d'adresse e-mail.
         """
 
         while True:

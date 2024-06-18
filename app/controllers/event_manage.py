@@ -29,7 +29,13 @@ class EventManage:
         self.user_connected_id = employee.Id
         self.utils = UtilsManage(self.employee)
 
-    def get_permissions_events(self):
+    def get_permissions_events(self) -> List[Event]:
+        """
+        Récupère les événements autorisés en fonction du rôle de l'utilisateur connecté.
+
+        Returns:
+            List[Event]: Liste des événements autorisés.
+        """
 
         if self.permissions.all_event(self.role):
             events = self.utils.filter(self.session, "All", None, Event)
@@ -51,7 +57,13 @@ class EventManage:
 
         return events
 
-    def get_permissions_contracts_signed(self):
+    def get_permissions_contracts_signed(self) -> List[Contract]:
+        """
+        Récupère les contrats signés autorisés en fonction du rôle de l'utilisateur connecté.
+
+        Returns:
+            List[Contract]: Liste des contrats signés autorisés.
+        """
 
         if self.permissions.all_contract(self.role):
             contracts_signed = self.utils.filter(self.session, "ContractSigned", True, Contract)
@@ -106,7 +118,7 @@ class EventManage:
         table = self.utils.table_create("event", events)
         self.view.display_table(table, "Liste de vos Evènements")
 
-    def create(self):
+    def create(self) -> None:
         """
         Crée un nouvel événement et l'ajoute à la base de données.
 
@@ -178,7 +190,24 @@ class EventManage:
 
         self.utils.valid_oper(self.session, "event", "create", event)
 
-    def update(self):
+    def update(self) -> None:
+        """
+        Modifie un évènement après validation de son identifiant et confirmation de l'utilisateur.
+
+        Cette méthode permet à l'utilisateur de modifier les détails d'un évènement existant.
+        Elle effectue les opérations suivantes :
+        1. Récupère les évènements autorisés à modifier et les contrats signés.
+        2. Vérifie s'il y a des évènements à modifier.
+        3. Valide l'existence de l'évènement à modifier et demande confirmation à l'utilisateur.
+        4. Affiche les détails de l'évènement à modifier.
+        5. Demande à l'utilisateur de saisir les nouvelles informations de l'évènement.
+        6. Valide et met à jour les informations de l'évènement dans la base de données.
+
+        Exceptions:
+            ValueError: Si l'identifiant de l'évènement n'est pas valide.
+            IntegrityError: Si une contrainte d'intégrité de la base de données est violée.
+            Exception: Pour toute autre erreur rencontrée lors de la modification de l'évènement.
+        """
 
         events = self.get_permissions_events()
         contracts_signed = self.get_permissions_contracts_signed()
@@ -224,7 +253,7 @@ class EventManage:
 
         self.utils.valid_oper(self.session, "event", "update", event)
 
-    def delete(self):
+    def delete(self) -> None:
         """
         Supprime un événement après validation de son identifiant et confirmation de l'utilisateur.
 
@@ -235,7 +264,7 @@ class EventManage:
         4. Demande une confirmation de suppression.
         5. Supprime l'événement de la base de données et gère les éventuelles erreurs.
 
-        Raises:
+        Exceptions:
             ValueError: Si l'identifiant de l'événement n'est pas valide.
             IntegrityError: Si une contrainte d'intégrité de la base de données est violée.
             Exception: Pour toute autre erreur rencontrée lors de la suppression de l'événement.
@@ -274,8 +303,8 @@ class EventManage:
         # Tableau de choix pour les contrats
         table = Table()
         table.add_column("ID", style="cyan")
-        table.add_column("Titre", style="magenta")
-        table.add_column("Contrat signé", style="magenta")
+        table.add_column("Titre", style="cyan")
+        table.add_column("Contrat signé", style="cyan")
         table.add_row("0", "Aucun")
 
         for contract in contracts:
@@ -348,7 +377,7 @@ class EventManage:
         Returns:
             Optional[int]: Le nombre validé de participants, ou None si l'utilisateur annule l'entrée.
 
-        Raises:
+        Exceptions:
             ValueError: Si la valeur entrée n'est pas un entier valide ou si elle est négative.
         """
         while True:
@@ -380,8 +409,8 @@ class EventManage:
         # Tableau de choix pour les employés de support
         table = Table()
         table.add_column("ID", style="cyan")
-        table.add_column("Nom", style="magenta")
-        table.add_column("Prénom", style="magenta")
+        table.add_column("Nom", style="cyan")
+        table.add_column("Prénom", style="cyan")
         table.add_row("0", "Aucun")
 
         for employee in employees_support:

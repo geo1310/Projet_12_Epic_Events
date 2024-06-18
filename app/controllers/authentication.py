@@ -1,6 +1,6 @@
 import os
 from datetime import datetime, timedelta, timezone
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Dict
 
 import jwt
 from dotenv import load_dotenv
@@ -8,8 +8,7 @@ from sqlalchemy.orm import Session
 
 from models.employee import Employee
 from models.role import Role
-from utils.token_manage_json import (delete_token, load_token_from_json,
-                                         save_token_to_json)
+from utils.token_manage_json import delete_token, load_token_from_json, save_token_to_json
 
 
 class AuthenticationManager:
@@ -63,26 +62,35 @@ class AuthenticationManager:
             session.close()
             return False, None, None
 
-    def generate_jwt_token(self, user_id: int):
+    def generate_jwt_token(self, user_id: int) -> None:
         """
         Génère un jeton JWT pour l'utilisateur authentifié.
 
+        Cette méthode crée un jeton JWT avec l'ID de l'utilisateur et une date
+        d'expiration. Le jeton est ensuite sauvegardé dans un fichier JSON à l'aide
+        de la fonction save_token_to_json.
+
         Args:
             user_id (int): L'ID de l'utilisateur.
+
+        Returns:
+            None
         """
+
         expiration_time = datetime.now() + timedelta(minutes=self.TOKEN_EXPIRY)
         payload = {"user_id": user_id, "exp": expiration_time}
         token = jwt.encode(payload, self.SECRET_KEY, algorithm="HS256")
         save_token_to_json(token)
 
-    def verify_and_decode_jwt_token(self):
+    def verify_and_decode_jwt_token(self) -> Optional[Dict]:
         """
         Vérifie et décode un jeton JWT.
-        Efface le Token s'il n'est plus valide.
+        Efface le jeton s'il n'est plus valide.
 
         Returns:
-            dict or None: Le contenu décodé du jeton JWT s'il est valide et non expiré, sinon None.
+            Optional[Dict]: Le contenu décodé du jeton JWT s'il est valide et non expiré, sinon None.
         """
+
         try:
             token = load_token_from_json()
             decoded_payload = jwt.decode(token, self.SECRET_KEY, algorithms=["HS256"])

@@ -1,3 +1,4 @@
+from sqlalchemy.exc import SQLAlchemyError
 from models.contract import Contract
 from models.customer import Customer
 from models.database import DatabaseConfig
@@ -166,67 +167,128 @@ class DatabaseInitializer:
             },
         }
 
-    def create_roles(self):
+    def create_roles(self) -> None:
+        """Crée les rôles prédéfinis dans la base de données.
+
+        Raises:
+            SQLAlchemyError: Si une erreur SQLAlchemy se produit lors de la création des rôles.
+            Exception: Pour toute autre exception générique.
+        """
+
         try:
             for role_name, role_data in self.ROLES.items():
                 role = Role(RoleName=role_name, **role_data)
                 self.session.add(role)
             self.session.commit()
             self.logger.info("Roles have been successfully created!")
+        except SQLAlchemyError as e:
+            self.session.rollback()
+            self.logger.error(f"An error occurred while creating roles: {e}")
         except Exception as e:
             self.session.rollback()
             self.logger.error(f"An error occurred while creating roles: {e}")
 
-    def create_users(self):
+    def create_users(self) -> None:
+        """Crée les utilisateurs prédéfinis dans la base de données.
+
+        Raises:
+            SQLAlchemyError: Si une erreur SQLAlchemy se produit lors de la création des utilisateurs.
+            Exception: Pour toute autre exception générique.
+        """
+
         try:
             for user_data in self.USERS.values():
                 user = Employee(**user_data)
                 self.session.add(user)
             self.session.commit()
             self.logger.info("Users have been successfully created!")
+        except SQLAlchemyError as e:
+            self.session.rollback()
+            self.logger.error(f"An error occurred while creating users: {e}")
         except Exception as e:
             self.session.rollback()
             self.logger.error(f"An error occurred while creating users: {e}")
 
-    def create_customers(self):
+    def create_customers(self) -> None:
+        """Crée les clients prédéfinis dans la base de données.
+
+        Raises:
+            SQLAlchemyError: Si une erreur SQLAlchemy se produit lors de la création des clients.
+            Exception: Pour toute autre exception générique.
+        """
+
         try:
             for customer_data in self.CUSTOMERS.values():
                 customer = Customer(**customer_data)
                 self.session.add(customer)
             self.session.commit()
             self.logger.info("Customers have been successfully created!")
+        except SQLAlchemyError as e:
+            self.session.rollback()
+            self.logger.error(f"An error occurred while creating customers: {e}")
         except Exception as e:
             self.session.rollback()
             self.logger.error(f"An error occurred while creating customers: {e}")
 
-    def create_contracts(self):
+    def create_contracts(self) -> None:
+        """Crée les contrats prédéfinis dans la base de données.
+
+        Raises:
+            SQLAlchemyError: Si une erreur SQLAlchemy se produit lors de la création des contrats.
+            Exception: Pour toute autre exception générique.
+        """
         try:
             for contract_data in self.CONTRACTS.values():
                 contract = Contract(**contract_data)
                 self.session.add(contract)
             self.session.commit()
             self.logger.info("Contracts have been successfully created!")
+        except SQLAlchemyError as e:
+            self.session.rollback()
+            self.logger.error(f"An error occurred while creating contracts: {e}")
         except Exception as e:
             self.session.rollback()
             self.logger.error(f"An error occurred while creating contracts: {e}")
 
-    def drop_all_tables(self):
+    def drop_all_tables(self) -> None:
+        """Supprime toutes les tables de la base de données.
+
+        Raises:
+            SQLAlchemyError: Si une erreur SQLAlchemy se produit lors de la suppression des tables.
+            Exception: Pour toute autre exception générique.
+        """
+
         try:
             self.logger.info("Dropping all tables...")
             self.base.metadata.drop_all(bind=self.engine, checkfirst=True)
             self.logger.info("All tables dropped successfully.")
+        except SQLAlchemyError as e:
+            self.logger.error(f"An error has occurred while dropping the tables: {e}", exc_info=False)
         except Exception as e:
             self.logger.error(f"An error has occurred while dropping the tables: {e}", exc_info=False)
 
-    def create_all_tables(self):
+    def create_all_tables(self) -> None:
+        """Crée toutes les tables dans la base de données.
+
+        Raises:
+            SQLAlchemyError: Si une erreur SQLAlchemy se produit lors de la création des tables.
+            Exception: Pour toute autre exception générique.
+        """
+
         try:
             self.logger.info("Creating all tables...")
             self.base.metadata.create_all(bind=self.engine, checkfirst=True)
             self.logger.info("All tables created successfully.")
-        except Exception as e:
+        except SQLAlchemyError as e:
             self.logger.error(f"An error has occurred while creating the tables: {e}", exc_info=False)
 
-    def init_base(self):
+    def init_base(self) -> None:
+        """
+        Réinitialise la base de données avec des données prédéfinies.
+
+        Raises:
+            Exception: Si une erreur se produit lors de l'initailisation.
+        """
 
         try:
             self.drop_all_tables()

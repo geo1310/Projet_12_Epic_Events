@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from rich.console import Console
 from rich.table import Table
@@ -28,8 +28,18 @@ class ContractManage:
         self.sentry = SentryLogger()
         self.utils = UtilsManage(self.employee)
 
-    def get_permissions_contracts(self):
-        # liste des contrats autorisés
+    def get_permissions_contracts(self) -> List[Contract]:
+        """
+        Récupère la liste des contrats autorisés en fonction des permissions de l'utilisateur connecté.
+
+        Cette méthode retourne une liste de contrats en fonction des permissions associées
+        au rôle de l'utilisateur. Les commerciaux ne voient que les contrats de leurs propres clients,
+        tandis que les utilisateurs avec des permissions globales voient tous les contrats.
+
+        Returns:
+            List[Contract]: Une liste de contrats autorisés. La liste est vide si aucun contrat n'est autorisé.
+        """
+
         if self.permissions.all_contract(self.role):
             contracts = self.utils.filter(self.session, "All", None, Contract)
 
@@ -46,9 +56,18 @@ class ContractManage:
 
         return contracts
 
-    def get_permissions_customers(self):
+    def get_permissions_customers(self) -> Optional[List[Customer]]:
+        """
+        Récupère la liste des clients autorisés en fonction des permissions de l'utilisateur connecté.
 
-        # liste des clients autorisés
+        Cette méthode retourne une liste de clients en fonction des permissions associées
+        au rôle de l'utilisateur. Les commerciaux ne voient que leurs propres clients,
+        tandis que les utilisateurs avec des permissions globales voient tous les clients.
+
+        Returns:
+            Optional[List[Customer]]: Une liste de clients autorisés ou None si aucun client n'est autorisé.
+        """
+
         if self.permissions.all_customer(self.role):
             customers = self.utils.filter(self.session, "All", None, Customer)
 
@@ -112,25 +131,13 @@ class ContractManage:
         table = self.utils.table_create("contract", contracts_not_payed)
         self.view.display_table(table, "Liste de vos Contrats non payés")
 
-    def create(self):
+    def create(self) -> None:
         """
         Crée un nouveau contrat.
 
         Cette méthode permet de créer un nouveau contrat en saisissant les détails nécessaires
         via des invites à l'utilisateur. Elle gère également la validation des données
         saisies et assure que le contrat est correctement lié à un client existant.
-
-        Workflow:
-            1. Récupère les données nécessaires (contrats et clients) via la méthode `_get_data`.
-            2. Affiche le titre de la section de création.
-            3. Demande à l'utilisateur de saisir le titre du contrat.
-            4. Valide et sélectionne le client associé au contrat.
-            5. Demande à l'utilisateur de saisir les montants et vérifie leur validité.
-            6. Demande à l'utilisateur de saisir l'état de signature du contrat.
-            7. Crée une instance du contrat avec les données saisies.
-            8. Ajoute le contrat à la session et tente de le valider en base de données.
-            9. Affiche et confirme la création du contrat.
-            10. Gère les exceptions potentielles et affiche les messages d'erreur appropriés.
 
         Exceptions:
             IntegrityError: Si une contrainte d'intégrité de la base de données est violée.
@@ -177,22 +184,13 @@ class ContractManage:
 
         self.utils.valid_oper(self.session, "contract", "create", contract)
 
-    def update(self):
+    def update(self) -> None:
         """
         Met à jour les détails d'un contrat existant.
 
         Cette méthode permet de modifier les informations d'un contrat sélectionné par son identifiant.
         L'utilisateur est guidé à travers un processus de saisie pour mettre à jour les champs du contrat.
         La méthode assure également que seules les personnes autorisées peuvent modifier un contrat donné.
-
-        Workflow:
-            1. Affiche le titre de la section de modification.
-            2. Demande l'identifiant du contrat à modifier.
-            3. Vérifie que l'utilisateur est autorisé à modifier le contrat.
-            4. Affiche et confirme les modifications.
-            5. Met à jour les champs du contrat avec les nouvelles valeurs.
-            6. Valide le client lié au contrat.
-            7. Enregistre les modifications dans la base de données.
 
         Exceptions:
             ValueError: Si la validation des montants échoue.
@@ -248,7 +246,7 @@ class ContractManage:
 
         self.utils.valid_oper(self.session, "contract", "update", contract)
 
-    def delete(self):
+    def delete(self) -> None:
         """
         Supprime un contrat existant.
 
@@ -258,7 +256,7 @@ class ContractManage:
         Si l'identifiant est valide et que l'utilisateur est autorisé, le contrat est supprimé
         après une confirmation.
 
-        Raises:
+        Exceptions:
             ValueError: Si l'identifiant du contrat n'est pas valide.
             Exception: Pour toute autre erreur lors de la suppression du contrat.
         """
@@ -274,7 +272,7 @@ class ContractManage:
 
         self.utils.valid_oper(self.session, "contract", "delete", contract)
 
-    def validation_amount(self, message: str, key: str, default: str = "0"):
+    def validation_amount(self, message: str, key: str, default: str = "0") -> float:
         """
         Valide et convertit un montant saisi par l'utilisateur.
 
@@ -301,16 +299,16 @@ class ContractManage:
             else:
                 return amount
 
-    def valid_customer(self, customers: List[Customer], default=None):
+    def valid_customer(self, customers: List[Customer], default: Optional[int] = None) -> Optional[int]:
         """
         Affiche une liste de clients et permet à l'utilisateur de sélectionner un client pour un contrat.
 
         Args:
             customers (List[Customer]): La liste des clients disponibles pour sélection.
-            default (optional): Valeur par défaut à afficher pour la sélection. Par défaut, None.
+            default (Optional[int], optional): Valeur par défaut à afficher pour la sélection. Par défaut, None.
 
         Returns:
-            int or None: L'identifiant du client sélectionné si un client est sélectionné, sinon None.
+            Optional[int]: L'identifiant du client sélectionné si un client est sélectionné, sinon None.
 
         Exceptions:
             Affiche un message d'erreur en cas de choix invalide ou si une exception se produit.
