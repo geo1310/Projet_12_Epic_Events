@@ -2,8 +2,8 @@ bin
 include
 lib
 .Python
-#.envrc
+#.env
 .coverage
 __pycache__
-env/
+.venv/
 Pipfile
