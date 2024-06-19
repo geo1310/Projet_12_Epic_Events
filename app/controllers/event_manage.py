@@ -49,8 +49,8 @@ class EventManage:
                 .all()
             )
 
-        elif self.permissions.role_name(self.role) == "support":
-            events = self.session.query(Event).filter(Event.EmployeeSupportRel == self.user_connected_id).all()
+        elif self.permissions.role_name(self.role) == "Support":
+             events = self.session.query(Event).filter(Event.EmployeeSupportRel.has(Id=self.user_connected_id)).all()
 
         else:
             events = []
