@@ -3,13 +3,13 @@ from typing import List, Type
 from rich.table import Table
 from sqlalchemy.exc import IntegrityError
 
-from models.contract import Contract
-from models.customer import Customer
-from models.employee import Employee
-from models.event import Event
-from models.role import Role
-from utils.sentry_logger import SentryLogger
-from views.views import View
+from app.models.contract import Contract
+from app.models.customer import Customer
+from app.models.employee import Employee
+from app.models.event import Event
+from app.models.role import Role
+from app.utils.sentry_logger import SentryLogger
+from app.views.views import View
 
 
 class UtilsManage:

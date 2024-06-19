@@ -28,6 +28,7 @@ rich = "^13.7.1"
 sentry-sdk = "^2.3.1"
 pg8000 = "^1.31.2"
 colorlog = "^6.8.2"
+bandit = "^1.7.9"
 
 
 [build-system]

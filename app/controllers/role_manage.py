@@ -1,5 +1,5 @@
-from models.role import Role
-from views.views import View
+from app.models.role import Role
+from app.views.views import View
 
 from .utils_manage import UtilsManage
 

@@ -4,7 +4,7 @@ from email.utils import parseaddr
 from sqlalchemy import TIMESTAMP, Column, ForeignKey, Integer, String, func
 from sqlalchemy.orm import relationship, validates
 
-from models.employee import Employee
+from app.models.employee import Employee
 
 from .database import DatabaseConfig
 

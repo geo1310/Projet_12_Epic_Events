@@ -3,11 +3,11 @@ from typing import List, Optional
 from rich.console import Console
 from rich.table import Table
 
-from models.contract import Contract
-from models.customer import Customer
-from permissions.permissions import Permissions
-from utils.sentry_logger import SentryLogger
-from views.views import View
+from app.models.contract import Contract
+from app.models.customer import Customer
+from app.permissions.permissions import Permissions
+from app.utils.sentry_logger import SentryLogger
+from app.views.views import View
 
 from .utils_manage import UtilsManage
 

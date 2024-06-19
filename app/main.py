@@ -3,16 +3,16 @@ from typing import Tuple, Union
 from dotenv import load_dotenv
 from sqlalchemy import inspect
 
-from controllers.authentication import AuthenticationManager
-from controllers.menu_manage import MenuManage
-from dev.init_db import DatabaseInitializer
-from models.database import DatabaseConfig
-from models.employee import Employee
-from models.role import Role
-from utils.logger_config import LoggerConfig
-from utils.sentry_logger import SentryLogger
-from utils.token_manage_json import delete_token
-from views.views import View
+from app.controllers.authentication import AuthenticationManager
+from app.controllers.menu_manage import MenuManage
+from app.dev.init_db import DatabaseInitializer
+from app.models.database import DatabaseConfig
+from app.models.employee import Employee
+from app.models.role import Role
+from app.utils.logger_config import LoggerConfig
+from app.utils.sentry_logger import SentryLogger
+from app.utils.token_manage_json import delete_token
+from app.views.views import View
 
 load_dotenv()
 

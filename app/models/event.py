@@ -3,8 +3,8 @@ from datetime import datetime
 from sqlalchemy import TIMESTAMP, Column, Date, ForeignKey, Integer, String, Text, func
 from sqlalchemy.orm import relationship, validates
 
-from models.contract import Contract
-from models.employee import Employee
+from app.models.contract import Contract
+from app.models.employee import Employee
 
 from .database import DatabaseConfig
 
