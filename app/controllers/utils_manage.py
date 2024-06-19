@@ -428,21 +428,35 @@ class UtilsManage:
 
     def valid_oper(self, session, model_name, oper: str, model_instance):
         """
-        Valide l'identifiant d'un élément en vérifiant qu'il existe dans la base de données et qu'il est autorisé.
+        Effectue une opération de base de données sur une instance de modèle donnée dans une session.
 
-        Args:
-            session (Session): La session SQLAlchemy à utiliser pour interagir avec la base de données.
-            model (Type): Le modèle de base de données SQLAlchemy à interroger.
-            message (str): Le message à afficher pour demander l'identifiant.
-            authorized_list (List, optional): La liste des éléments autorisés pour cette opération.
-                Si spécifiée, l'élément doit appartenir à cette liste pour être considéré comme autorisé.
-                Par défaut, None.
+        Cette méthode prend en charge la création, la mise à jour et la suppression d'instances d'un modèle donné.
+        Après avoir tenté l'opération spécifiée, elle confirme l'action avec l'utilisateur et gère la validation ou
+        l'annulation de la transaction si nécessaire. Elle journalise également l'événement à l'aide de Sentry.
 
-        Returns:
-            object or None: L'élément correspondant à l'identifiant s'il est valide et autorisé, sinon None.
-
+        Paramètres:
+        ----------
+        session : sqlalchemy.orm.Session
+            La session de base de données utilisée pour effectuer les opérations.
+        model_name : str
+            Le nom du modèle sur lequel l'opération est effectuée.
+        oper : str
+            L'opération à effectuer. Doit être 'create', 'update' ou 'delete'.
+        model_instance : sqlalchemy.ext.declarative.api.Base
+            L'instance du modèle sur laquelle effectuer l'opération.
+        
         Exceptions:
-            Affiche un message d'erreur en cas d'identifiant invalide ou si l'opération n'est pas autorisée.
+        ----------
+        IntegrityError: Si une contrainte d'intégrité est violée pendant l'opération.
+        Exception: Pour toute autre exception qui survient pendant l'opération.
+        ValueError: Erreur de validation
+
+        Remarques:
+        -----
+        - Si l'opération est réussie et confirmée, la transaction est validée.
+        - Si l'opération échoue ou n'est pas confirmée, la transaction est annulée.
+        - Un message indiquant le succès ou l'échec est affiché à l'utilisateur.
+        - Un événement est envoyé à Sentry pour journalisation.
         """
 
         try:
