@@ -31,7 +31,7 @@ class Event(DatabaseConfig.BASE):
     __tablename__ = "Event"
 
     Id = Column(Integer, primary_key=True)
-    ContractId = Column(Integer, ForeignKey("Contract.Id", ondelete="SET NULL"))
+    ContractId = Column(Integer, ForeignKey("Contract.Id", ondelete="CASCADE"), nullable=False)
     EmployeeSupportId = Column(Integer, ForeignKey("Employee.Id", ondelete="SET NULL"))
     Title = Column(String(100), nullable=False, unique=True)
     Notes = Column(Text)

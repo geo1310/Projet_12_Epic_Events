@@ -24,7 +24,7 @@ class Contract(DatabaseConfig.BASE):
     __tablename__ = "Contract"
 
     Id = Column(Integer, primary_key=True, autoincrement=True)
-    CustomerId = Column(Integer, ForeignKey("Customer.Id", ondelete="SET NULL"))
+    CustomerId = Column(Integer, ForeignKey("Customer.Id", ondelete="CASCADE"), nullable=False)
     Title = Column(String(100), unique=True, nullable=False)
     Amount = Column(Float, default=0)
     AmountOutstanding = Column(Float, default=0)
